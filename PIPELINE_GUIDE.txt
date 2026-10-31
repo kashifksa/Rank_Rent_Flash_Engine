@@ -26,6 +26,8 @@ BEFORE YOU START — RUN IN ORDER
   [ ] clean_research.py       → data.txt  (NEVER skip)
   [ ] pre_brief_check.py      → validates data.txt before P4
   [ ] build_data.py           → final data.txt compiled
+  [ ] data_extractor.py       → data_brief.txt  (compresses data.txt for Flash)
+        Review + fill any [fill in] fields in data_brief.txt before P4
   [ ] Easy MCP AI active in WordPress
   [ ] Primary keyword, city, state, monetization model confirmed
   [ ] examples/ folder has golden examples (generate with Claude FIRST)
@@ -39,7 +41,9 @@ STAGE 1 — PLANNING (once per project)
   P2  prompts/P2_market.md        → Market intelligence (JSON)
   P3  prompts/P3_competitor.md    → Competitor analysis (JSON)
   *   python scripts/pre_brief_check.py    ← RUN before P4
+  *   python scripts/data_extractor.py   → data_brief.txt  ← RUN before P4
   P4  prompts/P4_brief.md         → master_brief.json
+      INPUT: data_brief.txt (NOT raw data.txt — Flash 3.8 cannot handle large files)
   P5  prompts/P5_topical.md       → topical_authority.json
 
 STAGE 2 — BLUEPRINT (once per project — NEVER repeat P6)
