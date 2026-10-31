@@ -46,6 +46,12 @@ STAGE 1 — PLANNING (once per project)
       INPUT: data_brief.txt (NOT raw data.txt — Flash 3.8 cannot handle large files)
   P5  prompts/P5_topical.md       → topical_authority.json
 
+  * OPTIONAL BROWSER AUTOMATION (uses Gemini Argon in your logged-in browser):
+    1. Double-click scripts/launch_gemini_browser.bat (or run with --launch-browser)
+    2. python scripts/gemini_browser_bridge.py --task brief      → master_brief.json
+    3. python scripts/gemini_browser_bridge.py --task topical    → topical_authority.json
+    4. python scripts/gemini_browser_bridge.py --task blueprint  → master_site_blueprint.json
+
 STAGE 2 — BLUEPRINT (once per project — NEVER repeat P6)
   P6  prompts/P6_blueprint.md     → master_site_blueprint.json
 
