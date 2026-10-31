@@ -1,12 +1,40 @@
 # P7 Service — Section 10: Bottom CTA
-# Flash Engine — Atomic Mini-Prompt
-# Status: PENDING GOLDEN EXAMPLE — generate with Claude/Pro before using
-#
-# This prompt will be populated with:
-# 1. Section instructions (from structure/ files)
-# 2. Golden example output (generated with Claude Sonnet or Gemini Pro)
-# 3. Self-check block (QA checklist Flash runs before outputting)
-#
-# SETUP: Run one full project with Claude/Pro first.
-#        Copy that section's output here as the golden example.
-#        Then this prompt is ready for Flash 3.8.
+# Flash Engine — Service Page | Atomic Mini-Prompt
+# Model: Gemini Flash 3.8
+# Write ONLY this section. Nothing else.
+
+## VARIABLES — fill ALL before submitting
+PRIMARY_SERVICE = [fill in]
+CITY            = [fill in]
+STATE           = [fill in]
+COMPANY_NAME    = [fill in]
+PHONE           = [fill in]
+LOCAL_CHALLENGE = [fill in — e.g. "Austin's intense hail storms"]
+
+## SECTION RULES — Bottom CTA (Section 10 of 10)
+Word budget: ≤60 words HARD LIMIT
+
+H2: Ready for Professional {PRIMARY_SERVICE} in {CITY}?
+
+Write:
+1. Value recap (15-25 words): One sentence summarizing core value. Bold the key term.
+2. CTA button text: "Call {PHONE}"
+3. Trust micro-copy (≤10 words): "Licensed • Insured • {CITY}'s Trusted {PRIMARY_SERVICE} Team"
+
+SELF-CHECK before outputting:
+- [ ] H2 matches: "Ready for Professional {PRIMARY_SERVICE} in {CITY}?"
+- [ ] Total ≤ 60 words
+- [ ] One bolded key term in value recap
+- [ ] Trust micro-copy uses bullet separators (•)
+- [ ] No pricing
+
+## GOLDEN EXAMPLE
+<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
+<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Priority: fill this before Nov 2 while Claude access is available -->
+
+## OUTPUT RULES
+- Output ONLY the section content in Markdown
+- Start directly with the content — no intro, no "Here is the section:" preamble
+- No pricing, no em-dashes (—), no separator lines (---)
+- Bold ONE key phrase per paragraph

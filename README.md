@@ -49,3 +49,4 @@ structure/        Page type structure files (SERVICE, LOCATION, BLOG, ABOUT)
 ---
 
 *All project variables (niche, city, NAP) flow from `data.txt` → `master_brief.json`. Nothing is hardcoded.*
+

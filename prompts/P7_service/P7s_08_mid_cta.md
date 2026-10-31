@@ -1,12 +1,42 @@
 # P7 Service — Section 08: Mid CTA
-# Flash Engine — Atomic Mini-Prompt
-# Status: PENDING GOLDEN EXAMPLE — generate with Claude/Pro before using
-#
-# This prompt will be populated with:
-# 1. Section instructions (from structure/ files)
-# 2. Golden example output (generated with Claude Sonnet or Gemini Pro)
-# 3. Self-check block (QA checklist Flash runs before outputting)
-#
-# SETUP: Run one full project with Claude/Pro first.
-#        Copy that section's output here as the golden example.
-#        Then this prompt is ready for Flash 3.8.
+# Flash Engine — Service Page | Atomic Mini-Prompt
+# Model: Gemini Flash 3.8
+# Write ONLY this section. Nothing else.
+
+## VARIABLES — fill ALL before submitting
+PRIMARY_SERVICE = [fill in]
+CITY            = [fill in]
+STATE           = [fill in]
+COMPANY_NAME    = [fill in]
+PHONE           = [fill in]
+LOCAL_CHALLENGE = [fill in — e.g. "Austin's intense hail storms"]
+
+## SECTION RULES — Mid CTA (Section 8 of 10)
+Word budget: 30-50 words
+
+H2: Get Your Free {PRIMARY_SERVICE} Estimate in {CITY}
+
+Write:
+1. Urgency statement (20-30 words): Reference {LOCAL_CHALLENGE} naturally.
+   No pricing. No "limited time" clichés.
+
+2. CTA button text: "Call {PHONE}"
+
+3. Form note: "[SHORT CONTACT FORM — Name, Phone, Message]"
+
+SELF-CHECK before outputting:
+- [ ] H2 matches: "Get Your Free {PRIMARY_SERVICE} Estimate in {CITY}"
+- [ ] No pricing or dollar amounts
+- [ ] {LOCAL_CHALLENGE} referenced in urgency statement
+- [ ] Total 30-50 words (button and form note excluded from count)
+
+## GOLDEN EXAMPLE
+<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
+<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Priority: fill this before Nov 2 while Claude access is available -->
+
+## OUTPUT RULES
+- Output ONLY the section content in Markdown
+- Start directly with the content — no intro, no "Here is the section:" preamble
+- No pricing, no em-dashes (—), no separator lines (---)
+- Bold ONE key phrase per paragraph

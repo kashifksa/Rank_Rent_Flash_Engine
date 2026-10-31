@@ -13,3 +13,4 @@
 # - GEO writing style (answer-first, short paragraphs, bold phrases)
 # - Snippet zone format
 # - FAQ structure and question phrasing
+

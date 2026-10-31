@@ -6,3 +6,4 @@
 # 2. Copy the resulting page_content_about.md here
 # 3. Verify: credentials-display section present, entity triangulation links included
 # 4. Verify: no stock photos referenced, Person schema present
+

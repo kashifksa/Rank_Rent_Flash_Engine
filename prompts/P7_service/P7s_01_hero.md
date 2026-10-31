@@ -1,13 +1,50 @@
-# P7 Service Page — Section 01: Hero
-# Flash Engine — Atomic Mini-Prompt
-# Status: PENDING GOLDEN EXAMPLE — generate with Claude/Pro before using
+# P7 Service — Section 01: Hero
+# Flash Engine — Service Page | Atomic Mini-Prompt
+# Model: Gemini Flash 3.8
+# Write ONLY this section. Nothing else.
 
-> This prompt will be populated with:
-> 1. Full section instructions (from SERVICE_PAGE_STRUCTURE.md Section 1)
-> 2. A golden example output (generated with Claude Sonnet)
-> 3. A self-check block (QA checklist Flash runs before finalizing)
+## VARIABLES — fill ALL before submitting
+PRIMARY_SERVICE = [fill in]
+CITY            = [fill in]
+STATE           = [fill in]
+COMPANY_NAME    = [fill in]
+PHONE           = [fill in]
+LOCAL_CHALLENGE = [fill in — e.g. "Austin's intense hail storms"]
 
-## INSTRUCTIONS FOR SETUP
-Run the full pipeline once with Claude Sonnet or Gemini Pro.
-Copy the hero section output here as the golden example.
-Then this prompt is ready for Flash 3.8 use.
+## SECTION RULES — Hero (Section 1 of 10)
+Word budget: HARD LIMIT ≤120 words total (H1 + snippet zone + subheadline + CTA text)
+
+Write in this exact order:
+
+1. H1: {PRIMARY_SERVICE} in {CITY}, {STATE}
+
+2. SNIPPET ZONE (40-60 words, standalone paragraph):
+   - Directly answer: what is this service, who is it for, what area does it cover
+   - Self-contained — no "We offer..." opener
+   - This is the Featured Snippet / AI Overview capture target
+
+3. SUBHEADLINE (≤50 words):
+   - One sentence benefit statement referencing {LOCAL_CHALLENGE}
+   - Must mention {CITY}
+
+4. CTA TEXT (≤15 words):
+   - Click-to-call: "Call {PHONE}"
+   - Secondary anchor: "Get a Free Quote"
+
+SELF-CHECK before outputting:
+- [ ] H1 contains PRIMARY_SERVICE + CITY + STATE
+- [ ] Snippet zone is 40-60 words, standalone paragraph
+- [ ] Total word count ≤ 120
+- [ ] No pricing anywhere
+- [ ] No em-dashes
+
+## GOLDEN EXAMPLE
+<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
+<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Priority: fill this before Nov 2 while Claude access is available -->
+
+## OUTPUT RULES
+- Output ONLY the section content in Markdown
+- Start directly with the content — no intro, no "Here is the section:" preamble
+- No pricing, no em-dashes (—), no separator lines (---)
+- Bold ONE key phrase per paragraph

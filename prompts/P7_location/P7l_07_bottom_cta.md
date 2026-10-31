@@ -1,12 +1,42 @@
 # P7 Location — Section 07: Bottom CTA
-# Flash Engine — Atomic Mini-Prompt
-# Status: PENDING GOLDEN EXAMPLE — generate with Claude/Pro before using
-#
-# This prompt will be populated with:
-# 1. Section instructions (from structure/ files)
-# 2. Golden example output (generated with Claude Sonnet or Gemini Pro)
-# 3. Self-check block (QA checklist Flash runs before outputting)
-#
-# SETUP: Run one full project with Claude/Pro first.
-#        Copy that section's output here as the golden example.
-#        Then this prompt is ready for Flash 3.8.
+# Flash Engine — Location Page | Atomic Mini-Prompt
+# Model: Gemini Flash 3.8
+# Write ONLY this section. Nothing else.
+
+## VARIABLES — fill ALL before submitting
+PRIMARY_SERVICE  = [fill in]
+LOCATION_CITY    = [fill in — the TARGET city for this page]
+HUB_CITY         = [fill in — your main operating city]
+STATE            = [fill in]
+PHONE            = [fill in]
+LOCAL_LANDMARKS  = [fill in — real verifiable landmarks in LOCATION_CITY]
+LOCAL_CLIMATE    = [fill in — climate/geographic factor relevant to service]
+LOCAL_PERMIT     = [fill in — any permit note for LOCATION_CITY, or leave blank]
+LOCAL_NEIGHBORHOODS = [fill in — neighborhoods/zips in LOCATION_CITY]
+
+## SECTION RULES — Bottom CTA (Section 7 of 7)
+Word budget: ≤60 words HARD LIMIT
+
+H2: Serving {LOCATION_CITY} — Call for a Free Estimate Today
+
+Write:
+1. Availability statement (20-30 words) mentioning {LOCATION_CITY}
+2. CTA: "Call {PHONE}"
+3. Trust micro-copy: "Licensed • Insured • Serving {LOCATION_CITY} and Surrounding Areas"
+
+SELF-CHECK:
+- [ ] H2 = "Serving {LOCATION_CITY} — Call for a Free Estimate Today"
+- [ ] {LOCATION_CITY} mentioned in body
+- [ ] Total ≤ 60 words
+- [ ] No pricing
+
+## GOLDEN EXAMPLE
+<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
+<!-- Until filled: Flash will follow the rules above without an example -->
+
+## OUTPUT RULES
+- Output ONLY the section content in Markdown
+- Start directly with the content — no intro, no preamble
+- No pricing, no em-dashes (—), no separator lines (---)
+- Bold ONE key phrase per paragraph
+- Short paragraphs: 2-3 sentences max

@@ -1,12 +1,47 @@
 # P7 Location — Section 06: Service Area Detail
-# Flash Engine — Atomic Mini-Prompt
-# Status: PENDING GOLDEN EXAMPLE — generate with Claude/Pro before using
-#
-# This prompt will be populated with:
-# 1. Section instructions (from structure/ files)
-# 2. Golden example output (generated with Claude Sonnet or Gemini Pro)
-# 3. Self-check block (QA checklist Flash runs before outputting)
-#
-# SETUP: Run one full project with Claude/Pro first.
-#        Copy that section's output here as the golden example.
-#        Then this prompt is ready for Flash 3.8.
+# Flash Engine — Location Page | Atomic Mini-Prompt
+# Model: Gemini Flash 3.8
+# Write ONLY this section. Nothing else.
+
+## VARIABLES — fill ALL before submitting
+PRIMARY_SERVICE  = [fill in]
+LOCATION_CITY    = [fill in — the TARGET city for this page]
+HUB_CITY         = [fill in — your main operating city]
+STATE            = [fill in]
+PHONE            = [fill in]
+LOCAL_LANDMARKS  = [fill in — real verifiable landmarks in LOCATION_CITY]
+LOCAL_CLIMATE    = [fill in — climate/geographic factor relevant to service]
+LOCAL_PERMIT     = [fill in — any permit note for LOCATION_CITY, or leave blank]
+LOCAL_NEIGHBORHOODS = [fill in — neighborhoods/zips in LOCATION_CITY]
+
+## SECTION RULES — Service Area Detail (Section 6 of 7)
+Word budget: 60-100 words (text only, map is separate)
+
+H2: Areas We Serve in and Around {LOCATION_CITY}
+
+Write:
+"Our team covers {LOCATION_CITY} and these surrounding neighborhoods:"
+
+Bulleted list: neighborhoods and zip codes from {LOCAL_NEIGHBORHOODS}
+
+1 sentence for adjacent towns (plain text, no hyperlink unless live in phase1_registry.json)
+
+Note: "[GOOGLE MAPS IFRAME centered on {LOCATION_CITY} — no AI map image]"
+
+SELF-CHECK:
+- [ ] H2 = "Areas We Serve in and Around {LOCATION_CITY}"
+- [ ] Neighborhood bullet list present
+- [ ] Map iframe note included
+- [ ] Adjacent towns: plain text if not live
+- [ ] 60-100 words
+
+## GOLDEN EXAMPLE
+<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
+<!-- Until filled: Flash will follow the rules above without an example -->
+
+## OUTPUT RULES
+- Output ONLY the section content in Markdown
+- Start directly with the content — no intro, no preamble
+- No pricing, no em-dashes (—), no separator lines (---)
+- Bold ONE key phrase per paragraph
+- Short paragraphs: 2-3 sentences max
