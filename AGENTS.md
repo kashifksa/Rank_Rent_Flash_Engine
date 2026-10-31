@@ -97,6 +97,7 @@ Rank_Rent_Flash_Engine/
 │   └── about_page_example.md
 │
 ├── scripts/                     ← All pipeline scripts
+│   ├── data_extractor.py        ← Compresses data.txt → data_brief.txt for Flash 3.8
 │   ├── orchestrator.py          ← Master pipeline runner — sequences all steps
 │   ├── pipeline_state.json      ← Tracks current step — enables resume
 │   ├── pre_publish_filter.py
