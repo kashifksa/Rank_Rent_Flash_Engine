@@ -1,0 +1,164 @@
+======================================================================
+  RANK & RENT FLASH ENGINE — PIPELINE GUIDE v1.0
+  Gemini Flash 3.8 Edition
+======================================================================
+
+MODEL: Gemini Flash 3.8 — ALL steps, NO exceptions
+YOU DO: Fill variables + approve content at gates
+FLASH DOES: Everything else via orchestrator
+
+======================================================================
+KEY DIFFERENCE FROM STARTER KIT
+======================================================================
+
+  Starter Kit:  One giant prompt per page (P7 = full page at once)
+  Flash Engine: One mini-prompt per section → orchestrator stitches
+
+  Why: Flash 3.8 produces Pro-level quality on small focused tasks.
+       Large prompts cause Flash to drift, miss rules, skip sections.
+
+======================================================================
+BEFORE YOU START — RUN IN ORDER
+======================================================================
+
+  [ ] youtube_scraper.py      → youtube_data.txt
+  [ ] research_scraper.py     → research_data.txt
+  [ ] clean_research.py       → data.txt  (NEVER skip)
+  [ ] pre_brief_check.py      → validates data.txt before P4
+  [ ] build_data.py           → final data.txt compiled
+  [ ] Easy MCP AI active in WordPress
+  [ ] Primary keyword, city, state, monetization model confirmed
+  [ ] examples/ folder has golden examples (generate with Claude FIRST)
+
+======================================================================
+PIPELINE STAGES
+======================================================================
+
+STAGE 1 — PLANNING (once per project)
+  P1  prompts/P1_role.md          → Set Flash role for session
+  P2  prompts/P2_market.md        → Market intelligence (JSON)
+  P3  prompts/P3_competitor.md    → Competitor analysis (JSON)
+  *   python scripts/pre_brief_check.py    ← RUN before P4
+  P4  prompts/P4_brief.md         → master_brief.json
+  P5  prompts/P5_topical.md       → topical_authority.json
+
+STAGE 2 — BLUEPRINT (once per project — NEVER repeat P6)
+  P6  prompts/P6_blueprint.md     → master_site_blueprint.json
+
+STAGE 3 — CONTENT (repeat per page)
+
+  Step 1: Determine page type from topical_authority.json
+  Step 2: Read structure file for that page type (structure/ folder)
+  Step 3: Run orchestrator OR execute mini-prompts manually in order:
+
+  SERVICE PAGE  → run P7_service/ prompts in order (P7s_01 → P7s_10)
+  LOCATION PAGE → run P7_location/ prompts in order (P7l_01 → P7l_07)
+  BLOG POST     → run P7_blog/ prompts in order (P7b_01 → P7b_08)
+  ABOUT/CONTACT → run P7_about/ prompts in order (P7a_01 → P7a_08)
+
+  Step 4: Orchestrator stitches sections → page_content_[slug].md
+  Step 5: pre_publish_filter.py validates full page
+  Step 6: keyword_checker.py density check
+
+  HUMAN GATE 1: Review page_content_[slug].md — approve or revise
+
+STAGE 4 — IMAGES
+  P8  prompts/P8_images.md        → image_plan_[slug].json + images
+      image_geotagger.py          → EXIF strip + GPS inject + WebP
+
+  HUMAN GATE 2: Review images — approve or regenerate
+
+STAGE 5 — PUBLISH
+  safe_publish()                  → via scripts/pre_publish_filter.py
+  Easy MCP AI                     → WordPress publish
+
+  POST-PUBLISH (every page — non-negotiable):
+  1.  python scripts/audit_pages.py       → fix any issues
+  2.  Update scripts/phase1_registry.json → add WP ID, slug, anchor
+  3.  Check scripts/pending_links.json    → activate deferred links
+  *   python scripts/check_blueprint_sync.py  → after homepage changes
+
+======================================================================
+ORCHESTRATOR
+======================================================================
+
+  python scripts/orchestrator.py --page [page_id] --type [page_type]
+
+  Options:
+    --page    page_id from topical_authority.json
+    --type    service | location | blog | about | contact
+    --resume  resume from last saved step (reads pipeline_state.json)
+    --dry-run show steps without executing
+
+  The orchestrator:
+  - Reads master_brief.json and topical_authority.json
+  - Sequences the correct mini-prompts for the page type
+  - Saves progress to pipeline_state.json after each section
+  - Stitches all sections into page_content_[slug].md
+  - Runs pre_publish_filter.py automatically
+  - Stops at human gates
+
+======================================================================
+FLASH QUALITY RULES (how Flash matches Pro-level output)
+======================================================================
+
+  1. ATOMIC TASKS   — one section per prompt, never a full page
+  2. GOLDEN EXAMPLE — every mini-prompt shows Flash a perfect output
+  3. SELF-CHECK     — Flash runs its own QA checklist before finalizing
+  4. VARIABLES      — {CITY}, {SERVICE}, {PHONE} always pre-filled
+  5. WORD LIMITS    — exact min/max per section enforced in prompt
+
+======================================================================
+SCRIPTS REFERENCE
+======================================================================
+
+  Script                        When to run
+  ─────────────────────────────────────────────────────────────────
+  orchestrator.py               Main pipeline runner
+  youtube_scraper.py            Before P2
+  research_scraper.py           Before clean_research
+  clean_research.py             After scrape
+  pre_brief_check.py            Before P4
+  build_data.py                 After clean
+  keyword_checker.py            Before HUMAN GATE 1
+  check_blueprint_sync.py       After homepage edit
+  check_blog_cannibalization.py Before any blog post (P7_blog)
+  image_geotagger.py            After P8 images
+  audit_pages.py                After every publish
+  pre_publish_filter.py         Called by safe_publish() — do not skip
+
+======================================================================
+GOLDEN EXAMPLES — REQUIRED BEFORE FIRST RUN
+======================================================================
+
+  Generate these with Claude Sonnet or Gemini Pro BEFORE using Flash:
+
+  examples/service_page_example.md   ← 1 complete perfect service page
+  examples/location_page_example.md  ← 1 complete perfect location page
+  examples/blog_post_example.md      ← 1 complete perfect blog post
+  examples/about_page_example.md     ← 1 complete perfect about page
+
+  Each mini-prompt in prompts/P7_*/ references these examples.
+  Without golden examples, Flash output quality will degrade.
+
+======================================================================
+PUBLISHING PHASES (same as Starter Kit)
+======================================================================
+
+  Phase 0  Homepage
+  Phase 1  Primary service + About + Contact + Primary city    (Days 1-15)
+  Phase 2  Secondary service + Emergency service               (Days 15-30)
+  Phase 3  Location pages (one per expansion city) + FAQ hub   (Days 30-45)
+  Phase 4  Comparison / how-to / problem / glossary pages      (Months 2-3)
+  Phase 5  Blog posts + case studies + new service area pages  (Ongoing)
+
+======================================================================
+HARD LIMITS
+======================================================================
+
+  - Max 13-15 images per session (quota)
+  - P6 runs ONCE per project — never repeat
+  - P7_blog: always run check_blog_cannibalization.py first
+  - safe_publish() is the ONLY path to WordPress — no exceptions
+  - Never create a link to a page not in phase1_registry.json
+  - No pricing on any page — this is a Rank & Rent site

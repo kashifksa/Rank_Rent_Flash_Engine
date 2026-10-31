@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "description": "Deferred internal links. Every link that was planned in the interlinking map but points to a page NOT yet live. When a new page is published, search this file for its page_id as target_page_id and update all listed source pages to add the link.",
+    "last_updated": "YYYY-MM-DD",
+    "version": "1.0",
+    "instructions": "HOW TO USE: (1) When publishing a new page, search this file for its page_id under target_page_id. (2) For every match found, go to the source page (source_page_id) and inject the link at the specified placement. (3) Move resolved entries to the resolved_links section below. (4) Add new pending entries here whenever you write a link in content that points to a future page."
+  },
+  "pending_links": [
+    {
+      "id": "PL-001",
+      "source_page_id": "[page_id of the page that ALREADY CONTAINS the placeholder text]",
+      "source_url": "/[source-page-slug]/",
+      "source_wp_id": null,
+      "target_page_id": "[page_id of the page that does NOT exist yet]",
+      "target_url": "/[future-page-slug]/",
+      "anchor_text": "[the exact anchor text written in the source page content]",
+      "placement": "[e.g. Services section card | Body paragraph 3 | CTA section]",
+      "priority": "HIGH",
+      "phase_target": 2,
+      "notes": "Plain text written in source page. Re-activate as hyperlink when target page goes live."
+    }
+  ],
+  "resolved_links": [
+    {
+      "_note": "Move entries here after activating the link on the source page."
+    }
+  ]
+}

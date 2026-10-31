@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "project": "",
+  "niche": "",
+  "city": "",
+  "state": "",
+  "current_phase": 0,
+  "current_page": "",
+  "current_page_type": "",
+  "current_section_index": 0,
+  "stages_completed": {
+    "stage1_planning": false,
+    "stage2_blueprint": false
+  },
+  "pages_completed": [],
+  "pages_in_progress": [],
+  "last_updated": "",
+  "notes": ""
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "description": "Single source of truth for all LIVE pages. When writing or editing any page content, ONLY create internal links to pages listed in live_pages. All other links go to pending_links.json.",
+    "last_updated": "YYYY-MM-DD",
+    "version": "1.0",
+    "instructions": "Before writing content for any page: (1) Read this file. (2) Only hyperlink to pages in live_pages. (3) After publishing a new page, add it here immediately with its WP ID and slug. (4) Check pending_links.json to see if any existing pages need a link added to the page you just published."
+  },
+  "live_pages": [
+    {
+      "page_id": "homepage",
+      "wp_id": null,
+      "url": "/",
+      "live_url": "https://[YOUR-DOMAIN]/",
+      "title": "[Site Title]",
+      "slug": "home",
+      "type": "page",
+      "preferred_anchor": "[primary keyword]",
+      "alternate_anchors": [],
+      "phase": 0,
+      "note": "",
+      "published_date": "YYYY-MM-DD"
+    }
+  ],
+  "_instructions_for_next_page": "Copy the block above and fill in: page_id, wp_id (from WordPress after publishing), url, live_url, title, slug, type (page or post), preferred_anchor (the anchor text other pages should use when linking here), alternate_anchors, phase, and published_date. Add a note if the slug differs from master_brief.json."
+}
