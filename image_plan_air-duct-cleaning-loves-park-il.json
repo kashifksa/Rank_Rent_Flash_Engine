@@ -1,0 +1,22 @@
+{
+  "page_id": "air-duct-cleaning-loves-park-il",
+  "slug": "air-duct-cleaning-loves-park-il",
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "air-duct-cleaning-loves-park-illinois-hero.webp",
+      "alt_text": "Air duct cleaning service truck arriving at a Loves Park, IL residential home near Rock River",
+      "prompt": "A professional service van parked in front of a mid-century split-level residential home in a Midwest suburban neighborhood near a river. Early morning light, tree-lined street, professional appearance. Realistic photo style, no text overlays.",
+      "priority": 1,
+      "wp_media_id": null
+    },
+    {
+      "slot": "local-proof",
+      "filename": "duct-cleaning-loves-park-colonial-village.webp",
+      "alt_text": "Technician cleaning air duct in Colonial Village neighborhood home, Loves Park, IL",
+      "prompt": "A uniformed technician working inside a residential basement utility room, connecting equipment to an older galvanized sheet metal duct system. Professional setting, good lighting, mid-century home interior details visible. Realistic photo style.",
+      "priority": 2,
+      "wp_media_id": null
+    }
+  ]
+}

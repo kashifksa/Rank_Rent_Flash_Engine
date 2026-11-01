@@ -1,0 +1,22 @@
+{
+  "page_id": "about",
+  "slug": "about",
+  "images": [
+    {
+      "slot": "identity-hook",
+      "filename": "rockford-air-duct-pros-owner-team-photo.webp",
+      "alt_text": "Rockford Air Duct Pros owner and technician team standing beside service van in Rockford, IL",
+      "prompt": "Two uniformed professionals standing beside a clean white service van in a residential driveway in Rockford, Illinois. Both wearing company shirts and tool belts. Friendly, approachable demeanor. Realistic photo style, natural daylight, no heavy filters or text overlays.",
+      "priority": 1,
+      "wp_media_id": null
+    },
+    {
+      "slot": "community-proof",
+      "filename": "rockford-air-duct-pros-community-rockford-illinois.webp",
+      "alt_text": "Rockford Air Duct Pros team at Rockford community event, Winnebago County IL",
+      "prompt": "Two uniformed technicians at an outdoor community or neighborhood event booth in Rockford, IL. Table with company materials, branded shirts, friendly smiles. Community park or event setting, natural daylight. Realistic candid-style photo, no text overlays.",
+      "priority": 2,
+      "wp_media_id": null
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "page_id": "homepage",
+  "slug": "/",
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "rockford-air-duct-pros-van-hero.webp",
+      "alt_text": "Rockford Air Duct Pros service van parked outside residential home in Rockford, IL",
+      "prompt": "A clean white service van with company signage parked in front of a typical 1960s-1970s ranch-style brick home in a Midwest residential neighborhood. Mid-morning lighting, green lawn, mature trees. Professional appearance, realistic photo style. No text added beyond any visible on the van.",
+      "priority": 1,
+      "wp_media_id": null
+    },
+    {
+      "slot": "primary-service-intro",
+      "filename": "residential-duct-cleaning-rockford-illinois.webp",
+      "alt_text": "Air duct technician cleaning supply register in Rolling Green neighborhood, Rockford, IL",
+      "prompt": "A uniformed technician removing a ceiling supply air register in a residential home and vacuuming the duct boot with a HEPA vacuum. Clean, well-lit interior room, neutral wall colors, professional setting. Realistic photo, no text overlays.",
+      "priority": 2,
+      "wp_media_id": null
+    },
+    {
+      "slot": "credentials-block",
+      "filename": "nadca-bbb-credentials-rockford-duct-company.webp",
+      "alt_text": "NADCA and BBB A Plus accreditation logos displayed for Rockford air duct cleaning company",
+      "prompt": "A clean flat-lay or wall-mounted display showing NADCA member badge and BBB Accredited Business A+ badge on a neutral background. Professional, high resolution, no busy design. Simple credential display suitable for website trust section.",
+      "priority": 3,
+      "wp_media_id": null
+    }
+  ]
+}

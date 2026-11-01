@@ -1,0 +1,14 @@
+{
+  "page_id": "contact",
+  "slug": "contact",
+  "images": [
+    {
+      "slot": "contact-form-header",
+      "filename": "contact-rockford-air-duct-pros-technician.webp",
+      "alt_text": "Rockford Air Duct Pros technician answering phone call to schedule air duct cleaning, Rockford IL",
+      "prompt": "A friendly uniformed technician or office staff member talking on a phone with a notepad in hand, scheduling an appointment. Clean indoor setting, professional appearance, warm natural lighting. Realistic photo style, no text overlays.",
+      "priority": 1,
+      "wp_media_id": null
+    }
+  ]
+}
