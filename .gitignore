@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+browser_profile/
+scripts/browser_profile/
+scripts/test_*.py
+test_*.py
+

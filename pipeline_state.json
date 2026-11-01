@@ -1,0 +1,13 @@
+{
+  "project": "Rank & Rent Flash Engine",
+  "current_page": "about",
+  "completed_pages": [],
+  "completed_sections": {},
+  "golden_examples_completed": [
+    "service",
+    "location",
+    "blog",
+    "about"
+  ],
+  "current_type": "about"
+}

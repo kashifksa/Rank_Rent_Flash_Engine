@@ -1,0 +1,123 @@
+{
+  "project_name": "Rockford Air Duct Pros",
+  "niche": "Air Duct Cleaning",
+  "primary_service": "Residential and Commercial Air Duct Cleaning",
+  "city": "Rockford",
+  "state": "IL",
+  "nap": {
+    "company_name": "Rockford Air Duct Pros",
+    "address": "1111 S Alpine Rd, Rockford, IL 61108",
+    "phone": "(815) 555-0142",
+    "email": "service@rockfordairductpros.com",
+    "website": "https://rockfordairductpros.com"
+  },
+  "founded_year": "2014",
+  "primary_keyword": "air duct cleaning rockford",
+  "secondary_keywords": [
+    "air duct cleaning rockford il",
+    "air duct cleaning services rockford",
+    "dryer vent cleaning rockford il",
+    "HVAC duct cleaning rockford",
+    "duct cleaning near me rockford",
+    "duct cleaning Winnebago County IL",
+    "dryer vent cleaning Loves Park IL",
+    "duct cleaning Machesney Park IL",
+    "NADCA certified duct cleaning Rockford"
+  ],
+  "services": [
+    "Residential Air Duct Cleaning",
+    "Commercial HVAC Duct Cleaning",
+    "Dryer Vent Cleaning and Lint Removal",
+    "Negative Air Vacuum Trunk Line Cleaning",
+    "Sanitization and Antimicrobial Fogging",
+    "Video Camera Ductwork Inspection"
+  ],
+  "sub_services": [
+    "Supply and Return Register Cleaning",
+    "Air Handler and Plenum Cleaning",
+    "Furnace Blower Compartment Cleaning",
+    "Bathroom Exhaust Fan Duct Cleaning",
+    "Post-Construction Duct Debris Removal",
+    "Before-and-After Camera Documentation"
+  ],
+  "expansion_cities": [
+    "Loves Park",
+    "Machesney Park",
+    "Belvidere",
+    "Roscoe",
+    "Rockton",
+    "Cherry Valley",
+    "Winnebago",
+    "Pecatonica"
+  ],
+  "neighborhoods": [
+    "Churchill's Grove",
+    "Edgewater",
+    "Rolling Green",
+    "Highland Park",
+    "Signal Hill",
+    "Midtown"
+  ],
+  "local_challenge": "Historic pre-1985 galvanized sheet metal ductwork in Rockford's predominantly older housing stock accumulates decades of dust, pet dander, and furnace soot that standard HEPA filters cannot retroactively remove. Northern Illinois sub-zero winters require forced-air systems to run continuously from October through April, accelerating allergen buildup. Rock River valley humidity variations promote interior duct moisture and mold risk in basement plenum sections.",
+  "local_landmarks": [
+    "Rock River",
+    "Midway Village Museum",
+    "Sinnissippi Park",
+    "Coronado Performing Arts Center",
+    "Nicholas Conservatory",
+    "Anderson Japanese Gardens",
+    "BMO Center"
+  ],
+  "credentials": [
+    "NADCA Certified (National Air Duct Cleaners Association)",
+    "ASCS Certified Technicians",
+    "EPA Lead-Safe Certified",
+    "Better Business Bureau Accredited A+",
+    "Fully Licensed and Insured"
+  ],
+  "community_ties": [
+    "Serving Rockford homeowners since 2014",
+    "Member of Rockford Chamber of Commerce",
+    "Supports Winnebago County food bank drives",
+    "Participates in local Nextdoor community Q&A"
+  ],
+  "social_profiles": {
+    "google_business_profile": "",
+    "facebook": "",
+    "bbb": "",
+    "yelp": ""
+  },
+  "tone": {
+    "voice": "Authoritative, honest, reassuring, local, transparent, protective against scams",
+    "style": "Short paragraphs (2-3 sentences max), answer-first under every H2, bold one key phrase per paragraph, plain American English — no jargon",
+    "avoid": [
+      "em-dashes",
+      "pricing",
+      "superlatives without evidence",
+      "separator lines",
+      "emoji CTA notes",
+      "pending link placeholders"
+    ]
+  },
+  "pain_points": [
+    "The $49-$99 whole-house coupon bait-and-switch scam advertised in Facebook groups and on door hangers",
+    "Technicians claiming they found toxic black mold without laboratory testing — used to upsell unnecessary treatments",
+    "Unlicensed fly-by-night vans with no certifications and no liability insurance",
+    "Homeowners unsure how to verify whether duct cleaning is legitimate — no before-and-after documentation provided",
+    "Older Rockford homes with galvanized ducts that flex-hose-only cleaners cannot properly reach",
+    "Allergies and asthma flare-ups attributed to dirty return air plenums and clogged registers",
+    "Dryer fires from uncleaned lint buildup in long or kinked dryer vent runs",
+    "Confusion between HVAC maintenance and actual duct cleaning — HVAC tune-up does not clean duct interiors"
+  ],
+  "differentiation_angles": [
+    "NADCA certification as H1-level hero trust signal — no competing specialist ranks with this claim",
+    "Scam education authority content — zero competitors address this in Rockford market",
+    "Dryer vent cleaning as a standalone fire-safety service page, not an add-on",
+    "Before-and-after video camera inspection as a named deliverable on every job",
+    "Rockford pre-1985 galvanized ductwork specificity — speaks directly to local housing stock",
+    "No pricing, no gimmicks — Rank and Rent appropriate positioning"
+  ],
+  "monetization_model": "rank_and_rent",
+  "phase": 1
+}
+

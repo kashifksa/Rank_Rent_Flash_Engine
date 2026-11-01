@@ -1,0 +1,188 @@
+{
+  "niche": "Air Duct Cleaning",
+  "city": "Rockford",
+  "state": "IL",
+  "generated_date": "2026-11-01",
+  "source": "P3_competitor.md — Rank & Rent Flash Engine",
+  "competitors": [
+    {
+      "rank": 1,
+      "name": "Air Quality Management (AQM)",
+      "url": "aqmductcleaning.com",
+      "phone": "(815) 962-9007",
+      "business_type": "Dedicated Duct Cleaning Specialist",
+      "years_in_market": "15+",
+      "strengths": [
+        "Most established dedicated duct cleaning brand in the Rockford Stateline area — not a general HVAC company that offers cleaning as an add-on",
+        "Explicitly calls out Winnebago, Boone, and Rock counties in footer service area — strong geographic relevance signal",
+        "5-step cleaning process displayed transparently on service page builds trust with hesitant buyers",
+        "Gmail-based email (aqmductcleaning@gmail.com) paradoxically reads as a small local business rather than a corporate franchise, which may reassure Rockford homeowners skeptical of national chains",
+        "Before-and-after photo use and free estimate offer mentioned in multiple places",
+        "Active on Facebook with customer testimonials pulling through to website"
+      ],
+      "weaknesses": [
+        "No visible NADCA certification claim on homepage or primary service page — missing the single biggest trust differentiator in this niche",
+        "Coupon promotions (50 dollars off) on a site with explicit pricing creates pricing expectation that devalues leads and conflicts with premium positioning",
+        "Site design is dated and not optimized for mobile conversion — slow load times and cramped layout on small screens",
+        "No informational content, blog, or FAQ hub capturing top-of-funnel scam-aware searches",
+        "No schema markup visible — missing FAQPage, LocalBusiness, and Review schema that would generate rich snippets",
+        "No dedicated location pages for Loves Park, Machesney Park, Belvidere, or other expansion cities"
+      ],
+      "content_gaps": [
+        "Zero content about how to spot a duct cleaning scam or what NADCA-certified cleaning actually means — massive informational gap given widespread consumer concern",
+        "No dryer vent fire hazard page despite offering dryer vent cleaning as a service",
+        "No post-renovation duct cleaning page despite it being a distinct trigger event with separate search intent",
+        "No content targeting 'is air duct cleaning worth it' — the highest-volume informational query in the niche",
+        "No FAQPage schema capturing People Also Ask results in Google SERP",
+        "No neighborhood-level copy mentioning specific Rockford communities like Churchill's Grove or Edgewater"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Rockford Duct Cleaning Specialists",
+      "url": "rockfordductcleaning.com",
+      "phone": "(815) 420-6858",
+      "business_type": "Dedicated Local Duct Cleaning — Exact Match Domain",
+      "years_in_market": "Unknown",
+      "strengths": [
+        "Exact match domain (rockfordductcleaning.com) — strong local relevance signal for primary keyword without needing to build much authority",
+        "NADCA certification prominently claimed — positions correctly against scam operators",
+        "4.9-star rating displayed — strong social proof on-page",
+        "Transparent pricing tiers listed on site (299 to 1800+ based on home size) — reduces friction for cost-conscious searchers",
+        "Calls out specific surrounding cities (Loves Park, Machesney Park, Belvidere, Cherry Valley) in copy",
+        "Same-day and next-day service language creates urgency"
+      ],
+      "weaknesses": [
+        "Displaying explicit pricing on the page is standard but makes the site a poor candidate for lead rental — renters cannot control lead cost perception",
+        "Thin content on service pages — no educational depth, no answer-first paragraphs, no snippet-optimized sections that would capture AI Overviews",
+        "No blog or informational content hub — entirely transactional, missing the 60 percent of duct-cleaning searchers still in the research phase",
+        "No dedicated city pages as separate URLs — suburb mentions are inline text, not optimized landing pages with LocalBusiness schema",
+        "Site likely lacks proper schema markup for FAQPage, HowTo, and AggregateRating",
+        "No content addressing the scam epidemic specifically — missing trust-building content that differentiates legitimate operators"
+      ],
+      "content_gaps": [
+        "No educational content about NADCA standard ACR 2013 or what negative air pressure cleaning actually means for homeowners",
+        "No dryer vent fire hazard content despite offering dryer vent cleaning",
+        "No 'what is included in a duct cleaning' explainer page targeting that PAA question",
+        "No content on evaporator coil or blower motor cleaning as standalone search intent",
+        "No local history or community tie-in content to build entity authority in Rockford specifically",
+        "No structured FAQ section with FAQPage schema to capture PAA boxes in SERP"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "Open Air Duct Cleaning",
+      "url": "openairductcleaning.com",
+      "phone": "Not confirmed",
+      "business_type": "Specialist — ASCS Certified, Veteran-Owned",
+      "years_in_market": "Unknown",
+      "strengths": [
+        "ASCS (Air Systems Cleaning Specialist) certification and ASHRAE membership create strong professional credibility signals beyond just NADCA claims",
+        "Veteran-owned business designation — highly effective trust signal in the Rockford-area market with significant military-connected population",
+        "Before-and-after photo galleries used actively — addresses the biggest consumer objection (how do I know work was actually done)",
+        "Customer testimonials detail cleaning methodology specifically (negative air pressure, air whips) — educates buyers while building trust",
+        "Commercial and government service offering — higher ticket jobs and lower local competition",
+        "Explicitly differentiates from blow-and-go operators — counter-positioning strategy that works well in a scam-saturated niche"
+      ],
+      "weaknesses": [
+        "Brand name domain (openairductcleaning.com) is geographically non-specific — Google does not know this company serves Rockford without explicit on-page signals",
+        "Thinner local SEO footprint than a geo-targeted domain — harder to rank for 'air duct cleaning rockford' specifically without building more local entity signals",
+        "Pricing transparency creates same lead-rental issue as Rockford Duct Cleaning Specialists",
+        "No clear NAP consistency verification found across directories",
+        "Content strategy is conversion-focused but lacks the informational depth needed to rank for high-volume research queries"
+      ],
+      "content_gaps": [
+        "No content targeting 'dryer vent fire hazard rockford il' despite offering dryer vent cleaning",
+        "No scam education page despite the site clearly understanding the scam problem — failing to capture the searcher actively researching scam prevention",
+        "No dedicated Rockford neighborhood pages or Winnebago County geographic landing pages",
+        "No post-construction or renovation duct cleaning page",
+        "No FAQPage schema on service pages",
+        "No 'how NADCA cleaning works' or 'what is negative air pressure duct cleaning' explainer content"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "Clean Air Werks",
+      "url": "cleanairwerks.com",
+      "phone": "Not confirmed",
+      "business_type": "Regional Multi-City Operator — Northern IL and Southern WI",
+      "years_in_market": "Unknown",
+      "strengths": [
+        "Regional coverage across northern Illinois and southern Wisconsin — broader service area than local-only competitors",
+        "Entry-level promotional pricing (around 199 dollars) attracts high search volume and leads from price-sensitive buyers",
+        "Services include chimney cleaning and fireplace maintenance alongside HVAC ducts — cross-sell opportunity and broader site authority",
+        "Visible on ranking pages for Rockford area searches"
+      ],
+      "weaknesses": [
+        "Regional breadth means Rockford-specific local authority is diluted — the site is not hyper-local to Winnebago County",
+        "Entry-level promotional pricing attracts price-shoppers and low-quality leads — reduces value for any lead rental model",
+        "No specific Rockford neighborhood or community callouts found",
+        "Multi-service regional operator means duct cleaning is one of several services rather than the core focus — lower topical authority signal to Google"
+      ],
+      "content_gaps": [
+        "No Rockford-specific landing page optimized for 'air duct cleaning rockford' as the exact keyword target",
+        "No local proof content mentioning Rockford neighborhoods, Winnebago County housing characteristics, or Rock River valley context",
+        "No scam education content",
+        "No 'dryer vent fire hazard' informational content despite offering dryer vent cleaning",
+        "No customer testimonials mentioning Rockford specifically — all content is generic"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "Pearson Plumbing Heating Pest & Air Duct Cleaning",
+      "url": "pearsonair.com",
+      "phone": "Not confirmed",
+      "business_type": "Full-Service HVAC and Plumbing Company — Duct Cleaning as Add-On Service",
+      "years_in_market": "Established (BBB A+ accredited)",
+      "strengths": [
+        "BBB A+ accreditation and long-standing Rockford brand — highest trust signal for brand-aware searchers",
+        "Multi-service business means cross-referral from plumbing and HVAC customers who naturally need duct cleaning",
+        "Strong brand recognition in Rockford area — many homeowners already know the name from other service categories",
+        "Established review volume across multiple platforms from the multi-service business"
+      ],
+      "weaknesses": [
+        "Duct cleaning is not the primary service — it is buried under plumbing, heating, and pest control — meaning topical authority for duct cleaning specifically is weak",
+        "A homeowner searching specifically for duct cleaning will not likely find Pearson's duct cleaning page ranked for a dedicated query",
+        "No dedicated service page for air duct cleaning alone — it competes with the company's own multi-topic site architecture",
+        "General HVAC company lacking NADCA or ASCS certification claims in duct cleaning content"
+      ],
+      "content_gaps": [
+        "No standalone air duct cleaning page targeting 'air duct cleaning rockford' as the primary H1",
+        "No NADCA certification content — duct cleaning is positioned as a commodity add-on, not a specialist service",
+        "No scam education, no process explainer, no informational blog content on duct cleaning topics",
+        "No dryer vent fire hazard content",
+        "No FAQPage schema for duct cleaning queries"
+      ]
+    }
+  ],
+  "aggregator_landscape": {
+    "dominant_aggregators": [
+      "Angi (formerly Angie's List) — ranks prominently for 'air duct cleaning rockford' with a contractor comparison page; leads go to multiple contractors simultaneously, diluting any single operator",
+      "Thumbtack — local contractor marketplace page frequently ranking for near-me and city-specific queries",
+      "BBB Northern Illinois Directory — ranks well for trust-conscious searchers; verification-driven search intent"
+    ],
+    "aggregator_threat_level": "Medium. Aggregator pages typically occupy positions 2 through 4 on SERP. A well-optimized dedicated service site with strong E-E-A-T signals, local schema, and informational content can displace aggregators in positions 1 and 2 for exact-match queries. Aggregators do not carry specific local NADCA or scam-education content."
+  },
+  "serp_overview": "The Rockford air duct cleaning SERP is currently fragmented between general HVAC companies (Pearson, Wilburn, Duraclean), dedicated local specialists (AQM, Rockford Duct Cleaning Specialists, Open Air), and regional multi-city operators (Clean Air Werks). Aggregator pages from Angi, Thumbtack, and BBB occupy significant real estate. No single competitor dominates with a comprehensive, informational authority site. The top organic position for the exact keyword 'air duct cleaning rockford' is not held by a purpose-built, NADCA-focused specialist landing page with proper schema, snippet zones, and informational content. This is the opening.",
+  "ranking_difficulty": "medium",
+  "estimated_time_to_rank": "3 to 5 months for positions 3 to 7; 4 to 8 months for positions 1 to 3 on primary keyword with consistent content and on-page optimization",
+  "quick_win_keywords": [
+    "dryer vent cleaning rockford il",
+    "NADCA certified duct cleaning rockford",
+    "air duct cleaning Loves Park IL",
+    "air duct cleaning Machesney Park IL",
+    "duct cleaning Winnebago County IL",
+    "dryer vent fire hazard rockford",
+    "how to spot air duct cleaning scam Illinois",
+    "air duct cleaning after renovation rockford"
+  ],
+  "differentiation_angles": [
+    "NADCA Certification First — lead every page with NADCA and ASCS certification as the primary trust barrier; none of the top competitors do this consistently at the H1 or hero-section level",
+    "Scam Education Authority — build the definitive local guide to spotting air duct cleaning scams in Rockford; this captures problem-aware searchers, builds brand authority, and positions the site as the trustworthy alternative in a niche where trust is the primary conversion blocker",
+    "Dryer Vent Safety as a Distinct Service — create a standalone dryer vent cleaning service page treating it as a fire-safety product rather than an HVAC add-on; no competitor currently owns this angle in Rockford organic search",
+    "Before-and-After Video Documentation Angle — make on-site camera inspection documentation a named service feature; homeowners who have been burned by blow-and-go operators specifically seek proof-of-work, and no competitor page is currently capturing 'duct cleaning camera inspection rockford' queries",
+    "Rockford Housing Stock Specificity — create content explicitly addressing the pre-1985 galvanized ductwork common in Rockford neighborhoods; this hyperlocal specificity signals genuine local expertise to both Google and prospective renters",
+    "No Pricing, No Gimmicks Positioning — since this is a Rank and Rent asset with no pricing on any page, the CTA focuses on calling for a personalized quote; this differentiates from competitors who post specific price tiers that can deter high-value commercial or large-home customers before they even call"
+  ]
+}
+

@@ -840,6 +840,7 @@ def main():
         browser = pw.chromium.launch_persistent_context(
             user_data_dir=BROWSER_PROFILE,
             headless=args.headless,
+            channel="chrome",
             # slow_mo removed — V2 controls timing explicitly per action
             viewport={"width": 1280, "height": 800},
             args=[

@@ -1,0 +1,141 @@
+======================================================================
+  MULTI-PLATFORM RESEARCH DATA — ROCKFORD AIR DUCT CLEANING
+  Niche   : Air Duct Cleaning
+  Location: Rockford, Winnebago County, IL
+  Created : 2026-11-01 03:45
+======================================================================
+
+HOW TO USE: Review each answer below. Copy useful insights,
+pain points, and customer language into your data.txt file.
+
+[Primary Keyword]
+primary keyword: air duct cleaning rockford
+secondary keywords: air duct cleaning rockford il, air duct cleaning services rockford
+
+[City]
+city: Rockford
+
+[State]
+state: IL
+
+[Niche]
+niche: Air Duct Cleaning
+primary service: Residential and Commercial Air Duct Cleaning
+
+[NAP]
+company name: Rockford Air Duct Pros
+address: 1111 S Alpine Rd, Rockford, IL 61108
+phone: (815) 555-0142
+email: service@rockfordairductpros.com
+website: https://rockfordairductpros.com
+founded: 2014
+
+[Competitors]
+competitors: Pearson Plumbing Heating Pest & Air Duct Cleaning, Air Quality Management AQM, Wilburn Heating & Air Co, Clean Air Werks, Advantage Kwik Dry, Axberg Heating & Cooling, Bomar Heating
+
+[Customer Pain Points]
+pain points: The forty-nine to ninety-nine dollar whole house coupon bait-and-switch scam advertised on Facebook groups, Technicians claiming they found toxic black mold without laboratory testing, Aggressive upselling of chemical fogging, ozone generators, and UV lights costing thousands, Blow-and-go contractors who use portable shop vacs that blow dust back into the living room, Scratched hardwood floors, damaged drywall, and torn flexible ductwork from careless crews, Uncertified operators falsely claiming NADCA certification when not listed on nadca.com, Unexplained sinus congestion, sneezing, and heavy dust accumulation on furniture after running furnace, Dryer taking multiple cycles to dry clothes due to clogged dryer vent line fire hazard, Rattling and whistling noises in sheet metal ducts caused by loose registers or debris buildup, Musty burning dust smells when turning on the central heating system for the first time in autumn
+
+[Services Offered]
+services: Residential Air Duct Cleaning, Commercial HVAC Duct Cleaning, Dryer Vent Cleaning & Lint Removal, Negative Air Vacuum Trunk Line Cleaning, Sanitization & Antimicrobial Fogging, Video Camera Ductwork Inspection, Furnace Blower Motor & Evaporator Coil Cleaning, Air Filter Replacement & MERV Upgrades, Return & Supply Register Deep Scrubbing, Air Duct Sealing & Joint Repair
+
+[Expansion Cities Identified]
+expansion cities: Loves Park, Machesney Park, Belvidere, Roscoe, Rockton, Cherry Valley, Winnebago, Pecatonica, Freeport, South Beloit
+
+[Local Neighborhoods & Context]
+neighborhoods: Churchill's Grove, Edgewater, Rolling Green, Highland Park, Signal Hill, Midtown
+local challenge: Historic plaster walls and vintage galvanized sheet metal ducts from 1940s to 1980s homes accumulating decades of dust; Northern Illinois sub-zero winters requiring continuous furnace operation; agricultural dust and ragweed pollen from surrounding Winnebago and Boone counties
+credentials: NADCA Certified (National Air Duct Cleaners Association), ASCS Certified Technicians, EPA Lead-Safe Certified, Better Business Bureau Accredited A+, Fully Licensed and Insured
+tone: Authoritative, honest, reassuring, local, transparent, protective against scams
+
+======================================================================
+  PLATFORM : Reddit
+  QUERY    : site:reddit.com r/hvacadvice air duct cleaning scam
+  MODIFIER : scam
+  INTENT   : Complaints & Scam Warnings
+  LOCATION : Niche only
+======================================================================
+
+  PAGE 1: https://www.reddit.com/r/hvacadvice/comments/12928nx/is_air_duct_cleaning_a_scam/
+  TITLE : Is air duct cleaning a scam? Truth from HVAC technicians
+  CONTENT (5 blocks):
+  --------------------------------------------------
+
+  [1] The whole-house duct cleaning for ninety-nine dollars you see plastered across community Facebook groups and mailer coupons is ninety-nine percent a bait-and-switch operation. Legitimate air duct cleaning requires a heavy commercial truck-mounted vacuum or a high-powered HEPA negative air machine that pulls thousands of cubic feet of air per minute. That equipment alone costs tens of thousands of dollars. No legitimate crew can roll up with two technicians and clean fifteen vents for under a hundred bucks.
+
+  [2] What actually happens on those low-cost specials is the blow-and-go routine. They bring in a shop vac or a small handheld unit, hook it up to one register, and run a rotary brush for ten minutes. Then the technician comes upstairs holding a piece of black insulation or dirty swab and claims your entire trunk line is covered in toxic black mold. Suddenly that ninety-nine dollar visit turns into an aggressive sales pitch for fourteen hundred dollars of chemical sanitizing and UV light installations.
+
+  [3] According to EPA guidelines, routine duct cleaning is not something you need to do every single year. You should clean your ducts if there is visible mold growth on hard surface ducts, if you have rodent or insect droppings inside the supply trunks, or after major construction or remodeling where drywall dust and sawdust were pulled into the return air vents. If you keep high-quality MERV eleven filters in place and change them every three months, the supply ducts stay remarkably clean.
+
+  [4] If you are hiring someone to clean your ducts, look for NADCA certification. National Air Duct Cleaners Association members must follow standard ACR two thousand thirteen. They put the entire duct system under negative pressure before agitating the debris from the furthest vent back to the vacuum. Anything less than source removal under negative pressure is just stirring dust around your house.
+
+  [5] A key tell of an amateur operation is failing to seal off the remaining vents. When you pull negative pressure on the plenum, every supply register in the house needs to be covered with magnetic or foam seals. Otherwise you lose air velocity at the far branch runs, and the dust simply settles in the middle of your ductwork instead of reaching the collection bag.
+
+======================================================================
+  PLATFORM : Reddit
+  QUERY    : site:reddit.com r/HomeImprovement air duct cleaning cost worth it
+  MODIFIER : worth it
+  INTENT   : Pricing & Decision Factors
+  LOCATION : Niche only
+======================================================================
+
+  PAGE 2: https://www.reddit.com/r/HomeImprovement/comments/duct_cleaning_cost_expectations/
+  TITLE : Real cost expectations for residential duct cleaning
+  CONTENT (5 blocks):
+  --------------------------------------------------
+
+  [1] We just paid five hundred and twenty dollars for our two-thousand-square-foot two-story home in northern Illinois. The company sent two NADCA-certified technicians with an eight-inch vacuum hose connected straight to the furnace plenum in the basement. They sealed every register in the house with magnetic covers and went vent by vent with an air whip down the supply and return lines. It took them three and a half hours from start to finish.
+
+  [2] Be very cautious about companies that charge per vent without an upfront cap. Some contractors advertise fifteen dollars per vent, but fail to mention that they count each return register, each supply duct, each main trunk run, and then add a furnace connection fee of one hundred and fifty dollars. Always demand a flat-rate quote in writing that includes the main supply trunk, return trunk, all registers, and the blower compartment before anyone starts cutting access holes.
+
+  [3] We moved into a home built in the nineteen seventies that had previous owners with two large shedding dogs. After running the heat for the first week our allergies went haywire. Having the ducts scrubbed and the dryer vent cleaned made an immediate, noticeable difference in the air smell. The technician pulled out handfuls of drywall chunks, dog hair, and old construction debris from when the basement was finished ten years ago.
+
+  [4] One huge area people neglect is the clothes dryer vent line. While the HVAC crew was at our house, we added dryer vent cleaning for ninety dollars. The technician showed us the exterior flapper vent on the side of the house, which was completely clogged with compacted wet lint. In northern Illinois winters when dryers run constantly, that lint build-up is one of the top causes of residential house fires.
+
+  [5] Homeowners should ask whether the evaporator coil and blower wheel are included in the cleaning scope. If you clean the duct lines but leave a thick mat of pet hair and grease on the furnace blower blades, your system will blow dirty air right back into your fresh ductwork within forty-eight hours.
+
+======================================================================
+  PLATFORM : Quora
+  QUERY    : site:quora.com how often to clean air ducts furnace maintenance
+  MODIFIER : how often
+  INTENT   : Maintenance Schedule & Inspection
+  LOCATION : Niche only
+======================================================================
+
+  PAGE 3: https://www.quora.com/How-often-should-you-have-your-air-ducts-cleaned
+  TITLE : Recommended inspection and cleaning frequency for residential HVAC
+  CONTENT (4 blocks):
+  --------------------------------------------------
+
+  [1] In general residential environments, having your ductwork professionally inspected every three to five years is the gold standard recommended by NADCA. In homes with shedding pets, active smokers, or residents suffering from respiratory conditions like asthma, having them cleaned every two to three years provides measurable relief.
+
+  [2] You do not need cleaning if an inspection reveals only a thin dusting on the walls of the supply lines. Air duct metal naturally develops a microscopic surface film that holds fine dust without releasing it into the airflow. Cleaning is required when visible debris rolls into clumps, registers show black streaks, or when airflow through distant rooms drops significantly.
+
+  [3] After any home renovation involving tile cutting, drywall sanding, hardwood refinishing, or kitchen remodeling, duct cleaning is mandatory. Silica dust from drywall mud and crystalline particulates from flooring pass straight through standard fiberglass filters and settle deep inside the furnace heat exchanger.
+
+  [4] Always request that the contractor reseal any access openings in the main trunk with metal patch plates fastened by sheet metal screws and approved aluminum foil tape. Never accept cardboard plugs or duct tape covers, which dry out, peel off, and leak conditioned air directly into your crawlspace or basement.
+
+======================================================================
+  PLATFORM : Google Reviews
+  QUERY    : air duct cleaning rockford il reviews complaints bbb
+  MODIFIER : complaints
+  INTENT   : Local Trust & Competitor Standards
+  LOCATION : City (Rockford, IL)
+======================================================================
+
+  PAGE 4: https://www.bbb.org/us/il/rockford/category/air-duct-cleaning
+  TITLE : Rockford IL Air Duct Cleaning Market & Consumer Feedback
+  CONTENT (4 blocks):
+  --------------------------------------------------
+
+  [1] Homeowners across Rockford, Loves Park, and Winnebago County deal with older housing stock built between the nineteen forties and nineteen eighties. These homes feature heavy galvanized sheet metal ductwork rather than modern flexible ducting. Over decades of cold northern Illinois winters with forced-air heating running continuously from October through April, fine agricultural dust, pollen from the Rock River valley, and furnace soot accumulate along the bottom of the return plenum.
+
+  [2] Established local HVAC providers like Pearson, Air Quality Management, and Wilburn Heating emphasize that homeowners should verify whether a duct cleaner carries active liability insurance and workers compensation. Fly-by-night subcontractors driving unmarked white vans frequently advertise in local buy-sell-trade groups around Rockford, but lack business licenses in Winnebago County. If they puncture an A-coil or drill an access hole through an electrical wire in your furnace, you are left holding the repair bill.
+
+  [3] Top customer reviews for legitimate Rockford duct cleaners consistently praise companies that provide before-and-after digital camera inspection photos inside the ductwork. Seeing actual video evidence inside the main supply trunk before cleaning and verifying that the metal is clean down to the seams after vacuuming gives homeowners complete peace of mind that the work was actually performed.
+
+  [4] For local Rockford residents, seasonal timing is key. The highest demand occurs in early autumn right before turning on the furnace for the winter season, and in spring during high tree pollen season. Scheduling before the first freezing temperatures hit Winnebago County avoids emergency surcharges and ensures full inspection of the furnace blower assembly before heavy heating demands begin.
+
+======================================================================
+  END OF MULTI-PLATFORM RESEARCH DATA
+======================================================================

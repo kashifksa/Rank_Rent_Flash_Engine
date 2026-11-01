@@ -23,6 +23,11 @@ import re
 import sys
 import argparse
 
+# Force UTF-8 output on Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIG — adjust extraction patterns per your data.txt format
@@ -44,15 +49,15 @@ FIELD_PATTERNS = {
     "primary_keyword":     [r"(?i)primary keyword[:\s]+(.+)", r"(?i)main keyword[:\s]+(.+)"],
     "secondary_keywords":  [r"(?i)secondary keywords[:\s]+(.+)", r"(?i)keywords[:\s]+(.+)"],
     "services":            [r"(?i)^services[:\s]+(.+)", r"(?i)service list[:\s]+(.+)"],
-    "sub_services":        [r"(?i)sub.?services[:\s]+(.+)", r"(?i)service types[:\s]+(.+)"],
-    "neighborhoods":       [r"(?i)neighborhoods[:\s]+(.+)", r"(?i)areas served[:\s]+(.+)"],
-    "expansion_cities":    [r"(?i)expansion cities[:\s]+(.+)", r"(?i)service area cities[:\s]+(.+)"],
-    "local_challenge":     [r"(?i)local challenge[:\s]+(.+)", r"(?i)regional challenge[:\s]+(.+)", r"(?i)climate[:\s]+(.+)"],
-    "local_landmarks":     [r"(?i)landmarks[:\s]+(.+)", r"(?i)local landmarks[:\s]+(.+)"],
-    "credentials":         [r"(?i)credentials[:\s]+(.+)", r"(?i)licenses[:\s]+(.+)", r"(?i)certifications[:\s]+(.+)"],
-    "community_ties":      [r"(?i)community ties[:\s]+(.+)", r"(?i)memberships[:\s]+(.+)", r"(?i)sponsorships[:\s]+(.+)"],
-    "tone_voice":          [r"(?i)tone[:\s]+(.+)", r"(?i)voice[:\s]+(.+)", r"(?i)writing style[:\s]+(.+)"],
-    "pain_points":         [r"(?i)pain points[:\s]+(.+)", r"(?i)customer problems[:\s]+(.+)"],
+    "sub_services":        [r"(?i)^sub.?services[:\s]+(.+)", r"(?i)service types[:\s]+(.+)"],
+    "neighborhoods":       [r"(?i)^neighborhoods[:\s]+(.+)", r"(?i)^areas served[:\s]+(.+)"],
+    "expansion_cities":    [r"(?i)^expansion cities[:\s]+(.+)", r"(?i)^service area cities[:\s]+(.+)"],
+    "local_challenge":     [r"(?i)^local challenge[:\s]+(.+)", r"(?i)^regional challenge[:\s]+(.+)", r"(?i)^climate[:\s]+(.+)"],
+    "local_landmarks":     [r"(?i)^landmarks[:\s]+(.+)", r"(?i)^local landmarks[:\s]+(.+)"],
+    "credentials":         [r"(?i)^credentials[:\s]+(.+)", r"(?i)^licenses[:\s]+(.+)", r"(?i)^certifications[:\s]+(.+)"],
+    "community_ties":      [r"(?i)^community ties[:\s]+(.+)", r"(?i)^memberships[:\s]+(.+)", r"(?i)^sponsorships[:\s]+(.+)"],
+    "tone_voice":          [r"(?i)^tone[:\s]+(.+)", r"(?i)^voice[:\s]+(.+)", r"(?i)^writing style[:\s]+(.+)"],
+    "pain_points":         [r"(?i)^pain points[:\s]+(.+)", r"(?i)^customer problems[:\s]+(.+)"],
     "monetization_model":  [r"(?i)monetization[:\s]+(.+)", r"(?i)business model[:\s]+(.+)"],
 }
 
@@ -72,7 +77,7 @@ def extract_field(text, patterns):
         matches = re.findall(pattern, text, re.MULTILINE)
         if matches:
             value = matches[0].strip()
-            if value and len(value) > 2:
+            if value and len(value) >= 2:
                 return value[:MAX_FIELD_LENGTH]
     return ""
 
@@ -267,15 +272,15 @@ def main():
     if missing:
         print(f"\nWARNING: These required fields were not found in data.txt:")
         for m in missing:
-            print(f"  - {m} → fill in manually in {output_path}")
+            print(f"  - {m} -> fill in manually in {output_path}")
 
     if wc > 1200:
-        print(f"\nWARNING: Output is {wc} words — still large for Flash 3.8.")
+        print(f"\nWARNING: Output is {wc} words - still large for Flash 3.8.")
         print("Consider reducing the RESEARCH SUMMARY section manually.")
     elif wc <= 800:
-        print(f"\nPASS: Output is {wc} words — safe for Flash 3.8.")
+        print(f"\nPASS: Output is {wc} words - safe for Flash 3.8.")
     else:
-        print(f"\nOK: Output is {wc} words — acceptable for Flash 3.8.")
+        print(f"\nOK: Output is {wc} words - acceptable for Flash 3.8.")
 
     print("\nNext step: Review data_brief.txt, fill any [fill in] fields, then run P4.")
 

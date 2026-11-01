@@ -83,12 +83,22 @@ def is_excessive_caps(line: str) -> bool:
 # Section header pattern — always keep these
 SECTION_HEADER_RE = re.compile(r"^\[.+\]\s*$")
 
+# Structured metadata field pattern — always keep these
+FIELD_LINE_RE = re.compile(
+    r"^(niche|primary service|main service|city|target city|state|company name|business name|phone|telephone|address|street address|email|website|url|founded|primary keyword|main keyword|secondary keywords|keywords|services|expansion cities|neighborhoods|credentials|tone|voice|monetization)[:\s]+.+",
+    re.IGNORECASE,
+)
+
 def clean_line(line: str) -> str | None:
     """Return cleaned line or None if the line should be dropped."""
     stripped = line.strip()
 
     # Always keep section headers
     if SECTION_HEADER_RE.match(stripped):
+        return stripped
+
+    # Always keep structured metadata field definitions
+    if FIELD_LINE_RE.match(stripped):
         return stripped
 
     # Drop empty lines (handled separately for collapsing)

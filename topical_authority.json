@@ -1,0 +1,225 @@
+{
+  "pages": [
+    {
+      "page_id": "homepage",
+      "page_type": "homepage",
+      "phase": 1,
+      "priority": 1,
+      "target_keyword": "air duct cleaning rockford",
+      "h1_title": "NADCA-Certified Air Duct Cleaning in Rockford, IL",
+      "parent_service": "",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "residential-air-duct-cleaning",
+      "page_type": "service",
+      "phase": 1,
+      "priority": 2,
+      "target_keyword": "air duct cleaning rockford il",
+      "h1_title": "Residential Air Duct Cleaning in Rockford, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "about",
+      "page_type": "about",
+      "phase": 1,
+      "priority": 3,
+      "target_keyword": "rockford air duct cleaning company",
+      "h1_title": "About Rockford Air Duct Pros — NADCA Certified Since 2014",
+      "parent_service": "",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "contact",
+      "page_type": "contact",
+      "phase": 1,
+      "priority": 4,
+      "target_keyword": "contact air duct cleaning rockford",
+      "h1_title": "Contact Rockford Air Duct Pros — Schedule Your Inspection",
+      "parent_service": "",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-loves-park-il",
+      "page_type": "location",
+      "phase": 1,
+      "priority": 5,
+      "target_keyword": "air duct cleaning loves park il",
+      "h1_title": "Air Duct Cleaning in Loves Park, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Loves Park",
+      "status": "planned"
+    },
+    {
+      "page_id": "commercial-hvac-duct-cleaning",
+      "page_type": "service",
+      "phase": 2,
+      "priority": 6,
+      "target_keyword": "commercial HVAC duct cleaning rockford il",
+      "h1_title": "Commercial HVAC Duct Cleaning in Rockford, IL",
+      "parent_service": "Commercial HVAC Duct Cleaning",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "dryer-vent-cleaning-rockford",
+      "page_type": "service",
+      "phase": 2,
+      "priority": 7,
+      "target_keyword": "dryer vent cleaning rockford il",
+      "h1_title": "Dryer Vent Cleaning in Rockford, IL — Fire Safety Service",
+      "parent_service": "Dryer Vent Cleaning and Lint Removal",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "duct-sanitization-rockford",
+      "page_type": "service",
+      "phase": 2,
+      "priority": 8,
+      "target_keyword": "air duct sanitization rockford il",
+      "h1_title": "Air Duct Sanitization and Antimicrobial Treatment in Rockford, IL",
+      "parent_service": "Sanitization and Antimicrobial Fogging",
+      "city": "Rockford",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-machesney-park-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 9,
+      "target_keyword": "duct cleaning machesney park il",
+      "h1_title": "Air Duct Cleaning in Machesney Park, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Machesney Park",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-belvidere-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 10,
+      "target_keyword": "air duct cleaning belvidere il",
+      "h1_title": "Air Duct Cleaning in Belvidere, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Belvidere",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-roscoe-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 11,
+      "target_keyword": "air duct cleaning roscoe il",
+      "h1_title": "Air Duct Cleaning in Roscoe, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Roscoe",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-rockton-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 12,
+      "target_keyword": "air duct cleaning rockton il",
+      "h1_title": "Air Duct Cleaning in Rockton, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Rockton",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-cherry-valley-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 13,
+      "target_keyword": "air duct cleaning cherry valley il",
+      "h1_title": "Air Duct Cleaning in Cherry Valley, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Cherry Valley",
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-winnebago-il",
+      "page_type": "location",
+      "phase": 3,
+      "priority": 14,
+      "target_keyword": "air duct cleaning winnebago il",
+      "h1_title": "Air Duct Cleaning in Winnebago, IL",
+      "parent_service": "Air Duct Cleaning",
+      "city": "Winnebago",
+      "status": "planned"
+    },
+    {
+      "page_id": "how-often-should-you-clean-air-ducts",
+      "page_type": "blog",
+      "phase": 4,
+      "priority": 15,
+      "target_keyword": "how often should you clean air ducts",
+      "h1_title": "How Often Should You Clean Air Ducts? A Homeowner's Guide",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    },
+    {
+      "page_id": "signs-your-air-ducts-need-cleaning",
+      "page_type": "blog",
+      "phase": 4,
+      "priority": 16,
+      "target_keyword": "signs your air ducts need cleaning",
+      "h1_title": "7 Signs Your Air Ducts Need Cleaning Right Now",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    },
+    {
+      "page_id": "what-is-nadca-certification",
+      "page_type": "blog",
+      "phase": 4,
+      "priority": 17,
+      "target_keyword": "what is NADCA certification air duct cleaning",
+      "h1_title": "What Is NADCA Certification and Why Does It Matter for Duct Cleaning?",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    },
+    {
+      "page_id": "how-to-spot-air-duct-cleaning-scams",
+      "page_type": "blog",
+      "phase": 5,
+      "priority": 18,
+      "target_keyword": "how to spot air duct cleaning scams",
+      "h1_title": "How to Spot Air Duct Cleaning Scams Before They Waste Your Money",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    },
+    {
+      "page_id": "guide-to-dryer-vent-fire-hazards",
+      "page_type": "blog",
+      "phase": 5,
+      "priority": 19,
+      "target_keyword": "guide to dryer vent fire hazards",
+      "h1_title": "A Homeowner's Guide to Dryer Vent Fire Hazards and Prevention",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    },
+    {
+      "page_id": "what-is-negative-air-pressure-duct-cleaning",
+      "page_type": "blog",
+      "phase": 5,
+      "priority": 20,
+      "target_keyword": "what is negative air pressure duct cleaning",
+      "h1_title": "What Is Negative Air Pressure Duct Cleaning and How Does It Work?",
+      "parent_service": "",
+      "city": "",
+      "status": "planned"
+    }
+  ]
+}
+

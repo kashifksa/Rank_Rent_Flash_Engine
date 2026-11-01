@@ -1,0 +1,477 @@
+{
+  "site_name": "Rockford Air Duct Pros",
+  "domain": "https://rockfordairductpros.com",
+  "pages": [
+    {
+      "page_id": "homepage",
+      "page_type": "homepage",
+      "phase": 1,
+      "slug": "/",
+      "h1": "NADCA-Certified Air Duct Cleaning in Rockford, IL",
+      "meta_title": "Air Duct Cleaning Rockford IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Professional air duct cleaning in Rockford, IL by NADCA-certified technicians. Serving Winnebago County since 2014. Camera inspection on every job. Call (815) 555-0142.",
+      "target_keyword": "air duct cleaning rockford",
+      "secondary_keywords": [
+        "air duct cleaning rockford il",
+        "NADCA certified duct cleaning rockford",
+        "duct cleaning rockford illinois"
+      ],
+      "schema_types": ["LocalBusiness", "Service"],
+      "internal_links_to": [
+        "residential-air-duct-cleaning",
+        "dryer-vent-cleaning-rockford",
+        "commercial-hvac-duct-cleaning",
+        "about",
+        "contact",
+        "air-duct-cleaning-loves-park-il"
+      ],
+      "sections": [
+        "hero",
+        "trust_bar",
+        "primary_service_intro",
+        "service_grid",
+        "local_challenge",
+        "credentials_block",
+        "how_it_works",
+        "reviews",
+        "service_area_map",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1200,
+      "status": "planned"
+    },
+    {
+      "page_id": "residential-air-duct-cleaning",
+      "page_type": "service",
+      "phase": 1,
+      "slug": "/residential-air-duct-cleaning",
+      "h1": "Residential Air Duct Cleaning in Rockford, IL",
+      "meta_title": "Residential Air Duct Cleaning Rockford IL | NADCA Certified | (815) 555-0142",
+      "meta_description": "NADCA-certified residential air duct cleaning in Rockford, IL. Before-and-after camera inspection included. Serving Rockford and Winnebago County. Call today.",
+      "target_keyword": "air duct cleaning rockford il",
+      "secondary_keywords": [
+        "air duct cleaning services rockford",
+        "residential duct cleaning rockford",
+        "HVAC duct cleaning rockford il"
+      ],
+      "schema_types": ["Service", "LocalBusiness", "FAQPage"],
+      "internal_links_to": [
+        "homepage",
+        "dryer-vent-cleaning-rockford",
+        "about",
+        "contact",
+        "air-duct-cleaning-loves-park-il"
+      ],
+      "sections": [
+        "hero",
+        "trust_bar",
+        "service_intro",
+        "local_challenge",
+        "process_steps",
+        "feature_grid",
+        "credentials_block",
+        "service_area",
+        "reviews",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1400,
+      "status": "planned"
+    },
+    {
+      "page_id": "about",
+      "page_type": "about",
+      "phase": 1,
+      "slug": "/about",
+      "h1": "About Rockford Air Duct Pros — NADCA Certified Since 2014",
+      "meta_title": "About Rockford Air Duct Pros | NADCA Certified Since 2014",
+      "meta_description": "Rockford Air Duct Pros has served Winnebago County homeowners since 2014. NADCA-certified, EPA Lead-Safe, BBB A+ rated. Learn about our team and standards.",
+      "target_keyword": "rockford air duct cleaning company",
+      "secondary_keywords": [
+        "about rockford air duct pros",
+        "NADCA certified rockford il"
+      ],
+      "schema_types": ["LocalBusiness", "Person"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning",
+        "contact"
+      ],
+      "sections": [
+        "hero",
+        "origin_story",
+        "credentials_block",
+        "team",
+        "community_ties",
+        "eeat_signals",
+        "bottom_cta"
+      ],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "contact",
+      "page_type": "contact",
+      "phase": 1,
+      "slug": "/contact",
+      "h1": "Contact Rockford Air Duct Pros — Schedule Your Inspection",
+      "meta_title": "Contact Rockford Air Duct Pros | Schedule Duct Cleaning | (815) 555-0142",
+      "meta_description": "Schedule your air duct cleaning in Rockford, IL. Call (815) 555-0142 or fill out our contact form. NADCA-certified technicians serving Winnebago County.",
+      "target_keyword": "contact air duct cleaning rockford",
+      "secondary_keywords": [
+        "schedule air duct cleaning rockford il",
+        "air duct cleaning rockford phone number"
+      ],
+      "schema_types": ["LocalBusiness", "ContactPage"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning"
+      ],
+      "sections": [
+        "hero",
+        "contact_form",
+        "nap_block",
+        "service_area_list",
+        "faq_short"
+      ],
+      "word_count_target": 500,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-loves-park-il",
+      "page_type": "location",
+      "phase": 1,
+      "slug": "/air-duct-cleaning-loves-park-il",
+      "h1": "Air Duct Cleaning in Loves Park, IL",
+      "meta_title": "Air Duct Cleaning Loves Park IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Professional air duct cleaning in Loves Park, IL. NADCA-certified technicians, camera inspection on every job. Serving Loves Park and greater Winnebago County.",
+      "target_keyword": "air duct cleaning loves park il",
+      "secondary_keywords": [
+        "duct cleaning loves park illinois",
+        "dryer vent cleaning loves park il"
+      ],
+      "schema_types": ["Service", "LocalBusiness", "FAQPage"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning",
+        "contact"
+      ],
+      "sections": [
+        "hero",
+        "trust_bar",
+        "local_intro",
+        "local_challenge",
+        "process_steps",
+        "credentials_block",
+        "reviews",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1100,
+      "status": "planned"
+    },
+    {
+      "page_id": "commercial-hvac-duct-cleaning",
+      "page_type": "service",
+      "phase": 2,
+      "slug": "/commercial-hvac-duct-cleaning",
+      "h1": "Commercial HVAC Duct Cleaning in Rockford, IL",
+      "meta_title": "Commercial HVAC Duct Cleaning Rockford IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Commercial HVAC duct cleaning in Rockford, IL for offices, retail, and multi-unit buildings. NADCA-certified. Camera documentation provided. Call (815) 555-0142.",
+      "target_keyword": "commercial HVAC duct cleaning rockford il",
+      "secondary_keywords": [
+        "commercial duct cleaning rockford",
+        "office air duct cleaning rockford il"
+      ],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning",
+        "contact"
+      ],
+      "sections": [
+        "hero",
+        "service_intro",
+        "commercial_differentiators",
+        "process_steps",
+        "credentials_block",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1200,
+      "status": "planned"
+    },
+    {
+      "page_id": "dryer-vent-cleaning-rockford",
+      "page_type": "service",
+      "phase": 2,
+      "slug": "/dryer-vent-cleaning-rockford",
+      "h1": "Dryer Vent Cleaning in Rockford, IL — Fire Safety Service",
+      "meta_title": "Dryer Vent Cleaning Rockford IL | Fire Safety | Rockford Air Duct Pros",
+      "meta_description": "Professional dryer vent cleaning in Rockford, IL to reduce fire risk and improve drying efficiency. NADCA-certified. Camera inspection available. (815) 555-0142.",
+      "target_keyword": "dryer vent cleaning rockford il",
+      "secondary_keywords": [
+        "dryer vent cleaning loves park il",
+        "lint removal dryer vent rockford"
+      ],
+      "schema_types": ["Service", "LocalBusiness", "FAQPage"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning",
+        "contact"
+      ],
+      "sections": [
+        "hero",
+        "fire_safety_intro",
+        "warning_signs",
+        "process_steps",
+        "credentials_block",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1100,
+      "status": "planned"
+    },
+    {
+      "page_id": "duct-sanitization-rockford",
+      "page_type": "service",
+      "phase": 2,
+      "slug": "/duct-sanitization-rockford",
+      "h1": "Air Duct Sanitization and Antimicrobial Treatment in Rockford, IL",
+      "meta_title": "Air Duct Sanitization Rockford IL | Antimicrobial Treatment | Rockford Air Duct Pros",
+      "meta_description": "EPA-registered antimicrobial air duct sanitization in Rockford, IL. Reduces mold spores, bacteria, and odors inside your ductwork. NADCA-certified. (815) 555-0142.",
+      "target_keyword": "air duct sanitization rockford il",
+      "secondary_keywords": [
+        "antimicrobial duct treatment rockford",
+        "duct mold treatment rockford il"
+      ],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": [
+        "homepage",
+        "residential-air-duct-cleaning",
+        "contact"
+      ],
+      "sections": [
+        "hero",
+        "service_intro",
+        "when_needed",
+        "process_steps",
+        "credentials_block",
+        "faq",
+        "bottom_cta"
+      ],
+      "word_count_target": 1100,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-machesney-park-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-machesney-park-il",
+      "h1": "Air Duct Cleaning in Machesney Park, IL",
+      "meta_title": "Air Duct Cleaning Machesney Park IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Machesney Park, IL by NADCA-certified technicians. Camera inspection on every job. Serving Machesney Park and greater Winnebago County.",
+      "target_keyword": "duct cleaning machesney park il",
+      "secondary_keywords": ["air duct cleaning machesney park illinois"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-belvidere-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-belvidere-il",
+      "h1": "Air Duct Cleaning in Belvidere, IL",
+      "meta_title": "Air Duct Cleaning Belvidere IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Belvidere, IL by NADCA-certified technicians. Serving Boone County homeowners. Camera documentation on every job. Call (815) 555-0142.",
+      "target_keyword": "air duct cleaning belvidere il",
+      "secondary_keywords": ["duct cleaning belvidere illinois"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-roscoe-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-roscoe-il",
+      "h1": "Air Duct Cleaning in Roscoe, IL",
+      "meta_title": "Air Duct Cleaning Roscoe IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Roscoe, IL. NADCA-certified technicians, camera inspection included. Serving Roscoe and surrounding Winnebago County communities.",
+      "target_keyword": "air duct cleaning roscoe il",
+      "secondary_keywords": ["duct cleaning roscoe illinois"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-rockton-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-rockton-il",
+      "h1": "Air Duct Cleaning in Rockton, IL",
+      "meta_title": "Air Duct Cleaning Rockton IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Rockton, IL. NADCA-certified technicians serving Rockton and Winnebago County. Camera documentation on every job. Call (815) 555-0142.",
+      "target_keyword": "air duct cleaning rockton il",
+      "secondary_keywords": ["duct cleaning rockton illinois"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-cherry-valley-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-cherry-valley-il",
+      "h1": "Air Duct Cleaning in Cherry Valley, IL",
+      "meta_title": "Air Duct Cleaning Cherry Valley IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Cherry Valley, IL. NADCA-certified specialists serving Cherry Valley and Winnebago County. Camera inspection on every job.",
+      "target_keyword": "air duct cleaning cherry valley il",
+      "secondary_keywords": ["duct cleaning cherry valley illinois"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "air-duct-cleaning-winnebago-il",
+      "page_type": "location",
+      "phase": 3,
+      "slug": "/air-duct-cleaning-winnebago-il",
+      "h1": "Air Duct Cleaning in Winnebago, IL",
+      "meta_title": "Air Duct Cleaning Winnebago IL | NADCA Certified | Rockford Air Duct Pros",
+      "meta_description": "Air duct cleaning in Winnebago, IL. NADCA-certified technicians serving the village of Winnebago and surrounding Winnebago County areas.",
+      "target_keyword": "air duct cleaning winnebago il",
+      "secondary_keywords": ["duct cleaning winnebago county il"],
+      "schema_types": ["Service", "LocalBusiness"],
+      "internal_links_to": ["homepage", "residential-air-duct-cleaning", "contact"],
+      "sections": ["hero", "local_intro", "process_steps", "credentials_block", "faq", "bottom_cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "how-often-should-you-clean-air-ducts",
+      "page_type": "blog",
+      "phase": 4,
+      "slug": "/blog/how-often-should-you-clean-air-ducts",
+      "h1": "How Often Should You Clean Air Ducts? A Homeowner's Guide",
+      "meta_title": "How Often Should You Clean Air Ducts? | Rockford Air Duct Pros",
+      "meta_description": "Wondering how often to clean air ducts? NADCA recommends every 3-5 years. Learn what factors change that timeline for Rockford, IL homeowners.",
+      "target_keyword": "how often should you clean air ducts",
+      "secondary_keywords": ["how often air duct cleaning", "air duct cleaning frequency"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["residential-air-duct-cleaning", "contact"],
+      "sections": ["intro", "recommended_frequency", "factors_that_increase_frequency", "signs_to_watch", "local_context", "faq", "cta"],
+      "word_count_target": 1000,
+      "status": "planned"
+    },
+    {
+      "page_id": "signs-your-air-ducts-need-cleaning",
+      "page_type": "blog",
+      "phase": 4,
+      "slug": "/blog/signs-your-air-ducts-need-cleaning",
+      "h1": "7 Signs Your Air Ducts Need Cleaning Right Now",
+      "meta_title": "7 Signs Your Air Ducts Need Cleaning | Rockford Air Duct Pros",
+      "meta_description": "Dust buildup, musty odors, rising energy bills — learn 7 signs that your air ducts need professional cleaning from NADCA-certified technicians in Rockford, IL.",
+      "target_keyword": "signs your air ducts need cleaning",
+      "secondary_keywords": ["when to clean air ducts", "dirty air duct symptoms"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["residential-air-duct-cleaning", "contact"],
+      "sections": ["intro", "7_signs", "what_to_do_next", "faq", "cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    },
+    {
+      "page_id": "what-is-nadca-certification",
+      "page_type": "blog",
+      "phase": 4,
+      "slug": "/blog/what-is-nadca-certification",
+      "h1": "What Is NADCA Certification and Why Does It Matter for Duct Cleaning?",
+      "meta_title": "What Is NADCA Certification? | Rockford Air Duct Pros",
+      "meta_description": "NADCA certification means your duct cleaning technician has passed rigorous standards. Learn what NADCA is, what the ACR 2013 standard requires, and why it matters.",
+      "target_keyword": "what is NADCA certification air duct cleaning",
+      "secondary_keywords": ["NADCA ACR 2013 standard", "NADCA certified duct cleaner"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["residential-air-duct-cleaning", "about", "contact"],
+      "sections": ["intro", "what_is_nadca", "acr_2013_standard", "how_to_verify", "local_context", "faq", "cta"],
+      "word_count_target": 1000,
+      "status": "planned"
+    },
+    {
+      "page_id": "how-to-spot-air-duct-cleaning-scams",
+      "page_type": "blog",
+      "phase": 5,
+      "slug": "/blog/how-to-spot-air-duct-cleaning-scams",
+      "h1": "How to Spot Air Duct Cleaning Scams Before They Waste Your Money",
+      "meta_title": "How to Spot Air Duct Cleaning Scams | Rockford Air Duct Pros",
+      "meta_description": "The $49 whole-house coupon scam, fake mold claims, bait-and-switch tactics — learn how to identify dishonest duct cleaners before they enter your home.",
+      "target_keyword": "how to spot air duct cleaning scams",
+      "secondary_keywords": ["air duct cleaning scam warning signs", "bait and switch duct cleaning"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["residential-air-duct-cleaning", "what-is-nadca-certification", "contact"],
+      "sections": ["intro", "red_flags", "bait_and_switch_explainer", "mold_scam", "how_to_verify_legit", "faq", "cta"],
+      "word_count_target": 1100,
+      "status": "planned"
+    },
+    {
+      "page_id": "guide-to-dryer-vent-fire-hazards",
+      "page_type": "blog",
+      "phase": 5,
+      "slug": "/blog/guide-to-dryer-vent-fire-hazards",
+      "h1": "A Homeowner's Guide to Dryer Vent Fire Hazards and Prevention",
+      "meta_title": "Guide to Dryer Vent Fire Hazards | Rockford Air Duct Pros",
+      "meta_description": "Clogged dryer vents cause nearly 17,000 home fires per year. Learn the warning signs, risk factors, and how professional dryer vent cleaning reduces your risk.",
+      "target_keyword": "guide to dryer vent fire hazards",
+      "secondary_keywords": ["dryer vent fire prevention", "clogged dryer vent danger"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["dryer-vent-cleaning-rockford", "contact"],
+      "sections": ["intro", "fire_statistics", "warning_signs", "risk_factors", "prevention_steps", "faq", "cta"],
+      "word_count_target": 1000,
+      "status": "planned"
+    },
+    {
+      "page_id": "what-is-negative-air-pressure-duct-cleaning",
+      "page_type": "blog",
+      "phase": 5,
+      "slug": "/blog/what-is-negative-air-pressure-duct-cleaning",
+      "h1": "What Is Negative Air Pressure Duct Cleaning and How Does It Work?",
+      "meta_title": "What Is Negative Air Pressure Duct Cleaning? | Rockford Air Duct Pros",
+      "meta_description": "Negative air pressure duct cleaning uses a powerful vacuum to pull contaminants out instead of pushing them through your home. Learn how it works and why it matters.",
+      "target_keyword": "what is negative air pressure duct cleaning",
+      "secondary_keywords": ["negative air vacuum duct cleaning", "how duct cleaning works"],
+      "schema_types": ["Article", "FAQPage"],
+      "internal_links_to": ["residential-air-duct-cleaning", "contact"],
+      "sections": ["intro", "how_negative_air_works", "vs_contact_vacuum", "what_to_expect", "faq", "cta"],
+      "word_count_target": 900,
+      "status": "planned"
+    }
+  ],
+  "site_architecture": {
+    "homepage_links_to": [
+      "residential-air-duct-cleaning",
+      "dryer-vent-cleaning-rockford",
+      "commercial-hvac-duct-cleaning",
+      "about",
+      "contact",
+      "air-duct-cleaning-loves-park-il"
+    ],
+    "hub_pages": [
+      "residential-air-duct-cleaning",
+      "commercial-hvac-duct-cleaning",
+      "dryer-vent-cleaning-rockford"
+    ],
+    "location_hub": "air-duct-cleaning-loves-park-il"
+  }
+}
+
