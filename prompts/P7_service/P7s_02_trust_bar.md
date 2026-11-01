@@ -30,9 +30,13 @@ SELF-CHECK before outputting:
 - [ ] No pricing
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
-<!-- Priority: fill this before Nov 2 while Claude access is available -->
+<!-- Golden example generated from: service_page_example.md -->
+<!-- Section 02 — injected by inject_golden_examples.py -->
+
+- **4.9 Stars** Rated on Google
+- **Licensed and Insured** in Illinois
+- **Serving Rockford Since 2014**
+- **100% Satisfaction Guarantee**
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown

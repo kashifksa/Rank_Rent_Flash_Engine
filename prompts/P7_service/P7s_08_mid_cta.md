@@ -31,9 +31,16 @@ SELF-CHECK before outputting:
 - [ ] Total 30-50 words (button and form note excluded from count)
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
-<!-- Priority: fill this before Nov 2 while Claude access is available -->
+<!-- Golden example generated from: service_page_example.md -->
+<!-- Section 08 — injected by inject_golden_examples.py -->
+
+## Get Your Free Air Duct Cleaning Estimate in Rockford
+
+**Rockford's sub-zero winters** push forced-air systems to run continuously from October through April, accelerating allergen and debris buildup inside ductwork that compounds year after year in older homes.
+
+**Call (815) 555-0142**
+
+[SHORT CONTACT FORM - Name, Phone, Message]
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown

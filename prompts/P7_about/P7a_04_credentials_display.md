@@ -40,8 +40,18 @@ SELF-CHECK:
 - [ ] 60-120 words
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Golden example generated from: about_page_example.md -->
+<!-- Section 04 — injected by inject_golden_examples.py -->
+
+## Our Credentials and Certifications
+
+Every credential listed below is active and verifiable through the issuing organization.
+
+- **NADCA Membership** - National Air Duct Cleaners Association (verify at nadca.com)
+- **ASCS Certification** - Air Systems Cleaning Specialist, issued by NADCA; requires passing examination and adherence to ACR 2013 standard
+- **EPA Lead-Safe Certification** - Required for work in pre-1978 housing where original painted surfaces may be near duct components
+- **BBB Accreditation** - A+ rating with the Better Business Bureau; zero complaints on record since founding
+- **Fully Licensed and Insured** - General liability coverage maintained on every job in Illinois; proof available upon request before any appointment
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown

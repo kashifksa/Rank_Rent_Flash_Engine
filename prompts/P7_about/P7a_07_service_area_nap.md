@@ -45,8 +45,30 @@ SELF-CHECK:
 - [ ] 80-120 words
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Golden example generated from: about_page_example.md -->
+<!-- Section 07 — injected by inject_golden_examples.py -->
+
+## Our Location and Service Area
+
+**Rockford Air Duct Pros**
+1111 S Alpine Rd
+Rockford, IL 61108
+Phone: (815) 555-0142
+Email: service@rockfordairductpros.com
+Website: https://rockfordairductpros.com
+
+We serve all of Rockford and the following surrounding communities:
+
+- Loves Park, IL 61111
+- Machesney Park, IL 61115
+- Belvidere, IL 61008
+- Roscoe, IL 61073
+- Rockton, IL 61072
+- Cherry Valley, IL 61016
+- Winnebago, IL 61088
+- Pecatonica, IL 61063
+
+Scheduling is available Monday through Saturday. Same-week appointments are frequently available in Rockford and Loves Park. Outlying communities are scheduled on rotating availability.
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown

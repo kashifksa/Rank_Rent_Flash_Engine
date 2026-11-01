@@ -29,9 +29,16 @@ SELF-CHECK before outputting:
 - [ ] No pricing
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
-<!-- Priority: fill this before Nov 2 while Claude access is available -->
+<!-- Golden example generated from: service_page_example.md -->
+<!-- Section 10 — injected by inject_golden_examples.py -->
+
+## Ready for Professional Air Duct Cleaning in Rockford?
+
+**NADCA-certified technicians** with camera documentation on every job, serving Rockford and Winnebago County since 2014.
+
+**Call (815) 555-0142**
+
+Licensed * Insured * Rockford's Trusted Air Duct Cleaning Team
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown

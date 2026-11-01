@@ -36,8 +36,16 @@ SELF-CHECK:
 - [ ] 60-100 words
 
 ## GOLDEN EXAMPLE
-<!-- PASTE YOUR CLAUDE/PRO OUTPUT FOR THIS SECTION HERE -->
-<!-- Until filled: Flash will follow the rules above without an example -->
+<!-- Golden example generated from: blog_page_example.md -->
+<!-- Section 08 — injected by inject_golden_examples.py -->
+
+## Get Expert Air Duct Cleaning Help in Rockford
+
+Spotting a scam is the first step. Finding a verified, trustworthy alternative is the second. If you are in the greater Rockford area and want NADCA-certified service with camera documentation on every job, our team is available for scheduling throughout Winnebago County.
+
+**Call (815) 555-0142** to speak directly with our team and verify credentials before any appointment is made.
+
+Related reading: What Is NADCA Certification and Why Does It Matter for Duct Cleaning | How Often Should You Clean Air Ducts
 
 ## OUTPUT RULES
 - Output ONLY the section content in Markdown
