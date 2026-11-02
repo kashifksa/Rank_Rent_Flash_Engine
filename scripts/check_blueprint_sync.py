@@ -88,11 +88,18 @@ def get_homepage_service_cards(blueprint: dict | list) -> list[dict]:
 
     # Navigate to homepage
     if isinstance(blueprint, dict):
-        homepage = (
-            blueprint.get("homepage") or
-            blueprint.get("pages", {}).get("homepage") or
-            {}
-        )
+        pages_field = blueprint.get("pages")
+        if isinstance(pages_field, dict):
+            homepage = pages_field.get("homepage") or {}
+        elif isinstance(pages_field, list):
+            homepage = next(
+                (p for p in pages_field if isinstance(p, dict) and
+                 str(p.get("page_id", p.get("id", ""))).lower() in {"homepage", "home", "home_page"}),
+                {}
+            )
+        else:
+            homepage = blueprint.get("homepage") or {}
+        
         # Also check if blueprint IS the homepage object
         if not homepage and "sections" in blueprint:
             homepage = blueprint
