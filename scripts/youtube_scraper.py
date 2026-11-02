@@ -288,8 +288,10 @@ def main():
     )
 
     parser.add_argument("--niche", default="Unknown Niche", help='Your niche e.g. "Sprinkler Repair"')
-    parser.add_argument("--urls",  default="youtube_urls.txt", help="File with YouTube URLs (default: youtube_urls.txt)")
-    parser.add_argument("--out",   default="youtube_data.txt", help="Output file (default: youtube_data.txt)")
+    default_out = "raw_research/youtube_transcript.txt" if os.path.exists("raw_research") else "youtube_data.txt"
+    default_urls = "raw_research/youtube_urls.txt" if os.path.exists("raw_research/youtube_urls.txt") else "youtube_urls.txt"
+    parser.add_argument("--urls",  default=default_urls, help=f"File with YouTube URLs (default: {default_urls})")
+    parser.add_argument("--out",   default=default_out, help=f"Output file (default: {default_out})")
 
     args = parser.parse_args()
 

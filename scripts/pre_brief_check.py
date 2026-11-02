@@ -1,68 +1,62 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-pre_brief_check.py — Rank & Rent Pipeline (FIX 2)
-==================================================
+pre_brief_check.py — Rank & Rent Pipeline (Adaptive Input Validation)
+=====================================================================
 Validates all input files before running Prompt 4 (master_brief.json).
-
-Run AFTER clean_research.py, BEFORE submitting Prompt 4.
-Usage: python pre_brief_check.py
 
 Checks performed:
   1. data.txt exists and is non-empty
-  2. data.txt contains the required pipeline section headers
+  2. data.txt contains the required pipeline fields (Primary Keyword, City, Niche, NAP)
   3. data.txt has no raw HTML artifacts from the scraper
   4. data.txt has sufficient content (minimum line count)
   5. No obvious encoding errors
-  6. Warns if data.txt appears to contain raw, uncleaned content
 """
 
 import os
 import re
 import sys
+from pathlib import Path
 
-DATA_FILE = "data.txt"
+# Force UTF-8 output on Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-# ---------------------------------------------------------------------------
-# Required section headers that data.txt must contain
-# (clean_research.py must have produced a file with these present)
-# ---------------------------------------------------------------------------
-REQUIRED_SECTIONS = [
-    "[Primary Keyword]",
-    "[City]",
-    "[Niche]",
-    "[NAP]",
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_FILE = BASE_DIR / "data.txt" if (BASE_DIR / "data.txt").exists() else Path("data.txt")
+
+# Required fields/sections (any match counts as pass)
+REQUIRED_CHECKS = [
+    ("Primary Keyword", [r"\[Primary Keyword\]", r"Primary Keyword\s*:", r"SECTION 2"]),
+    ("City",            [r"\[City\]", r"City\s*:", r"SECTION 10"]),
+    ("Niche",           [r"\[Niche\]", r"Niche\s*:", r"SECTION 1"]),
+    ("NAP / Company",   [r"\[NAP\]", r"Company Name\s*:", r"Phone\s*:"]),
 ]
 
-# Sections that are strongly recommended (warn if missing, don't fail)
-RECOMMENDED_SECTIONS = [
-    "[Competitors]",
-    "[Customer Pain Points]",
-    "[Services Offered]",
-    "[Expansion Cities Identified]",
+RECOMMENDED_CHECKS = [
+    ("Competitors",         [r"\[Competitors\]", r"SECTION 8", r"competitor"]),
+    ("Customer Pain Points",[r"\[Customer Pain Points\]", r"SECTION 5", r"pain points"]),
+    ("Services Offered",    [r"\[Services Offered\]", r"SECTION 9", r"services in this niche"]),
+    ("Expansion Cities",    [r"\[Expansion Cities Identified\]", r"Expansion city\s*:", r"SECTION 10"]),
 ]
 
-# Signs of uncleaned raw scrape data
 RAW_SCRAPE_PATTERNS = [
     r"<html",
     r"<div",
     r"<span",
-    r"<script",
+    r"<script(?!\s+type=[\"']application/ld\+json[\"'])",  # Allow JSON-LD schema
     r"Posted by u/",
     r"View all comments",
     r"\[deleted\]",
-    r"^\s*https?://\S{20,}",   # bare long URLs
+    r"^\s*https?://\S{40,}",   # bare long tracking URLs
 ]
 RAW_RE = re.compile("|".join(RAW_SCRAPE_PATTERNS), re.IGNORECASE | re.MULTILINE)
 
-MIN_LINES = 50   # minimum meaningful lines expected after cleaning
+MIN_LINES = 50
 
-# ---------------------------------------------------------------------------
 
 def check(label: str, passed: bool, detail: str = "", fatal: bool = True):
-    """Print result line. Returns True if passed."""
-    status = "PASS" if passed else ("FAIL" if fatal else "WARN")
-    icon   = "[PASS]" if passed else ("[FAIL]" if fatal else "[WARN]")
+    icon = "[PASS]" if passed else ("[FAIL]" if fatal else "[WARN]")
     print(f"  {icon} {label}")
     if detail:
         print(f"         {detail}")
@@ -73,85 +67,47 @@ def run():
     print("=" * 60)
     print("  pre_brief_check.py — Input Validation for Prompt 4")
     print("=" * 60)
+    print(f"  Target: {DATA_FILE}")
     print()
 
     failures = 0
 
-    # ------------------------------------------------------------------
-    # CHECK 1: data.txt exists
-    # ------------------------------------------------------------------
-    exists = os.path.exists(DATA_FILE)
-    if not check("data.txt exists", exists,
-                 detail="" if exists else f"Expected at: {os.path.abspath(DATA_FILE)}"):
-        print()
-        print("FATAL: data.txt missing. Run research_scraper.py then clean_research.py.")
+    exists = DATA_FILE.exists()
+    if not check("data.txt exists", exists, detail="" if exists else f"Expected at: {DATA_FILE.resolve()}"):
+        print("\nFATAL: data.txt missing. Run python scripts/build_data.py first.")
         sys.exit(1)
 
-    with open(DATA_FILE, "r", encoding="utf-8", errors="replace") as f:
-        raw = f.read()
-
+    raw = DATA_FILE.read_text(encoding="utf-8", errors="replace")
     lines = [l for l in raw.splitlines() if l.strip()]
 
-    # ------------------------------------------------------------------
-    # CHECK 2: Non-empty
-    # ------------------------------------------------------------------
-    if not check("data.txt is non-empty", len(lines) > 0,
-                 detail=f"Found {len(lines)} non-empty lines"):
+    if not check("data.txt is non-empty", len(lines) > 0, detail=f"Found {len(lines)} non-empty lines"):
         failures += 1
 
-    # ------------------------------------------------------------------
-    # CHECK 3: Minimum line count
-    # ------------------------------------------------------------------
     sufficient = len(lines) >= MIN_LINES
-    if not check(
-        f"data.txt has sufficient content (>= {MIN_LINES} lines)",
-        sufficient,
-        detail=f"Found {len(lines)} lines. Run clean_research.py if count is too low.",
-        fatal=False
-    ):
-        pass  # warn only
+    check(f"data.txt has sufficient content (>= {MIN_LINES} lines)", sufficient,
+          detail=f"Found {len(lines)} lines.", fatal=False)
 
-    # ------------------------------------------------------------------
-    # CHECK 4: Required section headers present
-    # ------------------------------------------------------------------
-    for section in REQUIRED_SECTIONS:
-        found = section in raw
-        if not check(f"Required section present: {section}", found,
-                     detail="" if found else f"Add '{section}' section to data.txt"):
+    for name, patterns in REQUIRED_CHECKS:
+        found = any(re.search(pat, raw, re.IGNORECASE) for pat in patterns)
+        if not check(f"Required field present: {name}", found,
+                     detail="" if found else f"Add {name} to data.txt"):
             failures += 1
 
-    # ------------------------------------------------------------------
-    # CHECK 5: Recommended section headers (warn only)
-    # ------------------------------------------------------------------
-    for section in RECOMMENDED_SECTIONS:
-        found = section in raw
-        check(f"Recommended section present: {section}", found,
-              detail="" if found else f"Consider adding '{section}' for richer output",
-              fatal=False)
+    for name, patterns in RECOMMENDED_CHECKS:
+        found = any(re.search(pat, raw, re.IGNORECASE) for pat in patterns)
+        check(f"Recommended section present: {name}", found,
+              detail="" if found else f"Consider adding {name}", fatal=False)
 
-    # ------------------------------------------------------------------
-    # CHECK 6: No raw HTML / scraper artifacts
-    # ------------------------------------------------------------------
     raw_match = RAW_RE.search(raw)
     no_raw = raw_match is None
-    if not check(
-        "No raw HTML or scraper artifacts in data.txt",
-        no_raw,
-        detail="" if no_raw else f"Found artifact near: {repr(raw_match.group(0)[:60])}. Run clean_research.py.",
-    ):
+    if not check("No raw HTML or scraper artifacts in data.txt", no_raw,
+                 detail="" if no_raw else f"Found artifact near: {repr(raw_match.group(0)[:60])}"):
         failures += 1
 
-    # ------------------------------------------------------------------
-    # CHECK 7: No encoding errors (replacement chars)
-    # ------------------------------------------------------------------
     no_replacement = "\ufffd" not in raw
     check("No encoding errors (replacement chars)", no_replacement,
-          detail="" if no_replacement else "File contains replacement chars — re-save as UTF-8",
-          fatal=False)
+          detail="" if no_replacement else "File contains replacement chars", fatal=False)
 
-    # ------------------------------------------------------------------
-    # Summary
-    # ------------------------------------------------------------------
     print()
     print("-" * 60)
     if failures == 0:
@@ -159,12 +115,9 @@ def run():
         print("data.txt is ready. Proceed to Prompt 4 (master_brief.json).")
     else:
         print(f"{failures} REQUIRED CHECK(S) FAILED")
-        print("Fix the issues above before running Prompt 4.")
-        print("Common fix: re-run clean_research.py after editing data.txt.")
         sys.exit(1)
     print("-" * 60)
 
 
 if __name__ == "__main__":
     run()
-

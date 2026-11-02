@@ -6,6 +6,10 @@
 Generate the complete site blueprint. Every page in every phase gets a
 full blueprint entry. This is the master architecture document.
 
+Blog category hub pages must be included in the site architecture section.
+Each `blog_categories` entry from topical_authority.json becomes a hub URL
+(e.g., /blog/consumer-guides/) that category posts link back to.
+
 ## INPUTS REQUIRED
 === MASTER_BRIEF.JSON ===
 [paste here]
@@ -19,6 +23,15 @@ Output ONLY valid JSON. No markdown fences.
 {
   "site_name": "",
   "domain": "",
+  "blog_categories": [
+    {
+      "name": "",
+      "slug": "",
+      "url": "/blog/[category-slug]/",
+      "description": "",
+      "supporting_service": ""
+    }
+  ],
   "pages": [
     {
       "page_id": "",
@@ -32,6 +45,8 @@ Output ONLY valid JSON. No markdown fences.
       "secondary_keywords": [],
       "schema_types": [],
       "internal_links_to": [],
+      "category": "(blog pages only — from topical_authority.json)",
+      "category_slug": "(blog pages only — from topical_authority.json)",
       "sections": [],
       "word_count_target": 0,
       "status": "planned"
@@ -40,7 +55,13 @@ Output ONLY valid JSON. No markdown fences.
   "site_architecture": {
     "homepage_links_to": [],
     "hub_pages": [],
-    "location_hub": ""
+    "location_hub": "",
+    "blog_category_hubs": [
+      "/blog/consumer-guides/",
+      "/blog/air-quality-ducts/",
+      "/blog/methods-equipment/",
+      "/blog/dryer-vent-safety/"
+    ]
   }
 }
 
@@ -49,6 +70,8 @@ Output ONLY valid JSON. No markdown fences.
 - [ ] Each page has correct schema_types for its page_type
 - [ ] internal_links_to only references page_ids in this same blueprint
 - [ ] No duplicate slugs
+- [ ] Every blog page carries the correct category and category_slug from topical_authority.json
+- [ ] blog_category_hubs lists all category slugs from topical_authority.json blog_categories
 - [ ] Output is valid JSON
 
 ## REMINDER

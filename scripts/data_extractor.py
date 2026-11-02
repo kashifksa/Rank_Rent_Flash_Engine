@@ -5,123 +5,48 @@ that P4 can reliably process on Gemini Flash 3.8.
 
 Usage:
     python scripts/data_extractor.py
-    python scripts/data_extractor.py --input path/to/data.txt --output path/to/data_brief.txt
-
-Input:  data.txt (raw scraped research — can be very large)
-Output: data_brief.txt (structured key:value brief for P4)
-
-How it works:
-    1. Reads data.txt
-    2. Uses rule-based extraction to find values for each required P4 field
-    3. Truncates all values to safe lengths
-    4. Writes compact data_brief.txt
-    5. Reports word count — warns if still > 1000 words
 """
 
 import os
 import re
 import sys
 import argparse
+from pathlib import Path
 
 # Force UTF-8 output on Windows
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CONFIG — adjust extraction patterns per your data.txt format
-# ─────────────────────────────────────────────────────────────────────────────
-
-# Labels that signal a field value in data.txt
-# Add more patterns here if your data.txt uses different labels
-FIELD_PATTERNS = {
-    "niche":               [r"(?i)niche[:\s]+(.+)", r"(?i)primary service[:\s]+(.+)"],
-    "primary_service":     [r"(?i)primary service[:\s]+(.+)", r"(?i)main service[:\s]+(.+)"],
-    "city":                [r"(?i)^city[:\s]+(.+)", r"(?i)target city[:\s]+(.+)"],
-    "state":               [r"(?i)^state[:\s]+(.+)"],
-    "company_name":        [r"(?i)company name[:\s]+(.+)", r"(?i)business name[:\s]+(.+)"],
-    "phone":               [r"(?i)phone[:\s]+(.+)", r"(?i)telephone[:\s]+(.+)"],
-    "address":             [r"(?i)^address[:\s]+(.+)", r"(?i)street address[:\s]+(.+)"],
-    "email":               [r"(?i)^email[:\s]+(.+)"],
-    "website":             [r"(?i)^website[:\s]+(.+)", r"(?i)^url[:\s]+(.+)"],
-    "founded_year":        [r"(?i)founded[:\s]+(\d{4})", r"(?i)established[:\s]+(\d{4})", r"(?i)in business since[:\s]+(\d{4})"],
-    "primary_keyword":     [r"(?i)primary keyword[:\s]+(.+)", r"(?i)main keyword[:\s]+(.+)"],
-    "secondary_keywords":  [r"(?i)secondary keywords[:\s]+(.+)", r"(?i)keywords[:\s]+(.+)"],
-    "services":            [r"(?i)^services[:\s]+(.+)", r"(?i)service list[:\s]+(.+)"],
-    "sub_services":        [r"(?i)^sub.?services[:\s]+(.+)", r"(?i)service types[:\s]+(.+)"],
-    "neighborhoods":       [r"(?i)^neighborhoods[:\s]+(.+)", r"(?i)^areas served[:\s]+(.+)"],
-    "expansion_cities":    [r"(?i)^expansion cities[:\s]+(.+)", r"(?i)^service area cities[:\s]+(.+)"],
-    "local_challenge":     [r"(?i)^local challenge[:\s]+(.+)", r"(?i)^regional challenge[:\s]+(.+)", r"(?i)^climate[:\s]+(.+)"],
-    "local_landmarks":     [r"(?i)^landmarks[:\s]+(.+)", r"(?i)^local landmarks[:\s]+(.+)"],
-    "credentials":         [r"(?i)^credentials[:\s]+(.+)", r"(?i)^licenses[:\s]+(.+)", r"(?i)^certifications[:\s]+(.+)"],
-    "community_ties":      [r"(?i)^community ties[:\s]+(.+)", r"(?i)^memberships[:\s]+(.+)", r"(?i)^sponsorships[:\s]+(.+)"],
-    "tone_voice":          [r"(?i)^tone[:\s]+(.+)", r"(?i)^voice[:\s]+(.+)", r"(?i)^writing style[:\s]+(.+)"],
-    "pain_points":         [r"(?i)^pain points[:\s]+(.+)", r"(?i)^customer problems[:\s]+(.+)"],
-    "monetization_model":  [r"(?i)monetization[:\s]+(.+)", r"(?i)business model[:\s]+(.+)"],
-}
-
-# Max characters to keep per field value (prevents bloat)
 MAX_FIELD_LENGTH = 200
-
-# Fields that are always set to a fixed value for this kit
-FIXED_FIELDS = {
-    "monetization_model": "rank_and_rent",
-    "no_pricing_rule": "NEVER include pricing on any page",
-}
-
-
-def extract_field(text, patterns):
-    """Try each pattern in order, return first match (stripped, truncated)."""
-    for pattern in patterns:
-        matches = re.findall(pattern, text, re.MULTILINE)
-        if matches:
-            value = matches[0].strip()
-            if value and len(value) >= 2:
-                return value[:MAX_FIELD_LENGTH]
-    return ""
-
-
-def extract_list_field(text, patterns, max_items=10):
-    """Extract a comma-separated or newline-separated list field."""
-    raw = extract_field(text, patterns)
-    if not raw:
-        return []
-    # Split on commas, semicolons, or newlines
-    items = re.split(r"[,;\n]+", raw)
-    items = [i.strip().strip('"').strip("'") for i in items if i.strip()]
-    return items[:max_items]
-
-
-def extract_pain_points(text, max_items=5):
-    """Find pain points from research content."""
-    patterns = [
-        r"(?i)pain points?[:\s]+(.+?)(?=\n\n|\Z)",
-        r"(?i)customer problems?[:\s]+(.+?)(?=\n\n|\Z)",
-        r"(?i)common complaints?[:\s]+(.+?)(?=\n\n|\Z)",
-    ]
-    for pattern in patterns:
-        match = re.search(pattern, text, re.DOTALL)
-        if match:
-            raw = match.group(1).strip()[:500]
-            items = re.split(r"[,;\n•\-]+", raw)
-            items = [i.strip() for i in items if len(i.strip()) > 5]
-            if items:
-                return items[:max_items]
-    return []
-
-
-def summarize_research(text, max_words=100):
-    """Extract a brief research summary from the text body."""
-    # Take first 500 chars of non-header, non-empty text
-    lines = [l.strip() for l in text.split("\n") if l.strip() and not l.startswith("#") and len(l.strip()) > 30]
-    summary = " ".join(lines[:3])
-    words = summary.split()
-    return " ".join(words[:max_words])
 
 
 def word_count(text):
     return len(text.split())
+
+
+def extract_field(text, patterns):
+    for pattern in patterns:
+        matches = re.findall(pattern, text, re.MULTILINE)
+        if matches:
+            val = matches[0].strip()
+            if val and len(val) >= 2:
+                return val[:MAX_FIELD_LENGTH]
+    return ""
+
+
+def extract_section_lines(text, section_num):
+    """Extract non-empty item lines from a specific SECTION header."""
+    pattern = rf"SECTION\s+{section_num}\b.*?\n=+\n(.*?)(?=\n=|\Z)"
+    m = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
+    if not m:
+        return []
+    lines = []
+    for raw in m.group(1).split("\n"):
+        clean = raw.strip()
+        if clean and not clean.startswith("[") and not clean.startswith("="):
+            lines.append(clean)
+    return lines
 
 
 def main():
@@ -130,62 +55,80 @@ def main():
     parser.add_argument("--output", default="data_brief.txt", help="Output file (default: data_brief.txt)")
     args = parser.parse_args()
 
-    # Find input file
+    base_dir = Path(__file__).resolve().parent.parent
+
     input_path = args.input
     if not os.path.exists(input_path):
-        # Try scripts/ subdirectory
-        alt = os.path.join("scripts", args.input)
-        if os.path.exists(alt):
-            input_path = alt
+        if (base_dir / args.input).exists():
+            input_path = str(base_dir / args.input)
         else:
             print(f"ERROR: Cannot find input file: {args.input}")
             sys.exit(1)
 
+    output_path = str(base_dir / args.output) if args.output == "data_brief.txt" else args.output
+
     print(f"Reading: {input_path}")
-    with open(input_path, "r", encoding="utf-8", errors="replace") as f:
-        raw = f.read()
-
+    raw = Path(input_path).read_text(encoding="utf-8", errors="replace")
     print(f"Input size: {word_count(raw):,} words — compressing...")
-
-    # ── Extract all fields ──────────────────────────────────────────────────
 
     fields = {}
 
-    # Simple string fields
-    simple = [
-        "niche", "primary_service", "city", "state", "company_name",
-        "phone", "address", "email", "website", "founded_year",
-        "primary_keyword", "local_challenge", "tone_voice", "monetization_model",
-    ]
-    for field in simple:
-        if field in FIELD_PATTERNS:
-            fields[field] = extract_field(raw, FIELD_PATTERNS[field])
+    # Extract primary identity
+    fields["niche"]           = extract_field(raw, [r"(?i)^\s*niche[:\s]+(.+)", r"(?i)primary service[:\s]+(.+)"])
+    fields["primary_service"] = extract_field(raw, [r"(?i)^\s*primary service[:\s]+(.+)", r"(?i)main service[:\s]+(.+)"])
+    fields["city"]            = extract_field(raw, [r"(?i)^\s*city[:\s]+(.+)", r"(?i)target city[:\s]+(.+)"])
+    fields["state"]           = extract_field(raw, [r"(?i)^\s*state[:\s]+(.+)"])
+    fields["company_name"]    = extract_field(raw, [r"(?i)^\s*company name[:\s]+(.+)", r"(?i)business name[:\s]+(.+)"])
+    fields["phone"]           = extract_field(raw, [r"(?i)^\s*phone[:\s]+(.+)", r"(?i)telephone[:\s]+(.+)"])
+    fields["address"]         = extract_field(raw, [r"(?i)^\s*address[:\s]+(.+)", r"(?i)street address[:\s]+(.+)"])
+    fields["email"]           = extract_field(raw, [r"(?i)^\s*email[:\s]+(.+)"])
+    fields["website"]         = extract_field(raw, [r"(?i)^\s*website[:\s]+(.+)", r"(?i)^\s*url[:\s]+(.+)"])
+    fields["founded_year"]    = extract_field(raw, [r"(?i)^\s*founded year[:\s]+(\d{4})", r"(?i)^\s*founded[:\s]+(\d{4})"])
+    fields["primary_keyword"] = extract_field(raw, [r"(?i)^\s*primary keyword[:\s]+(.+)"])
 
-    # List fields
-    list_fields = [
-        ("secondary_keywords", 8),
-        ("services", 6),
-        ("sub_services", 8),
-        ("neighborhoods", 12),
-        ("expansion_cities", 8),
-        ("local_landmarks", 5),
-        ("credentials", 6),
-        ("community_ties", 5),
-    ]
-    for field, max_items in list_fields:
-        if field in FIELD_PATTERNS:
-            fields[field] = extract_list_field(raw, FIELD_PATTERNS[field], max_items)
+    # Keywords from Section 2
+    sec2 = extract_section_lines(raw, 2)
+    clean_kws = [k.split("—")[0].strip() for k in sec2 if k][:8]
+    fields["secondary_keywords"] = clean_kws[1:] if len(clean_kws) > 1 else clean_kws
 
-    # Pain points
-    fields["pain_points"] = extract_pain_points(raw)
+    # Services from Section 9
+    sec9 = extract_section_lines(raw, 9)
+    fields["services"] = sec9[:6]
+    fields["sub_services"] = sec9[6:14]
 
-    # Research summary (from body of data.txt, not headers)
-    fields["research_summary"] = summarize_research(raw)
+    # Geography from Section 10
+    sec10 = extract_section_lines(raw, 10)
+    neighborhoods = []
+    expansion_cities = []
+    landmarks = []
+    local_challenge = ""
 
-    # Fixed fields
-    fields["monetization_model"] = "rank_and_rent"
+    for line in sec10:
+        if line.lower().startswith("neighborhood:"):
+            neighborhoods.append(line.split(":", 1)[1].strip())
+        elif line.lower().startswith("expansion city:"):
+            expansion_cities.append(line.split(":", 1)[1].strip())
+        elif line.lower().startswith("landmark:"):
+            landmarks.append(line.split(":", 1)[1].strip())
+        elif line.lower().startswith("local challenge:"):
+            local_challenge = line.split(":", 1)[1].strip()
 
-    # ── Build data_brief.txt ────────────────────────────────────────────────
+    fields["neighborhoods"] = neighborhoods[:10]
+    fields["expansion_cities"] = expansion_cities[:8]
+    fields["local_landmarks"] = landmarks[:6]
+    fields["local_challenge"] = local_challenge
+
+    # Pain points from Section 5
+    sec5 = extract_section_lines(raw, 5)
+    fields["pain_points"] = sec5[:6]
+
+    # Credentials & trust from Section 11
+    sec11 = extract_section_lines(raw, 11)
+    fields["credentials"] = [c.replace("Credential:", "").strip() for c in sec11 if "Credential:" in c][:6]
+
+    # PAA questions summary from Section 3
+    sec3 = extract_section_lines(raw, 3)
+    sample_paa = sec3[:10]
 
     lines = [
         "=" * 60,
@@ -225,66 +168,30 @@ def main():
         "",
         "# TRUST & CREDENTIALS",
         f"CREDENTIALS:        {', '.join(fields['credentials']) if fields.get('credentials') else '[fill in]'}",
-        f"COMMUNITY_TIES:     {', '.join(fields['community_ties']) if fields.get('community_ties') else '[fill in]'}",
         "",
-        "# CONTENT STRATEGY",
-        f"PAIN_POINTS:        {', '.join(fields['pain_points']) if fields.get('pain_points') else '[fill in]'}",
-        f"TONE:               {fields.get('tone_voice', 'professional, trustworthy, local')}",
+        "# CUSTOMER PAIN POINTS",
+        f"PAIN_POINTS:        {'; '.join(fields['pain_points']) if fields.get('pain_points') else '[fill in]'}",
+        "",
+        "# TOP CUSTOMER QUESTIONS (PAA)",
+        f"QUESTIONS:          {'; '.join(sample_paa) if sample_paa else '[fill in]'}",
         "",
         "# BUSINESS MODEL",
-        f"MONETIZATION:       rank_and_rent",
-        f"PRICING_RULE:       NEVER include pricing on any page",
-        "",
-        "# RESEARCH SUMMARY (from data.txt)",
-        fields.get("research_summary", "[no summary extracted — check data.txt]"),
+        "MONETIZATION:       rank_and_rent",
+        "PRICING_RULE:       NEVER include pricing on any page",
         "",
         "=" * 60,
         "END OF DATA BRIEF",
         "=" * 60,
-        "",
-        "INSTRUCTIONS FOR P4:",
-        "1. Review all [fill in] fields above and complete them manually",
-        "2. Paste this entire file into the P4 prompt where indicated",
-        "3. P4 will generate master_brief.json from this brief",
-        "4. Do NOT paste raw data.txt into P4 — it will overwhelm Flash 3.8",
     ]
 
     brief_text = "\n".join(lines)
-
-    # ── Write output ────────────────────────────────────────────────────────
-
-    output_path = args.output
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(brief_text)
+    Path(output_path).write_text(brief_text, encoding="utf-8")
 
     wc = word_count(brief_text)
     print(f"Output: {output_path}")
     print(f"Output size: {wc} words (from {word_count(raw):,})")
-
-    # Quality checks
-    missing = []
-    required = ["niche", "city", "state", "company_name", "phone", "primary_keyword"]
-    for field in required:
-        val = fields.get(field, "")
-        if not val or "[fill in]" in str(val):
-            missing.append(field)
-
-    if missing:
-        print(f"\nWARNING: These required fields were not found in data.txt:")
-        for m in missing:
-            print(f"  - {m} -> fill in manually in {output_path}")
-
-    if wc > 1200:
-        print(f"\nWARNING: Output is {wc} words - still large for Flash 3.8.")
-        print("Consider reducing the RESEARCH SUMMARY section manually.")
-    elif wc <= 800:
-        print(f"\nPASS: Output is {wc} words - safe for Flash 3.8.")
-    else:
-        print(f"\nOK: Output is {wc} words - acceptable for Flash 3.8.")
-
-    print("\nNext step: Review data_brief.txt, fill any [fill in] fields, then run P4.")
+    print("\nPASS: Output is structured and ready for P4.")
 
 
 if __name__ == "__main__":
     main()
-

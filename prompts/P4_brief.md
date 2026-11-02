@@ -1,22 +1,23 @@
 # P4 — Generate master_brief.json
 # Flash Engine | Output: master_brief.json (SINGLE SOURCE OF TRUTH)
-# Input: data_brief.txt (NOT raw data.txt — run data_extractor.py first)
+# Input: data.txt (Argon Browser Bridge) OR data_brief.txt (Small Context Fallback)
 
-## WHY data_brief.txt (NOT data.txt)
-Raw data.txt is 5,000-15,000 words of scraped content.
-Flash 3.8 cannot reliably process it. Even Gemini Pro sometimes fails.
-data_extractor.py compresses it to ~500-800 words of structured key:value pairs.
-Flash converts a 500-word brief into JSON perfectly.
+## WORKFLOW MODES:
 
-## PRE-CHECK (run before submitting this prompt)
+### Option A: Gemini Browser Bridge (Argon / Gemini Advanced) — RECOMMENDED
+Gemini Argon in Chrome has a 1M+ token context window. It accepts the FULL, rich 18-section `data.txt` directly without losing any research data!
+Run:
+  python scripts/gemini_browser_bridge.py --task brief
+It feeds `data.txt` directly into Argon, extracts everything into `master_brief.json`, and saves it automatically.
+
+### Option B: Small-Context Fallback (Flash 3.8)
+If pasting manually into a small-context window:
   python scripts/data_extractor.py
-  → Review data_brief.txt
-  → Fill any [fill in] fields manually
-  → THEN paste data_brief.txt below
+Paste `data_brief.txt` into the input block below.
 
-## INPUT — paste data_brief.txt content here
-=== DATA_BRIEF.TXT ===
-[paste full data_brief.txt content here]
+## INPUT DATA
+=== RESEARCH DATA ===
+[paste full data.txt OR data_brief.txt content here]
 === END ===
 
 ## TASK

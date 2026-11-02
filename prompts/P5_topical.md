@@ -3,8 +3,8 @@
 # Read master_brief.json before running this prompt
 
 ## TASK
-Using master_brief.json, generate the complete topical authority map.
-This file defines every page to be built, in priority order.
+Using master_brief.json, generate the complete topical authority publishing roadmap.
+This file defines every page to be built, in priority order, AND the blog category taxonomy.
 
 ## INPUT REQUIRED
 Paste before submitting:
@@ -12,18 +12,37 @@ Paste before submitting:
 [paste full master_brief.json here]
 
 ## RULES
+
+### Phase Architecture
 - Phase 1: homepage + primary service page + about + contact + primary city location page
 - Phase 2: secondary service pages
 - Phase 3: expansion city location pages (one per expansion_cities entry)
-- Phase 4: comparison, how-to, problem, glossary pages
-- Phase 5: blog posts (informational intent ONLY — how to, signs of, guide to, what is)
-- Blog post keywords must NOT overlap with service or location page keywords
+- Phase 4: high-volume problem & decision guides (how often, signs of, what is, cost factors — no pricing)
+- Phase 5: informational blog posts (strictly informational — how to, signs of, guide to, what is, when to, why does)
+
+### Blog Post Rules
+- Blog post keywords MUST NOT overlap with any service or location page keyword
 - No two blog posts may share the same intent angle
+- All blog keywords must be informational intent — never transactional
+
+### Blog Category Rules — REQUIRED
+Every blog post (phase 4 and 5) MUST be assigned to one of the blog categories defined in `blog_categories`.
+Assign each blog post a `"category"` (category name) and `"category_slug"` (URL-safe slug).
+Blog categories must map to their supporting money service page.
+Define 3–5 topic-cluster categories based on the services in master_brief.json.
 
 ## OUTPUT FORMAT
 Output ONLY valid JSON. No markdown fences, no explanation.
 
 {
+  "blog_categories": [
+    {
+      "name": "Category Name",
+      "slug": "category-slug",
+      "description": "One sentence describing what posts in this category cover.",
+      "supporting_service": "page_id of the service page this silo supports"
+    }
+  ],
   "pages": [
     {
       "page_id": "unique-slug",
@@ -34,6 +53,8 @@ Output ONLY valid JSON. No markdown fences, no explanation.
       "h1_title": "",
       "parent_service": "",
       "city": "",
+      "category": "Category Name (blog pages only — omit for service/location pages)",
+      "category_slug": "category-slug (blog pages only — omit for service/location pages)",
       "status": "planned"
     }
   ]
@@ -43,4 +64,6 @@ Output ONLY valid JSON. No markdown fences, no explanation.
 - [ ] Phase 1 contains: homepage, primary service, about, contact, primary location
 - [ ] All blog post keywords are informational intent (how to / signs of / guide to)
 - [ ] No blog keyword overlaps with any service or location page keyword
+- [ ] Every blog post has both "category" and "category_slug" fields populated
+- [ ] blog_categories array has 3–5 entries, each with supporting_service pointing to a real page_id
 - [ ] Output is valid JSON

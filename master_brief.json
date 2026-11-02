@@ -22,7 +22,30 @@
     "duct cleaning Winnebago County IL",
     "dryer vent cleaning Loves Park IL",
     "duct cleaning Machesney Park IL",
-    "NADCA certified duct cleaning Rockford"
+    "NADCA certified duct cleaning Rockford",
+    "a/c duct cleaning",
+    "who cleans air ducts",
+    "a/c vent and duct cleaner",
+    "a c air ducts",
+    "a c duct cleaning",
+    "a c vent cleaning near me",
+    "a c vent duct cleaner",
+    "who cleans air ducts near me",
+    "who does air duct cleaning",
+    "a/c vent cleaning near me",
+    "a/c duct cleaning near me",
+    "who cleans out air ducts",
+    "a c duct cleaning near me",
+    "who cleans ac ducts",
+    "who cleans out dryer vents near me",
+    "a c vent cleaning",
+    "who cleans air ducts in homes",
+    "who cleans air ducts in my area",
+    "who can clean my air ducts",
+    "who cleans ductwork in my area",
+    "who does dryer vent cleaning near me",
+    "who does duct cleaning",
+    "a/c duct cleaning service near me"
   ],
   "services": [
     "Residential Air Duct Cleaning",
@@ -36,6 +59,7 @@
     "Supply and Return Register Cleaning",
     "Air Handler and Plenum Cleaning",
     "Furnace Blower Compartment Cleaning",
+    "Furnace Blower Motor & Evaporator Coil Cleaning",
     "Bathroom Exhaust Fan Duct Cleaning",
     "Post-Construction Duct Debris Removal",
     "Before-and-After Camera Documentation"
@@ -48,7 +72,9 @@
     "Rockton",
     "Cherry Valley",
     "Winnebago",
-    "Pecatonica"
+    "Pecatonica",
+    "Freeport",
+    "South Beloit"
   ],
   "neighborhoods": [
     "Churchill's Grove",
@@ -75,12 +101,7 @@
     "Better Business Bureau Accredited A+",
     "Fully Licensed and Insured"
   ],
-  "community_ties": [
-    "Serving Rockford homeowners since 2014",
-    "Member of Rockford Chamber of Commerce",
-    "Supports Winnebago County food bank drives",
-    "Participates in local Nextdoor community Q&A"
-  ],
+  "community_ties": [],
   "social_profiles": {
     "google_business_profile": "",
     "facebook": "",
@@ -88,36 +109,27 @@
     "yelp": ""
   },
   "tone": {
-    "voice": "Authoritative, honest, reassuring, local, transparent, protective against scams",
-    "style": "Short paragraphs (2-3 sentences max), answer-first under every H2, bold one key phrase per paragraph, plain American English — no jargon",
+    "voice": "authoritative, local expert, consumer-advocate",
+    "style": "informative, direct, helpful",
     "avoid": [
       "em-dashes",
       "pricing",
-      "superlatives without evidence",
-      "separator lines",
-      "emoji CTA notes",
-      "pending link placeholders"
+      "superlatives without evidence"
     ]
   },
   "pain_points": [
-    "The $49-$99 whole-house coupon bait-and-switch scam advertised in Facebook groups and on door hangers",
-    "Technicians claiming they found toxic black mold without laboratory testing — used to upsell unnecessary treatments",
+    "Whole-house coupon bait-and-switch scams advertised in Facebook groups and on door hangers",
+    "Technicians claiming they found toxic black mold without laboratory testing to upsell unnecessary treatments",
     "Unlicensed fly-by-night vans with no certifications and no liability insurance",
-    "Homeowners unsure how to verify whether duct cleaning is legitimate — no before-and-after documentation provided",
+    "Homeowners unsure how to verify whether duct cleaning is legitimate with no before-and-after documentation provided",
     "Older Rockford homes with galvanized ducts that flex-hose-only cleaners cannot properly reach",
     "Allergies and asthma flare-ups attributed to dirty return air plenums and clogged registers",
     "Dryer fires from uncleaned lint buildup in long or kinked dryer vent runs",
-    "Confusion between HVAC maintenance and actual duct cleaning — HVAC tune-up does not clean duct interiors"
-  ],
-  "differentiation_angles": [
-    "NADCA certification as H1-level hero trust signal — no competing specialist ranks with this claim",
-    "Scam education authority content — zero competitors address this in Rockford market",
-    "Dryer vent cleaning as a standalone fire-safety service page, not an add-on",
-    "Before-and-after video camera inspection as a named deliverable on every job",
-    "Rockford pre-1985 galvanized ductwork specificity — speaks directly to local housing stock",
-    "No pricing, no gimmicks — Rank and Rent appropriate positioning"
+    "Confusion between HVAC maintenance and actual duct cleaning because an HVAC tune-up does not clean duct interiors",
+    "Aggressive upselling of chemical fogging, ozone generators, and UV lights",
+    "Blow-and-go contractors who use portable shop vacs that blow dust back into the living room",
+    "Scratched hardwood floors, damaged drywall, and torn flexible ductwork from careless crews"
   ],
   "monetization_model": "rank_and_rent",
   "phase": 1
 }
-

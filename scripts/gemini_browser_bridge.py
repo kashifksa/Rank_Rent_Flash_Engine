@@ -40,6 +40,7 @@ CDP_DEFAULT_PORT = 9222
 CDP_DEFAULT_URL = f"http://127.0.0.1:{CDP_DEFAULT_PORT}"
 GEMINI_URL = "https://gemini.google.com/app"
 DEFAULT_PROFILE_DIR = os.path.expanduser(r"~\.gemini_automation_profile")
+REAL_PROFILE_DIR = r"C:\Users\Kashif\AppData\Local\Google\Chrome\User Data"
 CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 
@@ -55,8 +56,10 @@ def is_port_open(host="127.0.0.1", port=CDP_DEFAULT_PORT):
         return False
 
 
-def launch_chrome_debugger(profile_dir=DEFAULT_PROFILE_DIR, port=CDP_DEFAULT_PORT):
+def launch_chrome_debugger(profile_dir=DEFAULT_PROFILE_DIR, port=CDP_DEFAULT_PORT, use_real_profile=False):
     """Launch Chrome with remote debugging port and persistent profile."""
+    if use_real_profile:
+        profile_dir = REAL_PROFILE_DIR
     if not os.path.exists(CHROME_PATH):
         raise FileNotFoundError(f"Chrome not found at {CHROME_PATH}")
 
@@ -123,9 +126,10 @@ def build_task_payload(task_name, input_file=None):
 
     if task_name == "brief":
         prompt_file = base_dir / "prompts" / "P4_brief.md"
-        data_file = Path(input_file) if input_file else (base_dir / "data_brief.txt")
+        # Prioritize FULL data.txt — Argon / Gemini Advanced handles the entire 18 sections directly!
+        data_file = Path(input_file) if input_file else (base_dir / "data.txt")
         if not data_file.exists():
-            data_file = base_dir / "data.txt"
+            data_file = base_dir / "data_brief.txt"
         
         if not data_file.exists():
             raise FileNotFoundError(f"Input file not found. Checked data_brief.txt and data.txt in {base_dir}")
@@ -385,12 +389,15 @@ def main():
     parser.add_argument("--input", default=None, help="Optional custom input file path")
     parser.add_argument("--output", default=None, help="Optional custom output file path")
     parser.add_argument("--cdp-url", default=CDP_DEFAULT_URL, help="Chrome Remote Debugging URL")
+    parser.add_argument("--use-real-profile", action="store_true",
+                        help="Use your real Chrome profile so Argon is already logged in")
     parser.add_argument("--launch-browser", action="store_true",
                         help="Launch Chrome with debugging enabled and exit")
     args = parser.parse_args()
 
     if args.launch_browser:
-        launch_chrome_debugger()
+        use_real = getattr(args, 'use_real_profile', False)
+        launch_chrome_debugger(use_real_profile=use_real)
         print("\nChrome has been launched with remote debugging enabled.")
         print("Log into your Google account if not already logged in, then run:")
         print("  python scripts/gemini_browser_bridge.py --task brief")
@@ -401,11 +408,11 @@ def main():
         print(f"Chrome remote debugging is not running on {args.cdp_url}.")
         print("Starting Chrome debugging instance automatically...")
         try:
-            launch_chrome_debugger()
+            launch_chrome_debugger(use_real_profile=getattr(args, 'use_real_profile', False))
         except Exception as e:
             print(f"Could not auto-launch Chrome: {e}")
             print("\nPlease start Chrome manually with:")
-            print('  chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\\Users\\Kashif\\.gemini_automation_profile"')
+            print('  chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\\Users\\Kashif\\AppData\\Local\\Google\\Chrome\\User Data"')
             sys.exit(1)
 
     payload, default_output = build_task_payload(args.task, args.input)

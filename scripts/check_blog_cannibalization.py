@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-check_blog_cannibalization.py — Rank & Rent Pipeline (FIX 31)
+check_blog_cannibalization.py - Rank & Rent Pipeline (FIX 31)
 =============================================================
 Detects keyword cannibalization between blog posts, and between
 blog posts and service/location pages.
@@ -16,7 +16,7 @@ Usage:
       (checks a proposed new keyword against everything already registered)
 
 Exit code 0 = PASS (safe to proceed)
-Exit code 1 = FAIL (conflicts found — fix before writing)
+Exit code 1 = FAIL (conflicts found - fix before writing)
 """
 
 import json
@@ -47,7 +47,7 @@ STOP_WORDS = {
     "then", "just", "more", "most", "also", "not", "no", "any", "all",
 }
 
-# Similarity threshold — keyword pairs above this are flagged
+# Similarity threshold - keyword pairs above this are flagged
 # 0.5 = 50% of meaningful tokens overlap
 SIMILARITY_THRESHOLD = 0.50
 
@@ -120,7 +120,7 @@ def audit(new_keyword: str | None = None) -> bool:
     money_pages = [p for p in all_pages if get_type(p) in MONEY_TYPES and get_keyword(p)]
 
     print("=" * 60)
-    print("  check_blog_cannibalization.py — Blog Keyword Audit")
+    print("  check_blog_cannibalization.py - Blog Keyword Audit")
     print("=" * 60)
     print(f"\n  Blog posts found   : {len(blog_pages)}")
     print(f"  Money pages found  : {len(money_pages)}")
@@ -191,19 +191,19 @@ def audit(new_keyword: str | None = None) -> bool:
         else:
             print("  All blog post keywords are semantically distinct.")
         print()
-        print("─" * 60)
-        print("CLEAN — Proceed to Prompt 7.")
-        print("─" * 60)
+        print("-" * 60)
+        print("CLEAN - Proceed to Prompt 7.")
+        print("-" * 60)
         return True
 
     print(f"  [FAIL] {len(conflicts)} cannibalization conflict(s) found:\n")
     for i, c in enumerate(conflicts, 1):
-        print(f"  {i}. [{c['type']}] — {c['similarity']}% similarity")
+        print(f"  {i}. [{c['type']}] - {c['similarity']}% similarity")
         print(f"       A: {c['a']}")
         print(f"       B: {c['b']}")
         print()
 
-    print("─" * 60)
+    print("-" * 60)
     print("HOW TO FIX:")
     print("  blog-vs-blog    → Reframe one post with a different angle/intent")
     print("                    e.g. DIY fix vs cost guide vs diagnosis signs")
@@ -211,7 +211,7 @@ def audit(new_keyword: str | None = None) -> bool:
     print("                    e.g. 'how to tell if...' not 'sprinkler repair in city'")
     print("  Update topical_authority.json with the corrected keyword,")
     print("  then re-run this script before proceeding to Prompt 7.")
-    print("─" * 60)
+    print("-" * 60)
     return False
 
 
