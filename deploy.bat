@@ -7,3 +7,4 @@ if "%MSG%"=="" set "MSG=Update site content and templates"
 
 python scripts\deploy.py "%MSG%"
 endlocal
+

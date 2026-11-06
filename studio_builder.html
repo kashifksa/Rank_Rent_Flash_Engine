@@ -7216,7 +7216,7 @@ window.BUILDER_PAGES_DATA = {
         if (k.includes(slot) || slot.includes(k)) return img;
         if ((k.includes('hero') || k.includes('identity')) && (slot.includes('hero') || slot.includes('identity'))) return img;
         if ((k.includes('intro') || k.includes('primary')) && (slot.includes('intro') || slot.includes('primary'))) return img;
-        if ((k.includes('proof') || k.includes('community') || k.includes('local-context')) && (slot.includes('proof') || slot.includes('community') || slot.includes('testimonial') || slot.includes('local'))) return img;
+        if ((k.includes('proof') || k.includes('community') || k.includes('local-context')) && (slot.includes('proof') || slot.includes('community') || slot.includes('testimonial') || slot.includes('local') || slot.includes('botanical'))) return img;
         if ((k.includes('credential') || k.includes('why-us') || k.includes('why_choose') || k.includes('trust')) && slot.includes('credential')) return img;
         if ((k.includes('contact') || k.includes('form')) && slot.includes('contact')) return img;
         if (k.includes('process') && (slot.includes('equipment') || slot.includes('botanical') || slot.includes('scrubbing') || slot.includes('brush') || slot.includes('negative-air'))) return img;
@@ -8579,8 +8579,9 @@ window.BUILDER_PAGES_DATA = {
 
                 // D2. LOCAL ENVIRONMENTAL & HOUSING CONTEXT (SECTION 6 - SPECIFIC TO LOCAL NEIGHBORHOODS)
         else if (key.includes('local-context')) {
-          const imgPath = sectionImage ? `${pageData.img_dir}/${sectionImage.filename}` : "images/homepage/residential-duct-cleaning-rockford-illinois.webp";
-          const imgAlt = sectionImage ? sectionImage.alt_text : "Rockford Local Housing Context";
+          const defaultLocalImg = "images/homepage/botanical-antimicrobial-duct-fogging-rockford-residence.webp";
+          const imgPath = sectionImage ? `${pageData.img_dir}/${sectionImage.filename}` : defaultLocalImg;
+          const imgAlt = sectionImage ? sectionImage.alt_text : "Rockford Residential Duct Remediation and Moisture Treatment";
 
           html += `
             <section class="section" style="background-color: var(--surface-container-low); padding: 80px 24px;" id="sec-${key}">
