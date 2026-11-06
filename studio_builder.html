@@ -2885,6 +2885,97 @@
       color: #10b981;
     }
 
+        /* ========================================================
+       NAVIGATION DROPDOWNS (FIX 35 ARCHITECTURE)
+       ======================================================== */
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .nav-links {
+      display: none;
+      gap: 22px;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex !important;
+        align-items: center;
+      }
+    }
+    .nav-links a {
+      color: #334155;
+      font-weight: 600;
+      font-size: 14.5px;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: var(--primary, #ea580c);
+    }
+    .nav-links .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-links .dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 12px 0;
+    }
+    .nav-caret {
+      font-size: 9px;
+      color: #94a3b8;
+      transition: transform 0.2s ease, color 0.15s ease;
+      display: inline-block;
+    }
+    .nav-links .dropdown:hover .nav-caret {
+      transform: rotate(180deg);
+      color: var(--primary, #ea580c);
+    }
+    .nav-links .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      min-width: 280px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 8px 0;
+      z-index: 1000;
+      animation: navDropdownFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes navDropdownFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-links .dropdown-content a {
+      display: block;
+      padding: 11px 20px;
+      color: #1e293b;
+      font-size: 13.5px;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+    }
+    .nav-links .dropdown-content a:hover {
+      background: #f8fafc;
+      color: var(--primary, #ea580c);
+      padding-left: 24px;
+    }
+    .nav-links .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     /* ========================================================
        UNIVERSAL MOBILE RESPONSIVE ENGINE (FIX: ALL VIEWPORTS)
        ======================================================== */
@@ -8160,6 +8251,87 @@ window.BUILDER_PAGES_DATA = {
       return { heading: heading, subhead: subhead, cards: cards };
     }
 
+    // Universal Site Header with Services and Locations Dropdowns (FIX 35 Rule)
+    function renderUniversalSiteHeader(pageData) {
+      const company = (pageData && pageData.company_name) || 'Rockford Air Duct Pros';
+      const phone = (pageData && pageData.phone) || '(815) 555-0142';
+
+      // Dynamic collection of Service and Location pages
+      const servicePages = [];
+      const locationPages = [];
+      let blogUrl = 'how-to-spot-air-duct-cleaning-scams.html';
+
+      if (window.BUILDER_PAGES_DATA) {
+        Object.keys(window.BUILDER_PAGES_DATA).forEach(k => {
+          const p = window.BUILDER_PAGES_DATA[k];
+          const filename = (k === 'homepage' || k === 'home') ? 'index.html' : `${k}.html`;
+          if (p.type === 'service') {
+            const title = (p.title || k).replace(/ Service Page/i, '');
+            servicePages.push({ title: title, url: filename });
+          } else if (p.type === 'location') {
+            const rawTitle = (p.title || k).replace(/ Location Page/i, '').replace(/ Air Duct Cleaning/i, '');
+            const title = rawTitle.includes(',') ? rawTitle : `${rawTitle}, IL`;
+            locationPages.push({ title: title, url: filename });
+          } else if (p.type === 'blog') {
+            blogUrl = filename;
+          }
+        });
+      }
+
+      // Hardened fallbacks if not fully indexed in window
+      if (servicePages.length === 0) {
+        servicePages.push({ title: 'Commercial HVAC Duct Cleaning', url: 'commercial-hvac-duct-cleaning.html' });
+        servicePages.push({ title: 'Dryer Vent Cleaning & Lint Removal', url: 'dryer-vent-cleaning-and-lint-removal.html' });
+      }
+      if (locationPages.length === 0) {
+        locationPages.push({ title: 'Loves Park, IL', url: 'air-duct-cleaning-loves-park-il.html' });
+      }
+
+      const servicesDropdownHtml = servicePages.map(s => `<a href="${s.url}">${s.title}</a>`).join('\n                  ');
+      const locationsDropdownHtml = locationPages.map(l => `<a href="${l.url}">${l.title}</a>`).join('\n                  ');
+
+      return `
+        <header class="header">
+          <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1240px; margin: 0 auto; width: 100%;">
+            <a href="index.html" class="logo" contenteditable="true">${company}</a>
+            
+            <!-- Mobile Quick Call Button -->
+            <a href="tel:${phone}" class="header-mobile-call" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; background: var(--primary, #ea580c); color: #fff; font-size: 13px; font-weight: 700; border-radius: 8px; text-decoration: none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              Call
+            </a>
+
+            <!-- Desktop & Tablet Header Navigation (FIX 35 Universal Dropdowns) -->
+            <nav class="nav-links">
+              <a href="index.html">Home</a>
+              
+              <!-- Services Dropdown (All Inner Service Pages Nested Here) -->
+              <div class="dropdown">
+                <a href="index.html#services" class="dropdown-trigger">Services <span class="nav-caret">▼</span></a>
+                <div class="dropdown-content">
+                  ${servicesDropdownHtml}
+                </div>
+              </div>
+
+              <!-- Locations Dropdown (All Satellite Location Pages Nested Here) -->
+              <div class="dropdown">
+                <a href="index.html#service-area" class="dropdown-trigger">Locations <span class="nav-caret">▼</span></a>
+                <div class="dropdown-content">
+                  ${locationsDropdownHtml}
+                </div>
+              </div>
+
+              <a href="${blogUrl}">Blog</a>
+              <a href="index.html#reviews">Reviews</a>
+              <a href="about.html">About</a>
+              <a href="contact.html">Contact</a>
+              <a href="tel:${phone}" class="btn btn-primary" style="padding: 8px 18px; font-size: 13px; font-weight: 700;">${phone}</a>
+            </nav>
+          </div>
+        </header>
+      `;
+    }
+
     // Render Canvas with Pure Hostinger Industrial Integrity UI/UX
     function renderCurrentPage() {
       if (!currentActivePage || !window.BUILDER_PAGES_DATA || !window.BUILDER_PAGES_DATA[currentActivePage]) return;
@@ -8174,24 +8346,8 @@ window.BUILDER_PAGES_DATA = {
       // DEDICATED BLOG EDITORIAL ARTICLE LAYOUT (DISTINCT FROM COMMERCIAL)
       // -------------------------------------------------------------
       if (pageData.type === 'blog') {
+        html += renderUniversalSiteHeader(pageData);
         html += `
-          <!-- Sticky Header -->
-          <header class="header">
-            <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-              <a href="#" class="logo" contenteditable="true">${pageData.company_name || 'Rockford Air Duct Pros'}</a>
-              <a href="tel:${pageData.phone || '(815) 555-0142'}" class="header-mobile-call" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; background: var(--primary, #ea580c); color: #fff; font-size: 13px; font-weight: 700; border-radius: 8px; text-decoration: none;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                Call
-              </a>
-              <nav class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#reviews">Reviews</a>
-                <a href="tel:${pageData.phone || '(815) 555-0142'}" class="btn btn-primary ${pulseClass}" style="padding: 8px 18px; font-size: 13px;">${pageData.phone || '(815) 555-0142'}</a>
-              </nav>
-            </div>
-          </header>
-
           <!-- Editorial Blog Header -->
           <div class="blog-header-banner" style="background: var(--surface-container-low); padding: 56px 0 36px; border-bottom: 1px solid var(--surface-container-high);">
             <div class="container" style="max-width: 860px;">
@@ -8295,24 +8451,8 @@ window.BUILDER_PAGES_DATA = {
       // -------------------------------------------------------------
 
 
-      // 1. STICKY HEADER (TARGET SITE UI/UX)
-      html += `
-        <header class="header">
-          <div class="container">
-            <a href="#" class="logo" contenteditable="true">${pageData.company_name || 'Rockford Air Duct Pros'}</a>
-            <nav class="nav-links">
-              <a href="#services">Services</a>
-              <a href="#why-choose-us">Why Us</a>
-              <a href="#process">Process</a>
-              <a href="#before-after">Before & After</a>
-              <a href="#reviews">Reviews</a>
-              <a href="#faq">FAQ</a>
-              <a href="tel:${pageData.phone || '(815) 555-0142'}" class="btn btn-primary" style="padding: 8px 18px; font-size: 13px;">${pageData.phone || '(815) 555-0142'}</a>
-            </nav>
-            <button class="mobile-menu-btn" style="display: none;">☰</button>
-          </div>
-        </header>
-      `;
+      // 1. STICKY HEADER (TARGET SITE UI/UX - FIX 35 UNIVERSAL DROPDOWNS)
+      html += renderUniversalSiteHeader(pageData);
 
       // 2. RENDER REORDERED SECTIONS
       const order = pageSectionOrder[currentActivePage] || (pageData.sections ? Object.keys(pageData.sections) : []);
