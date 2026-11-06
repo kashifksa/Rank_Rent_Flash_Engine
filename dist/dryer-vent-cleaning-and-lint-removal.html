@@ -4447,7 +4447,48 @@ th {
 
   <!-- Production Interactive Handlers -->
   <script>
+  // Global FAQ Accordion Toggle Handler with Debounce
+  let lastFaqToggleTime = 0;
+  function toggleFaqItem(btn) {
+    if (!btn) return;
+    const now = Date.now();
+    if (now - lastFaqToggleTime < 80) return; // Prevent double-trigger from inline onclick + event bubbling
+    lastFaqToggleTime = now;
+
+    const card = btn.closest('.c-faq-card') || btn.closest('.faq-item') || btn.parentElement;
+    if (!card) return;
+    const isExpanded = card.classList.contains('active');
+
+    // Close sibling cards for clean single-expanded accordion UX
+    const parentList = card.parentElement;
+    if (parentList) {
+      parentList.querySelectorAll('.c-faq-card, .faq-item').forEach(c => {
+        c.classList.remove('active');
+        const b = c.querySelector('button, .c-faq-btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    if (!isExpanded) {
+      card.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      card.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+  window.toggleFaqItem = toggleFaqItem;
+
   document.addEventListener("DOMContentLoaded", () => {
+    // Delegated click handler for FAQ buttons
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest('.c-faq-btn') || e.target.closest('.faq-question');
+      if (btn) {
+        e.preventDefault();
+        toggleFaqItem(btn);
+      }
+    });
+
     // 2026 Section Flow-In Motion Observer
     const motionMode = 'rise';
     if (motionMode !== 'off' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -4482,12 +4523,6 @@ th {
     } else {
       document.querySelectorAll('section[id^="sec-"], div[id^="sec-"]').forEach(el => el.classList.add('is-revealed'));
     }
-    document.querySelectorAll(".faq-question").forEach(q => {
-      q.addEventListener("click", () => {
-        const item = q.parentElement;
-        item.classList.toggle("active");
-      });
-    });
   });
   </script>
 </body>
