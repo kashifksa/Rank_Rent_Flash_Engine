@@ -27,3 +27,4 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'ci: auto-sync dist to deploy branch for Hostinger'
+

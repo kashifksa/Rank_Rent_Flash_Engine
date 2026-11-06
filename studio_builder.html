@@ -52,26 +52,29 @@
     }
 
     /* 1. PRESET: Smooth Rise (20px elevation, 420ms out-expo) */
-    .motion-mode-rise.motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-rise.motion-ready .builder-page > div[id^="sec-"],
-    .motion-mode-rise .motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-rise .motion-ready .builder-page > div[id^="sec-"] {
+    .motion-mode-rise.motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-rise.motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed),
+    .motion-mode-rise .motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-rise .motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed) {
       opacity: 0;
       transform: translateY(22px);
     }
     .motion-mode-rise.motion-ready section[id^="sec-"].is-revealed,
     .motion-mode-rise.motion-ready .builder-page > div[id^="sec-"].is-revealed,
     .motion-mode-rise .motion-ready section[id^="sec-"].is-revealed,
-    .motion-mode-rise .motion-ready .builder-page > div[id^="sec-"].is-revealed {
-      opacity: 1;
-      transform: translateY(0);
+    .motion-mode-rise .motion-ready .builder-page > div[id^="sec-"].is-revealed,
+    .motion-ready section.is-revealed,
+    .motion-ready div.is-revealed,
+    .is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
 
     /* 2. PRESET: Stagger Cascade (Sections elevate + child cards cascade in) */
-    .motion-mode-cascade.motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-cascade.motion-ready .builder-page > div[id^="sec-"],
-    .motion-mode-cascade .motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-cascade .motion-ready .builder-page > div[id^="sec-"] {
+    .motion-mode-cascade.motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-cascade.motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed),
+    .motion-mode-cascade .motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-cascade .motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed) {
       opacity: 0;
       transform: translateY(20px);
     }
@@ -79,8 +82,8 @@
     .motion-mode-cascade.motion-ready .builder-page > div[id^="sec-"].is-revealed,
     .motion-mode-cascade .motion-ready section[id^="sec-"].is-revealed,
     .motion-mode-cascade .motion-ready .builder-page > div[id^="sec-"].is-revealed {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
 
     .motion-mode-cascade .is-revealed .denton-proof-card,
@@ -123,10 +126,10 @@
     }
 
     /* 3. PRESET: Soft Dissolve (Pure Opacity Fade) */
-    .motion-mode-fade.motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-fade.motion-ready .builder-page > div[id^="sec-"],
-    .motion-mode-fade .motion-ready section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
-    .motion-mode-fade .motion-ready .builder-page > div[id^="sec-"] {
+    .motion-mode-fade.motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-fade.motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed),
+    .motion-mode-fade .motion-ready section[id^="sec-"]:not(.is-revealed):not(.hero-denton-wrap):not(.hero):not(.motion-exempt),
+    .motion-mode-fade .motion-ready .builder-page > div[id^="sec-"]:not(.is-revealed) {
       opacity: 0;
       transform: none;
     }
@@ -134,8 +137,8 @@
     .motion-mode-fade.motion-ready .builder-page > div[id^="sec-"].is-revealed,
     .motion-mode-fade .motion-ready section[id^="sec-"].is-revealed,
     .motion-mode-fade .motion-ready .builder-page > div[id^="sec-"].is-revealed {
-      opacity: 1;
-      transform: none;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     /* 4. PRESET: Static Off */
@@ -9587,11 +9590,11 @@ ${bodyContent}
               obs.unobserve(entry.target);
             }
           });
-        }, { rootMargin: '0px 0px -50px 0px', threshold: 0.12 });
+        }, { rootMargin: '0px 0px 80px 0px', threshold: 0.01 });
 
         document.querySelectorAll('section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt), div[id^="sec-"]').forEach(el => {
           const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.85) {
+          if (rect.top < window.innerHeight) {
             el.classList.add('is-revealed');
           } else {
             observer.observe(el);
