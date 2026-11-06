@@ -3964,14 +3964,20 @@ th {
           });
         }, { rootMargin: '0px 0px 80px 0px', threshold: 0.01 });
 
+        // Pre-reveal top sections immediately
         document.querySelectorAll('section[id^="sec-"]:not(.hero-denton-wrap):not(.hero):not(.motion-exempt), div[id^="sec-"]').forEach(el => {
           const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight) {
+          if (rect.top < window.innerHeight * 1.5) {
             el.classList.add('is-revealed');
           } else {
             observer.observe(el);
           }
         });
+
+        // 2026 Fail-Safe: reveal all remaining sections after 1.2s to ensure 0% blank states
+        setTimeout(() => {
+          document.querySelectorAll('section[id^="sec-"], div[id^="sec-"]').forEach(el => el.classList.add('is-revealed'));
+        }, 1200);
       } else {
         document.querySelectorAll('section[id^="sec-"], div[id^="sec-"]').forEach(el => el.classList.add('is-revealed'));
       }
