@@ -11,6 +11,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&family=Outfit:wght@600;700;800&family=Oswald:wght@500;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   
   <style id="production-section-styles">
+    /* Global SVG Dimensions & Fluid Boundary Enforcement */
+    svg {
+      max-width: 100%;
+      height: auto;
+      box-sizing: content-box;
+    }
+    .c-faq-eyebrow svg, .c-cta-eyebrow svg {
+      width: 15px !important;
+      height: 15px !important;
+      max-width: 15px !important;
+      max-height: 15px !important;
+      flex-shrink: 0;
+    }
+    .c-faq-icon svg {
+      width: 16px !important;
+      height: 16px !important;
+      max-width: 16px !important;
+      max-height: 16px !important;
+    }
+    .c-faq-call-btn svg {
+      width: 18px !important;
+      height: 18px !important;
+      max-width: 18px !important;
+      max-height: 18px !important;
+    }
+    .c-cta-badge-item svg {
+      width: 16px !important;
+      height: 16px !important;
+      max-width: 16px !important;
+      max-height: 16px !important;
+    }
     /* Denton ProFlow Hero Section Styles */
     .denton-hero-text h1 {
       color: #ffffff !important;
@@ -2515,6 +2546,345 @@
       line-height: 1.4;
     }
 
+
+
+  /* ========================================================
+       CORNERSTONE FAQ ACCORDION (SECTION 9 - 2-COLUMN SPLIT)
+       ======================================================== */
+    .c-faq-section {
+      width: 100%;
+      padding: 84px 24px 80px;
+      background: var(--surface-container-low);
+      position: relative;
+    }
+    .c-faq-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .c-faq-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 390px) 1fr;
+      gap: 52px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .c-faq-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+    .c-faq-anchor {
+      position: sticky;
+      top: 90px;
+    }
+    @media (max-width: 900px) {
+      .c-faq-anchor {
+        position: static;
+        text-align: center;
+      }
+    }
+    .c-faq-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(var(--accent-rgb), 0.12);
+      color: var(--secondary-container);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .c-faq-eyebrow svg {
+      width: 15px;
+      height: 15px;
+    }
+    .c-faq-heading {
+      color: var(--on-surface);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      margin-bottom: 16px;
+    }
+    .c-faq-subheading {
+      color: var(--on-surface-variant);
+      font-size: 15.5px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .c-faq-call-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+      padding: 16px 26px;
+      border-radius: 9999px;
+      background: var(--secondary-container);
+      color: var(--on-primary, #ffffff);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(var(--accent-rgb), 0.35);
+      transition: all 0.25s ease;
+    }
+    .c-faq-call-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(var(--accent-rgb), 0.45);
+    }
+    .c-faq-call-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+    .c-faq-trust-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: var(--on-surface-variant);
+      font-weight: 600;
+    }
+    @media (max-width: 900px) {
+      .c-faq-trust-note {
+        justify-content: center;
+      }
+    }
+    .c-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .c-faq-card {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-default, 16px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .c-faq-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.35);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+    .c-faq-card.active {
+      border-color: var(--secondary-container);
+      box-shadow: 0 8px 26px rgba(var(--accent-rgb), 0.12);
+    }
+    .c-faq-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+    .c-faq-q-text {
+      color: var(--on-surface);
+      font-size: 16.5px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .c-faq-icon {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), 0.1);
+      color: var(--secondary-container);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, color 0.25s ease;
+    }
+    .c-faq-icon svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .c-faq-card.active .c-faq-icon {
+      transform: rotate(180deg);
+      background: var(--secondary-container);
+      color: #ffffff;
+    }
+    .c-faq-panel {
+      display: none;
+      padding: 0 24px 22px 24px;
+      color: var(--on-surface-variant);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .c-faq-card.active .c-faq-panel {
+      display: block;
+      animation: cFaqFade 0.25s ease;
+    }
+    @keyframes cFaqFade {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
+       CORNERSTONE BOTTOM CONVERSION CTA (SECTION 10)
+       ======================================================== */
+    .c-cta-section {
+      width: 100%;
+      padding: 80px 24px 84px;
+      background: var(--surface-container-lowest);
+      position: relative;
+    }
+    .c-cta-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .c-cta-box {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: clamp(48px, 6vw, 76px) clamp(24px, 5vw, 64px);
+      text-align: center;
+      background: 
+        radial-gradient(circle at 85% 15%, rgba(var(--accent-rgb), 0.22), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(var(--accent-rgb), 0.12), transparent 40%),
+        linear-gradient(135deg, #091730 0%, #0d2246 50%, #091730 100%);
+      border: 1px solid rgba(var(--accent-rgb), 0.3);
+      box-shadow: 0 24px 60px rgba(9, 23, 48, 0.45);
+    }
+    .c-cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+      background-image: radial-gradient(circle, #ffffff 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .c-cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: rgba(var(--accent-rgb), 0.25);
+      border: 1px solid rgba(var(--accent-rgb), 0.45);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+    .c-cta-eyebrow svg {
+      width: 15px;
+      height: 15px;
+      color: #f59e0b;
+    }
+    .c-cta-heading {
+      color: #ffffff;
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      max-width: 820px;
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .c-cta-subheading {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 16.5px;
+      line-height: 1.65;
+      max-width: 720px;
+      margin: 0 auto 34px;
+      position: relative;
+      z-index: 1;
+    }
+    .c-cta-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .c-cta-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 36px;
+      border-radius: 9999px;
+      background: var(--secondary-container);
+      color: var(--on-primary, #ffffff);
+      font-size: 16.5px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 12px 35px rgba(var(--accent-rgb), 0.45);
+      transition: all 0.25s ease;
+    }
+    .c-cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 45px rgba(var(--accent-rgb), 0.55);
+    }
+    .c-cta-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 32px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 700;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .c-cta-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+    }
+    .c-cta-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: clamp(14px, 3vw, 32px);
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      z-index: 1;
+    }
+    .c-cta-badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .c-cta-badge-item svg {
+      width: 16px;
+      height: 16px;
+      color: #10b981;
+    }
+
   </style>
   <style id="builder-ui-styles">
     /* ContentEditable Sleek Focus Styling (Webflow / Framer / Notion style) */
@@ -3354,344 +3724,7 @@
       word-break: break-all;
     }
   
-    /* ========================================================
-       CORNERSTONE FAQ ACCORDION (SECTION 9 - 2-COLUMN SPLIT)
-       ======================================================== */
-    .c-faq-section {
-      width: 100%;
-      padding: 84px 24px 80px;
-      background: var(--surface-container-low);
-      position: relative;
-    }
-    .c-faq-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .c-faq-layout {
-      display: grid;
-      grid-template-columns: minmax(320px, 390px) 1fr;
-      gap: 52px;
-      align-items: start;
-    }
-    @media (max-width: 900px) {
-      .c-faq-layout {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-    }
-    .c-faq-anchor {
-      position: sticky;
-      top: 90px;
-    }
-    @media (max-width: 900px) {
-      .c-faq-anchor {
-        position: static;
-        text-align: center;
-      }
-    }
-    .c-faq-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 9999px;
-      background: rgba(var(--accent-rgb), 0.12);
-      color: var(--secondary-container);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .c-faq-eyebrow svg {
-      width: 15px;
-      height: 15px;
-    }
-    .c-faq-heading {
-      color: var(--on-surface);
-      font-size: clamp(28px, 3vw, 38px);
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -0.015em;
-      margin-bottom: 16px;
-    }
-    .c-faq-subheading {
-      color: var(--on-surface-variant);
-      font-size: 15.5px;
-      line-height: 1.65;
-      margin-bottom: 28px;
-    }
-    .c-faq-call-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 320px;
-      padding: 16px 26px;
-      border-radius: 9999px;
-      background: var(--secondary-container);
-      color: var(--on-primary, #ffffff);
-      font-size: 15px;
-      font-weight: 800;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(var(--accent-rgb), 0.35);
-      transition: all 0.25s ease;
-    }
-    .c-faq-call-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 32px rgba(var(--accent-rgb), 0.45);
-    }
-    .c-faq-call-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2.2;
-    }
-    .c-faq-trust-note {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      font-size: 12.5px;
-      color: var(--on-surface-variant);
-      font-weight: 600;
-    }
-    @media (max-width: 900px) {
-      .c-faq-trust-note {
-        justify-content: center;
-      }
-    }
-    .c-faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .c-faq-card {
-      background: var(--surface-container-lowest);
-      border: 1px solid var(--outline-variant);
-      border-radius: var(--radius-default, 16px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-      overflow: hidden;
-      transition: all 0.25s ease;
-    }
-    .c-faq-card:hover {
-      border-color: rgba(var(--accent-rgb), 0.35);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    }
-    .c-faq-card.active {
-      border-color: var(--secondary-container);
-      box-shadow: 0 8px 26px rgba(var(--accent-rgb), 0.12);
-    }
-    .c-faq-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 20px 24px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      gap: 16px;
-    }
-    .c-faq-q-text {
-      color: var(--on-surface);
-      font-size: 16.5px;
-      font-weight: 700;
-      line-height: 1.4;
-      margin: 0;
-    }
-    .c-faq-icon {
-      display: grid;
-      place-items: center;
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      background: rgba(var(--accent-rgb), 0.1);
-      color: var(--secondary-container);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, color 0.25s ease;
-    }
-    .c-faq-icon svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.3s ease;
-    }
-    .c-faq-card.active .c-faq-icon {
-      transform: rotate(180deg);
-      background: var(--secondary-container);
-      color: #ffffff;
-    }
-    .c-faq-panel {
-      display: none;
-      padding: 0 24px 22px 24px;
-      color: var(--on-surface-variant);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .c-faq-card.active .c-faq-panel {
-      display: block;
-      animation: cFaqFade 0.25s ease;
-    }
-    @keyframes cFaqFade {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========================================================
-       CORNERSTONE BOTTOM CONVERSION CTA (SECTION 10)
-       ======================================================== */
-    .c-cta-section {
-      width: 100%;
-      padding: 80px 24px 84px;
-      background: var(--surface-container-lowest);
-      position: relative;
-    }
-    .c-cta-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .c-cta-box {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      border-radius: 24px;
-      padding: clamp(48px, 6vw, 76px) clamp(24px, 5vw, 64px);
-      text-align: center;
-      background: 
-        radial-gradient(circle at 85% 15%, rgba(var(--accent-rgb), 0.22), transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(var(--accent-rgb), 0.12), transparent 40%),
-        linear-gradient(135deg, #091730 0%, #0d2246 50%, #091730 100%);
-      border: 1px solid rgba(var(--accent-rgb), 0.3);
-      box-shadow: 0 24px 60px rgba(9, 23, 48, 0.45);
-    }
-    .c-cta-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0.12;
-      background-image: radial-gradient(circle, #ffffff 1.5px, transparent 1.5px);
-      background-size: 24px 24px;
-      pointer-events: none;
-    }
-    .c-cta-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 18px;
-      border-radius: 9999px;
-      background: rgba(var(--accent-rgb), 0.25);
-      border: 1px solid rgba(var(--accent-rgb), 0.45);
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-      position: relative;
-      z-index: 1;
-    }
-    .c-cta-eyebrow svg {
-      width: 15px;
-      height: 15px;
-      color: #f59e0b;
-    }
-    .c-cta-heading {
-      color: #ffffff;
-      font-size: clamp(28px, 3.2vw, 42px);
-      font-weight: 800;
-      line-height: 1.22;
-      letter-spacing: -0.02em;
-      max-width: 820px;
-      margin: 0 auto 18px;
-      position: relative;
-      z-index: 1;
-    }
-    .c-cta-subheading {
-      color: rgba(255, 255, 255, 0.88);
-      font-size: 16.5px;
-      line-height: 1.65;
-      max-width: 720px;
-      margin: 0 auto 34px;
-      position: relative;
-      z-index: 1;
-    }
-    .c-cta-actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-    .c-cta-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 18px 36px;
-      border-radius: 9999px;
-      background: var(--secondary-container);
-      color: var(--on-primary, #ffffff);
-      font-size: 16.5px;
-      font-weight: 800;
-      text-decoration: none;
-      box-shadow: 0 12px 35px rgba(var(--accent-rgb), 0.45);
-      transition: all 0.25s ease;
-    }
-    .c-cta-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 45px rgba(var(--accent-rgb), 0.55);
-    }
-    .c-cta-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 18px 32px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      font-size: 15.5px;
-      font-weight: 700;
-      text-decoration: none;
-      backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
-    }
-    .c-cta-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.45);
-      transform: translateY(-2px);
-    }
-    .c-cta-badges {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: clamp(14px, 3vw, 32px);
-      margin-top: 40px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      position: relative;
-      z-index: 1;
-    }
-    .c-cta-badge-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 13.5px;
-      font-weight: 600;
-    }
-    .c-cta-badge-item svg {
-      width: 16px;
-      height: 16px;
-      color: #10b981;
-    }
-
-  </style>
+    </style>
 
   <!-- ------------------------------------------------------------- -->
   <!-- 2. INDUSTRIAL INTEGRITY DESIGN SYSTEM (HOSTINGER REFERENCE)   -->
