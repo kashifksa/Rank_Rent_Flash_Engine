@@ -53,7 +53,6 @@
         "Service"
       ],
       "internal_links_to": [
-        "residential-air-duct-cleaning",
         "commercial-hvac-duct-cleaning",
         "dryer-vent-cleaning-and-lint-removal",
         "about",
@@ -77,11 +76,6 @@
       "status": "planned",
       "service_cards": [
         {
-          "title": "Residential Air Duct Cleaning",
-          "link_to": "residential-air-duct-cleaning",
-          "description": "Comprehensive negative air vacuum source removal for homes in Rockford and Winnebago County."
-        },
-        {
           "title": "Commercial HVAC Duct Cleaning",
           "link_to": "commercial-hvac-duct-cleaning",
           "description": "OSHA-compliant commercial and industrial ventilation decontamination across Northern Illinois."
@@ -90,58 +84,20 @@
           "title": "Dryer Vent Cleaning & Lint Removal",
           "link_to": "dryer-vent-cleaning-and-lint-removal",
           "description": "Professional rotary brush lint extraction to prevent house fires and restore dryer efficiency."
+        },
+        {
+          "title": "Sanitization & Antimicrobial Fogging",
+          "link_to": "sanitization-and-antimicrobial-fogging",
+          "description": "EPA-registered botanical thyme fogging neutralizing mold spores and bacteria on contact."
         }
       ]
-    },
-    {
-      "page_id": "residential-air-duct-cleaning",
-      "page_type": "service",
-      "phase": 1,
-      "slug": "/residential-air-duct-cleaning/",
-      "h1": "Residential Air Duct Cleaning Services in Rockford, IL",
-      "meta_title": "Residential Air Duct Cleaning Services Rockford IL | NADCA Certif",
-      "meta_description": "Professional air duct cleaning rockford il by NADCA-certified experts in Rockford, IL. Complete trunk line vacuuming & sanitized ductwork. Call (815) 555-0142 t",
-      "target_keyword": "air duct cleaning rockford il",
-      "secondary_keywords": [
-        "air duct cleaning rockford il",
-        "air duct cleaning services rockford",
-        "who cleans air ducts",
-        "a c air ducts"
-      ],
-      "schema_types": [
-        "Service",
-        "LocalBusiness",
-        "FAQPage"
-      ],
-      "internal_links_to": [
-        "homepage",
-        "contact",
-        "about",
-        "air-duct-cleaning-loves-park-il",
-        "dryer-vent-cleaning-and-lint-removal",
-        "negative-air-vacuum-trunk-line-cleaning"
-      ],
-      "sections": [
-        "gradient-hero",
-        "trust-bar",
-        "services-grid",
-        "why-choose-us",
-        "process",
-        "local-proof",
-        "service-area",
-        "mid-cta",
-        "faq",
-        "bottom-cta"
-      ],
-      "word_count_target": 1500,
-      "status": "planned"
     },
     {
       "page_id": "about",
       "page_type": "about",
       "phase": 1,
       "slug": "/about/",
-      "h1": "About Rockford Air Duct Pros — Certified Local Technicians",
+      "h1": "About Rockford Air Duct Pros \u2014 Certified Local Technicians",
       "meta_title": "About Us | Rockford Air Duct Pros | NADCA Certified Rockford",
       "meta_description": "Learn about Rockford Air Duct Pros. NADCA-certified air duct cleaning specialists serving Rockford and Winnebago County since 2014. Call (815) 555-0142.",
       "target_keyword": "rockford air duct cleaning company",
@@ -175,7 +131,7 @@
       "page_type": "contact",
       "phase": 1,
       "slug": "/contact/",
-      "h1": "Contact Rockford Air Duct Pros — Schedule an Inspection",
+      "h1": "Contact Rockford Air Duct Pros \u2014 Schedule an Inspection",
       "meta_title": "Contact Us | Rockford Air Duct Pros | Rockford, IL",
       "meta_description": "Contact Rockford Air Duct Pros in Rockford, IL. Schedule your professional air duct inspection or dryer vent cleaning today. Call (815) 555-0142.",
       "target_keyword": "contact air duct cleaning rockford",

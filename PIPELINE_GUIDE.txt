@@ -172,4 +172,6 @@ HARD LIMITS
   - safe_publish() is the ONLY path to WordPress — no exceptions
   - Never create a link to a page not in phase1_registry.json
   - No pricing on any page — this is a Rank & Rent site
+  - FIX 33: Never put logos, brand names, or text on vans or uniforms (unmarked white vans & solid navy workwear only)
+  - FIX 34: Never upload raw AI images directly; run image_geotagger.py (strip EXIF, GPS inject, WebP < 100KB, no digits)
 

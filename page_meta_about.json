@@ -1,0 +1,154 @@
+{
+  "page_id": "about",
+  "page_type": "about",
+  "phase": 1,
+  "slug": "about",
+  "h1": "About Rockford Air Duct Pros - Air Duct Cleaning Experts in Rockford, IL",
+  "meta_title": "About Rockford Air Duct Pros | Certified Duct Cleaners Rockford IL",
+  "meta_description": "Meet Rockford Air Duct Pros. NADCA-certified, EPA Lead-Safe duct cleaning specialists serving Rockford and Winnebago County since 2014. Call (815) 555-0142.",
+  "canonical": "https://rockfordairductpros.com/about/",
+  "target_keyword": "rockford air duct cleaning company",
+  "secondary_keywords": [
+    "air duct cleaning experts rockford il",
+    "certified duct cleaners rockford",
+    "NADCA certified air duct cleaning rockford",
+    "licensed duct cleaner winnebago county"
+  ],
+  "word_count": 1138,
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://rockfordairductpros.com/about/#webpage",
+        "url": "https://rockfordairductpros.com/about/",
+        "name": "About Rockford Air Duct Pros",
+        "isPartOf": {
+          "@id": "https://rockfordairductpros.com/#website"
+        },
+        "about": {
+          "@id": "https://rockfordairductpros.com/#business"
+        },
+        "description": "Information about Rockford Air Duct Pros, certified NADCA technicians, operational history, and ventilation cleaning standards in Rockford, IL."
+      },
+      {
+        "@type": "HVACBusiness",
+        "@id": "https://rockfordairductpros.com/#business",
+        "name": "Rockford Air Duct Pros",
+        "url": "https://rockfordairductpros.com/",
+        "telephone": "+18155550142",
+        "email": "service@rockfordairductpros.com",
+        "foundingDate": "2014",
+        "priceRange": "$$",
+        "image": "https://rockfordairductpros.com/images/about/rockford-air-duct-pros-owner-team-photo.webp",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1111 S Alpine Rd",
+          "addressLocality": "Rockford",
+          "addressRegion": "IL",
+          "postalCode": "61108",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 42.2713945,
+          "longitude": -89.093966
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Rockford"
+          },
+          {
+            "@type": "City",
+            "name": "Loves Park"
+          },
+          {
+            "@type": "City",
+            "name": "Machesney Park"
+          },
+          {
+            "@type": "City",
+            "name": "Belvidere"
+          },
+          {
+            "@type": "City",
+            "name": "Roscoe"
+          },
+          {
+            "@type": "City",
+            "name": "Rockton"
+          },
+          {
+            "@type": "City",
+            "name": "Cherry Valley"
+          },
+          {
+            "@type": "City",
+            "name": "Winnebago"
+          },
+          {
+            "@type": "City",
+            "name": "Pecatonica"
+          }
+        ],
+        "memberOf": [
+          {
+            "@type": "Organization",
+            "name": "National Air Duct Cleaners Association",
+            "alternateName": "NADCA",
+            "url": "https://nadca.com"
+          },
+          {
+            "@type": "Organization",
+            "name": "Better Business Bureau",
+            "alternateName": "BBB",
+            "url": "https://bbb.org"
+          }
+        ],
+        "founder": {
+          "@id": "https://rockfordairductpros.com/about/#marcus-miller"
+        },
+        "employee": [
+          {
+            "@id": "https://rockfordairductpros.com/about/#marcus-miller"
+          },
+          {
+            "@id": "https://rockfordairductpros.com/about/#david-kowalski"
+          }
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://rockfordairductpros.com/about/#marcus-miller",
+        "name": "Marcus Miller",
+        "jobTitle": "Founder & ASCS Lead Specialist",
+        "worksFor": {
+          "@id": "https://rockfordairductpros.com/#business"
+        },
+        "knowsAbout": [
+          "Air Systems Cleaning Specialist (ASCS)",
+          "HVAC System Restoration",
+          "Fiberoptic Borescope Duct Inspection",
+          "NADCA ACR 2021 Standard"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://rockfordairductpros.com/about/#david-kowalski",
+        "name": "David Kowalski",
+        "jobTitle": "Field Operations & Lead-Safe Specialist",
+        "worksFor": {
+          "@id": "https://rockfordairductpros.com/#business"
+        },
+        "knowsAbout": [
+          "EPA Lead-Safe Containment",
+          "High-Velocity Negative Air Systems",
+          "Historic Residential Plenums",
+          "Rotary Brush Agitation"
+        ]
+      }
+    ]
+  }
+}
+

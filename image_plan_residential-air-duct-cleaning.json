@@ -6,7 +6,7 @@
       "slot": "hero",
       "filename": "air-duct-cleaning-rockford-technician-hero.webp",
       "alt_text": "NADCA-certified air duct cleaning technician setting up negative air machine in Rockford, IL home",
-      "prompt": "Professional HVAC technician in uniform connecting a commercial-grade negative air pressure vacuum to a sheet metal duct trunk line in a residential utility room. Clean, professional setting. Tool belt, company logo shirt, protective gear. Realistic photo style, bright interior lighting, no text overlays.",
+      "prompt": "Professional HVAC technician in uniform connecting a commercial-grade negative air pressure vacuum to a sheet metal duct trunk line in a residential utility room. Clean, professional setting. Tool belt, company logo shirt, protective gear. Realistic photo style, bright interior lighting, no text overlays. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 1,
       "wp_media_id": null
     },
@@ -14,7 +14,7 @@
       "slot": "services-grid",
       "filename": "camera-inspection-ductwork-rockford.webp",
       "alt_text": "Flexible camera inserted into air duct trunk line showing interior debris, Rockford IL home inspection",
-      "prompt": "Close-up of a technician's hands guiding a flexible borescope camera into a galvanized steel duct opening. Monitor in background showing duct interior with visible dust accumulation. Professional setting, realistic photo, residential basement or utility closet background.",
+      "prompt": "Close-up of a technician's hands guiding a flexible borescope camera into a galvanized steel duct opening. Monitor in background showing duct interior with visible dust accumulation. Professional setting, realistic photo, residential basement or utility closet background. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 2,
       "wp_media_id": null
     },
@@ -22,7 +22,7 @@
       "slot": "process",
       "filename": "negative-air-vacuum-trunk-line-rockford.webp",
       "alt_text": "Commercial negative air pressure machine connected to main supply trunk in Rockford home",
-      "prompt": "A large commercial-grade HEPA negative air machine connected via flexible hose to the main supply trunk of a residential HVAC system. Yellow safety tape on floor, professional setting, technician partially visible adjusting the machine. Realistic interior photo, no text.",
+      "prompt": "A large commercial-grade HEPA negative air machine connected via flexible hose to the main supply trunk of a residential HVAC system. Yellow safety tape on floor, professional setting, technician partially visible adjusting the machine. Realistic interior photo, no text. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 3,
       "wp_media_id": null
     },
@@ -30,7 +30,7 @@
       "slot": "local-proof",
       "filename": "before-after-duct-cleaning-rockford-illinois.webp",
       "alt_text": "Side-by-side before and after photo of residential air duct interior, Rockford Illinois home",
-      "prompt": "Split image showing two duct interior photos side by side. Left panel labeled Before: dark grey duct walls coated in grey fibrous dust. Right panel labeled After: clean shiny galvanized steel interior. Professional documentation photography style, no people, clear difference visible.",
+      "prompt": "Split image showing two duct interior photos side by side. Left panel labeled Before: dark grey duct walls coated in grey fibrous dust. Right panel labeled After: clean shiny galvanized steel interior. Professional documentation photography style, no people, clear difference visible. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface.",
       "priority": 4,
       "wp_media_id": null
     },
@@ -38,10 +38,9 @@
       "slot": "why-us",
       "filename": "nadca-certified-badge-rockford-duct-pros.webp",
       "alt_text": "NADCA certification badge displayed by Rockford Air Duct Pros technician in Rockford, IL",
-      "prompt": "Close-up of a technician's shirt pocket showing an NADCA ASCS certification badge or card. Clean uniform, professional look, indoor residential setting. Shallow depth of field. Realistic photo style, no text overlays beyond what is on the badge.",
+      "prompt": "Close-up of a technician's shirt pocket showing an NADCA ASCS certification badge or card. Clean uniform, professional look, indoor residential setting. Shallow depth of field. Realistic photo style, no text overlays beyond what is on the badge. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 5,
       "wp_media_id": null
     }
   ]
 }
-

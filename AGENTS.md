@@ -178,4 +178,24 @@ Rank_Rent_Flash_Engine/
 - Content-Before-HTML rule (FIX 25) applies
 - Blueprint Drift Prevention (FIX 19) applies
 - Blog Cannibalization Prevention (FIX 31) applies
+- Primary Service & Location Cannibalization Prevention (FIX 32) applies
+- Brand Neutrality & Unmarked Vehicles/Uniforms (FIX 33) applies
+- Mandatory EXIF Stripping & WebP Pipeline (FIX 34) applies
+
+### Image Generation & Brand Neutrality (FIX 33)
+- **NEVER put company names, brand logos, phone numbers, or decals on service vehicles (vans or trucks).**
+- Service vehicles MUST ALWAYS be completely unmarked, solid-colored commercial work/cargo vans (clean white or silver) with clean, unbranded body panels.
+- **NEVER put company logos, brand names, or embroidered patches on technician uniforms or clothing.**
+- Technicians MUST ALWAYS wear plain, solid-colored professional trade workwear (navy blue, dark gray, or black polo/work shirts) with zero logos and zero text.
+- Rank & Rent sites must remain 100% white-label, photographic, and fully transferable.
+
+### Mandatory EXIF Stripping & WebP Pipeline (FIX 34)
+- **NEVER upload or link raw AI-generated JPEGs/PNGs directly into the website or WordPress.**
+- Raw AI images carry synthetic generation signatures, model markers, and excessive file weights.
+- **ALWAYS pass all AI-generated images through `scripts/image_geotagger.py`:**
+  1. Complete removal of all existing EXIF, XMP, and synthetic AI generator headers.
+  2. Injection of clean business copyright and localized GPS coordinates (Rockford / local target city).
+  3. Conversion to WebP under the hard 100KB limit (FIX 30 Lanczos quality scaling).
+  4. Automatic verification of brand-neutral filenames (FIX 30 bonus: no digits).
+- This is a non-negotiable quality gate for every page in the website creation process.
 

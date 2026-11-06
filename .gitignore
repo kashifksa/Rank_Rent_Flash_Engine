@@ -5,3 +5,18 @@ scripts/browser_profile/
 scripts/test_*.py
 test_*.py
 
+# Scratch dumps & temporary test files
+*dump*.html
+denton_*
+target_site_*
+test_*.html
+*.bak*
+*.png
+*.zip
+
+# Sample mockups
+stitch_sample.*
+sample_preview.html
+master_template_sample.html
+reference_hostinger.html
+reference_styles.css

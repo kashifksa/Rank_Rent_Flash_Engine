@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 =============================================================
   IMAGE GEOTAGGER & EXIF STRIPPER (Rank & Rent Pipeline)
@@ -36,6 +37,15 @@ if sys.platform == "win32":
 def get_gps_coordinates(city, state):
     """Auto-lookup GPS coordinates for the city/state using OpenStreetMap."""
     print(f"  Looking up GPS coordinates for {city}, {state}...")
+    known = {
+        ("Rockford", "IL"): (42.2713945, -89.093966),
+        ("Loves Park", "IL"): (42.3186, -89.0559),
+        ("Machesney Park", "IL"): (42.3547, -89.0415)
+    }
+    if (city, state) in known:
+        lat, lon = known[(city, state)]
+        print(f"  ✓ Found (local fallback): {lat}, {lon}")
+        return lat, lon
     try:
         geolocator = Nominatim(user_agent="rank_and_rent_geotagger")
         location = geolocator.geocode(f"{city}, {state}, USA")
@@ -207,7 +217,7 @@ def process_image(target_filename, image_data, folder_path, company_name, lat, l
             exif_dict = {"0th": zeroth_ifd, "Exif": {}, "1st": {}, "thumbnail": None, "GPS": {}}
             
             # 4. Inject GPS if geotag: true
-            if image_data.get("geotag", False):
+            if image_data.get("geotag", False) or image_data.get("geotagged", False):
                 exif_dict["GPS"] = create_gps_exif(lat, lon)
                 print("    ✓ Geotag injected")
                 
@@ -244,12 +254,32 @@ def main():
         sys.exit(1)
         
     with open(args.plan, "r", encoding="utf-8") as f:
-        plan = json.load(f).get("image_plan", {})
+        raw_data = json.load(f)
+        plan = raw_data.get("image_plan", raw_data)
         
-    meta = plan.get("meta", {})
-    company_name = meta.get("company_name", "Local Service Company")
+    meta = plan.get("meta", raw_data.get("_meta", {}))
+    company_name = meta.get("company_name", "")
     city = meta.get("primary_city", "")
     state = meta.get("state", "")
+
+    # Fallback to master_brief.json if missing in plan meta
+    brief_path = Path(args.plan).resolve().parent / "master_brief.json"
+    if not brief_path.exists():
+        brief_path = Path(__file__).resolve().parent.parent / "master_brief.json"
+    if brief_path.exists():
+        try:
+            with open(brief_path, "r", encoding="utf-8") as bf:
+                brief = json.load(bf)
+                if not company_name:
+                    company_name = brief.get("nap", {}).get("company_name", "Local Service Company")
+                if not city:
+                    city = brief.get("city", "")
+                if not state:
+                    state = brief.get("state", "")
+        except Exception:
+            pass
+    if not company_name:
+        company_name = "Rockford Air Duct Pros"
     
     print("=" * 60)
     print("  IMAGE GEOTAGGER & EXIF STRIPPER")
@@ -269,7 +299,7 @@ def main():
     if "favicon" in plan and plan["favicon"].get("filename"):
         images_to_process.append((plan["favicon"]["filename"], plan["favicon"]))
         
-    for img in plan.get("page_images", []):
+    for img in (plan.get("page_images") or plan.get("images", [])):
         if img.get("filename"):
             images_to_process.append((img["filename"], img))
             

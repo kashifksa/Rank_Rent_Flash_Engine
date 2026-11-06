@@ -1,0 +1,35 @@
+{
+  "page_id": "dryer-vent-cleaning-and-lint-removal",
+  "slug": "dryer-vent-cleaning-and-lint-removal",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Rockford",
+    "state": "IL"
+  },
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "dryer-vent-cleaning-rotary-brush-rockford-residence.webp",
+      "alt_text": "Technician using motorized rotary brush to remove lint from laundry dryer vent in Rockford, IL",
+      "prompt": "An HVAC technician in professional navy blue work uniform kneeling in a bright modern residential laundry room, feeding a flexible rotary cleaning brush into the wall dryer exhaust duct behind a clothes dryer appliance. Clean residential setting, authentic documentary photography, natural daylight, zero artificial graphics. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
+      "priority": 1,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "note": "Ready to generate upon quota reset at ~21:25 UTC.",
+      "file_size_kb": 63.6
+    },
+    {
+      "slot": "lint-hazard",
+      "filename": "clogged-dryer-vent-lint-hazard-rockford-home.webp",
+      "alt_text": "Compacted lint accumulation removed from residential clothes dryer exhaust duct in Rockford, IL",
+      "prompt": "An authentic close-up documentary photograph of a large clump of dark grey compacted clothes dryer lint pulled out from an exhaust duct, resting on a clean drop cloth with technician measuring tape and inspection flashlight beside it. Realistic trade photograph. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
+      "priority": 2,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "un-geotagged",
+      "note": "Ready to generate upon quota reset at ~21:25 UTC.",
+      "file_size_kb": 89.9
+    }
+  ]
+}

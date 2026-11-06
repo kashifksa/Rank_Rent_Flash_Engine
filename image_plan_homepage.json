@@ -4,28 +4,114 @@
   "images": [
     {
       "slot": "hero",
-      "filename": "rockford-air-duct-pros-van-hero.webp",
+      "filename": "rockford-air-duct-pros-service-van-hero.webp",
       "alt_text": "Rockford Air Duct Pros service van parked outside residential home in Rockford, IL",
-      "prompt": "A clean white service van with company signage parked in front of a typical 1960s-1970s ranch-style brick home in a Midwest residential neighborhood. Mid-morning lighting, green lawn, mature trees. Professional appearance, realistic photo style. No text added beyond any visible on the van.",
+      "prompt": "A clean white service van unmarked with clean solid white exterior and zero lettering or decals parked in the driveway of a 1960s brick ranch home in Rockford Illinois. Bright morning sunlight, manicured lawn, realistic documentary photography style, zero artificial graphics.",
       "priority": 1,
-      "wp_media_id": null
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 93.8,
+      "gps": "42.2713945, -89.093966",
+      "file_size_kb": 96.5
     },
     {
       "slot": "primary-service-intro",
       "filename": "residential-duct-cleaning-rockford-illinois.webp",
       "alt_text": "Air duct technician cleaning supply register in Rolling Green neighborhood, Rockford, IL",
-      "prompt": "A uniformed technician removing a ceiling supply air register in a residential home and vacuuming the duct boot with a HEPA vacuum. Clean, well-lit interior room, neutral wall colors, professional setting. Realistic photo, no text overlays.",
+      "prompt": "An HVAC technician in professional navy blue work uniform carefully removing a ceiling register vent and inserting a HEPA vacuum hose into a residential living room in Rockford Illinois. Clean residential interior, natural lighting, sharp photography. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 2,
-      "wp_media_id": null
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "un-geotagged",
+      "filesize_kb": 88.5,
+      "gps": "42.2713945, -89.093966",
+      "file_size_kb": 85.2
+    },
+    {
+      "slot": "equipment-negative-air",
+      "filename": "negative-air-containment-vacuum-rockford-home.webp",
+      "alt_text": "Five thousand CFM negative air containment system connected to duct trunk line in Rockford, IL",
+      "prompt": "Commercial five thousand CFM negative air containment vacuum unit connected with heavy duty flexible ductwork to a central basement furnace plenum in a residential Rockford Illinois basement. Professional industrial trade equipment, clean setting.",
+      "priority": 3,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 96.8,
+      "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "botanical-sanitization",
+      "filename": "botanical-antimicrobial-duct-fogging-rockford-residence.webp",
+      "alt_text": "Certified technician applying botanical thyme antimicrobial fogging in Churchill Grove, Rockford, IL",
+      "prompt": "A certified air duct specialist using an ultra low volume cold fogger to mist botanical antimicrobial solution into residential air supply ductwork. Bright modern bathroom and hallway interior, clean equipment, realistic style.",
+      "priority": 4,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 87.9,
+      "gps": "42.2713945, -89.093966",
+      "file_size_kb": 64.4
+    },
+    {
+      "slot": "before-inspection",
+      "filename": "contaminated-air-duct-interior-rockford-residence.webp",
+      "alt_text": "Borescope inspection camera photo of dust and dander accumulation in Rockford, IL ductwork",
+      "prompt": "Interior fiberoptic borescope inspection photograph looking down a square galvanized sheet metal air duct heavily coated in grey pet dander, lint, and settled construction dust. Authentic inspection camera perspective. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface.",
+      "priority": 5,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 89,
+      "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "after-inspection",
+      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
+      "alt_text": "Clean sanitized bare metal air duct interior after mechanical rotary scrubbing in Rockford, IL",
+      "prompt": "Interior inspection view down a clean galvanized steel air duct trunk line with shiny bare metal surfaces, free of dust and debris after professional rotary brush scrubbing and negative air vacuuming. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface.",
+      "priority": 6,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 93,
+      "gps": "42.2713945, -89.093966"
     },
     {
       "slot": "credentials-block",
       "filename": "nadca-bbb-credentials-rockford-duct-company.webp",
       "alt_text": "NADCA and BBB A Plus accreditation logos displayed for Rockford air duct cleaning company",
-      "prompt": "A clean flat-lay or wall-mounted display showing NADCA member badge and BBB Accredited Business A+ badge on a neutral background. Professional, high resolution, no busy design. Simple credential display suitable for website trust section.",
-      "priority": 3,
-      "wp_media_id": null
+      "prompt": "A clean flat lay certification display showing official NADCA member badge and Better Business Bureau A+ accredited business emblem on a clean brushed metal background, professional commercial presentation.",
+      "priority": 7,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 68.3,
+      "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "blower-wheel-before",
+      "filename": "contaminated-furnace-blower-wheel-rockford-residence.webp",
+      "alt_text": "Dirty residential furnace squirrel cage blower wheel caked with dust before cleaning in Rockford, IL",
+      "prompt": "Close-up interior trade photograph looking into a residential furnace air handler compartment showing a dirty squirrel cage blower wheel heavily caked with thick grey dust, lint fibers, and pet dander between the curved fan blades. Authentic HVAC technician inspection perspective, realistic interior flashlight lighting, natural photographic depth of field, strictly zero logos, zero text, zero brand names, realistic photographic documentary style.",
+      "priority": 8,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 86.9,
+      "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "blower-wheel-after",
+      "filename": "sanitized-furnace-blower-wheel-rockford-residence.webp",
+      "alt_text": "Clean sanitized bare metal furnace squirrel cage blower wheel after precision cleaning in Rockford, IL",
+      "prompt": "Close-up interior trade photograph of the same residential furnace squirrel cage blower wheel completely cleaned and sanitized to bare metal galvanized steel, sparkling clean blades with all dust removed, fully restored furnace blower compartment. Authentic HVAC technician inspection perspective, natural photographic flashlight illumination, realistic photography, strictly zero logos, zero text, zero brand names.",
+      "priority": 9,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 79.3,
+      "gps": "42.2713945, -89.093966"
     }
   ]
 }
-

@@ -1,0 +1,123 @@
+{
+  "page_id": "homepage",
+  "page_type": "homepage",
+  "phase": 1,
+  "slug": "/",
+  "h1": "NADCA Certified Air Duct Cleaning in Rockford, IL",
+  "meta_title": "Air Duct Cleaning Rockford IL | NADCA Certified Pros",
+  "meta_description": "Trusted NADCA-certified air duct cleaning in Rockford, IL. Full source removal, camera inspections, and dryer vent services. Call (815) 555-0142 for a free estimate.",
+  "canonical": "https://rockfordairductpros.com/",
+  "target_keyword": "air duct cleaning rockford",
+  "secondary_keywords": [
+    "air duct cleaning rockford il",
+    "air duct cleaning services rockford",
+    "dryer vent cleaning rockford il",
+    "HVAC duct cleaning rockford"
+  ],
+  "word_count": 2121,
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HVACBusiness",
+        "@id": "https://rockfordairductpros.com/#business",
+        "name": "Rockford Air Duct Pros",
+        "telephone": "+18155550142",
+        "priceRange": "$$",
+        "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=900&q=80",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1111 S Alpine Rd",
+          "addressLocality": "Rockford",
+          "addressRegion": "IL",
+          "postalCode": "61108",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 42.2575,
+          "longitude": -89.0305
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Rockford"
+          },
+          {
+            "@type": "City",
+            "name": "Loves Park"
+          },
+          {
+            "@type": "City",
+            "name": "Machesney Park"
+          },
+          {
+            "@type": "City",
+            "name": "Belvidere"
+          },
+          {
+            "@type": "City",
+            "name": "Cherry Valley"
+          },
+          {
+            "@type": "City",
+            "name": "Roscoe"
+          }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "07:00",
+            "closes": "19:00"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://rockfordairductpros.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How often should residential air ducts be cleaned?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "According to National Air Duct Cleaners Association (NADCA) guidelines, typical residential ductwork should be inspected every two years and thoroughly cleaned every three to five years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will dust or dirt blow into my living room during cleaning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Certified technicians seal every supply and return register grille throughout your home with airtight protective covers before starting work under continuous negative air pressure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a thorough residential duct cleaning take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A complete whole-home decontamination for a typical two thousand to twenty-five hundred square-foot Rockford home requires three to four and a half hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the antimicrobial fogging solutions safe for children and pets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We apply an EPA-registered botanical antimicrobial fog derived from natural oil of thyme that leaves zero synthetic VOCs or chemical residues."
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

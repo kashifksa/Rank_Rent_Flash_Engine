@@ -1,0 +1,87 @@
+{
+  "page_id": "contact",
+  "page_type": "contact",
+  "phase": 1,
+  "slug": "contact",
+  "h1": "Contact Rockford Air Duct Pros in Rockford, IL",
+  "meta_title": "Contact Rockford Air Duct Pros | Schedule Duct Inspection Rockford IL",
+  "meta_description": "Contact Rockford Air Duct Pros at (815) 555-0142. Schedule NADCA-certified air duct cleaning and camera inspections across Rockford and Winnebago County.",
+  "canonical": "https://rockfordairductpros.com/contact/",
+  "target_keyword": "contact air duct cleaning rockford",
+  "secondary_keywords": [
+    "schedule duct cleaning rockford il",
+    "rockford air duct cleaning phone number",
+    "duct cleaning consultation winnebago county"
+  ],
+  "word_count": 367,
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": "https://rockfordairductpros.com/contact/#webpage",
+        "url": "https://rockfordairductpros.com/contact/",
+        "name": "Contact Rockford Air Duct Pros",
+        "isPartOf": {
+          "@id": "https://rockfordairductpros.com/#website"
+        },
+        "about": {
+          "@id": "https://rockfordairductpros.com/#business"
+        },
+        "description": "Contact information, service inquiry form, and dispatch location for Rockford Air Duct Pros in Rockford, IL."
+      },
+      {
+        "@type": "HVACBusiness",
+        "@id": "https://rockfordairductpros.com/#business",
+        "name": "Rockford Air Duct Pros",
+        "url": "https://rockfordairductpros.com/",
+        "telephone": "+18155550142",
+        "email": "service@rockfordairductpros.com",
+        "foundingDate": "2014",
+        "priceRange": "$$",
+        "image": "https://rockfordairductpros.com/images/contact/contact-rockford-air-duct-pros-technician.webp",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1111 S Alpine Rd",
+          "addressLocality": "Rockford",
+          "addressRegion": "IL",
+          "postalCode": "61108",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 42.2713945,
+          "longitude": -89.093966
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+18155550142",
+          "contactType": "customer service",
+          "areaServed": "US",
+          "availableLanguage": "en"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "07:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "14:00"
+          }
+        ]
+      }
+    ]
+  }
+}
+

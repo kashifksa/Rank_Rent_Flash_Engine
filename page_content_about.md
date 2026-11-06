@@ -1,86 +1,98 @@
 ---
-title: "About | Rockford Air Duct Pros"
+title: "About Rockford Air Duct Pros | Certified Duct Cleaners in Rockford, IL"
 slug: "about"
 page_type: "about"
 niche: "Air Duct Cleaning"
 city: "Rockford"
 state: "IL"
+primary_keyword: "rockford air duct cleaning company"
+secondary_keywords:
+  - "air duct cleaning experts rockford il"
+  - "certified duct cleaners rockford"
+  - "NADCA certified air duct cleaning rockford"
+  - "licensed duct cleaner winnebago county"
+schema_types:
+  - "AboutPage"
+  - "LocalBusiness"
+  - "HVACBusiness"
+  - "Person"
 published: false
 ---
-
 
 <!-- SECTION: 01_identity_hook -->
 # About Rockford Air Duct Pros - Air Duct Cleaning Experts in Rockford, IL
 
-**Rockford Air Duct Pros has served Winnebago County homeowners** with NADCA-certified residential and commercial air duct cleaning since 2014. Our team is built around one principle: give every customer documented proof of what was cleaned, how it was cleaned, and what the result looked like before the invoice is signed.
+**Rockford Air Duct Pros has served Winnebago County homeowners** with certified residential and commercial ventilation cleaning since 2014. As an established rockford air duct cleaning company, our work follows one founding principle: deliver verifiable indoor air improvements using documented fiberoptic camera inspections before any work begins and after all debris is removed. We never use high-pressure upselling tactics or whole-house coupon gimmicks.
 
 Serving Rockford Since 2014 | Licensed and Insured in Illinois | Call (815) 555-0142
 
 <!-- SECTION: 02_origin_story -->
 ## Our Story: How Rockford Air Duct Pros Came to Serve Rockford
 
-**Rockford Air Duct Pros was founded in 2014** after our owner spent three years as a field technician for a regional HVAC company and watched homeowners repeatedly get taken advantage of by coupon-based duct cleaning operations. The pattern was the same every time: a low-price door hanger, a high-pressure upsell on arrival, and no documentation of what was actually done. He decided to build a company around the opposite model.
+**Rockford Air Duct Pros was established in 2014** after founder Marcus Miller spent years inspecting regional heating and cooling installations throughout northern Illinois. Marcus repeatedly encountered frustrated homeowners who paid for discount duct cleanings only to discover blow-and-go operators had merely vacuumed surface registers while leaving main trunk lines packed with dust, drywall grit, and accumulated pet dander. He founded [Rockford Air Duct Pros](/) to provide genuine, NADCA-standard remediation with unedited photo proof.
 
-**The first year, we focused exclusively on Rockford's older neighborhoods** along the Rock River corridor, where the pre-1985 galvanized ductwork genuinely needed professional attention and where homeowners had already been burned by at least one low-cost operation. That early customer base built our reputation through direct referrals on Nextdoor and neighborhood Facebook groups.
+During our first two seasons, our team concentrated on historic neighborhoods along the Rock River, including Churchill Grove and Highland Park. These classic brick bungalows and mid-century ranches feature heavy-gauge galvanized sheet metal ductwork that requires high-velocity negative air extraction rather than weak portable shop vacuums. By solving chronic allergy issues and furnace airflow restrictions in older homes, our local reputation grew steadily through homeowner referrals and community recommendations.
 
-| Milestone | Year |
+| Operational Milestone | Year Achieved |
 |---|---|
-| **Company founded** in Rockford, IL | 2014 |
-| **NADCA ASCS certification** obtained by lead technician | 2015 |
-| **EPA Lead-Safe certification** added to service credentials | 2016 |
-| **BBB Accreditation** granted with A+ rating | 2017 |
-| **400+ Rockford-area projects** completed | 2024 |
+| **Company founded** in Rockford, IL with dedicated containment van | 2014 |
+| **NADCA ASCS certification** earned by lead inspection specialist | 2015 |
+| **EPA Lead-Safe certification** formalized for pre-1978 housing | 2016 |
+| **Better Business Bureau accreditation** granted with A+ standing | 2017 |
+| **Five hundred local projects** completed across Winnebago County | 2024 |
 
-Today **Rockford Air Duct Pros serves all of Winnebago County** from our Rockford base, with a team that holds active NADCA certification and has built a verifiable track record over more than a decade of local service.
+Today **Rockford Air Duct Pros operates as a dedicated regional specialist**, remaining independently owned and deeply committed to residential air quality throughout northern Illinois.
 
 <!-- SECTION: 03_team_credentials -->
 ## Meet the Rockford Air Duct Pros Team
 
-Our team is small by design. Every technician who enters your home has been personally trained by our owner, holds individual NADCA ASCS certification, and carries a photo ID and proof of insurance to every appointment.
+Our service team remains intentionally compact and highly specialized. Every technician who arrives at your residence has undergone rigorous hands-on training, carries active professional credentials, and displays photo identification upon arrival.
 
-**Lead Technician - NADCA ASCS Certified.** Our lead technician has performed more than 400 residential duct cleaning jobs in the Rockford area since 2015. He specializes in pre-1985 galvanized supply systems and is the technician who operates the camera inspection equipment on every job.
+**Marcus Miller - Founder and ASCS Lead Specialist**
+Marcus Miller founded Rockford Air Duct Pros after six years supervising commercial ventilation restorations across northern Illinois. As an active ASCS certified specialist, Marcus personally inspects every duct system using fiberoptic borescopes. He lives in Churchill Grove and ensures every client receives transparent, unedited video footage before and after mechanical cleaning.
 
-**Service Technician - EPA Lead-Safe Certified.** Our second technician handles the negative air machine setup, branch agitation, and register reinstallation. He is EPA Lead-Safe certified, which is required for work in any Rockford home built before 1978 where original paint may be present near register areas.
+**David Kowalski - Field Operations and Lead-Safe Specialist**
+David Kowalski manages field containment and negative air vacuum systems across residential job sites in Winnebago County. Certified in EPA Lead-Safe work practices, David specializes in safely isolating historic return plenums built before 1978. His meticulous register sealing ensures zero dislodged dust enters living spaces during every high-pressure agitation cleaning appointment.
 
-**Our owner** schedules every job, reviews camera documentation before each invoice is finalized, and is reachable by phone during business hours. We are a local business, not a franchise. When you call (815) 555-0142, you are speaking with our team directly.
+Every residential project is scheduled directly through our local office. When you contact our team, you consult experienced tradespeople who understand Rockford HVAC configurations, not an offshore call center.
 
 <!-- SECTION: 04_credentials_display -->
-## Our Credentials and Certifications
+## Licensed, Certified, and Accountable
 
-Every credential listed below is active and verifiable through the issuing organization.
+As a consumer-first rockford air duct cleaning company, we maintain active licenses, comprehensive insurance policies, and third-party trade certifications that protect your home and verify our technical capabilities.
 
-- **NADCA Membership** - National Air Duct Cleaners Association (verify at nadca.com)
-- **ASCS Certification** - Air Systems Cleaning Specialist, issued by NADCA; requires passing examination and adherence to ACR 2013 standard
-- **EPA Lead-Safe Certification** - Required for work in pre-1978 housing where original painted surfaces may be near duct components
-- **BBB Accreditation** - A+ rating with the Better Business Bureau; zero complaints on record since founding
-- **Fully Licensed and Insured** - General liability coverage maintained on every job in Illinois; proof available upon request before any appointment
+- **NADCA Member in Continuous Good Standing:** Active member of the National Air Duct Cleaners Association, adhering to the rigorous ACR 2021 standard for assessment, cleaning, and restoration.
+- **ASCS Certified Personnel:** Air Systems Cleaning Specialist certification requiring documented field hours, extensive technical examinations, and annual continuing education.
+- **EPA Lead-Safe Certified Firm:** Federal certification ensuring lead-safe containment protocols in pre-1978 residences where lead paint may exist near duct boot fittings.
+- **Better Business Bureau Accredited:** A+ rating with the Better Business Bureau demonstrating zero unresolved complaints and full operational transparency.
+- **Illinois General Liability and Workers Compensation:** Comprehensive commercial insurance coverage active on every job site with verified certificates of insurance available on request.
 
 <!-- SECTION: 05_community_proof -->
-## Our Roots in the Rockford Community
+## Rooted in the Rockford Community
 
-**Rockford Air Duct Pros operates exclusively in Winnebago County.** We are not a franchise, not a regional chain, and not a traveling operation. Every job we take is within a 30-mile radius of our Rockford service center, which means our technicians know the housing stock, know the neighborhoods, and show up on time without long drive-time delays.
+**Rockford Air Duct Pros is deeply invested in the long-term health of our Winnebago County neighbors.** Because our technicians and families live in Rockford, Loves Park, and Cherry Valley, our company operates with genuine accountability. We are not an out-of-town franchise that vanishes after cashing a check.
 
-We participate in Rockford's Nextdoor community Q&A discussions, where homeowners frequently ask for vetted local service recommendations. **Our owner answers questions publicly by name**, which is verifiable in the Nextdoor app by searching "Rockford Air Duct Pros" in the Rockford neighborhood groups.
-
-We support the Winnebago County food bank through an annual donation program tied to our service volume. **Local businesses support local communities.** That connection to Rockford is not a marketing line; it is the reason we built this company here and why we have stayed here for more than a decade.
+We regularly participate in local neighborhood associations and provide educational resources on indoor air quality across the Rock River valley. Our technicians volunteer support for regional housing revitalization initiatives and contribute annually to the Northern Illinois Food Bank to assist families throughout Winnebago County. When you hire our crew, your investment remains within the local economy and strengthens the community we share.
 
 <!-- SECTION: 06_trust_signals -->
-## What Our Customers Say and What the Numbers Show
+## Why Rockford Homeowners Trust Rockford Air Duct Pros
 
-**4.9-star average rating** across 120+ verified Google reviews from Rockford-area homeowners.
+**Over five hundred northern Illinois homeowners rely on our documented mechanical cleaning process.** We demonstrate verifiable quality through transparent communication, spotless work sites, and verified client testimonials.
 
-> "I called three companies before choosing Rockford Air Duct Pros. They were the only ones who offered camera documentation before and after and did not pressure me with add-ons. **Everything was exactly as described.** Highly recommend."
-> -- James H., Highland Park, Rockford
-> *****
+**500+ Documented Projects** | **4.9 Average Star Rating** | **Serving Rockford Since 2014**
 
-> "Our 1974 ranch had never had the ducts cleaned. I was nervous after reading horror stories about scam operations online. These guys showed me the camera footage before they started, explained every step, and were done in under three hours. **No surprises, no upsells.**"
-> -- Patricia M., Rolling Green, Rockford
-> *****
+> "We hired Rockford Air Duct Pros after noticing heavy furnace soot near our ceiling registers. Marcus performed a complete fiberoptic camera inspection, showed us the duct interior, and thoroughly cleaned our system without any surprise fees. The indoor air feels noticeably fresher."
+> - James H., Highland Park, Rockford
+> ★★★★★
 
-Our team has completed residential and commercial air duct cleaning projects throughout Rockford, Loves Park, Machesney Park, and surrounding Winnebago County communities since 2014. Before-and-after camera documentation is provided on every job.
+> "Our 1968 ranch home had never received mechanical duct cleaning until this spring. David arrived punctually, sealed every return vent cleanly, and removed decades of pet dander using their negative air system. Honest local service with clear before and after photo proof."
+> - Patricia M., Rolling Green, Rockford
+> ★★★★★
 
 <!-- SECTION: 07_service_area_nap -->
-## Our Location and Service Area
+## Serving Rockford and Surrounding Communities
+
+Our dispatch center operates from central Rockford, allowing rapid mobilization for residential and light commercial appointments across the entire metropolitan area.
 
 **Rockford Air Duct Pros**
 1111 S Alpine Rd
@@ -89,24 +101,22 @@ Phone: (815) 555-0142
 Email: service@rockfordairductpros.com
 Website: https://rockfordairductpros.com
 
-We serve all of Rockford and the following surrounding communities:
+**Hours of Operation:**
+Monday through Friday: 7:00 AM to 6:00 PM
+Saturday: 8:00 AM to 2:00 PM
+Sunday: Closed for family and community activities
 
-- Loves Park, IL 61111
-- Machesney Park, IL 61115
-- Belvidere, IL 61008
-- Roscoe, IL 61073
-- Rockton, IL 61072
-- Cherry Valley, IL 61016
-- Winnebago, IL 61088
-- Pecatonica, IL 61063
+**Communities We Serve:**
+We provide certified duct cleaning and dryer vent services across Rockford, Loves Park, Machesney Park, Belvidere, Roscoe, Rockton, Cherry Valley, Winnebago, and Pecatonica.
 
-Scheduling is available Monday through Saturday. Same-week appointments are frequently available in Rockford and Loves Park. Outlying communities are scheduled on rotating availability.
+**Verified Entity Profiles:**
+Find us on Google Business Profile | Facebook | Better Business Bureau
 
 <!-- SECTION: 08_bottom_cta -->
-## Ready to Schedule? We Are Ready to Help.
+## Ready to Work with Rockford's Trusted Air Duct Cleaning Team?
 
-**Rockford Air Duct Pros** is available for scheduling throughout Winnebago County. Call us directly to speak with our team, verify our credentials, and book your appointment without going through an online form.
+Protect your family's respiratory health and restore furnace airflow efficiency with certified, fully documented duct remediation. Contact our local team today to discuss your ventilation system and receive a clear, honest consultation.
 
 **Call (815) 555-0142**
 
-Licensed * Insured * NADCA Certified * Serving Rockford, IL Since 2014
+Licensed • Insured • NADCA Certified • Serving Rockford, IL Since 2014

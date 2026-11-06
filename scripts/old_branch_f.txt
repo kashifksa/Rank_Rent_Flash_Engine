@@ -1,0 +1,60 @@
+// F. PREMIUM COMPARISON TABLE (HOSTINGER HIGHLIGHT-COL TABLE)
+        else if (key.includes('comparison')) {
+          html += `
+            <section class="section" style="background-color: var(--surface-container-low);" id="sec-${key}">
+              <div class="container">
+                <div style="text-align: center; max-width: 750px; margin: 0 auto var(--stack-md);">
+                  <h2 contenteditable="true">Why Rockford Homeowners and Contractors Choose Us</h2>
+                  <p contenteditable="true">Compare our verified mechanical source removal standards against uncertified bait-and-switch operations.</p>
+                </div>
+
+                <div style="overflow-x: auto; margin-top: var(--stack-md);">
+                  <table class="premium-table">
+                    <thead>
+                      <tr>
+                        <th>Standard Feature</th>
+                        <th class="highlight-col">Rockford Air Duct Pros</th>
+                        <th>$99 "Blow & Go" Operators</th>
+                        <th>DIY Shop Vac Attempt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Source Removal Protocol</td>
+                        <td class="highlight-col"><span class="check-icon">✓</span> NADCA ACR 2021 Standard</td>
+                        <td><span class="cross-icon">✕</span> Uncertified blow & go</td>
+                        <td>N/A</td>
+                      </tr>
+                      <tr>
+                        <td>Vacuum Suction Velocity</td>
+                        <td class="highlight-col"><span class="check-icon">✓</span> 5,000 CFM Negative Pressure</td>
+                        <td><span class="cross-icon">✕</span> Handheld carpet vacuum</td>
+                        <td><span class="cross-icon">✕</span> 120 CFM shop vac</td>
+                      </tr>
+                      <tr>
+                        <td>Borescope Video Inspection</td>
+                        <td class="highlight-col"><span class="check-icon">✓</span> Before & After Recorded Proof</td>
+                        <td><span class="cross-icon">✕</span> None (bait-and-switch)</td>
+                        <td><span class="cross-icon">✕</span> None</td>
+                      </tr>
+                      <tr>
+                        <td>Antimicrobial Sanitizer</td>
+                        <td class="highlight-col"><span class="check-icon">✓</span> EPA-Registered Botanical</td>
+                        <td><span class="cross-icon">✕</span> Synthetic perfumed mist</td>
+                        <td><span class="cross-icon">✕</span> None</td>
+                      </tr>
+                      <tr>
+                        <td>Transparent Flat-Rate Quote</td>
+                        <td class="highlight-col"><span class="check-icon">✓</span> Written binding quote</td>
+                        <td><span class="cross-icon">✕</span> Hidden per-vent charges</td>
+                        <td>Equipment rental + time</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          `;
+        }
+
+        

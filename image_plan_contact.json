@@ -5,11 +5,15 @@
     {
       "slot": "contact-form-header",
       "filename": "contact-rockford-air-duct-pros-technician.webp",
-      "alt_text": "Rockford Air Duct Pros technician answering phone call to schedule air duct cleaning, Rockford IL",
-      "prompt": "A friendly uniformed technician or office staff member talking on a phone with a notepad in hand, scheduling an appointment. Clean indoor setting, professional appearance, warm natural lighting. Realistic photo style, no text overlays.",
+      "alt_text": "Rockford Air Duct Pros technician answering customer call to schedule air duct cleaning in Rockford, IL",
+      "prompt": "A friendly HVAC duct cleaning technician in professional navy blue work shirt speaking courteously on an office phone with a scheduling clipboard in hand. Clean bright dispatch office setting in Rockford Illinois, warm natural daylight, realistic documentary photography style, zero artificial graphics, zero text overlay. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 1,
-      "wp_media_id": null
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 81.0,
+      "gps": "42.2713945, -89.093966",
+      "file_size_kb": 87.2
     }
   ]
 }
-

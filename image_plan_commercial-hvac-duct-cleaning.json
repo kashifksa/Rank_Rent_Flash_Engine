@@ -1,0 +1,35 @@
+{
+  "page_id": "commercial-hvac-duct-cleaning",
+  "slug": "commercial-hvac-duct-cleaning",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Rockford",
+    "state": "IL"
+  },
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "commercial-hvac-duct-cleaning-rockford-rooftop-hero.webp",
+      "alt_text": "Commercial HVAC duct cleaning crew servicing rooftop air handler unit in Rockford, IL",
+      "prompt": "Two uniformed commercial HVAC technicians in high-visibility vests and safety helmets servicing a large rooftop commercial air handler unit on an industrial building in Rockford, Illinois. Clear blue sky, clean commercial rooftop setting, authentic documentary trade photography, zero artificial text, zero 3D rendering. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
+      "priority": 1,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 89.9,
+      "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "spiral-duct-scrubbing",
+      "filename": "industrial-spiral-duct-cleaning-rockford-facility.webp",
+      "alt_text": "Technician using rotary brush to clean industrial spiral ductwork in Rockford, IL facility",
+      "prompt": "An HVAC technician on a scissor lift operating a motorized rotary scrubbing whip inside overhead galvanized spiral ductwork in a modern Rockford Illinois manufacturing warehouse. Bright industrial facility lighting, clean professional trade setting, authentic documentary photography, zero artificial graphics. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
+      "priority": 2,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "note": "Model quota capacity reached (13 images generated in session). Ready to generate upon quota reset at ~21:25 UTC.",
+      "file_size_kb": 93.8
+    }
+  ]
+}

@@ -1,23 +1,37 @@
 {
   "page_id": "air-duct-cleaning-loves-park-il",
   "slug": "air-duct-cleaning-loves-park-il",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Loves Park",
+    "state": "IL"
+  },
   "images": [
     {
       "slot": "hero",
       "filename": "air-duct-cleaning-loves-park-illinois-hero.webp",
       "alt_text": "Air duct cleaning service truck arriving at a Loves Park, IL residential home near Rock River",
-      "prompt": "A professional service van parked in front of a mid-century split-level residential home in a Midwest suburban neighborhood near a river. Early morning light, tree-lined street, professional appearance. Realistic photo style, no text overlays.",
+      "prompt": "A clean white commercial service van parked in the driveway of a 1960s mid-century split-level residential home in a leafy suburban neighborhood in Loves Park, Illinois near the Rock River. Bright morning sunlight, lush green lawn, authentic documentary photography style, zero artificial graphics, zero text overlay. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface.",
       "priority": 1,
-      "wp_media_id": null
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "filesize_kb": 92.1,
+      "gps": "42.3186, -89.0559",
+      "file_size_kb": 97.2
     },
     {
       "slot": "local-proof",
       "filename": "duct-cleaning-loves-park-colonial-village.webp",
       "alt_text": "Technician cleaning air duct in Colonial Village neighborhood home, Loves Park, IL",
-      "prompt": "A uniformed technician working inside a residential basement utility room, connecting equipment to an older galvanized sheet metal duct system. Professional setting, good lighting, mid-century home interior details visible. Realistic photo style.",
+      "prompt": "An HVAC technician in professional navy blue work uniform connecting a negative air vacuum hose to an older galvanized sheet metal furnace plenum in a clean residential basement in Loves Park, Illinois. Good natural lighting, authentic trade documentary photography, zero artificial text, zero 3D rendering. The service van must be a completely unmarked, clean solid white commercial cargo vehicle with zero text, zero decals, and zero company logos on any surface. Technicians wear plain, solid-colored professional trade workwear with strictly zero logos, zero text, zero badges, and zero embroidery on their clothing.",
       "priority": 2,
-      "wp_media_id": null
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "un-geotagged",
+      "filesize_kb": 93.0,
+      "gps": "42.3186, -89.0559",
+      "file_size_kb": 88.9
     }
   ]
 }
-
