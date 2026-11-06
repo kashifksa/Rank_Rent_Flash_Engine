@@ -2885,6 +2885,89 @@
       color: #10b981;
     }
 
+    /* ========================================================
+       UNIVERSAL MOBILE RESPONSIVE ENGINE (FIX: ALL VIEWPORTS)
+       ======================================================== */
+    @media (max-width: 768px) {
+      /* Force single-column stacking for multi-card sections */
+      .denton-ba-title {
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem) !important;
+        overflow-wrap: break-word !important;
+      }
+      .svc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      .denton-ba-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      .denton-ba-card {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .test-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 20px !important;
+      }
+      .test-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .test-quote {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+      .test-author-info, .test-author-loc {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+      }
+      
+      /* Accreditations & Trust Grid */
+      .ac-showcase__grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      
+      /* Process Section */
+      .proc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+
+      /* Why Choose Us Grid */
+      .wcp-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+
+      /* Service Area City Grid */
+      .aws-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* Mobile Header Call Button */
+      .header-mobile-call {
+        display: inline-flex !important;
+      }
+
+      /* Comparison Table - smooth horizontal scroll on touch */
+      .table-responsive, [class*="table-wrap"], [id*="comparison"] > div > div {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      /* Consistent edge padding on mobile */
+      .section, .svc-section, .denton-ba-section, .test-section, .proc-section, .ac-showcase, .aws-section, .c-faq-section, .c-cta-section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+    }
+
   </style>
   <style id="builder-ui-styles">
     /* ContentEditable Sleek Focus Styling (Webflow / Framer / Notion style) */
@@ -7639,7 +7722,7 @@ window.BUILDER_PAGES_DATA = {
 
     function parseAwardsFromContent(rawSec, pageKey) {
       const defaultData = {
-        eyebrow: "NADCA Certified â€¢ Locally Trusted",
+        eyebrow: "NADCA Certified • Locally Trusted",
         heading: "Certified, Accredited, and Locally Trusted in Rockford, IL",
         intro: "Rockford Air Duct Pros holds active industry accreditations, certifications, and compliance standards required for precision indoor airway decontamination. Here is what backs every project we complete.",
         stats: [
@@ -8094,8 +8177,12 @@ window.BUILDER_PAGES_DATA = {
         html += `
           <!-- Sticky Header -->
           <header class="header">
-            <div class="container">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
               <a href="#" class="logo" contenteditable="true">${pageData.company_name || 'Rockford Air Duct Pros'}</a>
+              <a href="tel:${pageData.phone || '(815) 555-0142'}" class="header-mobile-call" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; background: var(--primary, #ea580c); color: #fff; font-size: 13px; font-weight: 700; border-radius: 8px; text-decoration: none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Call
+              </a>
               <nav class="nav-links">
                 <a href="#services">Services</a>
                 <a href="#about">About</a>

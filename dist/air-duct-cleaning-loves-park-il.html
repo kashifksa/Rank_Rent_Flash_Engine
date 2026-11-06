@@ -2905,6 +2905,89 @@
       color: #10b981;
     }
 
+    /* ========================================================
+       UNIVERSAL MOBILE RESPONSIVE ENGINE (FIX: ALL VIEWPORTS)
+       ======================================================== */
+    @media (max-width: 768px) {
+      /* Force single-column stacking for multi-card sections */
+      .denton-ba-title {
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem) !important;
+        overflow-wrap: break-word !important;
+      }
+      .svc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      .denton-ba-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      .denton-ba-card {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .test-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 20px !important;
+      }
+      .test-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .test-quote {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+      .test-author-info, .test-author-loc {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+      }
+      
+      /* Accreditations & Trust Grid */
+      .ac-showcase__grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      
+      /* Process Section */
+      .proc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+
+      /* Why Choose Us Grid */
+      .wcp-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+
+      /* Service Area City Grid */
+      .aws-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* Mobile Header Call Button */
+      .header-mobile-call {
+        display: inline-flex !important;
+      }
+
+      /* Comparison Table - smooth horizontal scroll on touch */
+      .table-responsive, [class*="table-wrap"], [id*="comparison"] > div > div {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      /* Consistent edge padding on mobile */
+      .section, .svc-section, .denton-ba-section, .test-section, .proc-section, .ac-showcase, .aws-section, .c-faq-section, .c-cta-section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+    }
+
   
 
 

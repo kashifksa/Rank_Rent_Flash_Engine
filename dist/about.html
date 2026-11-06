@@ -2905,6 +2905,89 @@
       color: #10b981;
     }
 
+    /* ========================================================
+       UNIVERSAL MOBILE RESPONSIVE ENGINE (FIX: ALL VIEWPORTS)
+       ======================================================== */
+    @media (max-width: 768px) {
+      /* Force single-column stacking for multi-card sections */
+      .denton-ba-title {
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem) !important;
+        overflow-wrap: break-word !important;
+      }
+      .svc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      .denton-ba-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      .denton-ba-card {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .test-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 20px !important;
+      }
+      .test-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .test-quote {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+      .test-author-info, .test-author-loc {
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+      }
+      
+      /* Accreditations & Trust Grid */
+      .ac-showcase__grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      
+      /* Process Section */
+      .proc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+
+      /* Why Choose Us Grid */
+      .wcp-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+
+      /* Service Area City Grid */
+      .aws-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* Mobile Header Call Button */
+      .header-mobile-call {
+        display: inline-flex !important;
+      }
+
+      /* Comparison Table - smooth horizontal scroll on touch */
+      .table-responsive, [class*="table-wrap"], [id*="comparison"] > div > div {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      /* Consistent edge padding on mobile */
+      .section, .svc-section, .denton-ba-section, .test-section, .proc-section, .ac-showcase, .aws-section, .c-faq-section, .c-cta-section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+    }
+
   
 
 
@@ -3852,7 +3935,7 @@ th {
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         <path d="m9 12 2 2 4-4"></path>
                       </svg>
-                      NADCA Certified â€¢ Locally Trusted
+                      NADCA Certified • Locally Trusted
                     </div>
                     <h2 class="ac-showcase__title">Meet the Rockford Air Duct Pros Team</h2>
                     <p class="ac-showcase__intro">Our service team remains intentionally compact and highly specialized. Every technician who arrives at your residence has undergone rigorous hands-on training, carries active professional credentials, and displays photo identification upon arrival.</p>
@@ -3979,7 +4062,7 @@ th {
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         <path d="m9 12 2 2 4-4"></path>
                       </svg>
-                      NADCA Certified â€¢ Locally Trusted
+                      NADCA Certified • Locally Trusted
                     </div>
                     <h2 class="ac-showcase__title">Licensed, Certified, and Accountable</h2>
                     <p class="ac-showcase__intro">As a consumer-first rockford air duct cleaning company, we maintain active licenses, comprehensive insurance policies, and third-party trade certifications that protect your home and verify our technical capabilities.</p>
