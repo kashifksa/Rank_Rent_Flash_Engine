@@ -1,6 +1,6 @@
 {
   "project": "Rank & Rent Flash Engine",
-  "current_page": "negative-air-vacuum-trunk-line-cleaning",
+  "current_page": "sanitization-and-antimicrobial-fogging",
   "completed_pages": [
     "homepage",
     "about",
@@ -9,10 +9,23 @@
     "commercial-hvac-duct-cleaning",
     "dryer-vent-cleaning-and-lint-removal",
     "how-to-spot-air-duct-cleaning-scams",
-    "negative-air-vacuum-trunk-line-cleaning"
+    "negative-air-vacuum-trunk-line-cleaning",
+    "sanitization-and-antimicrobial-fogging"
   ],
   "completed_sections": {
     "negative-air-vacuum-trunk-line-cleaning": [
+      "hero",
+      "trust_bar",
+      "services_grid",
+      "why_choose_us",
+      "process",
+      "local_proof",
+      "service_area",
+      "mid_cta",
+      "faq",
+      "bottom_cta"
+    ],
+    "sanitization-and-antimicrobial-fogging": [
       "hero",
       "trust_bar",
       "services_grid",
@@ -32,5 +45,6 @@
     "about"
   ],
   "current_type": "service_page_phase2",
-  "phase2_progress": "1_of_3_services_completed"
+  "phase2_progress": "1_of_3_services_completed",
+  "phase1_services_progress": "4_of_5_services_completed"
 }

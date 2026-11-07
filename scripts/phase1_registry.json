@@ -19,6 +19,40 @@
       "phase": 0,
       "note": "",
       "published_date": "YYYY-MM-DD"
+    },
+    {
+      "page_id": "negative-air-vacuum-trunk-line-cleaning",
+      "wp_id": null,
+      "url": "/negative-air-vacuum-trunk-line-cleaning.html",
+      "live_url": "https://darkviolet-meerkat-820208.hostingersite.com/negative-air-vacuum-trunk-line-cleaning.html",
+      "title": "Negative Air Vacuum Trunk Line Cleaning",
+      "slug": "negative-air-vacuum-trunk-line-cleaning",
+      "type": "service",
+      "preferred_anchor": "negative air vacuum trunk line cleaning",
+      "alternate_anchors": [
+        "negative air duct cleaning",
+        "trunk line vacuum extraction"
+      ],
+      "phase": 1,
+      "note": "FIX 37 Phase 1 service launch",
+      "published_date": "2026-11-07"
+    },
+    {
+      "page_id": "sanitization-and-antimicrobial-fogging",
+      "wp_id": null,
+      "url": "/sanitization-and-antimicrobial-fogging.html",
+      "live_url": "https://darkviolet-meerkat-820208.hostingersite.com/sanitization-and-antimicrobial-fogging.html",
+      "title": "Air Duct Sanitization and Antimicrobial Fogging",
+      "slug": "sanitization-and-antimicrobial-fogging",
+      "type": "service",
+      "preferred_anchor": "air duct sanitization and antimicrobial fogging",
+      "alternate_anchors": [
+        "antimicrobial duct fogging",
+        "duct sanitization"
+      ],
+      "phase": 1,
+      "note": "FIX 37 Phase 1 service launch",
+      "published_date": "2026-11-07"
     }
   ],
   "_instructions_for_next_page": "Copy the block above and fill in: page_id, wp_id (from WordPress after publishing), url, live_url, title, slug, type (page or post), preferred_anchor (the anchor text other pages should use when linking here), alternate_anchors, phase, and published_date. Add a note if the slug differs from master_brief.json."

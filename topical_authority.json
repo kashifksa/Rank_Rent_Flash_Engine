@@ -79,7 +79,7 @@
       "h1_title": "Commercial HVAC Duct Cleaning in Rockford, IL",
       "parent_service": "Commercial HVAC Duct Cleaning",
       "city": "Rockford",
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "dryer-vent-cleaning-and-lint-removal",
@@ -90,34 +90,34 @@
       "h1_title": "Dryer Vent Cleaning and Lint Removal in Rockford, IL",
       "parent_service": "Dryer Vent Cleaning and Lint Removal",
       "city": "Rockford",
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "negative-air-vacuum-trunk-line-cleaning",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "priority": 7,
       "target_keyword": "negative air vacuum trunk line cleaning rockford",
       "h1_title": "Negative Air Vacuum Trunk Line Cleaning in Rockford, IL",
       "parent_service": "Negative Air Vacuum Trunk Line Cleaning",
       "city": "Rockford",
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "sanitization-and-antimicrobial-fogging",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "priority": 8,
       "target_keyword": "air duct sanitization and antimicrobial fogging rockford",
       "h1_title": "Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL",
       "parent_service": "Sanitization and Antimicrobial Fogging",
       "city": "Rockford",
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "video-camera-ductwork-inspection",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "priority": 9,
       "target_keyword": "video camera ductwork inspection rockford",
       "h1_title": "Video Camera Ductwork Inspection in Rockford, IL",

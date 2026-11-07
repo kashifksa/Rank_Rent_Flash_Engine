@@ -224,7 +224,7 @@
         "bottom-cta"
       ],
       "word_count_target": 1500,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "dryer-vent-cleaning-and-lint-removal",
@@ -266,12 +266,12 @@
         "bottom-cta"
       ],
       "word_count_target": 1500,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "negative-air-vacuum-trunk-line-cleaning",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "slug": "/negative-air-vacuum-trunk-line-cleaning/",
       "h1": "Negative Air Vacuum Trunk Line Cleaning in Rockford, IL",
       "meta_title": "Negative Air Vacuum Trunk Line Cleaning Rockford IL | NADCA Certi",
@@ -307,12 +307,12 @@
         "bottom-cta"
       ],
       "word_count_target": 1500,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "sanitization-and-antimicrobial-fogging",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "slug": "/sanitization-and-antimicrobial-fogging/",
       "h1": "Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL",
       "meta_title": "Air Duct Sanitization and Antimicrobial Fogging Rockford IL | NAD",
@@ -345,12 +345,12 @@
         "bottom-cta"
       ],
       "word_count_target": 1500,
-      "status": "planned"
+      "status": "completed"
     },
     {
       "page_id": "video-camera-ductwork-inspection",
       "page_type": "service",
-      "phase": 2,
+      "phase": 1,
       "slug": "/video-camera-ductwork-inspection/",
       "h1": "Video Camera Ductwork Inspection in Rockford, IL",
       "meta_title": "Video Camera Ductwork Inspection Rockford IL | NADCA Certified",

@@ -1,0 +1,33 @@
+{
+  "page_id": "sanitization-and-antimicrobial-fogging",
+  "slug": "sanitization-and-antimicrobial-fogging",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Rockford",
+    "state": "IL"
+  },
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "botanical-antimicrobial-duct-fogging-rockford-residence.webp",
+      "alt_text": "Hospital-grade botanical antimicrobial duct fogging treatment in Rockford, IL",
+      "prompt": "An HVAC technician in solid navy blue trade uniform with zero logos or text applying botanical antimicrobial fogging with an ultra-low volume cold mist atomizer into a residential HVAC duct system in Rockford, IL.",
+      "priority": 1,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 65.9
+    },
+    {
+      "slot": "results",
+      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
+      "alt_text": "Sanitized bare metal interior of residential ductwork following antimicrobial misting in Rockford, IL",
+      "prompt": "Inspection borescope view inside a clean sanitized galvanized sheet metal air duct trunk line with smooth reflective bare metal free of microbial growth.",
+      "priority": 2,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 100.9
+    }
+  ]
+}
