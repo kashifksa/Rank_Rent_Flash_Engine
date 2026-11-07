@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-container": "#fffbff", "outline": "#8c7166", "on-error": "#ffffff", "error-container": "#ffdad6", "on-primary-fixed": "#351000", "surface-bright": "#faf8ff", "inverse-primary": "#ffb694", "tertiary": "#4f5d71", "surface-container-high": "#e2e7ff", "error": "#ba1a1a", "secondary-fixed": "#dbe2f5", "on-tertiary-fixed": "#0d1c2e", "primary-fixed-dim": "#ffb694", "surface-tint": "#a14000", "surface-dim": "#d2d9f4", "on-surface-variant": "#584238", "surface-container": "#eaedff", "inverse-surface": "#283044", "on-error-container": "#93000a", "background": "#faf8ff", "tertiary-fixed": "#d5e3fc", "primary": "#d95d0f", "on-tertiary-container": "#fdfcff", "surface-container-low": "#f2f3ff", "on-secondary-container": "#5b6373", "on-primary-fixed-variant": "#7b2f00", "secondary-container": "#d8e0f2", "primary-container": "#c55000", "surface": "#faf8ff", "outline-variant": "#e0c0b2", "primary-fixed": "#ffdbcc", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "on-background": "#131b2e", "inverse-on-surface": "#eef0ff", "secondary-fixed-dim": "#bfc6d9", "on-tertiary-fixed-variant": "#3a485b", "tertiary-fixed-dim": "#b9c7df", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#3f4756", "on-secondary-fixed": "#141c29", "secondary": "#575f6e", "on-secondary": "#ffffff", "surface-container-highest": "#dae2fd", "surface-variant": "#dae2fd", "tertiary-container": "#67758b", "on-surface": "#131b2e" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-lg": "2rem", "gutter-sm": "1rem", "margin-md": "3rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1.5rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "space-md": "1rem", "margin-lg": "5rem" }, "fontFamily": { "headline-lg-mobile": ["Plus Jakarta Sans"], "display-hero": ["Plus Jakarta Sans"], "technical-badge": ["Inter"], "label-nav": ["Inter"], "body-lg": ["Inter"], "display-hero-mobile": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Inter"], "body-sm": ["Inter"], "metric-display": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, "fontSize": { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "technical-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }], "label-nav": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "metric-display": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><div class="fixed top-0 left-0 right-0 z-50 flex flex-col"><aside aria-label="Local Dispatch Status Bar" class="h-[38px] w-full bg-inverse-surface text-inverse-on-surface flex items-center justify-between px-gutter border-b border-white/10"><div class="max-w-7xl w-full mx-auto flex items-center justify-between"><div class="flex items-center space-x-space-sm"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span><span class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/90">Direct Dispatch Available Across Greater Rockford Region • Mon–Sat: 7:00 AM – 7:00 PM</span></div><div class="flex items-center space-x-space-md"><span class="inline-flex items-center px-space-xs py-0.5 rounded-lg bg-primary-container text-on-primary-container font-technical-badge text-technical-badge uppercase tracking-wider">24/7 Rapid Response</span><a class="flex items-center space-x-1 font-label-nav text-label-nav text-inverse-on-surface hover:text-primary-fixed transition-colors" href="tel:8155550142"><span class="material-symbols-outlined text-[16px]">call</span><span class="font-semibold">(815) 555-0142</span></a></div></div></aside><header class="h-20 w-full bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center space-x-space-md"><a class="flex flex-col" data-path="home" href="#"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase font-extrabold">ROCKFORD AIR DUCT PROS</span><div class="flex items-center space-x-space-xs"><span class="font-technical-badge text-technical-badge tracking-wider uppercase text-primary font-bold">NADCA Certified</span><span class="text-on-surface-variant font-technical-badge text-technical-badge">•</span><span class="font-technical-badge text-technical-badge tracking-wider uppercase text-on-surface-variant">License #IL-884920</span></div></a></div><nav class="hidden xl:flex items-center space-x-space-xs" data-active-classes="bg-primary-container text-on-primary-container rounded-lg font-semibold"><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary-container rounded-lg font-semibold" data-path="home" href="#">Home</a><div class="relative group"><button class="flex items-center px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" type="button"><span>Services</span><span class="material-symbols-outlined text-[18px] ml-0.5">arrow_drop_down</span></button><div class="absolute left-0 top-full hidden group-hover:block w-80 bg-surface-container-lowest shadow-[0_20px_40px_-12px_rgba(11,19,32,0.15)] rounded-lg py-space-xs border border-outline-variant/30"><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="commercial-hvac-scrubbing" href="#">Commercial &amp; Institutional HVAC Scrubbing</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="dryer-vent-safety-extraction" href="#">Dryer Vent Lint Extraction &amp; Fire Safety</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="air-duct-mold-remediation" href="#">Air Duct Mold &amp; Microbial Remediation</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="botanical-sanitization" href="#">Sanitization &amp; Antimicrobial Botanical Fogging</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="video-camera-inspection" href="#">Video Camera Ductwork Inspection</a></div></div><div class="relative group"><button class="flex items-center px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" type="button"><span>Locations</span><span class="material-symbols-outlined text-[18px] ml-0.5">arrow_drop_down</span></button><div class="absolute left-0 top-full hidden group-hover:block w-56 bg-surface-container-lowest shadow-[0_20px_40px_-12px_rgba(11,19,32,0.15)] rounded-lg py-space-xs border border-outline-variant/30"><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="loves-park" href="#">Loves Park</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="machesney-park" href="#">Machesney Park</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="belvidere" href="#">Belvidere</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="cherry-valley" href="#">Cherry Valley</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="roscoe" href="#">Roscoe</a><a class="block px-space-md py-space-sm font-label-nav text-label-nav text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-path="rockton" href="#">Rockton</a></div></div><a class="px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors" data-path="process" href="#process-timeline">Process</a><a class="px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors" data-path="comparison" href="#optical-verification">Optical Proof</a><a class="px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors" data-path="reviews" href="#">Reviews</a><a class="px-space-sm py-space-xs font-label-nav text-label-nav text-on-surface-variant hover:text-on-surface transition-colors" data-path="faq" href="#">FAQ</a></nav><div class="flex items-center space-x-space-md"><a class="hidden sm:inline-flex items-center space-x-space-xs px-space-md py-2.5 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container rounded-full font-label-nav text-label-nav transition-all" href="tel:8155550142"><span class="material-symbols-outlined text-[18px]">call</span><span class="font-semibold">Direct Call: (815) 555-0142</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div><main class="w-full pt-[118px] bg-surface"><div class="flex flex-col w-full">
+<!-- SECTION 1: HERO SECTION -->
+<section class="relative w-full bg-gradient-to-b from-surface-container-lowest to-surface-container-low py-margin-md overflow-hidden">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Left Column: Primary Content -->
+<div class="lg:col-span-7 flex flex-col space-y-space-md">
+<!-- Pill Badge -->
+<div class="inline-flex items-center space-x-space-xs px-space-sm py-1 bg-surface-container rounded-full w-fit">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider text-on-surface-variant">NADCA ACR 2021 Certified • Serving Greater Rockford Since 2014</span>
+</div>
+<!-- H1 Editorial Headline -->
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-on-surface tracking-tight leading-tight">
+          Surgical Air Duct Decontamination &amp; HVAC Restoration in Rockford, IL
+        </h1>
+<!-- Standalone Snippet Zone -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center space-x-space-xs mb-space-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider font-semibold">Standard Operating Definition</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Rockford Air Duct Pros delivers clinical-grade indoor air restoration using 5,000 CFM truck-mounted negative air pressure systems. We eliminate particulate accumulation, post-construction drywall dust, and microbial contamination across residential and commercial HVAC infrastructure without interior blowback.
+          </p>
+</div>
+<!-- CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+<a class="inline-flex items-center justify-center space-x-space-xs px-space-lg py-3.5 bg-primary text-on-primary font-label-nav text-label-nav font-semibold uppercase tracking-wider rounded-lg shadow-sm hover:bg-primary-container transition-all" href="tel:8155550142">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Call Central Dispatch: (815) 555-0142</span>
+</a>
+<a class="inline-flex items-center justify-center space-x-space-xs px-space-lg py-3.5 bg-surface-container-high text-on-surface font-label-nav text-label-nav font-semibold uppercase tracking-wider rounded-lg hover:bg-surface-container-highest transition-all" href="#process-timeline">
+<span>View 4-Phase Process ↓</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Live Dispatch Card & Integrated Multi-Step Fast Quote Intake Form -->
+<div class="lg:col-span-5 flex flex-col space-y-space-md">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md border border-outline-variant/30">
+<!-- Operations Status Header -->
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-container">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Active Operations Status</span>
+</div>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-lg bg-surface-container text-on-surface-variant font-technical-badge text-technical-badge uppercase">LIVE RADAR</span>
+</div>
+<!-- Dispatch Metrics -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Central Dispatch Staged</span>
+<span class="font-label-nav text-label-nav font-bold text-on-surface">Rockford Hub • 1420 N Main</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Average Arrival Window</span>
+<span class="font-label-nav text-label-nav font-bold text-primary">45–60 Minutes</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Active Crew Status</span>
+<span class="font-label-nav text-label-nav font-bold text-on-surface">3 Heavy Units Deployed</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">On-Duty Master Tech</span>
+<span class="font-label-nav text-label-nav font-bold text-on-surface">ASCS Certified #8849</span>
+</div>
+</div>
+<!-- Micro Vacuum Differential Bar Chart -->
+<div class="mt-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-center mb-space-xs">
+<span class="font-technical-badge text-technical-badge uppercase text-on-surface-variant">Differential Suction Pressure</span>
+<span class="font-technical-badge text-technical-badge font-bold text-primary">16.5" W.C. Nominal</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 82.5%;"></div>
+</div>
+</div>
+<!-- Integrated Multi-Step Fast Quote Intake Form -->
+<form class="mt-space-md pt-space-sm border-t border-surface-container flex flex-col space-y-space-sm" onsubmit="event.preventDefault(); alert('Dispatch request submitted. An ASCS specialist will contact you in under 15 minutes.');">
+<div class="flex items-center justify-between">
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider text-primary font-bold">Fast Quote Intake Module</span>
+<span class="font-technical-badge text-technical-badge text-on-surface-variant">STEP 1 OF 2</span>
+</div>
+<!-- Property Type -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase text-on-surface-variant font-semibold">1. Select Property Classification</label>
+<select class="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary font-body-sm">
+<option value="residential-single">Residential Single-Family</option>
+<option value="multi-family">Multi-Family / Townhome</option>
+<option value="commercial">Commercial Facility / Industrial</option>
+</select>
+</div>
+<!-- Estimated Duct Runs / Square Footage -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase text-on-surface-variant font-semibold">2. Estimated Duct Runs / Area</label>
+<select class="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary font-body-sm">
+<option value="under-2000">Under 2,000 sq ft (Up to 12 Registers)</option>
+<option value="2000-4000">2,000 – 4,000 sq ft (13–24 Registers)</option>
+<option value="4000-plus">4,000+ sq ft / Multi-Zone System</option>
+</select>
+</div>
+<!-- Phone Number input -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase text-on-surface-variant font-semibold">3. Direct Dispatch Phone</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg pl-9 pr-3 py-2 text-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary font-body-sm" placeholder="(815) 555-0142" required="" type="tel"/>
+<span class="material-symbols-outlined absolute left-2.5 top-2.5 text-on-surface-variant text-[18px]">call</span>
+</div>
+</div>
+<!-- Primary CTA button in Safety Amber (#d95d0f) -->
+<button class="w-full mt-space-xs inline-flex items-center justify-center space-x-space-xs px-space-md py-3 bg-primary text-on-primary font-label-nav text-label-nav font-bold uppercase tracking-wider rounded-lg shadow-sm hover:bg-primary-container transition-all cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-[18px]">send_and_archive</span>
+<span>CONFIRM DISPATCH &amp; ESTIMATE</span>
+</button>
+<div class="flex items-center justify-center space-x-1 text-center pt-0.5">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">lock</span>
+<span class="font-technical-badge text-[10px] text-on-surface-variant uppercase tracking-wider">Encrypted &amp; No Spam Guarantee</span>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: HORIZONTAL ACCREDITATION & TRUST STRIP -->
+<section class="w-full bg-surface-container-lowest py-space-lg shadow-sm border-y border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Item 1 -->
+<div class="flex items-start space-x-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[28px] mt-0.5">star</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">4.9★ Average</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">380+ Verified Local Winnebago County Reviews</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start space-x-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[28px] mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">NADCA ASCS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lead HVAC Technicians On Every Truck</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start space-x-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[28px] mt-0.5">air</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">5,000 CFM Negative</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hospital-Grade True Source Removal</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-start space-x-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[28px] mt-0.5">price_check</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">Flat Rate Guarantee</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero Per-Vent Add-Ons or Hidden Fees</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: CANONICAL SERVICES GRID -->
+<section class="w-full bg-surface py-margin-md">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col space-y-margin">
+<!-- Section Header -->
+<div class="flex flex-col space-y-space-xs max-w-3xl">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• PRECISION MECHANICAL SOLUTIONS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Our Rockford Air Duct &amp; Indoor Environmental Services</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Full-scale containment and decontamination engineered specifically for residential homes, healthcare clinics, and light commercial properties.</p>
+</div>
+<!-- 3 equal-height cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">home_repair_service</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold pt-space-xs">Residential Whole-System Decontamination</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Full trunkline negative pressure isolation, mechanical agitation whip cleaning, and EPA-registered antimicrobial botanical fogging for total allergy and dust eradication.
+            </p>
+<div class="flex flex-wrap gap-1.5 pt-space-xs">
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">TRUNK ISOLATION</span>
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">HEPA 99.97%</span>
+</div>
+</div>
+<div class="pt-space-lg">
+<a class="inline-flex items-center text-primary font-label-nav text-label-nav font-semibold group" data-path="residential-duct-decontamination" href="#">
+<span>Explore Residential Decontamination</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">domain</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold pt-space-xs">Commercial &amp; Institutional HVAC Scrubbing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              OSHA and NADCA-compliant air handler sanitization, rooftop package unit scrub-downs, and industrial particulate extraction for schools, healthcare hubs, and factories.
+            </p>
+<div class="flex flex-wrap gap-1.5 pt-space-xs">
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">OSHA COMPLIANT</span>
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">ACR 2021 PROTOCOL</span>
+</div>
+</div>
+<div class="pt-space-lg">
+<a class="inline-flex items-center text-primary font-label-nav text-label-nav font-semibold group" data-path="commercial-hvac-scrubbing" href="#">
+<span>Explore Commercial HVAC Scrubbing</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">local_laundry_service</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold pt-space-xs">Dryer Vent Lint Extraction &amp; Fire Safety</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Heavy rotary brush thermal obstruction clearance, inline booster fan calibration, backflow damper verification, and code-compliant exterior wall cap replacements.
+            </p>
+<div class="flex flex-wrap gap-1.5 pt-space-xs">
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">NFPA COMPLIANT</span>
+<span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">FIRE PREVENTION</span>
+</div>
+</div>
+<div class="pt-space-lg">
+<a class="inline-flex items-center text-primary font-label-nav text-label-nav font-semibold group" data-path="dryer-vent-safety-extraction" href="#">
+<span>Explore Dryer Vent Extraction</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: SPLIT DIAGNOSTIC & WHY CHOOSE US -->
+<section class="w-full bg-surface-container-low py-margin-md">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Left Column: Technical Photo Card Representation -->
+<div class="lg:col-span-5 flex flex-col space-y-space-md">
+<div class="relative rounded-xl overflow-hidden shadow-lg bg-surface-container-highest">
+<img class="w-full h-96 object-cover" data-alt="Close up shot of professional HVAC technicians in branded protective gear operating heavy negative air equipment connected via large diameter intake hoses to a residential duct trunk in Rockford Illinois, industrial lighting, clean slate aesthetic with amber accents, high detail realistic photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8yXoz8A4VBM6gIL2HhP9Ww7fva5fnOu48sS_U6CPChQazWQD35vJKH9Izb2S7RciITfxGyRsK0TVT5hit8qtpZJ2gtTJxTqYwCzLNP3cECoA4_aeGIV2uOX1D8hU8JTzLpJJo5XJ2ohJmiVUSfEcD_eirViO1gBhtBaL_n_2SaFdBGyOtpzOpE0wltCPQtQG5KZmvYJ_FJTQw_oLtkSdeWbHiaOtRM6uk_TXfbJo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/30 to-transparent flex flex-col justify-end p-space-md text-inverse-on-surface">
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider text-primary-fixed font-bold mb-1">Negative Air Interface Status</span>
+<div class="flex items-center space-x-space-xs mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-headline-sm text-headline-sm font-semibold">Zero Living Space Blowback</span>
+</div>
+<p class="font-body-sm text-body-sm text-inverse-on-surface/80">99.97% HEPA Filtration • Continuous 16.5" Water Column Vacuum Draw</p>
+</div>
+</div>
+<!-- Live telemetry card -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center space-x-space-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">speed</span>
+<div class="flex flex-col">
+<span class="font-technical-badge text-technical-badge uppercase text-on-surface-variant">Target Static Vacuum</span>
+<span class="font-label-nav text-label-nav font-bold text-on-surface">5,000 CFM Rated Extraction</span>
+</div>
+</div>
+<span class="font-technical-badge text-technical-badge uppercase px-space-xs py-1 rounded bg-surface-container text-on-surface font-semibold">CALIBRATED</span>
+</div>
+</div>
+<!-- Right Column: Why Northern Illinois Property Owners Trust Our Mechanics -->
+<div class="lg:col-span-7 flex flex-col space-y-space-md">
+<div class="flex flex-col space-y-space-xs">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• PROVEN ENGINEERING EXCELLENCE</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Why Northern Illinois Property Owners Trust Our Mechanics</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">We treat HVAC decontamination as a clinical containment operation, not a casual vacuum sweep.</p>
+</div>
+<div class="flex flex-col space-y-space-md pt-space-xs">
+<!-- Row 1 -->
+<div class="flex items-start space-x-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">air</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Truck-Mounted High-Vacuum Power</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Our 5,000 CFM powerhouses pull contaminants directly outside, never circulating exhaust dust inside your family's living areas.</p>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-start space-x-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">NADCA ASCS Certified Staff</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Every deployment is supervised by a certified Air Systems Cleaning Specialist trained under ACR 2021 standards.</p>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-start space-x-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Full Optical Transparency</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">High-definition optical borescope footage recorded before and after cleaning so you inspect your ductwork walls firsthand.</p>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex items-start space-x-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">request_quote</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Fixed Investment Pricing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Guaranteed flat-rate pricing per furnace and trunk run. No bait-and-switch $49 coupon scams or surprise per-register fees.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4B: BEFORE & AFTER OPTICAL PROOF GALLERY -->
+<section class="w-full bg-surface py-margin-md" id="optical-verification">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col space-y-margin"><div class="flex flex-col items-center text-center space-y-space-xs max-w-3xl mx-auto"><span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold px-space-xs py-0.5 border border-outline-variant/30 rounded">● OPTICAL VERIFICATION PROTOCOL</span><h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">Real Jobs. Real Rockford Homes.</h2><p class="font-body-md text-body-md text-on-surface-variant">Real duct decontaminations on real Winnebago County properties. Every photo is a job completed right here in the greater Rockford area.</p></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter"><div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow"><div class="flex flex-col"><div class="relative w-full aspect-[4/3] grid grid-cols-2 overflow-hidden bg-neutral-900"><div class="relative h-full overflow-hidden border-r border-white/20"><img alt="Return trunkline before decontamination showing heavy dust" class="w-full h-full object-cover filter contrast-125 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmCuXyLca3uStq9sgwY8R7v0-GdIfAb_nDen3E362cwtxqArzHfkRJD0fkg3ZNWUMP4yddFIRhr5LEK408HL70HKJyTkMRRUOgD-5xHcbbJDoUYA7WvzJWPSp_-9gmVVOufG3HmCoLEPZGdFT9P17F21UCEn3U0dtxtdzjSmdDjSn_E7kSuAvU8_1fWdGgKpzo5ieSqNqWe_7KxnsPRrQKYfs9d1gCK7VB__65ss6qYXfanapd_u87IdNYrutYQnMt_BCVLcMGbvQ"/><div class="absolute top-2 left-2 px-2 py-0.5 bg-red-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">BEFORE</div></div><div class="relative h-full overflow-hidden"><img alt="Return trunkline after decontamination down to bare metal" class="w-full h-full object-cover filter contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2757JJT59gJoNYZa1ygTyXjrpGqvciQJSOyoOt6Lbon-1pWEPkoIB6_Srd9xRrK0QUyoBUkPxi2BzucsbRSMnT59XZr5YuP9Sl10pPDF3Hzns4zH752Gq97a8yZWXR9D4-oxnFzQWpfMZ1zMELIsPy6lhkQ3mhFScVJD22zppSv-BZtO7IKDEHm2TGi3e5t6OM7E9l75ftqygZfw4e6Ekk32ec7ta9iE4nWc2jYYSNtXR4OwBnyAPQS0DHE-cozJHN6apZgytqho"/><div class="absolute top-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">AFTER</div></div></div><div class="p-space-md flex flex-col space-y-space-xs"><h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Return Trunkline Decontamination</h3><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Churchill Grove return trunk: 7 years of drywall dust and pet dander cleared to bare metal under 5,000 CFM negative air.</p></div></div><div class="p-space-md pt-0 flex flex-wrap gap-1.5"><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Churchill Grove, Rockford</span><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-primary font-semibold">5,000 CFM Negative Air</span></div></div><div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow"><div class="flex flex-col"><div class="relative w-full aspect-[4/3] grid grid-cols-2 overflow-hidden bg-neutral-900"><div class="relative h-full overflow-hidden border-r border-white/20"><img alt="Dryer vent lint clog before cleaning" class="w-full h-full object-cover filter contrast-125 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmCuXyLca3uStq9sgwY8R7v0-GdIfAb_nDen3E362cwtxqArzHfkRJD0fkg3ZNWUMP4yddFIRhr5LEK408HL70HKJyTkMRRUOgD-5xHcbbJDoUYA7WvzJWPSp_-9gmVVOufG3HmCoLEPZGdFT9P17F21UCEn3U0dtxtdzjSmdDjSn_E7kSuAvU8_1fWdGgKpzo5ieSqNqWe_7KxnsPRrQKYfs9d1gCK7VB__65ss6qYXfanapd_u87IdNYrutYQnMt_BCVLcMGbvQ"/><div class="absolute top-2 left-2 px-2 py-0.5 bg-red-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">BEFORE</div></div><div class="relative h-full overflow-hidden"><img alt="Dryer vent cleared of lint fire hazard" class="w-full h-full object-cover filter contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2757JJT59gJoNYZa1ygTyXjrpGqvciQJSOyoOt6Lbon-1pWEPkoIB6_Srd9xRrK0QUyoBUkPxi2BzucsbRSMnT59XZr5YuP9Sl10pPDF3Hzns4zH752Gq97a8yZWXR9D4-oxnFzQWpfMZ1zMELIsPy6lhkQ3mhFScVJD22zppSv-BZtO7IKDEHm2TGi3e5t6OM7E9l75ftqygZfw4e6Ekk32ec7ta9iE4nWc2jYYSNtXR4OwBnyAPQS0DHE-cozJHN6apZgytqho"/><div class="absolute top-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">AFTER</div></div></div><div class="p-space-md flex flex-col space-y-space-xs"><h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dryer Vent Lint Extraction</h3><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Rolling Green laundry exhaust: heavy combustible lint felt cleared with 360° rotary brush, fire hazard eliminated.</p></div></div><div class="p-space-md pt-0 flex flex-wrap gap-1.5"><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Rolling Green, Rockford</span><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-primary font-semibold">360° Rotary Brush</span></div></div><div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow"><div class="flex flex-col"><div class="relative w-full aspect-[4/3] grid grid-cols-2 overflow-hidden bg-neutral-900"><div class="relative h-full overflow-hidden border-r border-white/20"><img alt="Furnace blower squirrel cage caked in grime" class="w-full h-full object-cover filter contrast-125 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmCuXyLca3uStq9sgwY8R7v0-GdIfAb_nDen3E362cwtxqArzHfkRJD0fkg3ZNWUMP4yddFIRhr5LEK408HL70HKJyTkMRRUOgD-5xHcbbJDoUYA7WvzJWPSp_-9gmVVOufG3HmCoLEPZGdFT9P17F21UCEn3U0dtxtdzjSmdDjSn_E7kSuAvU8_1fWdGgKpzo5ieSqNqWe_7KxnsPRrQKYfs9d1gCK7VB__65ss6qYXfanapd_u87IdNYrutYQnMt_BCVLcMGbvQ"/><div class="absolute top-2 left-2 px-2 py-0.5 bg-red-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">BEFORE</div></div><div class="relative h-full overflow-hidden"><img alt="Furnace blower squirrel cage fully sanitized to bare metal" class="w-full h-full object-cover filter contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2757JJT59gJoNYZa1ygTyXjrpGqvciQJSOyoOt6Lbon-1pWEPkoIB6_Srd9xRrK0QUyoBUkPxi2BzucsbRSMnT59XZr5YuP9Sl10pPDF3Hzns4zH752Gq97a8yZWXR9D4-oxnFzQWpfMZ1zMELIsPy6lhkQ3mhFScVJD22zppSv-BZtO7IKDEHm2TGi3e5t6OM7E9l75ftqygZfw4e6Ekk32ec7ta9iE4nWc2jYYSNtXR4OwBnyAPQS0DHE-cozJHN6apZgytqho"/><div class="absolute top-2 right-2 px-2 py-0.5 bg-emerald-600/90 text-white rounded font-technical-badge text-technical-badge uppercase tracking-wider backdrop-blur-sm">AFTER</div></div></div><div class="p-space-md flex flex-col space-y-space-xs"><h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Furnace Squirrel Cage Restoration</h3><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Midtown residential furnace: caked squirrel cage blower wheel sanitized to bare metal, static pressure restored by +42%.</p></div></div><div class="p-space-md pt-0 flex flex-wrap gap-1.5"><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-on-surface-variant">Midtown, Rockford</span><span class="font-technical-badge text-technical-badge px-2 py-0.5 bg-surface-container rounded text-primary font-semibold">Botanical Sanitization</span></div></div></div><div class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-md shadow-sm"><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter divide-y sm:divide-y-0 sm:divide-x divide-surface-container"><div class="flex flex-col items-center text-center p-space-xs"><span class="font-headline-lg text-headline-lg font-bold text-primary">+42%</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Static Air Pressure Restored to Furnace Blower</span></div><div class="flex flex-col items-center text-center p-space-xs sm:pl-gutter"><span class="font-headline-lg text-headline-lg font-bold text-primary">99.97%</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Particulate Capture at 0.3 Microns (HEPA)</span></div><div class="flex flex-col items-center text-center p-space-xs sm:pl-gutter"><span class="font-headline-lg text-headline-lg font-bold text-primary">0.00%</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Zero-Blowback Interior Guarantee</span></div><div class="flex flex-col items-center text-center p-space-xs sm:pl-gutter"><span class="font-headline-lg text-headline-lg font-bold text-primary">100%</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Video Camera Verification Before Close</span></div></div></div></div>
+</section>
+<!-- SECTION 5: 4-COLUMN TIMELINE PROCESS SECTION -->
+<section class="w-full bg-surface-container-low py-margin-md" id="process-timeline">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col space-y-margin">
+<div class="flex flex-col items-center text-center space-y-space-xs max-w-3xl mx-auto">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• SYSTEMATIC ACR 2021 PROTOCOL</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">How Our Medical-Grade Decontamination Process Works in Rockford</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Engineered for complete contaminant extraction with zero indoor blowback across 4 sequential containment phases.</p>
+</div>
+<!-- 4-Column Timeline Connected by Horizontal Architectural Conduit -->
+<div class="relative">
+<!-- Architectural Conduit Bar (desktop only) -->
+<div class="hidden lg:block absolute top-12 left-8 right-8 h-1 bg-gradient-to-r from-primary via-primary-container to-primary z-0 opacity-40"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter relative z-10">
+<!-- Phase 01 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative border border-outline-variant/30 hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-headline-lg text-headline-lg font-extrabold text-primary bg-surface-container-lowest px-2 rounded">01</span>
+<span class="inline-flex items-center px-space-xs py-1 rounded bg-surface-container text-on-surface-variant font-technical-badge text-technical-badge font-semibold">⏱ 15–20 MIN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">Diagnostic Borescope Mapping</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Fiber-optic probe insertion through supply registers and return plenums to map interior dust burden, obstructions, and structural seams.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-container text-primary font-technical-badge text-technical-badge uppercase font-bold">
+            Phase 01: Telemetry Audit
+          </div>
+</div>
+<!-- Phase 02 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative border border-outline-variant/30 hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-headline-lg text-headline-lg font-extrabold text-primary bg-surface-container-lowest px-2 rounded">02</span>
+<span class="inline-flex items-center px-space-xs py-1 rounded bg-surface-container text-on-surface-variant font-technical-badge text-technical-badge font-semibold">⏱ 20–30 MIN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">Negative Air Trunkline Isolation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Sealing all registers with magnetic containment film and pulling 5,000 CFM continuous negative vacuum to guarantee zero living space blowback.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-container text-primary font-technical-badge text-technical-badge uppercase font-bold">
+            Phase 02: Total Containment
+          </div>
+</div>
+<!-- Phase 03 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative border border-outline-variant/30 hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-headline-lg text-headline-lg font-extrabold text-primary bg-surface-container-lowest px-2 rounded">03</span>
+<span class="inline-flex items-center px-space-xs py-1 rounded bg-surface-container text-on-surface-variant font-technical-badge text-technical-badge font-semibold">⏱ 60–90 MIN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">High-Velocity Mechanical Agitation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Deploying pneumatic rotary whips, reverse-air sweeps, and forward nozzles through every branch line down to the main extraction trunk.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-container text-primary font-technical-badge text-technical-badge uppercase font-bold">
+            Phase 03: Mechanical Scrub
+          </div>
+</div>
+<!-- Phase 04 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative border border-outline-variant/30 hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-headline-lg text-headline-lg font-extrabold text-primary bg-surface-container-lowest px-2 rounded">04</span>
+<span class="inline-flex items-center px-space-xs py-1 rounded bg-surface-container text-on-surface-variant font-technical-badge text-technical-badge font-semibold">⏱ 15–20 MIN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">EPA Botanical Sanitization &amp; Verification</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Atomized hospital-grade thyme-oil antimicrobial fogging followed by recorded optical borescope playback and client sign-off.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-container text-primary font-technical-badge text-technical-badge uppercase font-bold">
+            Phase 04: Clearance Sign-Off
+          </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: ENTERPRISE COMPARISON TABLE -->
+<section class="w-full bg-surface py-margin-md">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col space-y-margin">
+<div class="flex flex-col items-center text-center space-y-space-xs max-w-3xl mx-auto">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• INDUSTRIAL BENCHMARK ANALYSIS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">How We Compare to Low-Cost Coupon Cleaners</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Why $49 coupon contractors cost homeowners thousands in equipment damage and airborne contamination.</p>
+</div>
+<!-- Comparison Matrix Table -->
+<div class="w-full overflow-x-auto rounded-xl shadow-md bg-surface-container-lowest border border-outline-variant/30">
+<table class="w-full text-left border-collapse min-w-[700px]">
+<thead>
+<tr class="bg-surface-container-high text-on-surface">
+<th class="p-space-md font-label-nav text-label-nav font-semibold uppercase tracking-wider w-1/4">Standard / Specification</th>
+<th class="p-space-md font-label-nav text-label-nav font-bold uppercase tracking-wider w-1/4 bg-primary text-on-primary">
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Rockford Air Duct Pros</span>
+</div>
+</th>
+<th class="p-space-md font-label-nav text-label-nav font-semibold uppercase tracking-wider w-1/4 text-on-surface-variant">Discount Coupon Cleaners</th>
+<th class="p-space-md font-label-nav text-label-nav font-semibold uppercase tracking-wider w-1/4 text-on-surface-variant">DIY Shop Vac Attempts</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-sm text-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-space-md font-semibold text-on-surface">Extraction Equipment</td>
+<td class="p-space-md bg-surface-container font-bold text-primary">5,000 CFM Truck-Mounted Vacuum</td>
+<td class="p-space-md text-on-surface-variant">Portable Shop-Vac / Handheld unit</td>
+<td class="p-space-md text-on-surface-variant">Underpowered (&lt;150 CFM)</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-space-md font-semibold text-on-surface">Containment Protocols</td>
+<td class="p-space-md bg-surface-container font-bold text-primary">Positive Register Air Seals + HEPA 99.97%</td>
+<td class="p-space-md text-on-surface-variant">No sealing; dust blows into living space</td>
+<td class="p-space-md text-on-surface-variant">Ruptured filter blows dust back into room</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-space-md font-semibold text-on-surface">Diagnostic Optical Proof</td>
+<td class="p-space-md bg-surface-container font-bold text-primary">HD Borescope Video File Provided</td>
+<td class="p-space-md text-on-surface-variant">No camera verification</td>
+<td class="p-space-md text-on-surface-variant">Cannot reach past first 24 inches</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-space-md font-semibold text-on-surface">Pricing Structure</td>
+<td class="p-space-md bg-surface-container font-bold text-primary">Upfront Flat Rate Written Quote</td>
+<td class="p-space-md text-on-surface-variant">Bait-and-switch ($49 turns into $800+)</td>
+<td class="p-space-md text-on-surface-variant">Tool rentals + damaged duct tape</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-space-md font-semibold text-on-surface">Professional Certification</td>
+<td class="p-space-md bg-surface-container font-bold text-primary">NADCA ASCS Certified &amp; Insured</td>
+<td class="p-space-md text-on-surface-variant">Unlicensed &amp; Uncertified</td>
+<td class="p-space-md text-on-surface-variant">Zero technical accountability</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- SECTION 7: GEO-TAGGED CUSTOMER SOCIAL PROOF -->
+<section class="w-full bg-surface-container-low py-margin-md">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col space-y-margin">
+<div class="flex flex-col items-center text-center space-y-space-xs max-w-3xl mx-auto">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• LOCAL WINNEBAGO COUNTY VERIFICATION</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Verified Results from Winnebago County Property Owners</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real testimonials from local residents who demand certified airborne remediation.</p>
+</div>
+<!-- 3-Column Reviews -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Review 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center text-primary text-headline-sm">
+              ★★★★★
+            </div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+              "After extensive remodeling, drywall dust choked our vents. Rockford Air Duct Pros hooked up their negative air truck and showed us camera footage of every trunkline. Zero dust inside our home. Prompt, professional, and thorough."
+            </p>
+</div>
+<div class="pt-space-md flex flex-col">
+<span class="font-label-nav text-label-nav font-bold text-on-surface">Marcus T.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Churchill Grove, Rockford</span>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center text-primary text-headline-sm">
+              ★★★★★
+            </div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+              "As a pediatrician, indoor air quality is non-negotiable. Their lead technician walked me through the NADCA checklist and verified full debris removal before sanitizing. The difference in air freshness is immediately noticeable."
+            </p>
+</div>
+<div class="pt-space-md flex flex-col">
+<span class="font-label-nav text-label-nav font-bold text-on-surface">Dr. Elena S.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Spring Creek / Edgewood, Rockford</span>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center text-primary text-headline-sm">
+              ★★★★★
+            </div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+              "Avoided the cheap coupon companies after reading their horror stories. These guys gave an upfront flat quote, arrived right on schedule, and treated our 1920s ductwork with extreme care. Outstanding local service."
+            </p>
+</div>
+<div class="pt-space-md flex flex-col">
+<span class="font-label-nav text-label-nav font-bold text-on-surface">David K.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Perryville Corridor, Loves Park</span>
+</div>
+</div>
+</div>
+<!-- Trust Stat Banner -->
+<div class="bg-surface-container-high p-space-md rounded-xl text-center shadow-sm border border-outline-variant/30">
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+          Over 500+ residential and commercial systems cleaned across Winnebago &amp; Boone Counties with a 4.9-star average.
+        </p>
+</div>
+</div>
+</section>
+<!-- SECTION 8: GEOGRAPHIC SERVICE AREA & ROUTE COVERAGE -->
+<section class="w-full bg-surface py-margin-md">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Left Column: Neighborhood Coverage & Corridors -->
+<div class="lg:col-span-7 flex flex-col space-y-space-md">
+<div class="flex flex-col space-y-space-xs">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• REGIONAL OPERATIONAL FOOTPRINT</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Areas We Serve in Winnebago &amp; Boone Counties</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Direct truck deployment stationed from our central Rockford depot, serving historical properties, subdivisions, and industrial parks.</p>
+</div>
+<!-- Neighborhood checklist -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Churchill Grove</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Signal Hill</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Edgewood / Spring Crk</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Edgebrook District</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Forest Hills</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Rural Rockford</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Loves Park</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Machesney Park</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Belvidere</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Cherry Valley</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Roscoe</span>
+</div>
+<div class="flex items-center space-x-1.5 p-2 bg-surface-container-lowest rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Rockton</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl mt-space-sm border border-outline-variant/20">
+<span class="font-technical-badge text-technical-badge uppercase text-primary font-bold">Transit Arterial Dispatch</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Fast response times guaranteed via direct access along the US-20 bypass, I-90 corridor, IL-251, and Perryville Road.
+          </p>
+</div>
+</div>
+<!-- Right Column: Interactive Map Component -->
+<div class="lg:col-span-5 flex flex-col space-y-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-md border border-outline-variant/30">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-primary">fmd_good</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Service Radius Map</span>
+</div>
+<span class="font-technical-badge text-technical-badge text-on-surface-variant uppercase">30-MILE RADIUS</span>
+</div>
+<div class="w-full h-64 bg-cover bg-center rounded-lg shadow-inner" data-location="Rockford, Illinois" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaQ256V3BVQHFqrz_JsrnFEAU-tV7CMDoEkg8aH4nmq6PzsuqNZ4ozIyC7NLj_Vczcd0lWGWOaiARm6ZUts6hq-QW9XxpQ7PoMd8F8MzyfPdZE88GTgvypj5yt6zYU076vgrC4Y88GpajQhAzOkmpV9sDyVcQjL9MXgYD0Xz1Pp0kvv53Y1qTR35LSOFj29hI1pxWu_54q_roA7atJLQC5rbKF3T3nTQsLOGTlsnw')"></div>
+<div class="mt-space-sm p-space-xs bg-surface-container-low rounded flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Rockford Logistics Hub • 1420 N Main St</span>
+<span class="font-semibold text-primary">Rapid 90-Min Window</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 9: STRUCTURED FAQ ACCORDION -->
+<section class="w-full bg-surface-container-low py-margin-md">
+<div class="max-w-4xl mx-auto px-gutter flex flex-col space-y-margin">
+<div class="flex flex-col items-center text-center space-y-space-xs">
+<span class="font-technical-badge text-technical-badge text-primary uppercase tracking-widest font-bold">• MECHANICAL TRANSPARENCY</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Frequently Asked Questions About Air Duct Decontamination</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Authoritative answers to common questions about HVAC hygiene and system integrity.</p>
+</div>
+<!-- Accordion Stack -->
+<div class="flex flex-col space-y-space-sm" id="faq-accordion-group">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>How long does a professional whole-home air duct cleaning take?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            A typical 2,000–3,000 sq. ft. residential home takes 2.5 to 3.5 hours using our two-man certified crew and truck-mounted 5,000 CFM negative air equipment. Commercial spaces are scoped based on total square footage and duct branch complexity.
+          </div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>Do you need to cut access holes in our sheet metal ductwork?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            Yes, ACR 2021 standards require precision 8-to-10 inch inspection access ports into the main supply and return trunks, which are sealed airtight with heavy-gauge galvanized patch plates, gaskets, and sheet metal screws upon completion.
+          </div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>Are your antimicrobial sanitizing solutions safe for pets and children?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            We use an EPA-registered hospital-grade botanical disinfectant derived from essential thyme oil. It is 100% non-toxic, leaving no harmful residues and requiring zero evacuation period for your household.
+          </div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>How frequently should residential HVAC ductwork be scrubbed?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            NADCA recommends a visual borescope inspection every 2 years and comprehensive negative pressure extraction every 3 to 5 years, or immediately following home renovations, water damage, or mold remediation.
+          </div>
+</div>
+<!-- Item 5 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>How does your truck vacuum avoid blowing dust into our rooms?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            Our negative air machines create a continuous vacuum draw throughout your entire duct network, maintaining every room register under negative suction. All dislodged particulate travels directly into our exterior truck containment system without blowback.
+          </div>
+</div>
+<!-- Item 6 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30">
+<button class="w-full p-space-md text-left flex justify-between items-center text-on-surface font-headline-sm text-headline-sm hover:text-primary transition-colors focus:outline-none" onclick="toggleFaq(this)" type="button">
+<span>What is the difference between NADCA certified and an uncertified cleaner?</span>
+<span class="material-symbols-outlined transform transition-transform duration-200">expand_more</span>
+</button>
+<div class="px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md">
+            NADCA certification mandates strict compliance with the ACR 2021 engineering standard, rigorous written technician examinations, proof of comprehensive commercial liability insurance, and mandatory annual continuing education credits.
+          </div>
+</div>
+</div>
+<!-- FAQ Callout box -->
+<div class="bg-surface-container-high p-space-md rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-sm shadow-sm border border-outline-variant/20">
+<div class="flex items-center space-x-space-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">contact_support</span>
+<p class="font-body-md text-body-md text-on-surface">
+            Have a specific question about your HVAC configuration? Speak directly with our dispatch supervisor.
+          </p>
+</div>
+<a class="whitespace-nowrap px-space-md py-2.5 bg-primary text-on-primary font-label-nav text-label-nav font-semibold uppercase tracking-wider rounded-lg hover:bg-primary-container transition-all" href="tel:8155550142">
+          (815) 555-0142
+        </a>
+</div>
+</div>
+</section>
+<!-- SECTION 10: FINAL CONVERSION CALLOUT WITH SIDE-BY-SIDE INTAKE MODULE -->
+<section class="w-full bg-[#0B1320] text-inverse-on-surface py-margin-lg border-t border-white/10">
+<div class="max-w-7xl mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Left Column: Direct Telephone Dispatch Info -->
+<div class="lg:col-span-6 flex flex-col space-y-space-md">
+<div class="inline-flex items-center space-x-space-xs px-space-sm py-1 bg-white/10 rounded-full w-fit">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider text-primary-fixed">Immediate Scheduling Window Open</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-white tracking-tight leading-tight">
+        Ready for Clinical-Grade, Certified Indoor Air in Rockford?
+      </h2>
+<p class="font-body-lg text-body-lg text-inverse-on-surface/80">
+        Speak directly with our central dispatch desk now to lock in your upfront flat-rate quote and secure priority deployment with our ASCS-certified mechanics.
+      </p>
+<!-- Direct Call Action Block -->
+<div class="p-space-md rounded-xl bg-white/5 border border-white/10 flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-technical-badge text-technical-badge uppercase tracking-wider text-white/70">Central Dispatch Desk</span>
+<span class="font-technical-badge text-technical-badge uppercase text-emerald-400 font-bold">● Active Right Now</span>
+</div>
+<a class="inline-flex items-center space-x-space-sm text-2xl lg:text-3xl font-bold text-white hover:text-primary transition-colors" href="tel:8155550142">
+<span class="material-symbols-outlined text-[32px] text-primary">call</span>
+<span>(815) 555-0142</span>
+</a>
+<p class="font-body-sm text-body-sm text-inverse-on-surface/70">
+        Guaranteed rapid response • Mon–Sat: 7:00 AM – 7:00 PM • ASCS certified lead technician on every dispatched truck.
+      </p>
+</div>
+<!-- Micro-Trust Specs -->
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-space-xs text-inverse-on-surface/60 font-technical-badge text-technical-badge uppercase tracking-widest pt-space-xs">
+<span>Licensed Mechanical #IL-884920</span>
+<span>•</span>
+<span>Bonded &amp; Insured</span>
+<span>•</span>
+<span>Zero Risk Guarantee</span>
+</div>
+</div>
+<!-- Right Column: Clean Dark-Mode 2-Column Digital Quote Request Box -->
+<div class="lg:col-span-6">
+<div class="bg-surface-container-lowest/5 border border-white/15 p-space-lg rounded-2xl shadow-2xl backdrop-blur-sm">
+<div class="flex items-center justify-between pb-space-sm border-b border-white/10 mb-space-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-white font-semibold">After-Hours Estimate Intake</h3>
+<p class="font-body-sm text-body-sm text-inverse-on-surface/70 mt-0.5">Submit online for immediate priority morning callback.</p>
+</div>
+<span class="p-2 bg-white/10 rounded-lg text-primary-fixed material-symbols-outlined text-[24px]">assignment</span>
+</div>
+<form class="flex flex-col space-y-space-sm" onsubmit="event.preventDefault(); alert('After-hours estimate received. A technician will follow up immediately at 7:00 AM or via emergency dispatch.');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Name input -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/80">Full Name</label>
+<input class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-body-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary" placeholder="e.g. John Miller" required="" type="text"/>
+</div>
+<!-- Phone input -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/80">Phone Number</label>
+<input class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-body-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary" placeholder="(815) 555-0142" required="" type="tel"/>
+</div>
+</div>
+<!-- Service Type dropdown -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/80">Select Service Required</label>
+<select class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-body-sm text-white focus:outline-none focus:border-primary [&amp;&gt;option]:bg-[#0B1320] [&amp;&gt;option]:text-white">
+<option value="residential">Residential Whole-System Decontamination</option>
+<option value="commercial">Commercial &amp; Institutional HVAC Scrubbing</option>
+<option value="dryer-vent">Dryer Vent Lint Extraction &amp; Safety</option>
+<option value="mold-remediation">Air Duct Mold &amp; Microbial Remediation</option>
+<option value="borescope-inspection">Optical Video Camera Duct Inspection</option>
+</select>
+</div>
+<!-- Property Location Note -->
+<div class="flex flex-col space-y-1">
+<label class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/80">Property City / ZIP Code</label>
+<input class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-body-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary" placeholder="e.g. Rockford, Loves Park, Belvidere" type="text"/>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-space-sm inline-flex items-center justify-center space-x-space-xs px-space-lg py-3.5 bg-primary text-on-primary font-label-nav text-label-nav font-bold uppercase tracking-wider rounded-lg shadow-lg hover:bg-primary-container transition-all cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-[20px]">calendar_clock</span>
+<span>REQUEST AFTER-HOURS ESTIMATE</span>
+</button>
+<div class="flex items-center justify-center space-x-1.5 pt-1 text-center">
+<span class="material-symbols-outlined text-[14px] text-white/50">verified_user</span>
+<span class="font-technical-badge text-[10px] text-white/60 uppercase tracking-wider">No Obligation • Flat-Rate Guarantee • Strict Privacy Policy</span>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('.material-symbols-outlined');
+    if (content.style.display === 'none') {
+      content.style.display = 'block';
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      content.style.display = 'none';
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+</script></main><footer class="w-full bg-[#0B1320] text-inverse-on-surface py-margin-md"><div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-lg pb-margin"><div class="flex flex-col space-y-space-md"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-white font-bold uppercase tracking-tight">ROCKFORD AIR DUCT PROS</span><span class="font-technical-badge text-technical-badge uppercase tracking-widest text-primary-fixed">NADCA Certified Agency</span></div><p class="font-body-sm text-body-sm text-inverse-on-surface/75">Industrial-grade containment and precision HVAC decontamination. Certified according to stringent NADCA ASCS / ACR 2021 engineering standards for commercial and institutional environments.</p><div class="flex flex-col space-y-space-xs pt-space-xs"><span class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/60">Mechanical Lic. #IL-884920</span><span class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/60">NADCA Membership ID: #772910</span><span class="font-technical-badge text-technical-badge uppercase tracking-wider text-inverse-on-surface/60">EPA Section 608 Universal Certified</span></div></div><div class="flex flex-col space-y-space-md"><span class="font-headline-sm text-headline-sm text-white font-semibold">Core Services</span><div class="flex flex-col space-y-space-sm"><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="residential-duct-decontamination" href="#">Residential Duct Decontamination</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="commercial-hvac-scrubbing" href="#">Commercial &amp; Institutional HVAC Scrubbing</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="dryer-vent-safety-extraction" href="#">Dryer Vent Safety Extraction</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="mold-remediation" href="#">Air Duct Mold &amp; Microbial Remediation</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="botanical-fogging" href="#">Sanitization &amp; Botanical Fogging</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="comparison" href="#optical-verification">Borescope Video Inspection</a></div></div><div class="flex flex-col space-y-space-md"><span class="font-headline-sm text-headline-sm text-white font-semibold">Service Corridors</span><div class="flex flex-col space-y-space-sm"><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="rockford" href="#">Greater Rockford Core</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="loves-park" href="#">Loves Park District</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="machesney-park" href="#">Machesney Park Logistics Hub</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="belvidere" href="#">Belvidere &amp; Boone County</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="cherry-valley" href="#">Cherry Valley Commercial</a><a class="font-body-sm text-body-sm text-inverse-on-surface/80 hover:text-primary-fixed transition-colors" data-path="roscoe" href="#">Roscoe / Rockton Corridor</a></div></div><div class="flex flex-col space-y-space-md"><span class="font-headline-sm text-headline-sm text-white font-semibold">Dispatch Headquarters</span><div class="flex flex-col space-y-space-xs font-body-sm text-body-sm text-inverse-on-surface/80"><p class="font-semibold text-white">Rockford Logistics Depôt</p><p>1420 N Main St</p><p>Rockford, IL 61103</p></div><div class="flex flex-col space-y-1 font-body-sm text-body-sm text-inverse-on-surface/80"><p><span class="text-white font-medium">Hours:</span> Mon–Sat: 7:00 AM – 7:00 PM</p><p><span class="text-white font-medium">24/7 Rapid Response:</span> <a class="text-primary-fixed hover:underline" href="tel:8155550142">(815) 555-0142</a></p></div><div class="pt-space-xs"><span class="inline-flex items-center px-space-sm py-1 rounded-lg bg-surface-container-high/10 text-primary-fixed font-technical-badge text-technical-badge uppercase tracking-wider">ISO 9001 Alignment Ready</span></div></div></div><div class="max-w-7xl mx-auto px-gutter pt-gutter border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-inverse-on-surface/60 font-body-sm text-body-sm"><p>© 2024 Rockford Air Duct Pros. NADCA Member ASCS/CVI. All rights reserved.</p><div class="flex space-x-gutter-sm mt-space-sm md:mt-0"><a class="hover:text-inverse-on-surface transition-colors" data-path="faq" href="#">Compliance FAQ</a><a class="hover:text-inverse-on-surface transition-colors" data-path="process" href="#process-timeline">Engineering Protocol</a><a class="hover:text-inverse-on-surface transition-colors" data-path="home" href="#">Privacy Policy</a></div></div></footer></body></html>
