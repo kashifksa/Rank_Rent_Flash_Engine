@@ -8623,20 +8623,30 @@ window.BUILDER_PAGES_DATA = {
             // Detect layout:
             // Case 1: Col 0 is a number/digit (e.g., "01", "1"), Col 1 is Title, Col 2 is Description
             if (rawCol0.match(/^\d+$/) && cells.length >= 3) {
+              let win = cells[3] ? cells[3].replace(/\*\*/g, "").trim() : "";
+              let desc = rawCol2;
+              if (win.length > 25) { desc += " " + win; win = ""; }
               steps.push({
                 title: rawCol1,
-                desc: rawCol2,
-                window: cells[3] ? cells[3].replace(/\*\*/g, "").trim() : ""
+                desc: desc,
+                window: win
               });
               continue;
             }
 
             // Case 2: Col 0 is Title, Col 1 is Description, Col 2 is Window
             const cleanTitle = rawCol0.replace(/^(?:Phase|Stage|Step)\s*\d+:\s*/i, "").trim();
+            let win = rawCol2;
+            let desc = rawCol1;
+            // ANTI-OVERFLOW SAFEGUARD: If window text is longer than 25 chars, it is a description, not a badge
+            if (win.length > 25) {
+              desc += " " + win;
+              win = "";
+            }
             steps.push({
               title: cleanTitle || rawCol0,
-              desc: rawCol1,
-              window: rawCol2
+              desc: desc,
+              window: win
             });
             continue;
           }

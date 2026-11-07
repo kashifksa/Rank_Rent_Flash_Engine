@@ -56,6 +56,22 @@ def check_consistency():
                     if "Rockford Property" in clean_h2:
                         errors.append(f"FIX 36 VIOLATION in {hf}: H2 contains hub city: '{clean_h2}'.")
                         
+            # FIX 38 Check: Process Table & Anti-Overflow Architecture
+            proc_windows = re.findall(r'<span class="proc-window"[^>]*>(.*?)</span>', html, re.IGNORECASE | re.DOTALL)
+            for pw in proc_windows:
+                clean_pw = re.sub(r'<[^>]+>', '', pw).strip()
+                if len(clean_pw) > 28:
+                    errors.append(f"FIX 38 VIOLATION in {hf}: .proc-window badge text exceeds 28 chars ('{clean_pw[:30]}...'). Badges must be short timeframes, not descriptions.")
+                    
+            proc_titles = re.findall(r'<h3 class="proc-title"[^>]*>(.*?)</h3>', html, re.IGNORECASE | re.DOTALL)
+            for pt in proc_titles:
+                clean_pt = re.sub(r'<[^>]+>', '', pt).strip()
+                if clean_pt.isdigit() or clean_pt.lower() in ['step', 'protocol phase', 'technical execution']:
+                    errors.append(f"FIX 38 VIOLATION in {hf}: Invalid .proc-title detected ('{clean_pt}'). Titles must be descriptive, not step numbers or table headers.")
+                    
+            if "**" in html:
+                errors.append(f"FIX 38 VIOLATION in {hf}: Unparsed markdown asterisks '**' detected in compiled HTML.")
+                        
     print(f"\n[2/3] Checking Navigation Dropdowns (FIX 35)...")
     if os.path.exists(os.path.join(dist_dir, "index.html")):
         with open(os.path.join(dist_dir, "index.html"), "r", encoding="utf-8") as f:

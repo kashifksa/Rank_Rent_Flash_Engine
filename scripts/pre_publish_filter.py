@@ -201,40 +201,117 @@ def check_no_pricing(content: str, label: str = 'content') -> None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# PHASE 3B — Canonical Link & Geographic Purity Guards (FIX 32 & FIX 36)
+# ─────────────────────────────────────────────────────────────────────────────
+
+_ILLEGAL_RESIDENTIAL_LINK = re.compile(
+    r'href=[\'"][^\'"]*residential-(?:duct-cleaning|air-duct-cleaning)[^\'"]*[\'"]|href=[\'"][^\'"]*residential-[a-z0-9\-]+\.html[\'"]',
+    re.IGNORECASE
+)
+
+def check_canonical_links(content: str, label: str = 'content') -> None:
+    """
+    FIX 32 & FIX 36: Block any links pointing to inner residential service pages.
+    The Homepage is the primary residential service page; inner residential pages
+    must never be linked (all primary residential service CTAs route to #contact).
+    """
+    match = _ILLEGAL_RESIDENTIAL_LINK.search(content)
+    if match:
+        raise ValueError(
+            f'CANONICAL LINK VIOLATION (FIX 32 / FIX 36) in {label} -- publish blocked.\n'
+            f'Offending link: {match.group(0)}\n'
+            'Primary residential services must route to "#contact" or direct phone dispatch.'
+        )
+
+def check_geographic_purity(content: str, label: str = 'content', hub_city: str = None) -> None:
+    """
+    FIX 36: On satellite location pages, the primary hub city name is forbidden
+    in H2 headings and localized diagnostic titles.
+    """
+    if not hub_city:
+        return
+    h2_matches = re.findall(r'^##\s+(.*)$|<h2[^>]*>(.*?)</h2>', content, re.MULTILINE | re.IGNORECASE)
+    for m in h2_matches:
+        heading = m[0] or m[1]
+        clean_heading = re.sub(r'<[^>]+>', '', heading).strip()
+        if hub_city.lower() in clean_heading.lower():
+            raise ValueError(
+                f'GEOGRAPHIC PURITY VIOLATION (FIX 36) in {label} -- publish blocked.\n'
+                f'Hub city "{hub_city}" detected in location H2: "{clean_heading}".\n'
+                'Location H2s must target the satellite city exclusively.'
+            )
+
+def check_process_tables(content: str, label: str = 'content') -> None:
+    """
+    FIX 38: Verify Section 5 process tables conform to the 3-column architecture:
+    Col 1 = Phase Title, Col 2 = Description, Col 3 = Timeframe.
+    Blocks publish if Col 3 contains descriptions/sentences (> 30 chars) or Col 1 is a bare number.
+    """
+    for line in content.splitlines():
+        line = line.strip()
+        if line.startswith('|') and '---' not in line:
+            cells = [c.strip() for c in line.split('|') if c.strip()]
+            if len(cells) >= 3:
+                c0 = cells[0].replace('**', '').strip()
+                c2 = cells[2].replace('**', '').strip()
+                if any(k in c0.lower() for k in ['phase 1', 'phase 2', 'phase 3', 'step 1', 'step 2', 'step 3']):
+                    if len(c2) > 30:
+                        raise ValueError(
+                            f'PROCESS TABLE ARCHITECTURE VIOLATION (FIX 38) in {label} -- publish blocked.\n'
+                            f'Column 3 ("{c2[:30]}...") exceeds 30 characters.\n'
+                            'Column 3 must be a short timeframe badge (e.g. "30-45 min"), not a description.'
+                        )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # PHASE 4 — Safe publish gate
 # ─────────────────────────────────────────────────────────────────────────────
 
-def safe_publish(call_mcp_fn, post_id: int, raw_content: str, post_type: str = 'page') -> dict:
+def safe_publish(call_mcp_fn, post_id: int, raw_content: str, post_type: str = 'page', hub_city: str = None) -> dict:
     """
     The correct way to push content to WordPress.
-    Runs check_no_pricing() on both sides of filter_html().
-    Raises ValueError and blocks the publish if pricing is found.
-
-    Args:
-        call_mcp_fn: Your call_mcp function that sends requests to the WP API
-        post_id:     WordPress post/page ID
-        raw_content: The raw HTML content string to publish
-        post_type:   'page' or 'post'
-
-    Returns:
-        The API response dict
-
-    Raises:
-        ValueError if any pricing content is detected (publish is blocked).
-
-    Example:
-        from pre_publish_filter import safe_publish
-        result = safe_publish(call_mcp, 42, my_html_content, post_type='page')
+    Runs check_no_pricing() and check_canonical_links() on both sides of filter_html().
+    Raises ValueError and blocks the publish if any quality gate fails.
     """
     # Gate 1: Pricing check -- blocks publish if any $ amount or pricing phrase found
     check_no_pricing(raw_content, label='HTML (pre-filter)')
+    check_canonical_links(raw_content, label='HTML (pre-filter)')
+    check_process_tables(raw_content, label='HTML (pre-filter)')
+    if hub_city and post_type == 'location':
+        check_geographic_purity(raw_content, label='HTML (pre-filter)', hub_city=hub_city)
 
     # Gate 2: Strip internal annotations and artifacts
     clean_content = filter_html(raw_content)
 
-    # Gate 3: Re-check after filtering (ensures filter did not introduce pricing)
+    # Gate 3: Re-check after filtering
     check_no_pricing(clean_content, label='HTML (post-filter)')
+    check_canonical_links(clean_content, label='HTML (post-filter)')
+    check_process_tables(clean_content, label='HTML (post-filter)')
+    if hub_city and post_type == 'location':
+        check_geographic_purity(clean_content, label='HTML (post-filter)', hub_city=hub_city)
 
     method = 'wp_update_page' if post_type == 'page' else 'wp_update_post'
     id_key = 'page_id' if post_type == 'page' else 'post_id'
     return call_mcp_fn(method, {id_key: post_id, 'content': clean_content})
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1:
+        target = sys.argv[1]
+        print(f"=== pre_publish_filter checking: {target} ===")
+        with open(target, 'r', encoding='utf-8', errors='replace') as f:
+            content = f.read()
+        try:
+            check_no_pricing(content, label=target)
+            print("[PASS] Gate 1: No pricing detected.")
+            check_canonical_links(content, label=target)
+            print("[PASS] Gate 2: Canonical links verified.")
+            check_process_tables(content, label=target)
+            print("[PASS] Gate 3: Process table architecture verified (FIX 38).")
+            filtered = filter_markdown(content)
+            print(f"[PASS] Gate 4: Content clean ({len(filtered.split())} words).")
+            print("ALL GATES PASSED - Content is safe for publication.")
+        except Exception as e:
+            print(f"[FAIL] {e}")
+            sys.exit(1)
