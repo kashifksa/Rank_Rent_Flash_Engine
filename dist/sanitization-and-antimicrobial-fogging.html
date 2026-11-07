@@ -1515,13 +1515,15 @@
     }
     .proc-body {
       flex: 1;
+      min-width: 0;
     }
     .proc-title-wrap {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
     .proc-title {
       margin: 0;
@@ -1529,6 +1531,7 @@
       font-size: 16.5px;
       font-weight: 800;
       line-height: 1.35;
+      word-break: break-word;
     }
     .proc-window {
       font-size: 11px;
@@ -1538,13 +1541,16 @@
       background: var(--surface-container-low);
       color: var(--on-surface-variant);
       border: 1px solid var(--outline-variant);
-      white-space: nowrap;
+      white-space: normal;
+      max-width: 100%;
+      word-break: break-word;
     }
     .proc-desc {
       margin: 0;
       color: var(--on-surface-variant);
       font-size: 14px;
       line-height: 1.6;
+      word-break: break-word;
     }
     .proc-visual {
       position: relative;
@@ -4106,10 +4112,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">Step</h3>
-                      <span class="proc-window">⏱ Technical Execution</span>
+                      <h3 class="proc-title">Mechanical Source Removal</h3>
+                      <span class="proc-window">⏱ 60-90 min</span>
                     </div>
-                    <p class="proc-desc">Protocol Phase</p>
+                    <p class="proc-desc">Technicians clean supply and return trunks down to bare metal using high-vacuum negative pressure, ensuring particulate dust is extracted before antimicrobial misting begins.</p>
                   </div>
                 </div>
               
@@ -4120,10 +4126,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">01</h3>
-                      <span class="proc-window">⏱ Technicians clean supply and return trunks down to bare metal using high-vacuum negative pressure, ensuring particulate dust is extracted before antimicrobial misting begins.</span>
+                      <h3 class="proc-title">ULV Botanical Fogging</h3>
+                      <span class="proc-window">⏱ 25-35 min</span>
                     </div>
-                    <p class="proc-desc">**Mechanical Source Removal**</p>
+                    <p class="proc-desc">An ultra-low volume cold mister disperses microscopic droplets of EPA-registered botanical disinfectant throughout the airflow stream, thoroughly coating interior duct walls and neutralizing microbes.</p>
                   </div>
                 </div>
               
@@ -4134,24 +4140,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">02</h3>
-                      <span class="proc-window">⏱ An ultra-low volume cold mister disperses microscopic droplets of EPA-registered botanical disinfectant throughout the airflow stream, thoroughly coating interior duct walls and neutralizing microbes.</span>
+                      <h3 class="proc-title">Airflow Dwell &amp; Recirculation</h3>
+                      <span class="proc-window">⏱ 20-30 min</span>
                     </div>
-                    <p class="proc-desc">**ULV Botanical Fogging**</p>
-                  </div>
-                </div>
-              
-                <div class="proc-item">
-                  <div class="proc-badge-col">
-                    <div class="proc-badge">04</div>
-                    <div class="proc-track"></div>
-                  </div>
-                  <div class="proc-body">
-                    <div class="proc-title-wrap">
-                      <h3 class="proc-title">03</h3>
-                      <span class="proc-window">⏱ The HVAC blower circulates the botanical mist across all branch registers for twenty minutes, completing contact dwell times and leaving clean, fresh indoor air.</span>
-                    </div>
-                    <p class="proc-desc">**Airflow Dwell &amp; Recirculation**</p>
+                    <p class="proc-desc">The HVAC blower circulates the botanical mist across all branch registers for twenty minutes, completing contact dwell times and leaving clean, fresh indoor air.</p>
                   </div>
                 </div>
               

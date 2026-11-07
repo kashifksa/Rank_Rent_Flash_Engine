@@ -76,11 +76,11 @@ Property owners across Winnebago County choose Rockford Air Duct Pros because ne
 
 Our systematic source removal process protects your living areas and guarantees measurable airflow improvement across all supply registers.
 
-| Step | Protocol Phase | Technical Execution |
-| :--- | :--- | :--- |
-| **01** | **Negative Air Hookup** | Technicians seal all supply and return registers, cut an engineered service access port into the main trunk line, and attach an eight-inch vacuum collar connected to our 5,000 CFM negative air machine. |
-| **02** | **Pneumatic Agitation** | Starting at the register furthest from the furnace, technicians feed high-velocity reverse-air sweepers and nylon rotary whips through each branch run, driving debris directly into the vacuum trunk. |
-| **03** | **Trunk Extraction & Closure** | High-pressure agitation scours the main trunk line while continuous suction draws dislodged particulates into triple-stage HEPA filtration, followed by airtight galvanized steel plate installation. |
+| Project Phase | Action and Execution Protocol | Typical Window |
+|---|---|---|
+| **Phase 1: Negative Air Hookup** | Technicians seal all supply and return registers, cut an engineered service access port into the main trunk line, and attach an eight-inch vacuum collar connected to our 5,000 CFM negative air machine. | 30-45 min |
+| **Phase 2: Pneumatic Agitation** | Starting at the register furthest from the furnace, technicians feed high-velocity reverse-air sweepers and nylon rotary whips through each branch run, driving debris directly into the vacuum trunk. | 60-90 min |
+| **Phase 3: Trunk Extraction & Closure** | High-pressure agitation scours the main trunk line while continuous suction draws dislodged particulates into triple-stage HEPA filtration, followed by airtight galvanized steel plate installation. | 45-60 min |
 
 <!-- ========================================================================= -->
 <!-- SECTION: local-proof | BLOCK: kt-testimonials -->

@@ -76,11 +76,11 @@ Property owners across Winnebago County trust Rockford Air Duct Pros because our
 
 Our certified multi-phase sanitization process eliminates microbial pathogens safely without disrupting your daily routine or requiring prolonged evacuation of your building.
 
-| Step | Protocol Phase | Technical Execution |
-| :--- | :--- | :--- |
-| **01** | **Mechanical Source Removal** | Technicians clean supply and return trunks down to bare metal using high-vacuum negative pressure, ensuring particulate dust is extracted before antimicrobial misting begins. |
-| **02** | **ULV Botanical Fogging** | An ultra-low volume cold mister disperses microscopic droplets of EPA-registered botanical disinfectant throughout the airflow stream, thoroughly coating interior duct walls and neutralizing microbes. |
-| **03** | **Airflow Dwell & Recirculation** | The HVAC blower circulates the botanical mist across all branch registers for twenty minutes, completing contact dwell times and leaving clean, fresh indoor air. |
+| Project Phase | Action and Execution Protocol | Typical Window |
+|---|---|---|
+| **Phase 1: Mechanical Source Removal** | Technicians clean supply and return trunks down to bare metal using high-vacuum negative pressure, ensuring particulate dust is extracted before antimicrobial misting begins. | 60-90 min |
+| **Phase 2: ULV Botanical Fogging** | An ultra-low volume cold mister disperses microscopic droplets of EPA-registered botanical disinfectant throughout the airflow stream, thoroughly coating interior duct walls and neutralizing microbes. | 25-35 min |
+| **Phase 3: Airflow Dwell & Recirculation** | The HVAC blower circulates the botanical mist across all branch registers for twenty minutes, completing contact dwell times and leaving clean, fresh indoor air. | 20-30 min |
 
 <!-- ========================================================================= -->
 <!-- SECTION: local-proof | BLOCK: kt-testimonials -->

@@ -1515,13 +1515,15 @@
     }
     .proc-body {
       flex: 1;
+      min-width: 0;
     }
     .proc-title-wrap {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
     .proc-title {
       margin: 0;
@@ -1529,6 +1531,7 @@
       font-size: 16.5px;
       font-weight: 800;
       line-height: 1.35;
+      word-break: break-word;
     }
     .proc-window {
       font-size: 11px;
@@ -1538,13 +1541,16 @@
       background: var(--surface-container-low);
       color: var(--on-surface-variant);
       border: 1px solid var(--outline-variant);
-      white-space: nowrap;
+      white-space: normal;
+      max-width: 100%;
+      word-break: break-word;
     }
     .proc-desc {
       margin: 0;
       color: var(--on-surface-variant);
       font-size: 14px;
       line-height: 1.6;
+      word-break: break-word;
     }
     .proc-visual {
       position: relative;

@@ -1515,13 +1515,15 @@
     }
     .proc-body {
       flex: 1;
+      min-width: 0;
     }
     .proc-title-wrap {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
     .proc-title {
       margin: 0;
@@ -1529,6 +1531,7 @@
       font-size: 16.5px;
       font-weight: 800;
       line-height: 1.35;
+      word-break: break-word;
     }
     .proc-window {
       font-size: 11px;
@@ -1538,13 +1541,16 @@
       background: var(--surface-container-low);
       color: var(--on-surface-variant);
       border: 1px solid var(--outline-variant);
-      white-space: nowrap;
+      white-space: normal;
+      max-width: 100%;
+      word-break: break-word;
     }
     .proc-desc {
       margin: 0;
       color: var(--on-surface-variant);
       font-size: 14px;
       line-height: 1.6;
+      word-break: break-word;
     }
     .proc-visual {
       position: relative;
@@ -4106,10 +4112,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">Step</h3>
-                      <span class="proc-window">⏱ Technical Execution</span>
+                      <h3 class="proc-title">Negative Air Hookup</h3>
+                      <span class="proc-window">⏱ 30-45 min</span>
                     </div>
-                    <p class="proc-desc">Protocol Phase</p>
+                    <p class="proc-desc">Technicians seal all supply and return registers, cut an engineered service access port into the main trunk line, and attach an eight-inch vacuum collar connected to our 5,000 CFM negative air machine.</p>
                   </div>
                 </div>
               
@@ -4120,10 +4126,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">01</h3>
-                      <span class="proc-window">⏱ Technicians seal all supply and return registers, cut an engineered service access port into the main trunk line, and attach an eight-inch vacuum collar connected to our 5,000 CFM negative air machine.</span>
+                      <h3 class="proc-title">Pneumatic Agitation</h3>
+                      <span class="proc-window">⏱ 60-90 min</span>
                     </div>
-                    <p class="proc-desc">**Negative Air Hookup**</p>
+                    <p class="proc-desc">Starting at the register furthest from the furnace, technicians feed high-velocity reverse-air sweepers and nylon rotary whips through each branch run, driving debris directly into the vacuum trunk.</p>
                   </div>
                 </div>
               
@@ -4134,24 +4140,10 @@ th {
                   </div>
                   <div class="proc-body">
                     <div class="proc-title-wrap">
-                      <h3 class="proc-title">02</h3>
-                      <span class="proc-window">⏱ Starting at the register furthest from the furnace, technicians feed high-velocity reverse-air sweepers and nylon rotary whips through each branch run, driving debris directly into the vacuum trunk.</span>
+                      <h3 class="proc-title">Trunk Extraction &amp; Closure</h3>
+                      <span class="proc-window">⏱ 45-60 min</span>
                     </div>
-                    <p class="proc-desc">**Pneumatic Agitation**</p>
-                  </div>
-                </div>
-              
-                <div class="proc-item">
-                  <div class="proc-badge-col">
-                    <div class="proc-badge">04</div>
-                    <div class="proc-track"></div>
-                  </div>
-                  <div class="proc-body">
-                    <div class="proc-title-wrap">
-                      <h3 class="proc-title">03</h3>
-                      <span class="proc-window">⏱ High-pressure agitation scours the main trunk line while continuous suction draws dislodged particulates into triple-stage HEPA filtration, followed by airtight galvanized steel plate installation.</span>
-                    </div>
-                    <p class="proc-desc">**Trunk Extraction &amp; Closure**</p>
+                    <p class="proc-desc">High-pressure agitation scours the main trunk line while continuous suction draws dislodged particulates into triple-stage HEPA filtration, followed by airtight galvanized steel plate installation.</p>
                   </div>
                 </div>
               

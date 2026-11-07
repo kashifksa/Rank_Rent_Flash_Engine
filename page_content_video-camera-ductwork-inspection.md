@@ -76,11 +76,11 @@ Property owners across Winnebago County choose Rockford Air Duct Pros because ou
 
 Our systematic camera diagnostic process captures comprehensive optical evidence without damaging ductwork or disturbing clean interior furnishings.
 
-| Step | Protocol Phase | Technical Execution |
-| :--- | :--- | :--- |
-| **01** | **Fiber-Optic Insertion** | Technicians guide high-definition fiber-optic camera probes into supply registers and plenum ports, navigating through ninety-degree elbows and straight trunk sections. |
-| **02** | **Real-Time Digital Recording** | High-intensity LED arrays illuminate duct interiors while the camera records continuous digital video, documenting dust depth, joint integrity, and biological growth. |
-| **03** | **Client Review & Reporting** | Our certified technician reviews the recorded video footage with you on-site, providing honest recommendations and documented proof of ductwork condition. |
+| Project Phase | Action and Execution Protocol | Typical Window |
+|---|---|---|
+| **Phase 1: Fiber-Optic Insertion** | Technicians guide high-definition fiber-optic camera probes into supply registers and plenum ports, navigating through ninety-degree elbows and straight trunk sections. | 15-20 min |
+| **Phase 2: Real-Time Digital Recording** | High-intensity LED arrays illuminate duct interiors while the camera records continuous digital video, documenting dust depth, joint integrity, and biological growth. | 20-30 min |
+| **Phase 3: Client Review & Reporting** | Our certified technician reviews the recorded video footage with you on-site, providing honest recommendations and documented proof of ductwork condition. | 10-15 min |
 
 <!-- ========================================================================= -->
 <!-- SECTION: local-proof | BLOCK: kt-testimonials -->
