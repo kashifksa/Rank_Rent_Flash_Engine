@@ -53,6 +53,23 @@
       "phase": 1,
       "note": "FIX 37 Phase 1 service launch",
       "published_date": "2026-11-07"
+    },
+    {
+      "page_id": "video-camera-ductwork-inspection",
+      "wp_id": null,
+      "url": "/video-camera-ductwork-inspection.html",
+      "live_url": "https://darkviolet-meerkat-820208.hostingersite.com/video-camera-ductwork-inspection.html",
+      "title": "Video Camera Ductwork Inspection",
+      "slug": "video-camera-ductwork-inspection",
+      "type": "service",
+      "preferred_anchor": "video camera ductwork inspection",
+      "alternate_anchors": [
+        "air duct camera inspection",
+        "duct borescope diagnostics"
+      ],
+      "phase": 1,
+      "note": "FIX 37 Phase 1 complete service launch",
+      "published_date": "2026-11-07"
     }
   ],
   "_instructions_for_next_page": "Copy the block above and fill in: page_id, wp_id (from WordPress after publishing), url, live_url, title, slug, type (page or post), preferred_anchor (the anchor text other pages should use when linking here), alternate_anchors, phase, and published_date. Add a note if the slug differs from master_brief.json."

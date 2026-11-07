@@ -1,0 +1,110 @@
+{
+  "page_id": "video-camera-ductwork-inspection",
+  "page_type": "service",
+  "phase": 1,
+  "slug": "video-camera-ductwork-inspection",
+  "h1": "Video Camera Ductwork Inspection in Rockford, IL",
+  "meta_title": "Video Camera Ductwork Inspection Rockford IL | NADCA Pros",
+  "meta_description": "High-definition video camera ductwork inspection in Rockford, IL. Real-time fiber-optic borescope diagnostics, bare-metal proof, and zero hidden issues. Call (815) 555-0142.",
+  "target_keyword": "video camera ductwork inspection rockford",
+  "secondary_keywords": [
+    "air duct camera inspection rockford",
+    "ductwork video inspection rockford il",
+    "borescope duct inspection rockford",
+    "hvac camera diagnostics rockford"
+  ],
+  "canonical": "https://rockfordairductpros.com/video-camera-ductwork-inspection/",
+  "published_date": "2026-11-07",
+  "author": "Rockford Air Duct Pros Technical Board",
+  "schema": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://rockfordairductpros.com/video-camera-ductwork-inspection/#service",
+      "name": "Video Camera Ductwork Inspection in Rockford, IL",
+      "serviceType": "HVAC Video Camera Duct Inspection and Diagnostics",
+      "description": "High-definition fiber-optic borescope inspection and visual air duct diagnostics for residential and commercial systems in Rockford, Illinois.",
+      "provider": {
+        "@type": "HVACBusiness",
+        "@id": "https://rockfordairductpros.com/#business",
+        "name": "Rockford Air Duct Pros",
+        "telephone": "+18155550142",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1111 S Alpine Rd",
+          "addressLocality": "Rockford",
+          "addressRegion": "IL",
+          "postalCode": "61108",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Rockford",
+          "sameAs": "https://en.wikipedia.org/wiki/Rockford,_Illinois"
+        },
+        {
+          "@type": "City",
+          "name": "Loves Park",
+          "sameAs": "https://en.wikipedia.org/wiki/Loves_Park,_Illinois"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://rockfordairductpros.com/video-camera-ductwork-inspection/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is video camera ductwork inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Video camera ductwork inspection is an advanced diagnostic procedure that utilizes fiber-optic borescope cameras and robotic crawlers to visually examine the interior of heating, ventilation, and air conditioning ductwork. High-definition color cameras transmit real-time video to external monitors, allowing technicians and homeowners to inspect areas that are completely concealed within walls, floors, and ceilings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is camera inspection superior to traditional visual checking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional visual inspections are limited to the first few inches visible behind register grilles, leaving ninety percent of your ventilation system unseen. Industrial video borescopes navigate thirty to fifty feet deep into trunk lines, navigating complex bends and plenums to identify debris, microbial growth, or structural damage that standard register checks miss entirely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can video cameras detect mold inside air ducts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. High-resolution camera sensors equipped with balanced LED lighting illuminate interior duct surfaces, revealing discoloration, fungal fuzz, and moisture pooling along duct seams. While laboratory sampling confirms specific mold species, video cameras provide immediate visual confirmation of biological contamination requiring antimicrobial treatment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a video camera inspection require cutting holes in ductwork?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In most cases, inspection cameras enter through existing supply grilles and return air intakes without cutting openings. If an inspection of the central furnace plenum or main horizontal trunk is necessary, technicians utilize existing service ports or create small, temporary access holes that are airtight sealed with galvanized patch plates after the inspection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a whole-home camera duct inspection take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A comprehensive video camera ductwork inspection for an average Rockford home takes approximately forty-five to sixty minutes. This allows technicians to inspect multiple supply branches, traverse the central supply and return trunk lines, and review recorded digital footage with the homeowner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can camera inspections reveal ductwork air leaks and disconnects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Video cameras frequently discover separated sheet metal slip joints, disconnected flexible duct runs, and crushed insulated flex lines in attic spaces. Identifying these airflow leaks allows homeowners to restore balanced heating and cooling while preventing conditioned air from escaping into unconditioned crawlspaces or attics."
+          }
+        }
+      ]
+    }
+  ]
+}

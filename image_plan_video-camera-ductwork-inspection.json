@@ -1,0 +1,33 @@
+{
+  "page_id": "video-camera-ductwork-inspection",
+  "slug": "video-camera-ductwork-inspection",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Rockford",
+    "state": "IL"
+  },
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "contaminated-air-duct-interior-rockford-residence.webp",
+      "alt_text": "High-definition borescope camera view inside contaminated residential air duct in Rockford, IL",
+      "prompt": "An authentic inspection borescope view inside a dark sheet metal air duct showing dust buildup illuminated by bright camera LED light in Rockford, IL.",
+      "priority": 1,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 91.6
+    },
+    {
+      "slot": "verification",
+      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
+      "alt_text": "High-definition camera verification showing clean bare metal ductwork in Rockford, IL",
+      "prompt": "Inspection borescope view inside a clean sanitized galvanized sheet metal air duct trunk line with smooth reflective bare metal free of dust in Rockford, IL.",
+      "priority": 2,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 100.9
+    }
+  ]
+}
