@@ -1,53 +1,27 @@
 {
   "project": "Rank & Rent Flash Engine",
-  "current_page": "phase1_complete",
+  "current_page": "negative-air-vacuum-trunk-line-cleaning",
   "completed_pages": [
     "homepage",
     "about",
     "contact",
     "air-duct-cleaning-loves-park-il",
     "commercial-hvac-duct-cleaning",
-    "dryer-vent-cleaning-and-lint-removal"
+    "dryer-vent-cleaning-and-lint-removal",
+    "how-to-spot-air-duct-cleaning-scams",
+    "negative-air-vacuum-trunk-line-cleaning"
   ],
   "completed_sections": {
-    "homepage": [
+    "negative-air-vacuum-trunk-line-cleaning": [
       "hero",
       "trust_bar",
-      "intro",
       "services_grid",
-      "why_us",
-      "local_context",
-      "before_after",
-      "comparison_table",
+      "why_choose_us",
       "process",
-      "testimonials",
-      "service_area",
-      "faq",
-      "bottom_cta"
-    ],
-    "about": [
-      "identity_hook",
-      "origin_story",
-      "team_credentials",
-      "credentials_display",
-      "community_proof",
-      "trust_signals",
-      "service_area_nap",
-      "bottom_cta"
-    ],
-    "contact": [
-      "contact_hero",
-      "contact_form",
-      "nap_block",
-      "trust_bar"
-    ],
-    "air-duct-cleaning-loves-park-il": [
-      "hero",
-      "localized_intro",
-      "services_overview",
       "local_proof",
-      "local_faq",
       "service_area",
+      "mid_cta",
+      "faq",
       "bottom_cta"
     ]
   },
@@ -57,7 +31,6 @@
     "blog",
     "about"
   ],
-  "current_type": "phase1_complete",
-  "phase1_content_status": "100%_complete",
-  "phase1_images_status": "16_completed_100%_verified"
+  "current_type": "service_page_phase2",
+  "phase2_progress": "1_of_3_services_completed"
 }

@@ -1,0 +1,33 @@
+{
+  "page_id": "negative-air-vacuum-trunk-line-cleaning",
+  "slug": "negative-air-vacuum-trunk-line-cleaning",
+  "_meta": {
+    "company_name": "Rockford Air Duct Pros",
+    "primary_city": "Rockford",
+    "state": "IL"
+  },
+  "images": [
+    {
+      "slot": "hero",
+      "filename": "negative-air-containment-vacuum-rockford-home.webp",
+      "alt_text": "Commercial negative air vacuum extractor connected to residential duct trunk in Rockford, IL",
+      "prompt": "An HVAC technician in professional navy blue work uniform with zero logos or text, operating a heavy-duty negative air vacuum machine connected via a 10-inch flex hose to galvanized sheet metal trunk line in a clean residential basement in Rockford, IL.",
+      "priority": 1,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 92.0
+    },
+    {
+      "slot": "trunk-extraction",
+      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
+      "alt_text": "Sanitized bare metal interior of residential main supply trunk after negative air vacuum extraction",
+      "prompt": "Authentic inspection borescope view inside a clean galvanized sheet metal air duct trunk line with smooth reflective bare metal free of dust or pet dander.",
+      "priority": 2,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 98.5
+    }
+  ]
+}
