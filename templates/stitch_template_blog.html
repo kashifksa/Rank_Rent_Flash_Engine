@@ -50,25 +50,199 @@ html { scroll-behavior: smooth; }
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 .reveal-on-scroll.is-visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+/* Universal Live Site Dropdown & Hover Bridge Standards (FIX 35) */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e2e8f0;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 16px;
+  height: 72px;
+}
+.dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 14px 0;
+  color: #334155;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.dropdown:hover .dropdown-trigger, .nav-links a:hover {
+  color: #d95d0f !important;
+}
+.dropdown:hover .nav-caret {
+  transform: rotate(180deg);
+  color: #d95d0f;
+}
+.nav-caret {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  min-width: 320px;
+  box-shadow: 0 16px 36px rgba(11, 19, 32, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 8px 0;
+  z-index: 1000;
+  animation: navDropdownFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes navDropdownFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+.dropdown-content a:hover {
+  background: #f8fafc;
+  color: #d95d0f !important;
+  padding-left: 24px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.header-mobile-call {
+  display: none;
+}
+@media (max-width: 900px) {
+  .header-mobile-call {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #d95d0f;
+    color: #ffffff !important;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
 
 <!-- TOP STRIP & NAV -->
-<header class="h-20 w-full bg-white border-b border-slate-200 px-6 sticky top-0 z-50">
-  <div class="max-w-7xl h-full mx-auto flex items-center justify-between">
-    <a class="flex flex-col" href="index.html">
-      <span class="font-heading font-extrabold text-xl tracking-tight text-[#0B1320]">ROCKFORD AIR DUCT PROS</span>
-      <span class="text-[10px] uppercase font-bold tracking-widest text-primary">Consumer Education &amp; Standards Hub</span>
+<!-- TOP SYSTEM STATUS BAR -->
+<aside aria-label="Local Dispatch Status Bar" class="bg-inverse-surface border-b border-white/10 px-4 py-2 text-xs font-mono text-slate-300">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 radar-beacon"></span>
+      <span class="text-white font-medium">ROCKFORD CENTRAL DISPATCH HUB:</span>
+      <span class="text-slate-400">1420 N Main St, Rockford IL 61103</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-400">
+      <span class="hidden sm:inline">MON-SAT: 7:00 AM - 7:00 PM</span>
+      <span class="text-primary font-bold">24/7 RAPID RESPONSE</span>
+      <a href="tel:8155550142" class="text-white hover:text-primary font-bold flex items-center gap-1 transition-colors text-decoration-none">
+        <span class="material-symbols-outlined text-[14px]">call</span>
+        (815) 555-0142
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- STICKY HEADER WITH FIX 35 LIVE-SITE CANONICAL STANDARD -->
+<header class="header sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+  <div class="container flex justify-between items-center max-w-[1240px] mx-auto px-4 h-[72px] w-full">
+    <a href="index.html" class="logo flex items-center gap-2.5 text-decoration-none" style="text-decoration: none;">
+      <div class="w-10 h-10 rounded-lg bg-inverse-surface flex items-center justify-center text-primary border border-white/10 shadow-sm shrink-0">
+        <span class="material-symbols-outlined text-2xl">air</span>
+      </div>
+      <div>
+        <span class="font-heading font-extrabold text-base sm:text-lg tracking-tight text-slate-900 block leading-tight">ROCKFORD AIR DUCT PROS</span>
+        <span class="text-[9.5px] font-mono tracking-widest uppercase text-slate-500 font-semibold block">CERTIFIED MECHANICAL HYGIENE • LIC #IL-884920</span>
+      </div>
     </a>
-    <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-700">
-      <a class="hover:text-primary transition-colors" href="index.html">Home</a>
-      <a class="hover:text-primary transition-colors" href="index.html#services">Services</a>
-      <a class="text-primary font-bold" href="#">Editorial Guide</a>
+    
+    <!-- Mobile Quick Call Button (Live Site Standard for < 900px) -->
+    <a href="tel:8155550142" class="header-mobile-call md:hidden inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary text-white text-xs font-heading font-bold rounded-lg shadow-sm hover:bg-primary-container transition-all text-decoration-none">
+      <span class="material-symbols-outlined text-[16px]">call</span>
+      <span>Call (815) 555-0142</span>
+    </a>
+
+    <!-- Desktop & Tablet Header Navigation (FIX 35 Canonical Hierarchy) -->
+    <nav class="nav-links hidden md:flex items-center gap-5 lg:gap-6 text-sm font-semibold text-slate-700">
+      <a href="index.html" class="hover:text-primary transition-colors text-decoration-none">Home</a>
+      
+      <!-- Services Dropdown (All 5 Confirmed Phase 1 Services - FIX 35 & FIX 37) -->
+      <div class="dropdown">
+        <a href="index.html#services" class="dropdown-trigger text-decoration-none">
+          <span>Services</span>
+          <span class="nav-caret">▼</span>
+        </a>
+        <div class="dropdown-content">
+          <a href="commercial-hvac-duct-cleaning.html">Commercial HVAC Duct Cleaning</a>
+          <a href="dryer-vent-cleaning-and-lint-removal.html">Dryer Vent Cleaning &amp; Lint Removal</a>
+          <a href="negative-air-vacuum-trunk-line-cleaning.html">Negative Air Vacuum Trunk Line Cleaning</a>
+          <a href="sanitization-and-antimicrobial-fogging.html">Air Duct Sanitization &amp; Antimicrobial Fogging</a>
+          <a href="video-camera-ductwork-inspection.html">Video Camera Ductwork Inspection</a>
+        </div>
+      </div>
+
+      <!-- Locations Dropdown (Strictly Gated to Confirmed Live Satellite Cities - FIX 21 & FIX 35) -->
+      <div class="dropdown">
+        <a href="index.html#service-area" class="dropdown-trigger text-decoration-none">
+          <span>Locations</span>
+          <span class="nav-caret">▼</span>
+        </a>
+        <div class="dropdown-content" style="min-width: 240px;">
+          <a href="air-duct-cleaning-loves-park-il.html" style="display: flex; align-items: center; justify-content: space-between;">
+            <span>Loves Park, IL</span>
+            <span style="font-family: monospace; font-size: 10px; color: #16a34a; background: #f0fdf4; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Phase 1</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="how-to-spot-air-duct-cleaning-scams.html" class="hover:text-primary transition-colors text-decoration-none">Blog</a>
+      <a href="index.html#reviews" class="hover:text-primary transition-colors text-decoration-none">Reviews</a>
+      <a href="about.html" class="hover:text-primary transition-colors text-decoration-none">About</a>
+      <a href="contact.html" class="hover:text-primary transition-colors text-decoration-none">Contact</a>
+      
+      <!-- Direct Phone CTA Button -->
+      <a href="tel:8155550142" class="btn btn-primary bg-primary hover:bg-primary-container text-white px-4 py-2 rounded-lg font-heading font-bold text-xs tracking-wider shadow-sm hover:shadow transition-all flex items-center gap-1.5 text-decoration-none ml-1">
+        <span class="material-symbols-outlined text-[15px]">call</span>
+        <span>(815) 555-0142</span>
+      </a>
     </nav>
-    <a class="px-5 py-2.5 bg-primary text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-primary-container transition-all" href="tel:8155550142">
-      Dispatch Desk: (815) 555-0142
-    </a>
   </div>
 </header>
 
@@ -236,3 +410,4 @@ html { scroll-behavior: smooth; }
 
 </body>
 </html>
+
