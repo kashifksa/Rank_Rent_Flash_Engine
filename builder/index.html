@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Site Builder</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><span class="logo">&#9889;</span><b>Site Builder</b><span id="projName"></span></div>
+    <label class="tb">Template
+      <select id="tplSel"></select>
+    </label>
+    <label class="tb">Page
+      <select id="pageSel"></select>
+    </label>
+    <div class="grow"></div>
+    <div class="seg" id="vpSeg">
+      <button data-vp="desktop" class="on" title="Desktop">Desktop</button>
+      <button data-vp="tablet" title="Tablet">Tablet</button>
+      <button data-vp="mobile" title="Mobile">Mobile</button>
+    </div>
+    <button class="btn2" id="themeBtn">Theme</button>
+    <div class="menu">
+      <button class="btn2 primary" id="exportBtn">Export &#9662;</button>
+      <div class="menu-list" id="exportMenu">
+        <button data-act="page">Download this page (.html)</button>
+        <button data-act="all">Download all pages</button>
+        <hr>
+        <button data-act="save">Save project file (.json)</button>
+        <button data-act="load">Load project file</button>
+        <hr>
+        <button data-act="reset" class="danger">Reset all my edits</button>
+      </div>
+    </div>
+    <input type="file" id="fileIn" accept=".json" hidden>
+  </header>
+
+  <aside id="left">
+    <div class="ph"><span>Sections</span><small id="secCount"></small></div>
+    <div id="seclist"></div>
+    <div id="addbox"></div>
+  </aside>
+
+  <main id="stage">
+    <div id="frameWrap"><iframe id="frame" title="Page preview"></iframe></div>
+  </main>
+
+  <aside id="right"><div id="editor"></div></aside>
+
+  <div id="themePop" class="pop" hidden>
+    <h4>Theme <small id="tplNote"></small></h4>
+    <label>Primary / dark color <input type="color" id="thPrimary"></label>
+    <label>Accent color <input type="color" id="thAccent"></label>
+    <label>Fonts <select id="thFont"></select></label>
+    <label>Corner radius <input type="range" id="thRadius" min="0" max="24" step="2"></label>
+    <label>Section spacing <select id="thDensity"><option value="compact">Compact</option><option value="balanced">Balanced</option><option value="spacious">Spacious</option></select></label>
+    <button class="btn2" id="thReset">Reset to template colors</button>
+  </div>
+  <div id="toast"></div>
+</div>
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+<script src="js/site-css.js"></script>
+<script src="js/templates.js"></script>
+<script src="js/blocks.js"></script>
+<script src="js/site.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -37,7 +37,7 @@ def normalize_sections(sections_dict: dict, page_type: str, pid: str):
     drop sections the live site does not render separately, and return them in live order."""
     spec = SCHEMA.get(page_type)
     if not spec:
-        return sections_dict, []
+        return sections_dict, [], {}
     aliases = spec.get("aliases", {})
     canon = {s["id"]: s for s in spec["sections"]}
 
@@ -49,21 +49,23 @@ def normalize_sections(sections_dict: dict, page_type: str, pid: str):
     # Only the required sections must exist; any extra sections are valid.
     if spec.get("flexible"):
         warnings = [f"missing required section '{r}'" for r in spec.get("required", []) if r not in renamed]
-        return renamed, warnings
+        return renamed, warnings, {}
 
-    ordered, warnings = {}, []
+    ordered, warnings, merged = {}, [], {}
     for s in spec["sections"]:
         sid = s["id"]
         if sid in renamed:
             if s.get("live", True):
                 ordered[sid] = renamed[sid]
+            else:
+                merged[sid] = renamed[sid]
         elif s.get("live", True):
             warnings.append(f"missing live section '{sid}'")
     for key, content in renamed.items():
         if key not in canon:
             ordered[key] = content
             warnings.append(f"extra non-schema section '{key}'")
-    return ordered, warnings
+    return ordered, warnings, merged
 
 
 def parse_markdown_sections(md_text: str):
@@ -143,6 +145,53 @@ def sanitize_for_script_tag(json_str: str) -> str:
     return json_str.replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
 
 
+def nav_label(p):
+    t = p.get("title", "")
+    if p["type"] == "homepage":
+        return "Home"
+    t = re.sub(r"\s*Location Page$", "", t)
+    t = re.sub(r"^Blog:\s*", "", t)
+    return t
+
+
+def write_v5_data(compiled):
+    """Write builder/js/data.js for the section-registry builder (builder/index.html)."""
+    brief = load_json_safe(BASE_DIR / "master_brief.json")
+    nap = brief.get("nap", {})
+    pages = {}
+    for pid, p in compiled.items():
+        plan_imgs = [
+            {"slot": i.get("slot", ""), "filename": i.get("filename", ""), "alt_text": i.get("alt_text", "")}
+            for i in p.get("images", []) if i.get("filename")
+        ]
+        pages[pid] = {
+            "id": pid, "title": p["title"], "nav": nav_label(p), "slug": p["slug"], "type": p["type"],
+            "sections": p["sections"], "order": list(p["sections"].keys()), "merged": p.get("merged", {}),
+            "meta": p.get("meta", {}), "images": plan_imgs, "img_dir": p.get("img_dir", "images/homepage"),
+        }
+    state_path = BASE_DIR / "builder_state.json"
+    default_state = load_json_safe(state_path) if state_path.exists() else None
+    data = {
+        "nap": {
+            "company_name": nap.get("company_name", brief.get("project_name", "")),
+            "address": nap.get("address", ""), "phone": nap.get("phone", ""),
+            "email": nap.get("email", ""), "website": nap.get("website", ""),
+        },
+        "brief": {
+            "project_name": brief.get("project_name", ""), "niche": brief.get("niche", ""),
+            "city": brief.get("city", ""), "state": brief.get("state", ""),
+            "primary_keyword": brief.get("primary_keyword", ""),
+        },
+        "schema": SCHEMA,
+        "pages": pages,
+        "defaultState": default_state,
+    }
+    out = BASE_DIR / "builder" / "js" / "data.js"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("window.BUILDER_DATA = " + json.dumps(data, indent=1, ensure_ascii=False) + ";\n", encoding="utf-8")
+    print(f"✓ Wrote {len(pages)} pages -> {out}")
+
+
 def compile_all_pages(sync_builder_html=True):
     pages_config, company_name, phone, default_city = discover_project_pages()
     compiled = {}
@@ -158,7 +207,7 @@ def compile_all_pages(sync_builder_html=True):
 
         md_text = md_path.read_text(encoding="utf-8", errors="ignore")
         sections_dict = parse_markdown_sections(md_text)
-        sections_dict, sec_warnings = normalize_sections(sections_dict, p["type"], pid)
+        sections_dict, sec_warnings, merged_sections = normalize_sections(sections_dict, p["type"], pid)
         for w in sec_warnings:
             print(f"  [SECTIONS] {pid}: {w}")
         meta_data = load_json_safe(meta_path)
@@ -179,6 +228,7 @@ def compile_all_pages(sync_builder_html=True):
             "meta": meta_data,
             "images": images_list,
             "img_dir": img_dir,
+            "merged": merged_sections,
         }
 
     templates_html = discover_stitch_templates()
@@ -202,6 +252,7 @@ def compile_all_pages(sync_builder_html=True):
                 builder_path.write_text(new_html, encoding="utf-8")
                 print(f"✓ Synced window.BUILDER_PAGES_DATA & window.STITCH_TEMPLATES_HTML inside studio_builder.html")
 
+    write_v5_data(compiled)
     return compiled
 
 

@@ -419,6 +419,81 @@ def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
     print("=" * 72)
 
 
+def build_site_v5(template_id="cornerstone", out_folder=None):
+    """
+    Whole-site export with the section-registry builder (builder/index.html).
+    Templates: cornerstone, keystone, industrial. Sections come from sections_schema.json.
+    If builder_state.json exists in the project root it is used as the saved project state.
+    """
+    print("=" * 72)
+    print(f"  BUILDING FULL WEBSITE (builder v5) - TEMPLATE: {template_id}")
+    print("=" * 72)
+
+    # 1. sections must match the schema before anything is built
+    import subprocess
+    val = subprocess.run([sys.executable, str(ROOT_DIR / "validate_sections.py")], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if val.returncode != 0:
+        print(val.stdout)
+        print("ABORTED: fix the section errors above first (python validate_sections.py).")
+        return
+    print("OK sections match sections_schema.json")
+
+    # 2. compile md -> builder/js/data.js
+    run_compile()
+
+    out_dir = ROOT_DIR / (out_folder or f"dist_{template_id}")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    url = f"file:///{str(ROOT_DIR / 'builder' / 'index.html').replace(chr(92), '/')}"
+
+    from playwright.sync_api import sync_playwright
+    chrome_paths = [
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+    ]
+    exec_path = next((cp for cp in chrome_paths if os.path.exists(cp)), None)
+    with sync_playwright() as p:
+        kw = {"headless": True}
+        if exec_path:
+            kw["executable_path"] = exec_path
+        else:
+            kw["channel"] = "msedge"
+        browser = p.chromium.launch(**kw)
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        errs = []
+        page.on("pageerror", lambda e: errs.append(str(e)))
+        page.goto(url)
+        page.wait_for_timeout(500)
+        # always start from the file state (builder_state.json), never from a browser profile
+        page.evaluate("localStorage.clear()")
+        page.reload()
+        page.wait_for_timeout(500)
+        ok = page.evaluate(f"!!Builder.TEMPLATES['{template_id}']")
+        if not ok:
+            print("Unknown template. Available:", page.evaluate("Object.keys(Builder.TEMPLATES)"))
+            browser.close()
+            return
+        page.evaluate(f"Builder.state.template = '{template_id}'")
+        files = page.evaluate("Builder.exportAll()")
+        browser.close()
+    if errs:
+        print("Builder errors:", errs)
+
+    for fname, html in files.items():
+        (out_dir / fname).write_text(html, encoding="utf-8")
+        print(f"  OK {fname:<48} ({len(html) // 1024} KB)")
+
+    src_images = ROOT_DIR / "images"
+    dst_images = out_dir / "images"
+    if src_images.exists():
+        if dst_images.exists():
+            shutil.rmtree(dst_images)
+        shutil.copytree(src_images, dst_images)
+        print(f"OK Synced geotagged WebP images -> {dst_images}")
+    print("=" * 72)
+    print(f"SUCCESS: {len(files)}-page website generated in: {out_dir}")
+    print("=" * 72)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Rank & Rent Flash Engine Orchestrator")
     parser.add_argument("--status", action="store_true", help="Show pipeline, templates, and page progress")
@@ -430,6 +505,7 @@ def main():
     parser.add_argument("--compile", action="store_true", help="Compile all page_content_*.md files into Studio Builder")
     parser.add_argument("--build-site", action="store_true", help="Generate complete multi-page website using chosen template")
     parser.add_argument("--template", default="stitch_modern_industrial", help="Template ID (cornerstone or stitch_modern_industrial)")
+    parser.add_argument("--engine", choices=["legacy", "v5"], default="legacy", help="v5 = new section-registry builder (builder/index.html); templates: cornerstone, keystone, industrial")
     parser.add_argument("--out", default=None, help="Output directory for --build-site (e.g. dist_stitch)")
     parser.add_argument("--page", help="Page slug (e.g. commercial-hvac-duct-cleaning)")
     parser.add_argument("--type", choices=["service", "location", "blog", "about", "contact"], help="Page type")
@@ -468,7 +544,10 @@ def main():
     elif args.compile:
         run_compile()
     elif args.build_site:
-        build_full_website(template_id=args.template, out_folder=args.out)
+        if args.engine == "v5":
+            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial") else "cornerstone", out_folder=args.out)
+        else:
+            build_full_website(template_id=args.template, out_folder=args.out)
 
 
 if __name__ == "__main__":
