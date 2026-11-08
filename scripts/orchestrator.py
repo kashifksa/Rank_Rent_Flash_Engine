@@ -352,7 +352,12 @@ def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
     run_compile()
 
     if not out_folder:
-        out_folder = "dist_stitch" if template_id.startswith("stitch") else "build_site"
+        if template_id.startswith("stitch"):
+            out_folder = "dist_stitch"
+        elif template_id == "keystone":
+            out_folder = "dist_keystone"
+        else:
+            out_folder = "build_site"
     out_dir = ROOT_DIR / out_folder
     out_dir.mkdir(parents=True, exist_ok=True)
 

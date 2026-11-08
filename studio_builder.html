@@ -4667,14 +4667,21 @@ th {
           <span id="template-badge-pill" style="font-size: 9px; font-weight: 800; color: #10b981; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 2px 6px; border-radius: 4px;">LIVE STANDARD</span>
         </div>
         <div class="form-group" style="margin-bottom: 8px;">
-          <label class="form-label">Select Active Template System</label>
-          <select id="template-select" class="form-select" onchange="selectWebsiteTemplate(this.value)" style="font-weight: 700;">
-            <option value="cornerstone">🏗️ Cornerstone Classic (Customizable Builder)</option>
-            <option value="stitch_modern_industrial">⚡ Stitch: Modern Industrial Authority</option>
+          <label class="form-label">Select Active Template System (3 Complete Designs)</label>
+          <select id="template-select" class="form-select" onchange="selectWebsiteTemplate(this.value)" style="font-weight: 700; margin-bottom: 8px;">
+            <option value="cornerstone">🏗️ 1. Cornerstone ProFlow (Full-Bleed Authority)</option>
+            <option value="keystone">🏛️ 2. Keystone Classic (Kadence Split Layout)</option>
+            <option value="stitch_modern_industrial">⚡ 3. Stitch: Modern Industrial Authority</option>
           </select>
+          <!-- 1-Click Quick Template Switcher Pills -->
+          <div class="variation-pill-group" style="margin-bottom: 0;">
+            <button type="button" class="variation-pill active" id="qtpl-cornerstone" onclick="selectWebsiteTemplate('cornerstone')" title="Cornerstone ProFlow (Full-Bleed Hero & High-Conversion Cards)">🏗️ Cornerstone</button>
+            <button type="button" class="variation-pill" id="qtpl-keystone" onclick="selectWebsiteTemplate('keystone')" title="Keystone Classic (Kadence V-Split Hero & Clean Editorial Grid)">🏛️ Keystone</button>
+            <button type="button" class="variation-pill" id="qtpl-stitch_modern_industrial" onclick="selectWebsiteTemplate('stitch_modern_industrial')" title="Google Stitch: Modern Industrial Authority">⚡ Stitch</button>
+          </div>
         </div>
         <div id="template-active-desc" style="font-size: 10.5px; color: var(--app-text-muted); line-height: 1.4;">
-          Full section-by-section customizer with Keystone/Cornerstone variants, color pickers &amp; 10 live pages.
+          Full-bleed Denton ProFlow hero, 3-card split Before/After showcase, dark comparison benchmark &amp; 10 live pages.
         </div>
       </div>
 
@@ -6766,12 +6773,51 @@ window.STITCH_TEMPLATES_HTML = {
     window.BUILDER_TEMPLATES = {
       "cornerstone": {
         id: "cornerstone",
-        name: "Cornerstone Classic (Customizable Builder)",
-        shortName: "🏗️ Cornerstone Classic",
+        name: "Cornerstone ProFlow (Full-Bleed Authority)",
+        shortName: "🏗️ Cornerstone ProFlow",
         badge: "LIVE STANDARD",
         badgeColor: "#10b981",
         type: "native",
-        description: "Full section-by-section customizer with Keystone/Cornerstone variants, color pickers & 10 live pages."
+        description: "Full-bleed Denton ProFlow hero, 3-card split Before/After showcase, dark comparison benchmark & 10 live pages.",
+        variantPreset: {
+          hero: "denton",
+          intro: "denton",
+          services: "cornerstone",
+          why: "cornerstone",
+          process: "cornerstone",
+          awards: "cornerstone",
+          reviews: "cornerstone",
+          comp: "cornerstone",
+          area: "cornerstone",
+          faq: "cornerstone",
+          cta: "cornerstone"
+        },
+        baMode: "cards",
+        uncoveredDefault: "cornerstone"
+      },
+      "keystone": {
+        id: "keystone",
+        name: "Keystone Classic (Kadence Split Layout)",
+        shortName: "🏛️ Keystone Classic",
+        badge: "KADENCE SPLIT",
+        badgeColor: "#38bdf8",
+        type: "native",
+        description: "650px V-Split Kadence hero, alternating callout blocks, photo service grid, interactive wipe slider & 10 live pages.",
+        variantPreset: {
+          hero: "split",
+          intro: "callout",
+          services: "grid",
+          why: "kadence",
+          process: "kadence",
+          awards: "keystone",
+          reviews: "kadence",
+          comp: "kadence",
+          area: "kadence",
+          faq: "kadence",
+          cta: "kadence"
+        },
+        baMode: "slider",
+        uncoveredDefault: "kadence"
       },
       "stitch_modern_industrial": {
         id: "stitch_modern_industrial",
@@ -7277,9 +7323,10 @@ window.STITCH_TEMPLATES_HTML = {
     function populateTemplateSelectDropdown() {
       const sel = document.getElementById('template-select');
       if (!sel || !window.BUILDER_TEMPLATES) return;
-      sel.innerHTML = Object.values(window.BUILDER_TEMPLATES).map(t =>
-        `<option value="${t.id}">${t.shortName ? t.shortName + ' — ' : ''}${t.name.replace('Stitch: ', '')}</option>`
-      ).join('');
+      sel.innerHTML = Object.values(window.BUILDER_TEMPLATES).map((t, idx) => {
+        const icon = t.shortName ? t.shortName.split(' ')[0] : '🎨';
+        return `<option value="${t.id}">${icon} ${idx + 1}. ${t.name}</option>`;
+      }).join('');
       sel.value = currentWebsiteTemplate;
     }
 
@@ -7332,7 +7379,7 @@ window.STITCH_TEMPLATES_HTML = {
       }
     }
 
-    function selectWebsiteTemplate(templateId, targetPageId, silent) {
+    function selectWebsiteTemplate(templateId, targetPageId, silent, preserveVariants) {
       if (!window.BUILDER_TEMPLATES || !window.BUILDER_TEMPLATES[templateId]) {
         templateId = "cornerstone";
       }
@@ -7341,6 +7388,12 @@ window.STITCH_TEMPLATES_HTML = {
 
       const tSel = document.getElementById('template-select');
       if (tSel) tSel.value = templateId;
+
+      // Sync 1-click quick template pills in Box 1
+      Object.keys(window.BUILDER_TEMPLATES).forEach(tid => {
+        const qBtn = document.getElementById(`qtpl-${tid}`);
+        if (qBtn) qBtn.classList.toggle('active', tid === templateId);
+      });
 
       const badgePill = document.getElementById('template-badge-pill');
       if (badgePill) {
@@ -7355,7 +7408,24 @@ window.STITCH_TEMPLATES_HTML = {
       const topBarName = document.getElementById('topbar-template-name');
       if (topBarName) topBarName.textContent = tpl.shortName || tpl.name;
 
-      // Toggle Sidebar Controls: Hide Cornerstone clutter when viewing a Stitch template
+      // Apply full variant preset when switching between Cornerstone ProFlow and Keystone Classic
+      if (tpl.variantPreset && !preserveVariants) {
+        masterBlueprint.variants = Object.assign({}, tpl.variantPreset);
+        sectionVariants = Object.assign({}, tpl.variantPreset);
+        pageOverrides = {};
+        if (tpl.baMode) {
+          currentBaMode = tpl.baMode;
+          masterBlueprint.baMode = tpl.baMode;
+        }
+        const uDef = tpl.uncoveredDefault || 'cornerstone';
+        Object.keys(uncoveredVariants).forEach(pid => {
+          Object.keys(uncoveredVariants[pid]).forEach(sk => {
+            uncoveredVariants[pid][sk] = uDef;
+          });
+        });
+      }
+
+      // Toggle Sidebar Controls: Hide Cornerstone/Keystone customizer when viewing a Stitch template
       const csWrapper = document.getElementById('cornerstone-controls-wrapper');
       const stitchCard = document.getElementById('stitch-sidebar-card');
       if (tpl.type === 'stitch') {
@@ -7441,10 +7511,10 @@ window.STITCH_TEMPLATES_HTML = {
 
       if (!hasSavedState) {
         setArchetype("industrial");
-        selectWebsiteTemplate("cornerstone", "homepage", true);
+        selectWebsiteTemplate("cornerstone", "homepage", true, false);
       } else {
         applyThemeStyles();
-        selectWebsiteTemplate(currentWebsiteTemplate, currentActivePage, true);
+        selectWebsiteTemplate(currentWebsiteTemplate, currentActivePage, true, true);
       }
       setupCanvasClickInspection();
       applySectionMotionToCanvas();
@@ -7553,8 +7623,7 @@ window.STITCH_TEMPLATES_HTML = {
     }
 
     function updateVariationCardPills() {
-      const isHome = currentActivePage === 'homepage';
-      const sections = ['hero', 'intro', 'services', 'why', 'process', 'reviews', 'comp', 'area', 'faq', 'cta'];
+      const sections = ['hero', 'intro', 'services', 'why', 'process', 'awards', 'reviews', 'comp', 'area', 'faq', 'cta'];
       
       sections.forEach(sec => {
         const group = {
@@ -7563,6 +7632,7 @@ window.STITCH_TEMPLATES_HTML = {
           services: ['grid', 'cornerstone', 'bento', 'strips'],
           why: ['kadence', 'cornerstone'],
           process: ['kadence', 'cornerstone'],
+          awards: ['keystone', 'cornerstone'],
           reviews: ['kadence', 'cornerstone'],
           comp: ['kadence', 'cornerstone'],
           area: ['kadence', 'cornerstone'],
@@ -7574,10 +7644,27 @@ window.STITCH_TEMPLATES_HTML = {
         if (group) {
           group.forEach(v => {
             const btn = document.getElementById(`${sec}-var-${v}`);
-            if (btn) btn.classList.toggle('active', v === activeVar);
+            if (btn) {
+              btn.classList.toggle('active', v === activeVar);
+              // Update the right-hand section badge text (CORNERSTONE vs KEYSTONE)
+              if (v === activeVar) {
+                const formGroup = btn.closest('.form-group');
+                const badgeSpan = formGroup && formGroup.querySelector('.form-label span:nth-child(2)');
+                if (badgeSpan) {
+                  const isCornerstone = (v === 'cornerstone' || v === 'denton');
+                  badgeSpan.textContent = isCornerstone ? 'CORNERSTONE' : 'KEYSTONE';
+                  badgeSpan.style.color = isCornerstone ? '#3b82f6' : '#38bdf8';
+                }
+              }
+            }
           });
         }
       });
+
+      const baCardsBtn = document.getElementById('ba-cards-btn');
+      const baSliderBtn = document.getElementById('ba-slider-btn');
+      if (baCardsBtn) baCardsBtn.classList.toggle('active', currentBaMode === 'cards');
+      if (baSliderBtn) baSliderBtn.classList.toggle('active', currentBaMode === 'slider');
     }
 
     function setUncoveredVariant(secKey, variant) {
