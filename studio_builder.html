@@ -4683,6 +4683,7 @@ th {
           <label class="form-label">Select Page</label>
           <select id="page-select" class="form-select" onchange="loadSelectedPage(this.value)">
             <option value="homepage">🏠 Homepage (Rockford Primary Hub)</option>
+            <option value="preview-stitch-template" style="background: #0f172a; color: #f59e0b; font-weight: 700;">🎨 Template: Modern Industrial (Stitch Master)</option>
             <option value="about">👥 About Us (Company & Technicians)</option>
             <option value="contact">📞 Contact Us (Local Dispatch)</option>
             <option value="air-duct-cleaning-loves-park-il">📍 Loves Park Location Page</option>
@@ -5364,6 +5365,14 @@ window.BUILDER_PAGES_DATA = {
       }
     ],
     "img_dir": "images/homepage"
+  },
+  "preview-stitch-template": {
+    "id": "preview-stitch-template",
+    "title": "Modern Industrial Template (Stitch)",
+    "slug": "templates/stitch_modern_industrial_master.html",
+    "type": "template_preview",
+    "keyword": "modern industrial trade architecture",
+    "sections": {}
   },
   "about": {
     "id": "about",
@@ -8892,6 +8901,26 @@ window.BUILDER_PAGES_DATA = {
       const pageData = window.BUILDER_PAGES_DATA[currentActivePage];
 
       const container = document.getElementById('page-render-target');
+
+      // -------------------------------------------------------------
+      // TEMPLATE PREVIEW: STITCH MASTER DESIGN SYSTEM
+      // -------------------------------------------------------------
+      if (pageData.type === 'template_preview') {
+        container.innerHTML = `
+          <div style="width: 100%; min-height: 100vh; background: #0B1320; padding: 0; margin: 0; display: flex; flex-direction: column;">
+            <div style="background: #0B1320; color: #ffffff; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.12); z-index: 10;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="background: #D95D0F; color: #ffffff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Stitch Master Preset</span>
+                <strong style="font-size: 14px; color: #f8fafc;">Modern Industrial Authority Design (13 Sections)</strong>
+              </div>
+              <span style="font-size: 11px; color: #94a3b8;">Dual Fast Quote Intake Forms • Denton Split CS-05 • 4-Phase Protocol</span>
+            </div>
+            <iframe src="templates/stitch_modern_industrial_master.html" style="width: 100%; height: 8200px; min-height: 100vh; border: none; display: block; background: #ffffff;" id="stitch-preview-iframe"></iframe>
+          </div>
+        `;
+        return;
+      }
+
       let html = `<div class="builder-page" style="padding-bottom: 40px; background: var(--background);">`;
 
       const pulseClass = activeFeatures.pulse ? 'btn-pulse-glow' : '';
