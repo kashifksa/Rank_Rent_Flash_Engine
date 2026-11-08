@@ -143,3 +143,4 @@
   B.esc = esc; B.inline = inline; B.mdToHtml = mdToHtml; B.tableHtml = tableHtml;
   B.parseSection = parseSection; B.serializeSection = serializeSection;
 })();
+

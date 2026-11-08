@@ -57,7 +57,18 @@
     <label>Fonts <select id="thFont"></select></label>
     <label>Corner radius <input type="range" id="thRadius" min="0" max="24" step="2"></label>
     <label>Section spacing <select id="thDensity"><option value="compact">Compact</option><option value="balanced">Balanced</option><option value="spacious">Spacious</option></select></label>
+    <label>Default animation <select id="thAnim"><option value="">Template default</option><option value="none">None</option><option value="fade">Fade in</option><option value="rise">Rise up</option><option value="slide-left">Slide from left</option><option value="slide-right">Slide from right</option><option value="zoom">Zoom in</option><option value="stagger">Cards one by one</option></select></label>
+    <label>Default hero effect <select id="thFx"><option value="">Template default</option><option value="none">None</option><option value="airflow">Airflow</option><option value="motes">Motes</option><option value="blueprint">Blueprint grid</option></select></label>
     <button class="btn2" id="thReset">Reset to template colors</button>
+    <hr style="border:0;border-top:1px solid var(--line);width:100%;margin:2px 0">
+    <h4>Brand</h4>
+    <label>Logo <select id="thLogoSrc"><option value="auto">Auto-detect from images/</option><option value="upload">Uploaded file</option><option value="none">No logo (text only)</option></select></label>
+    <button class="btn2" id="thLogoBtn">Upload logo (.webp / .png)</button><input type="file" id="thLogoFile" accept="image/webp,image/png,image/jpeg,image/svg+xml" hidden>
+    <label>Logo height <input type="range" id="thLogoH" min="24" max="96" step="2"></label>
+    <label>Header shows <select id="thLogoMode"><option value="auto">Auto</option><option value="logo">Logo only</option><option value="both">Logo + company name</option><option value="text">Company name only</option></select></label>
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="thFavicon"> Use favicon</label>
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="thFooterLogo"> Logo in footer</label>
+    <small id="logoNote" style="color:var(--muted);line-height:1.4"></small>
   </div>
   <div id="toast"></div>
 </div>
@@ -70,3 +81,4 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+

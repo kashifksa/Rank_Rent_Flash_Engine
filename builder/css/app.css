@@ -42,7 +42,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 .card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;color:var(--muted);font-size:11px;font-weight:700}
 .tbl-ed{overflow-x:auto}.tbl-ed table{border-collapse:separate;border-spacing:4px;min-width:100%}.tbl-ed input{padding:6px;font-size:12px;min-width:110px}
 .hint{color:var(--muted);padding:30px 22px;line-height:1.6}.hint b{color:var(--text)}
-.pop{position:absolute;right:340px;top:58px;width:280px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;z-index:40;box-shadow:0 18px 40px rgba(0,0,0,.5);display:grid;gap:10px}
+.pop{max-height:calc(100vh - 80px);overflow-y:auto;position:absolute;right:340px;top:58px;width:290px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;z-index:40;box-shadow:0 18px 40px rgba(0,0,0,.5);display:grid;gap:10px}
 .pop h4{margin:0}.pop small{color:var(--muted);font-weight:400}.pop label{display:grid;gap:4px;font-size:11px;font-weight:700;color:#b4bdd2}.pop select{min-width:0}
 #toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#1a2030;border:1px solid var(--accent);padding:10px 18px;border-radius:9px;opacity:0;transition:.25s;pointer-events:none;z-index:99;font-weight:600}
 #toast.show{opacity:1;transform:translate(-50%,0)}

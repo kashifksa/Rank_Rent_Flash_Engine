@@ -26,7 +26,7 @@
   function reloadSoon() { clearTimeout(frameT); frameT = setTimeout(loadFrame, 140); }
   function refreshSection() {
     if (!sel) return;
-    const html = B.renderSectionHtml(pid, sel, { preview: true, selected: sel });
+    const html = B.renderSectionHtml(pid, sel, { preview: true, selected: sel, instant: true });
     frame().contentWindow.postMessage({ b5: 'replace', sid: sel, html: html }, '*');
   }
 
@@ -49,6 +49,23 @@
     };
     $('#themeBtn').onclick = () => { const p = $('#themePop'); p.hidden = !p.hidden; syncTheme(); };
     const th = (id, key, cast) => { $(id).oninput = e => { B.state.theme = Object.assign({}, B.state.theme, { [key]: cast ? cast(e.target.value) : e.target.value }); reloadSoon(); save(); }; };
+    const thd = (id, key) => { $(id).onchange = e => { const th0 = Object.assign({}, B.state.theme); if (e.target.value === '') delete th0[key]; else th0[key] = e.target.value; B.state.theme = th0; reloadSoon(); save(); }; };
+    thd('#thAnim', 'anim'); thd('#thFx', 'fx');
+    const br = (k, v) => { B.state.brand = Object.assign({}, B.state.brand, { [k]: v }); reloadSoon(); save(); syncBrand(); };
+    $('#thLogoSrc').onchange = e => br('logoSrc', e.target.value);
+    $('#thLogoH').oninput = e => br('height', Number(e.target.value));
+    $('#thLogoMode').onchange = e => br('mode', e.target.value);
+    $('#thFavicon').onchange = e => br('favicon', e.target.checked);
+    $('#thFooterLogo').onchange = e => br('footer', e.target.checked);
+    $('#thLogoBtn').onclick = () => $('#thLogoFile').click();
+    $('#thLogoFile').onchange = e => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => {
+        B.state.brand = Object.assign({}, B.state.brand, { logoSrc: 'upload', logoData: r.result });
+        toast('Logo loaded (' + Math.round(f.size / 1024) + ' KB' + (f.size > 102400 ? ', over 100 KB: run image_geotagger.py before launch' : '') + ')');
+        reloadSoon(); save(); syncBrand();
+      }; r.readAsDataURL(f); e.target.value = '';
+    };
     th('#thPrimary', 'primary'); th('#thAccent', 'accent'); th('#thFont', 'font'); th('#thRadius', 'radius', Number); th('#thDensity', 'density');
     $('#thReset').onclick = () => { B.state.theme = {}; syncTheme(); reloadSoon(); save(); };
     $('#exportBtn').onclick = e => { e.stopPropagation(); document.querySelector('.menu').classList.toggle('open'); };
@@ -69,6 +86,15 @@
     $('#tplSel').value = B.state.template;
     $('#thPrimary').value = t.primary; $('#thAccent').value = t.accent; $('#thFont').value = t.font; $('#thRadius').value = t.radius; $('#thDensity').value = t.density;
     $('#tplNote').textContent = B.tpl().name;
+    $('#thAnim').value = t.anim || ''; $('#thFx').value = t.fx || '';
+    syncBrand();
+  }
+  function syncBrand() {
+    const b = B.brand(), d = D.brand || {};
+    $('#thLogoSrc').value = b.logoSrc; $('#thLogoH').value = b.height; $('#thLogoMode').value = b.mode;
+    $('#thFavicon').checked = !!b.favicon; $('#thFooterLogo').checked = !!b.footer;
+    $('#logoNote').textContent = b.logoSrc === 'upload' && b.logoData ? 'Using the uploaded logo (for the final site, save it as a .webp in images/ and re-compile).'
+      : (d.logo ? 'Detected: ' + d.logo : 'No *logo*.webp found in images/. Upload one or add it to images/.') + (d.favicon ? ' | Favicon: ' + d.favicon : '');
   }
   function exportThis() { download(B.fileName(pid), B.exportPage(pid)); toast('Downloaded ' + B.fileName(pid)); }
   function exportAll() {
@@ -160,6 +186,19 @@
     }
     h += '</div>';
 
+    const o = B.getOpts(pid, sel);
+    const osel = (k, label, list, v) => '<div class="fld"><label>' + label + '</label><select data-o="' + k + '">' + list.map(x => opt(x[0], String(v), x[1])).join('') + '</select></div>';
+    h += '<div class="grp"><h5>Animation &amp; options</h5><div class="two">' +
+      osel('anim', 'Entrance animation', [['auto', 'Auto (template)'], ['none', 'None'], ['fade', 'Fade in'], ['rise', 'Rise up'], ['slide-left', 'Slide from left'], ['slide-right', 'Slide from right'], ['zoom', 'Zoom in'], ['stagger', 'Cards one by one']], o.anim) +
+      osel('speed', 'Speed', [['fast', 'Fast'], ['normal', 'Normal'], ['slow', 'Slow']], o.speed) + '</div><div class="two">' +
+      '<div class="fld"><label>Delay (seconds)</label><input type="text" data-o="delay" value="' + esc(o.delay) + '"></div>' +
+      osel('pad', 'Spacing', [['auto', 'Auto'], ['compact', 'Compact'], ['roomy', 'Roomy']], o.pad) + '</div><div class="two">' +
+      osel('width', 'Content width', [['auto', 'Standard'], ['narrow', 'Narrow'], ['wide', 'Wide']], o.width) +
+      osel('align', 'Heading align', [['auto', 'Auto'], ['left', 'Left'], ['center', 'Center']], o.align) + '</div><div class="two">' +
+      osel('hover', 'Card hover lift', [['on', 'On'], ['off', 'Off']], o.hover) +
+      (type === 'hero' ? osel('fx', 'Hero effect', [['auto', 'Auto (template)'], ['none', 'None'], ['airflow', 'Airflow'], ['motes', 'Motes'], ['blueprint', 'Blueprint grid']], o.fx) : '<div></div>') +
+      '</div>' + act('replay', 'Replay animation') + '</div>';
+
     if (type === 'article' || type === 'nap') {
       h += '<div class="grp"><h5>Content (markdown)</h5>' + '<div class="fld"><textarea rows="22" data-raw="1">' + esc(B.serializeSection(m)) + '</textarea></div><p style="color:var(--muted);font-size:11px;margin:0">Use ## for headings, - for lists, | for tables. Changes apply when you click away.</p></div>';
       box.innerHTML = h; return;
@@ -195,6 +234,16 @@
       h += '<div class="grp"><h5>Reviews</h5>' + (m.quotes || []).map((q, i) => '<div class="card"><div class="top"><span>Review ' + (i + 1) + '</span>' + act('del:quotes.' + i, 'Remove', 'danger') + '</div>' +
         area('quotes.' + i + '.text', '', q.text, 3) + '<div class="two">' + inp('quotes.' + i + '.author', 'Name', q.author) + inp('quotes.' + i + '.loc', 'Location', q.loc) + '</div></div>').join('') + act('add:quotes', '+ Add review') + '</div>';
     }
+    if (type === 'gallery') {
+      const cc = B.siteCtx(pid, true), cards = cc.galleryCards(m), pairs = cc.galleryPairs(m), imgs = B.imageOptions(pid);
+      const isel = (f, v) => '<select data-f="' + f + '">' + imgs.map(i => opt(i.file, v, i.file.replace(/\.webp$/, ''))).join('') + '</select>';
+      h += '<div class="grp"><h5>Comparison cards (one image each)</h5>' + cards.map((k, i) => '<div class="card"><div class="top"><span>Card ' + (i + 1) + '</span><span>' +
+        act('up:cards.' + i, '&uarr;') + ' ' + act('down:cards.' + i, '&darr;') + ' ' + act('del:cards.' + i, 'Remove', 'danger') + '</span></div>' +
+        '<div class="fld"><label>Image</label>' + isel('cards.' + i + '.img', k.img) + '</div>' + inp('cards.' + i + '.alt', 'Alt text', k.alt) + inp('cards.' + i + '.caption', 'Caption (optional)', k.caption || '')).join('</div>') + (cards.length ? '</div>' : '') + act('add:cards', '+ Add card') + '</div>';
+      h += '<div class="grp"><h5>Wipe slider cases (before + after)</h5>' + pairs.map((k, i) => '<div class="card"><div class="top"><span>Case ' + (i + 1) + '</span><span>' + act('del:pairs.' + i, 'Remove', 'danger') + '</span></div>' +
+        inp('pairs.' + i + '.label', 'Tab label', k.label) + '<div class="two"><div class="fld"><label>Before</label>' + isel('pairs.' + i + '.before', k.before) + '</div><div class="fld"><label>After</label>' + isel('pairs.' + i + '.after', k.after) + '</div></div>' +
+        inp('pairs.' + i + '.caption', 'Caption (optional)', k.caption || '')).join('</div>') + (pairs.length ? '</div>' : '') + act('add:pairs', '+ Add case') + '</div>';
+    }
     if (m.cta) h += '<div class="grp"><h5>Call line</h5>' + inp('cta', 'Bold call line', m.cta) + '</div>';
     h += '<div class="grp"><h5>Advanced</h5><details style="background:none;border:0"><summary style="padding:0;cursor:pointer;color:var(--muted)">Edit whole section as markdown</summary><div class="fld" style="margin-top:8px"><textarea rows="14" data-raw="1">' + esc(B.serializeSection(m)) + '</textarea></div></details></div>';
     box.innerHTML = h;
@@ -205,6 +254,7 @@
     const el = e.target, f = el.dataset.f;
     if (!sel || !f) return;
     const m = B.editModel(pid, sel);
+    if (B.sectionType(pid, sel) === 'gallery') B.prepGallery(pid, sel, m);
     let v = el.value;
     if (el.dataset.lines) v = v.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
     if (f === 'h1' && m.h1 === '' && m.h2) setPath(m, 'h2', v); else setPath(m, f, v);
@@ -218,6 +268,12 @@
       if (old.eyebrow) nm.eyebrow = old.eyebrow; if (old.btn2) nm.btn2 = old.btn2;
       B.editModel(pid, sel); B.ps(pid).models[sel] = nm; refreshSection(); renderEditor(); touch(); return;
     }
+    if (el.dataset.o && sel) {
+      const ps0 = B.ps(pid), k = el.dataset.o; ps0.opts[sel] = ps0.opts[sel] || {};
+      let val = el.value; if (k === 'delay') val = Math.max(0, Number(val) || 0);
+      if (val === 'auto' || (k === 'hover' && val === 'on') || (k === 'speed' && val === 'normal') || (k === 'delay' && !val)) delete ps0.opts[sel][k]; else ps0.opts[sel][k] = val;
+      refreshSection(); if (/anim|speed|delay/.test(k)) frame().contentWindow.postMessage({ b5: 'replay', sid: sel }, '*'); save(); return;
+    }
     const v = el.dataset.v; if (!v || !sel) return; const ps = B.ps(pid);
     if (v === 'variant') ps.variants[sel] = el.value;
     if (v === 'bg') { if (el.value === 'auto') delete ps.bg[sel]; else ps.bg[sel] = el.value; }
@@ -227,11 +283,13 @@
   $('#editor').addEventListener('click', e => {
     const b = e.target.closest('button[data-a]'); if (!b || !sel) return;
     const a = b.dataset.a;
+    if (a === 'replay') { frame().contentWindow.postMessage({ b5: 'replay', sid: sel }, '*'); return; }
     if (a === 'reset') { B.resetSection(pid, sel); refreshSection(); renderEditor(); touch(); toast('Section reset to source text'); return; }
     if (a === 'remove') {
       const ps = B.ps(pid); delete ps.added[sel]; delete ps.models[sel]; ps.order = B.sectionList(pid).filter(s => s !== sel); sel = null; renderLeft(); renderEditor(); loadFrame(); save(); return;
     }
     const [op, path] = a.split(':'); const m = B.editModel(pid, sel);
+    if (B.sectionType(pid, sel) === 'gallery') B.prepGallery(pid, sel, m);
     const parts = path.split('.'), idx = parts.length > 1 && /^\d+$/.test(parts[parts.length - 1]) ? +parts.pop() : null, listPath = parts.join('.'), list = getPath(m, listPath);
     if (op === 'add') {
       if (listPath === 'paras') list.push('');
@@ -239,6 +297,8 @@
       else if (listPath === 'bullets') list.push({ label: '', text: '' });
       else if (listPath === 'quotes') list.push({ text: '', author: '', loc: '', rating: 5 });
       else if (listPath === 'table.rows') list.push(m.table.head.map(() => ''));
+      else if (listPath === 'cards') { const f = (B.imageOptions(pid)[0] || {}).file || ''; list.push({ img: f, alt: '', caption: '' }); }
+      else if (listPath === 'pairs') { const f = (B.imageOptions(pid)[0] || {}).file || ''; list.push({ before: f, after: f, label: 'Case ' + (list.length + 1), caption: '' }); }
     } else if (op === 'del') list.splice(idx, 1);
     else if (op === 'up' && idx > 0) [list[idx - 1], list[idx]] = [list[idx], list[idx - 1]];
     else if (op === 'down' && idx < list.length - 1) [list[idx + 1], list[idx]] = [list[idx], list[idx + 1]];
@@ -262,3 +322,4 @@
   B.app = { go: go, select: select, get pid() { return pid; }, get sel() { return sel; }, renderAll: renderAll };
   boot();
 })();
+

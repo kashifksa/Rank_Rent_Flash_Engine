@@ -112,6 +112,39 @@
       "status": "geotagged",
       "filesize_kb": 79.3,
       "gps": "42.2713945, -89.093966"
+    },
+    {
+      "slot": "before-after-1",
+      "filename": "single-card-air-duct-trunk-rockford-residence.webp",
+      "alt_text": "Churchill Grove residential return air duct decontamination before and after",
+      "priority": 3,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 92.6,
+      "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+    },
+    {
+      "slot": "before-after-2",
+      "filename": "single-card-dryer-vent-exhaust-rockford-residence.webp",
+      "alt_text": "Rolling Green laundry dryer vent lint hazard cleanout before and after",
+      "priority": 3,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 72.4,
+      "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+    },
+    {
+      "slot": "before-after-3",
+      "filename": "single-card-blower-wheel-rockford-residence.webp",
+      "alt_text": "Midtown residential furnace blower wheel before and after sanitization",
+      "priority": 3,
+      "wp_media_id": null,
+      "geotag": true,
+      "status": "geotagged",
+      "file_size_kb": 94.9,
+      "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
     }
   ]
 }

@@ -57,16 +57,17 @@
       if (!chips.length && line) chips = line.split('|').map(s => s.trim()).filter(s => s && !/^direct|\d{3}[-\s)]/i.test(s)).slice(0, 4);
       const img = c.img();
       const btn2 = m.btn2 || 'See Our Services';
+      const fx = c.fx && c.fx !== 'none' ? ' data-fx="' + esc(c.fx) + '"' : '';
       const nextHref = c.nextSid ? '#sec-' + c.nextSid : '#';
       const copy = '<h1>' + inline(title) + '</h1>' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') +
         '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div>' +
         (chips.length ? '<div class="proof">' + chips.map(x => '<span class="chip">' + icon('check') + ' ' + esc(x) + '</span>').join('') + '</div>' : '');
       if (c.variant === 'split') {
-        return '<div class="hero hero--split"><div class="wrap"><div>' + copy + '</div>' +
+        return '<div class="hero hero--split"' + fx + '><div class="wrap"><div>' + copy + '</div>' +
           (img ? '<img class="hero-img" src="' + esc(img.src) + '" alt="' + esc(img.alt) + '">' : '<div class="hero-img"></div>') + '</div></div>';
       }
-      if (c.variant === 'centered') return '<div class="hero hero--centered"><div class="wrap">' + copy + '</div></div>';
-      return '<div class="hero hero--full" style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap">' + copy + '</div></div>';
+      if (c.variant === 'centered') return '<div class="hero hero--centered"' + fx + '><div class="wrap">' + copy + '</div></div>';
+      return '<div class="hero hero--full"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap">' + copy + '</div></div>';
     }
   };
 
@@ -197,18 +198,28 @@
   };
 
   BLOCKS.gallery = {
-    label: 'Before / after', variants: ['cards'],
+    label: 'Before / after', variants: ['cards', 'slider'],
     render(m, c) {
-      const b = c.pick(/contaminated|before|dirty/i), a = c.pick(/sanitized|after|clean/i);
-      const it = m.items || [];
-      const fig = (img, tag, cap, cls) => '<figure class="' + cls + '">' + (img ? '<img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '">' : '<div style="aspect-ratio:4/3"></div>') +
-        '<span class="tagb">' + tag + '</span><figcaption><strong>' + inline(cap.title || '') + '</strong><br>' + inline((cap.paras || [])[0] || '') + '</figcaption></figure>';
-      const stats = (m.bullets || []).map(x => {
+      const cards = c.galleryCards(m), pairs = c.galleryPairs(m);
+      const metrics = (m.bullets || []).map(x => {
         const mm = (x.text || x.label).match(/^([+\-]?[\d.,]+%?)\s*(.*)$/);
         return mm ? '<div><b>' + esc(mm[1]) + '</b>' + inline(mm[2]) + '</div>' : '';
       }).join('');
-      return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="ba">' + fig(b, 'BEFORE', it[0] || {}, 'before') + fig(a, 'AFTER', it[1] || {}, 'after') + '</div>' +
-        (stats ? '<div class="stats">' + stats + '</div>' : '') + '</div>';
+      const strip = metrics ? '<div class="metrics">' + metrics + '</div>' : '';
+      const h = head(c.eyebrow, m.h2 || m.h1, m.paras[0]);
+      let mode = c.variant;
+      if (mode === 'slider' && !pairs.length) mode = 'cards';
+      if (mode === 'cards' && !cards.length && pairs.length) mode = 'slider';
+      if (mode === 'slider') {
+        const tabs = pairs.length > 1 ? '<div class="ba-tabs">' + pairs.map((p, i) => '<button type="button" class="ba-tab' + (i ? '' : ' on') + '" data-i="' + i + '">' + esc(p.label || ('Case ' + (i + 1))) + '</button>').join('') + '</div>' : '';
+        const cases = pairs.map((p, i) => '<div class="ba-case"' + (i ? ' hidden' : '') + '><div class="ba-slider"><img src="' + esc(c.src(p.before)) + '" alt="Before cleaning"><img class="aft" src="' + esc(c.src(p.after)) + '" alt="After cleaning">' +
+          '<span class="tg a">AFTER</span><span class="tg b">BEFORE</span><span class="bar"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider"></div>' +
+          (p.caption ? '<p class="ba-cap">' + inline(p.caption) + '</p>' : '') + '</div>').join('');
+        return '<div class="wrap">' + h + '<div class="ba-wrap">' + tabs + cases + '</div>' + strip + '</div>';
+      }
+      const figs = cards.map(k => '<figure class="dba-card"><img src="' + esc(c.src(k.img)) + '" alt="' + esc(k.alt || '') + '" loading="lazy">' +
+        (k.caption ? '<figcaption>' + inline(k.caption) + '</figcaption>' : '') + '</figure>').join('');
+      return '<div class="wrap">' + h + (figs ? '<div class="dba-grid">' + figs + '</div>' : '<p style="text-align:center;color:var(--muted)">Add before / after images in the editor.</p>') + strip + '</div>';
     }
   };
 
@@ -250,3 +261,4 @@
 
   B.BLOCKS = BLOCKS; B.icon = icon;
 })();
+

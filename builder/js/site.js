@@ -22,8 +22,9 @@
   B.page = pid => D().pages[pid];
   B.ps = function (pid) {
     const s = B.state.pages;
-    if (!s[pid]) s[pid] = { order: null, hidden: {}, variants: {}, bg: {}, images: {}, models: {}, srcHash: {}, added: {} };
+    if (!s[pid]) s[pid] = { order: null, hidden: {}, variants: {}, bg: {}, images: {}, models: {}, srcHash: {}, added: {}, opts: {} };
     if (!s[pid].srcHash) s[pid].srcHash = {};
+    if (!s[pid].opts) s[pid].opts = {};
     return s[pid];
   };
   B.fileName = function (pid) {
@@ -99,6 +100,25 @@
   };
   B.theme = function () { return Object.assign({}, B.tpl().theme, B.state.theme || {}); };
 
+  /* per-section options (animation, spacing, width, alignment, hover, hero effect) */
+  const OPT_DEFAULTS = { anim: 'auto', speed: 'normal', delay: 0, pad: 'auto', width: 'auto', align: 'auto', hover: 'on', fx: 'auto' };
+  B.getOpts = (pid, sid) => Object.assign({}, OPT_DEFAULTS, B.ps(pid).opts[sid] || {});
+  B.effAnim = o => o.anim !== 'auto' ? o.anim : (B.theme().anim || (B.tpl().motion || {}).anim || 'none');
+  B.effFx = o => o.fx !== 'auto' ? o.fx : (B.theme().fx || (B.tpl().motion || {}).fx || 'none');
+
+  /* brand: webp logo + favicon */
+  B.brand = () => Object.assign({ logoSrc: 'auto', logoData: '', height: 44, mode: 'auto', favicon: true, footer: true }, B.state.brand || {});
+  B.logoUrl = function (preview) {
+    const b = B.brand(), d = D().brand || {};
+    if (b.logoSrc === 'none') return '';
+    if (b.logoSrc === 'upload' && b.logoData) return b.logoData;
+    return d.logo ? (preview ? '../' : '') + d.logo : '';
+  };
+  B.faviconUrl = function (preview) {
+    const b = B.brand(), d = D().brand || {};
+    return b.favicon && d.favicon ? (preview ? '../' : '') + d.favicon : '';
+  };
+
   function hexRgb(h) {
     h = (h || '#000').replace('#', ''); if (h.length === 3) h = h.split('').map(x => x + x).join('');
     const n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -110,7 +130,7 @@
     const [ar, ag, ab] = hexRgb(t.accent), [pr, pg, pb] = hexRgb(t.primary);
     const pad = B.DENSITY[t.density] || 76;
     return ':root{--primary:' + t.primary + ';--dark:' + t.primary + ';--dark-rgb:' + pr + ',' + pg + ',' + pb + ';--accent:' + t.accent + ';--accent-rgb:' + ar + ',' + ag + ',' + ab +
-      ';--heading:' + (lum(t.primary) < 0.4 ? t.primary : '#0f172a') + ';--text:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafc;--card:#fff;--line:#e2e8f0;--radius:' + t.radius + 'px;--pad:' + pad +
+      ';--logo-h:' + (B.brand().height || 44) + 'px;--heading:' + (lum(t.primary) < 0.4 ? t.primary : '#0f172a') + ';--text:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafc;--card:#fff;--line:#e2e8f0;--radius:' + t.radius + 'px;--pad:' + pad +
       'px;--font-h:"' + f.h + '",sans-serif;--font-b:"' + f.b + '",sans-serif}';
   };
 
@@ -167,7 +187,7 @@
     const order = B.sectionList(pid).filter(s => !ps.hidden[s]);
     const next = order[order.indexOf(sid) + 1];
     const c = Object.assign({}, ctxBase, {
-      variant, sid, nextSid: next, eyebrow: model.eyebrow === 'none' ? '' : (model.eyebrow != null ? model.eyebrow : (EYEBROW[sid] || '')),
+      fx: type === 'hero' ? B.effFx(B.getOpts(pid, sid)) : 'none', variant, sid, nextSid: next, eyebrow: model.eyebrow === 'none' ? '' : (model.eyebrow != null ? model.eyebrow : (EYEBROW[sid] || '')),
       img: () => ctxBase.imgs.forSection(sid, type), pick: ctxBase.imgs.pick,
       merged: type === 'hero' ? mergedChips(pid) : []
     });
@@ -175,24 +195,47 @@
     try { inner = block.render(model, c); } catch (e) { inner = '<div class="wrap"><p style="color:#b91c1c">Render error in ' + esc(sid) + ': ' + esc(e.message) + '</p></div>'; }
     let bg = ps.bg[sid] || 'auto';
     if (bg === 'auto') bg = autoBg(pid, sid, type);
-    const cls = 'sec sec-' + type + ' bg-' + bg + (type === 'cta' && variant === 'band' ? ' is-band' : '') + (selected === sid ? ' is-selected' : '');
-    return '<section class="' + cls + '" id="sec-' + esc(sid) + '" data-sec="' + esc(sid) + '">' + inner + '</section>';
+    const o = B.getOpts(pid, sid), anim = B.effAnim(o);
+    const cls = 'sec sec-' + type + ' bg-' + bg + (type === 'cta' && variant === 'band' ? ' is-band' : '') + (selected === sid ? ' is-selected' : '') +
+      (o.pad === 'compact' ? ' pad-compact' : o.pad === 'roomy' ? ' pad-roomy' : '') + (o.width === 'wide' ? ' w-wide' : o.width === 'narrow' ? ' w-narrow' : '') +
+      (o.align === 'left' ? ' al-left' : o.align === 'center' ? ' al-center' : '') + (o.hover === 'off' ? ' nohover' : '') + (ctxBase.instant ? ' in' : '');
+    const dur = { fast: '.35s', normal: '.6s', slow: '1.05s' }[o.speed] || '.6s';
+    const aa = anim && anim !== 'none' ? ' data-anim="' + anim + '" style="--ad:' + dur + ';--adl:' + (Number(o.delay) || 0) + 's"' : '';
+    return '<section class="' + cls + '" id="sec-' + esc(sid) + '" data-sec="' + esc(sid) + '"' + aa + '>' + inner + '</section>';
   }
   B.renderSectionHtml = function (pid, sid, opts) {
     opts = opts || {};
     const base = B.siteCtx(pid, opts.preview);
+    base.instant = !!opts.instant;
     return renderSection(pid, sid, 0, base, opts.selected);
   };
 
   B.siteCtx = function (pid, preview) {
     const d = D(), page = B.page(pid);
+    const base = preview ? '../images/' : 'images/', imgs = page.images || [];
+    const num = s => parseInt((String(s).match(/(\d+)$/) || [0, 0])[1], 10);
+    const pretty = s => String(s).replace(/[-_]+/g, ' ').trim().replace(/\b\w/g, x => x.toUpperCase());
     return {
-      page, pid, nap: d.nap, brief: d.brief, phone: d.nap.phone,
-      imgs: makeImageCtx(pid, preview ? '../images/' : 'images/', {}), altCounter: { n: 0 }
+      page, pid, nap: d.nap, brief: d.brief, phone: d.nap.phone, preview: !!preview,
+      imgs: makeImageCtx(pid, base, {}), altCounter: { n: 0 },
+      src: f => imgSrc(page, f, base),
+      galleryCards: m => Array.isArray(m.cards) ? m.cards :
+        imgs.filter(i => /^before-after-\d+$/.test(i.slot || '')).sort((a, b) => num(a.slot) - num(b.slot)).map(i => ({ img: i.filename, alt: i.alt_text || '', caption: '' })),
+      galleryPairs: m => {
+        if (Array.isArray(m.pairs)) return m.pairs;
+        const map = {};
+        imgs.forEach(i => {
+          const s = i.slot || '';
+          if (/^before-after-\d+$/.test(s) || !/(before|after)/.test(s)) return;
+          const key = s.replace(/before|after/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+          (map[key] = map[key] || {})[/before/.test(s) ? 'before' : 'after'] = i.filename;
+        });
+        return Object.keys(map).filter(k => map[k].before && map[k].after).map((k, n) => ({ before: map[k].before, after: map[k].after, label: 'Case ' + String(n + 1).padStart(2, '0') + ': ' + pretty(k || 'Cleaning'), caption: '' }));
+      }
     };
   };
 
-  function header(pid) {
+  function header(pid, preview) {
     const d = D(), nap = d.nap, pages = Object.values(d.pages);
     const svc = pages.filter(p => p.type === 'service'), loc = pages.filter(p => p.type === 'location');
     const blog = pages.find(p => p.type === 'blog'), about = pages.find(p => p.type === 'about'), contact = pages.find(p => p.type === 'contact');
@@ -210,26 +253,35 @@
       contact ? '<a href="' + B.fileName(contact.id) + '">Contact</a>' : ''
     ].filter(Boolean);
     const tel = 'tel:' + nap.phone.replace(/[^\d+]/g, '');
-    return '<header class="hdr"><div class="wrap"><a class="logo" href="index.html">' + esc(nap.company_name) + '</a><nav class="nav">' + links.join('') +
+    const lg = B.logoUrl(preview), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
+    const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
+    return '<header class="hdr"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
       '<a class="btn btn-primary" href="' + tel + '" style="color:#fff">' + esc(nap.phone) + '</a></nav>' +
       '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
   }
-  function footer() {
+  function footer(preview) {
     const d = D(), nap = d.nap, pages = Object.values(d.pages);
     const list = t => pages.filter(p => p.type === t).map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('');
-    return '<footer class="ftr"><div class="wrap"><div class="cols"><div><h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
+    const flg = B.brand().footer ? B.logoUrl(preview) : '';
+    return '<footer class="ftr"><div class="wrap"><div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
       '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
       '</div><div><h4>Contact</h4><a href="tel:' + nap.phone.replace(/[^\d+]/g, '') + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +
       '<div class="copy">&copy; ' + new Date().getFullYear() + ' ' + esc(nap.company_name) + '. All rights reserved.</div></div></footer>' +
       '<a class="callbar" href="tel:' + nap.phone.replace(/[^\d+]/g, '') + '">' + B.icon('phone') + ' Call ' + esc(nap.phone) + '</a>';
   }
 
-  const PREVIEW_JS = '(function(){var st=document.createElement("style");st.textContent="[data-sec]{cursor:pointer}[data-sec]:hover{outline:2px dashed rgba(var(--accent-rgb),.65);outline-offset:-2px}.is-selected{outline:3px solid var(--accent)!important;outline-offset:-3px}.sec{animation:none!important}";document.head.appendChild(st);' +
+  const PREVIEW_JS = '(function(){var st=document.createElement("style");st.textContent="[data-sec]{cursor:pointer}[data-sec]:hover{outline:2px dashed rgba(var(--accent-rgb),.65);outline-offset:-2px}.is-selected{outline:3px solid var(--accent)!important;outline-offset:-3px}";document.head.appendChild(st);' +
     'document.addEventListener("click",function(e){var a=e.target.closest("a");if(a){var h=a.getAttribute("href")||"";if(h.indexOf("#")===0)return;if(h&&h.indexOf("tel:")!==0&&h.indexOf("mailto:")!==0&&!/^https?:/.test(h)){e.preventDefault();parent.postMessage({b5:"nav",href:h},"*");return}if(/^https?:/.test(h)){e.preventDefault();return}}var s=e.target.closest("[data-sec]");if(s){e.preventDefault();parent.postMessage({b5:"select",sid:s.getAttribute("data-sec")},"*")}},true);' +
     'window.addEventListener("message",function(ev){var d=ev.data||{};if(d.b5==="replace"){var el=document.querySelector("[data-sec=\\""+d.sid+"\\"]");if(el){el.outerHTML=d.html}}' +
+    'if(d.b5==="replay"){var r=document.querySelector("[data-sec=\\""+d.sid+"\\"]");if(r){r.classList.remove("in");void r.offsetWidth;setTimeout(function(){r.classList.add("in")},80)}}' +
     'if(d.b5==="setScroll"){window.scrollTo(0,d.y||0)}if(d.b5==="select"){document.querySelectorAll(".is-selected").forEach(function(x){x.classList.remove("is-selected")});var t=document.querySelector("[data-sec=\\""+d.sid+"\\"]");if(t){t.classList.add("is-selected");if(d.scroll)t.scrollIntoView({behavior:"smooth",block:"start"})}}});' +
     'var tk=0;window.addEventListener("scroll",function(){if(tk)return;tk=1;requestAnimationFrame(function(){tk=0;parent.postMessage({b5:"scroll",y:window.scrollY},"*")})});})();';
+
+  const RUNTIME_JS = '(function(){var d=document;d.documentElement.classList.add("js-anim");function chk(){var l=d.querySelectorAll("[data-anim]:not(.in)");for(var i=0;i<l.length;i++){var r=l[i].getBoundingClientRect();if(r.top<innerHeight*0.92&&r.bottom>0)l[i].classList.add("in")}}' +
+    'addEventListener("scroll",chk,{passive:true});addEventListener("resize",chk);addEventListener("load",chk);setTimeout(chk,60);setTimeout(chk,500);' +
+    'd.addEventListener("input",function(e){var t=e.target;if(t.classList&&t.classList.contains("ba-range")){t.closest(".ba-slider").style.setProperty("--pos",t.value+"%")}});' +
+    'd.addEventListener("click",function(e){var b=e.target.closest(".ba-tab");if(!b)return;var w=b.closest(".ba-wrap");w.querySelectorAll(".ba-tab").forEach(function(x){x.classList.toggle("on",x===b)});w.querySelectorAll(".ba-case").forEach(function(c,i){c.hidden=(String(i)!==b.getAttribute("data-i"))})});})();';
 
   B.buildDocument = function (pid, opts) {
     opts = opts || {};
@@ -242,12 +294,17 @@
     return '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
       '<title>' + esc(title) + '</title><meta name="description" content="' + esc(desc) + '">' + (canon ? '<link rel="canonical" href="' + esc(canon) + '">' : '') +
       '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-      '<link href="https://fonts.googleapis.com/css2?' + f.q + '&display=swap" rel="stylesheet"><style>' + B.cssVars() + B.SITE_CSS + '</style>' + ld + '</head><body>' +
-      header(pid) + '<main>' + body + '</main>' + footer() +
-      (opts.preview ? '<script>' + PREVIEW_JS + '<\/script>' : '') + '</body></html>';
+      (B.faviconUrl(opts.preview) ? '<link rel="icon" type="image/webp" href="' + esc(B.faviconUrl(opts.preview)) + '">' : '') + '<link href="https://fonts.googleapis.com/css2?' + f.q + '&display=swap" rel="stylesheet"><style>' + B.cssVars() + B.SITE_CSS + '</style>' + ld + '</head><body>' +
+      header(pid, opts.preview) + '<main>' + body + '</main>' + footer(opts.preview) +
+      '<script>' + RUNTIME_JS + '<\/script>' + (opts.preview ? '<script>' + PREVIEW_JS + '<\/script>' : '') + '</body></html>';
   };
 
   /* public API for the orchestrator */
+  B.prepGallery = function (pid, sid, m) {
+    const c = B.siteCtx(pid, true);
+    if (!Array.isArray(m.cards)) m.cards = c.galleryCards(m).map(x => Object.assign({}, x));
+    if (!Array.isArray(m.pairs)) m.pairs = c.galleryPairs(m).map(x => Object.assign({}, x));
+  };
   B.exportPage = pid => B.buildDocument(pid, { preview: false });
   B.exportAll = function () { const o = {}; B.pageIds().forEach(p => { o[B.fileName(p)] = B.exportPage(p); }); return o; };
   B.setTemplate = function (id, keepEdits) {

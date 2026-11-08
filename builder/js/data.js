@@ -430,6 +430,10 @@ window.BUILDER_DATA = {
    "aliases": {}
   }
  },
+ "brand": {
+  "logo": null,
+  "favicon": "images/homepage/rockford-air-duct-pros-favicon.webp"
+ },
  "pages": {
   "homepage": {
    "id": "homepage",
@@ -639,6 +643,21 @@ window.BUILDER_DATA = {
      "slot": "blower-wheel-after",
      "filename": "sanitized-furnace-blower-wheel-rockford-residence.webp",
      "alt_text": "Clean sanitized bare metal furnace squirrel cage blower wheel after precision cleaning in Rockford, IL"
+    },
+    {
+     "slot": "before-after-1",
+     "filename": "single-card-air-duct-trunk-rockford-residence.webp",
+     "alt_text": "Churchill Grove residential return air duct decontamination before and after"
+    },
+    {
+     "slot": "before-after-2",
+     "filename": "single-card-dryer-vent-exhaust-rockford-residence.webp",
+     "alt_text": "Rolling Green laundry dryer vent lint hazard cleanout before and after"
+    },
+    {
+     "slot": "before-after-3",
+     "filename": "single-card-blower-wheel-rockford-residence.webp",
+     "alt_text": "Midtown residential furnace blower wheel before and after sanitization"
     }
    ],
    "img_dir": "images/homepage"
