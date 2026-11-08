@@ -45,6 +45,12 @@ def normalize_sections(sections_dict: dict, page_type: str, pid: str):
     for key, content in sections_dict.items():
         renamed[aliases.get(key, key)] = content
 
+    # Flexible page types (blog): keep the author's own section order and count.
+    # Only the required sections must exist; any extra sections are valid.
+    if spec.get("flexible"):
+        warnings = [f"missing required section '{r}'" for r in spec.get("required", []) if r not in renamed]
+        return renamed, warnings
+
     ordered, warnings = {}, []
     for s in spec["sections"]:
         sid = s["id"]

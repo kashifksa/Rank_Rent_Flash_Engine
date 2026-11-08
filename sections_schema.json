@@ -67,6 +67,14 @@
     },
     "blog": {
       "structure_file": "BLOG_POST_STRUCTURE.md",
+      "flexible": true,
+      "_flexible_note": "Blog posts vary by niche topic. Only the required sections must exist (and keep this relative order); any number of extra sections can be added anywhere using the optional library below or any custom id.",
+      "required": ["01_header", "07_faq", "08_conclusion_cta"],
+      "optional_library": [
+        "cause_context", "diy_vs_pro", "structured_data", "how_it_works", "local_considerations",
+        "myth_vs_fact", "cost_factors", "warning_signs", "checklist", "comparison", "case_study",
+        "step_by_step", "pros_and_cons", "seasonal_tips", "tools_and_materials", "regulations", "related_reading"
+      ],
       "sections": [
         {"id": "01_header", "label": "Post Header & Answer", "live": true},
         {"id": "02_cause_context", "label": "Cause / Context", "live": true},
@@ -105,3 +113,4 @@
     }
   }
 }
+
