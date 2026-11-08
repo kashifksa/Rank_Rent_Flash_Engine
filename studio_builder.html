@@ -4682,14 +4682,22 @@ th {
         <div class="form-group">
           <label class="form-label">Select Page</label>
           <select id="page-select" class="form-select" onchange="loadSelectedPage(this.value)">
-            <option value="homepage">🏠 Homepage (Rockford Primary Hub)</option>
-            <option value="preview-stitch-template" style="background: #0f172a; color: #f59e0b; font-weight: 700;">🎨 Template: Modern Industrial (Stitch Master)</option>
-            <option value="about">👥 About Us (Company & Technicians)</option>
-            <option value="contact">📞 Contact Us (Local Dispatch)</option>
-            <option value="air-duct-cleaning-loves-park-il">📍 Loves Park Location Page</option>
-            <option value="commercial-hvac-duct-cleaning">🏢 Commercial HVAC Duct Cleaning</option>
-            <option value="dryer-vent-cleaning-and-lint-removal">🔥 Dryer Vent Cleaning & Lint Removal</option>
-            <option value="how-to-spot-air-duct-cleaning-scams">📰 Blog: How to Spot Duct Scams (Editorial Layout)</option>
+            <optgroup label="🎨 Modern Industrial Design Archetypes (Stitch / Reusable)">
+              <option value="preview-stitch-template" style="background: #0f172a; color: #f59e0b; font-weight: 700;">🏠 Master Homepage (13 Sections, Dual Forms, CS-05)</option>
+              <option value="preview-stitch-service" style="background: #0f172a; color: #f59e0b; font-weight: 700;">🏢 Inner Service: Commercial HVAC Scrubbing</option>
+              <option value="preview-stitch-location" style="background: #0f172a; color: #f59e0b; font-weight: 700;">📍 Satellite Location: Loves Park, IL (FIX 36 &amp; 39)</option>
+              <option value="preview-stitch-blog" style="background: #0f172a; color: #f59e0b; font-weight: 700;">📰 Editorial Authority Blog: How to Spot $49 Scams</option>
+              <option value="preview-stitch-contact" style="background: #0f172a; color: #f59e0b; font-weight: 700;">📞 About &amp; Contact: Central Dispatch Hub (E-E-A-T)</option>
+            </optgroup>
+            <optgroup label="📄 Live Project Pages (Rockford Production)">
+              <option value="homepage">🏠 Homepage (Rockford Primary Hub)</option>
+              <option value="about">👥 About Us (Company &amp; Technicians)</option>
+              <option value="contact">📞 Contact Us (Local Dispatch)</option>
+              <option value="air-duct-cleaning-loves-park-il">📍 Loves Park Location Page</option>
+              <option value="commercial-hvac-duct-cleaning">🏢 Commercial HVAC Duct Cleaning</option>
+              <option value="dryer-vent-cleaning-and-lint-removal">🔥 Dryer Vent Cleaning &amp; Lint Removal</option>
+              <option value="how-to-spot-air-duct-cleaning-scams">📰 Blog: How to Spot Duct Scams (Editorial Layout)</option>
+            </optgroup>
           </select>
         </div>
         <div style="font-size: 11px; color: var(--app-text-muted);" id="meta-kw">
@@ -5368,10 +5376,52 @@ window.BUILDER_PAGES_DATA = {
   },
   "preview-stitch-template": {
     "id": "preview-stitch-template",
-    "title": "Modern Industrial Template (Stitch)",
+    "title": "Master Homepage Template (13 Sections)",
     "slug": "templates/stitch_modern_industrial_master.html",
     "type": "template_preview",
-    "keyword": "modern industrial trade architecture",
+    "desc": "Dual Fast Quote Intake Forms • Denton Split CS-05 • 4-Phase Protocol • Full Motion",
+    "previewHeight": "8200px",
+    "keyword": "modern industrial master homepage",
+    "sections": {}
+  },
+  "preview-stitch-service": {
+    "id": "preview-stitch-service",
+    "title": "Inner Service: Commercial HVAC Scrubbing",
+    "slug": "templates/stitch_template_service.html",
+    "type": "template_preview",
+    "desc": "NADCA ACR 2021 Protocol • Specification Matrix • Scope Tiers • Full Motion",
+    "previewHeight": "5800px",
+    "keyword": "commercial hvac duct cleaning",
+    "sections": {}
+  },
+  "preview-stitch-location": {
+    "id": "preview-stitch-location",
+    "title": "Satellite Location: Loves Park, IL",
+    "slug": "templates/stitch_template_location.html",
+    "type": "template_preview",
+    "desc": "Geographic Purity (FIX 36) • Loves Park City Hall & IL-251 (FIX 39) • Full Motion",
+    "previewHeight": "5400px",
+    "keyword": "air duct cleaning loves park il",
+    "sections": {}
+  },
+  "preview-stitch-blog": {
+    "id": "preview-stitch-blog",
+    "title": "Editorial Authority Blog: Spotting $49 Duct Scams",
+    "slug": "templates/stitch_template_blog.html",
+    "type": "template_preview",
+    "desc": "Consumer Protection Guide • Bait-and-Switch Red Flags • Sticky Table of Contents",
+    "previewHeight": "4600px",
+    "keyword": "air duct cleaning scam red flags",
+    "sections": {}
+  },
+  "preview-stitch-contact": {
+    "id": "preview-stitch-contact",
+    "title": "About & Contact Hub: Central Dispatch Terminal",
+    "slug": "templates/stitch_template_contact.html",
+    "type": "template_preview",
+    "desc": "Dual Dispatch Intake • 1420 N Main St NAP Lock • Entity Triangulation • Full Motion",
+    "previewHeight": "5200px",
+    "keyword": "rockford air duct pros dispatch contact",
     "sections": {}
   },
   "about": {
@@ -8911,11 +8961,11 @@ window.BUILDER_PAGES_DATA = {
             <div style="background: #0B1320; color: #ffffff; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.12); z-index: 10;">
               <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="background: #D95D0F; color: #ffffff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Stitch Master Preset</span>
-                <strong style="font-size: 14px; color: #f8fafc;">Modern Industrial Authority Design (13 Sections)</strong>
+                <strong style="font-size: 14px; color: #f8fafc;">${pageData.title}</strong>
               </div>
-              <span style="font-size: 11px; color: #94a3b8;">Dual Fast Quote Intake Forms • Denton Split CS-05 • 4-Phase Protocol</span>
+              <span style="font-size: 11px; color: #94a3b8;">${pageData.desc || 'Modern Industrial Motion & Interaction Design System'}</span>
             </div>
-            <iframe src="templates/stitch_modern_industrial_master.html" style="width: 100%; height: 8200px; min-height: 100vh; border: none; display: block; background: #ffffff;" id="stitch-preview-iframe"></iframe>
+            <iframe src="${pageData.slug}" style="width: 100%; height: ${pageData.previewHeight || '8200px'}; min-height: 100vh; border: none; display: block; background: #ffffff;" id="stitch-preview-iframe"></iframe>
           </div>
         `;
         return;
