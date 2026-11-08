@@ -29,6 +29,37 @@ def load_json_safe(path: Path):
     return {}
 
 
+SCHEMA = load_json_safe(BASE_DIR / "sections_schema.json").get("page_types", {})
+
+
+def normalize_sections(sections_dict: dict, page_type: str, pid: str):
+    """Rename section keys to the canonical LIVE-site ids from sections_schema.json,
+    drop sections the live site does not render separately, and return them in live order."""
+    spec = SCHEMA.get(page_type)
+    if not spec:
+        return sections_dict, []
+    aliases = spec.get("aliases", {})
+    canon = {s["id"]: s for s in spec["sections"]}
+
+    renamed = {}
+    for key, content in sections_dict.items():
+        renamed[aliases.get(key, key)] = content
+
+    ordered, warnings = {}, []
+    for s in spec["sections"]:
+        sid = s["id"]
+        if sid in renamed:
+            if s.get("live", True):
+                ordered[sid] = renamed[sid]
+        elif s.get("live", True):
+            warnings.append(f"missing live section '{sid}'")
+    for key, content in renamed.items():
+        if key not in canon:
+            ordered[key] = content
+            warnings.append(f"extra non-schema section '{key}'")
+    return ordered, warnings
+
+
 def parse_markdown_sections(md_text: str):
     yaml_match = re.search(r"^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?", md_text)
     body_str = md_text[yaml_match.end():].strip() if yaml_match else md_text.strip()
@@ -36,28 +67,13 @@ def parse_markdown_sections(md_text: str):
     pattern = r"(?:<!--\s*=+\s*-->\s*)?<!--\s*SECTION:\s*([a-zA-Z0-9_-]+)(?:\s*\|\s*BLOCK:[^>]*)?\s*-->(?:\s*<!--\s*=+\s*-->)?"
     parts = re.split(pattern, body_str)
 
-    canonical_map = {
-        "gradient-hero": "01_hero",
-        "hero": "01_hero",
-        "trust-bar": "02_trust_bar",
-        "services-grid": "03_services_grid",
-        "why-choose-us": "04_why_choose_us",
-        "process": "05_process",
-        "local-proof": "06_local_proof",
-        "service-area": "07_service_area",
-        "mid-cta": "08_mid_cta",
-        "faq": "09_faq",
-        "bottom-cta": "10_bottom_cta",
-    }
-
     sections_dict = {}
     if len(parts) > 1:
         for i in range(1, len(parts), 2):
             sec_name = parts[i].strip()
             sec_content = parts[i + 1].strip() if (i + 1) < len(parts) else ""
             sec_content = re.sub(r"<!--\s*=+\s*-->\s*$", "", sec_content).strip()
-            mapped_key = canonical_map.get(sec_name, sec_name)
-            sections_dict[mapped_key] = sec_content
+            sections_dict[sec_name] = sec_content
     else:
         sections_dict["main"] = body_str
 
@@ -136,6 +152,9 @@ def compile_all_pages(sync_builder_html=True):
 
         md_text = md_path.read_text(encoding="utf-8", errors="ignore")
         sections_dict = parse_markdown_sections(md_text)
+        sections_dict, sec_warnings = normalize_sections(sections_dict, p["type"], pid)
+        for w in sec_warnings:
+            print(f"  [SECTIONS] {pid}: {w}")
         meta_data = load_json_safe(meta_path)
         plan_data = load_json_safe(plan_path)
         images_list = plan_data.get("images", [])

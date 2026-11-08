@@ -1,0 +1,107 @@
+{
+  "_comment": "Single source of truth for page sections. Derived from the LIVE site (dist/) as updated. Order = live render order. live:false = content may exist in the .md but the live site does NOT render it as its own section (it is merged into the hero), so the builder skips it.",
+  "page_types": {
+    "homepage": {
+      "structure_file": "MASTER_HOMEPAGE_STRUCTURE.md",
+      "sections": [
+        {"id": "hero", "block": "CS-01", "label": "Hero", "live": true},
+        {"id": "trust-bar", "block": "CS-01", "label": "Trust Bar (merged into hero proof bar)", "live": false, "merged_into": "hero"},
+        {"id": "intro", "block": "CS-01-INTRO", "label": "Problem / Diagnostic Intro", "live": true},
+        {"id": "services-grid", "block": "CS-02", "label": "Services Grid", "live": true},
+        {"id": "why-us", "block": "CS-03", "label": "Why Choose Us", "live": true},
+        {"id": "local-context", "block": "CS-04B", "label": "Local Context", "live": true},
+        {"id": "before-after", "block": "CS-05", "label": "Before & After", "live": true},
+        {"id": "comparison-table", "block": "CS-17", "label": "Comparison Table", "live": true},
+        {"id": "process", "block": "CS-04", "label": "Process", "live": true},
+        {"id": "awards", "block": "CS-07", "label": "Awards & Certifications", "live": true},
+        {"id": "testimonials", "block": "CS-08", "label": "Reviews", "live": true},
+        {"id": "service-area", "block": "CS-11", "label": "Service Area & Map", "live": true},
+        {"id": "faq", "block": "CS-09", "label": "FAQ", "live": true},
+        {"id": "bottom-cta", "block": "CS-10", "label": "Bottom CTA", "live": true}
+      ],
+      "aliases": {"gradient-hero": "hero", "why-choose-us": "why-us", "reviews": "testimonials"}
+    },
+    "service": {
+      "structure_file": "SERVICE_PAGE_STRUCTURE.md",
+      "sections": [
+        {"id": "01_hero", "label": "Hero", "live": true},
+        {"id": "02_trust_bar", "label": "Trust Bar (merged into hero)", "live": false, "merged_into": "01_hero"},
+        {"id": "03_services_grid", "label": "Services Grid", "live": true},
+        {"id": "04_why_choose_us", "label": "Why Choose Us", "live": true},
+        {"id": "05_process", "label": "Process", "live": true},
+        {"id": "06_local_proof", "label": "Local Proof", "live": true},
+        {"id": "07_service_area", "label": "Service Area", "live": true},
+        {"id": "08_mid_cta", "label": "Mid CTA", "live": true},
+        {"id": "09_faq", "label": "FAQ", "live": true},
+        {"id": "10_bottom_cta", "label": "Bottom CTA", "live": true}
+      ],
+      "aliases": {
+        "gradient-hero": "01_hero", "hero": "01_hero",
+        "trust-bar": "02_trust_bar",
+        "services-grid": "03_services_grid",
+        "why-choose-us": "04_why_choose_us", "04_why_us": "04_why_choose_us", "why-us": "04_why_choose_us",
+        "process": "05_process",
+        "local-proof": "06_local_proof",
+        "service-area": "07_service_area",
+        "mid-cta": "08_mid_cta",
+        "faq": "09_faq",
+        "bottom-cta": "10_bottom_cta"
+      }
+    },
+    "location": {
+      "structure_file": "LOCATION_PAGE_STRUCTURE.md",
+      "sections": [
+        {"id": "01_hero", "label": "Hero", "live": true},
+        {"id": "02_localized_intro", "label": "Localized Intro", "live": true},
+        {"id": "03_services_overview", "label": "Services Overview", "live": true},
+        {"id": "04_local_proof", "label": "Local Proof", "live": true},
+        {"id": "05_local_faq", "label": "Local FAQ", "live": true},
+        {"id": "06_service_area", "label": "Service Area Detail", "live": true},
+        {"id": "07_bottom_cta", "label": "Bottom CTA", "live": true}
+      ],
+      "aliases": {
+        "gradient-hero": "01_hero", "localized-intro": "02_localized_intro",
+        "services-overview": "03_services_overview", "local-proof": "04_local_proof",
+        "local-faq": "05_local_faq", "service-area-detail": "06_service_area", "bottom-cta": "07_bottom_cta"
+      }
+    },
+    "blog": {
+      "structure_file": "BLOG_POST_STRUCTURE.md",
+      "sections": [
+        {"id": "01_header", "label": "Post Header & Answer", "live": true},
+        {"id": "02_cause_context", "label": "Cause / Context", "live": true},
+        {"id": "03_diy_vs_pro", "label": "DIY vs Pro", "live": true},
+        {"id": "04_structured_data", "label": "Structured Data Element", "live": true},
+        {"id": "05_how_it_works", "label": "How It Works", "live": true},
+        {"id": "06_local_considerations", "label": "Local Considerations", "live": true},
+        {"id": "07_faq", "label": "FAQ", "live": true},
+        {"id": "08_conclusion_cta", "label": "Conclusion CTA", "live": true}
+      ],
+      "aliases": {}
+    },
+    "about": {
+      "structure_file": "ABOUT_PAGE_STRUCTURE.md",
+      "sections": [
+        {"id": "01_identity_hook", "label": "Identity Hook", "live": true},
+        {"id": "02_origin_story", "label": "Origin Story", "live": true},
+        {"id": "03_team_credentials", "label": "Team & Credentials", "live": true},
+        {"id": "04_credentials_display", "label": "Credentials Display", "live": true},
+        {"id": "05_community_proof", "label": "Community Proof", "live": true},
+        {"id": "06_trust_signals", "label": "Trust Signals", "live": true},
+        {"id": "07_service_area_nap", "label": "Service Area & NAP", "live": true},
+        {"id": "08_bottom_cta", "label": "Bottom CTA", "live": true}
+      ],
+      "aliases": {}
+    },
+    "contact": {
+      "structure_file": "ABOUT_PAGE_STRUCTURE.md",
+      "sections": [
+        {"id": "01_contact_hero", "label": "Contact Hero", "live": true},
+        {"id": "02_contact_form", "label": "Contact Form", "live": true},
+        {"id": "03_nap_block", "label": "NAP & Hours", "live": true},
+        {"id": "04_trust_bar", "label": "Trust Bar (not rendered live)", "live": false}
+      ],
+      "aliases": {}
+    }
+  }
+}
