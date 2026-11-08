@@ -17,7 +17,7 @@ canonical: https://rockfordairductpros.com/video-camera-ductwork-inspection/
 ---
 
 <!-- ========================================================================= -->
-<!-- SECTION: gradient-hero | BLOCK: kt-hero -->
+<!-- SECTION: 01_hero | BLOCK: kt-hero -->
 <!-- ========================================================================= -->
 # Video Camera Ductwork Inspection in Rockford, IL
 
@@ -28,7 +28,7 @@ Uncover hidden blockages, verify structural sheet metal integrity, and inspect p
 Direct Dispatch: (815) 555-0142 | NADCA ASCS Certified Diagnostics
 
 <!-- ========================================================================= -->
-<!-- SECTION: trust-bar | BLOCK: kt-row -->
+<!-- SECTION: 02_trust_bar | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 * **High-Definition Fiber-Optic Borescopes**
 * **Real-Time Client Monitor Verification**
@@ -36,7 +36,7 @@ Direct Dispatch: (815) 555-0142 | NADCA ASCS Certified Diagnostics
 * **Serving Winnebago County Since 2014**
 
 <!-- ========================================================================= -->
-<!-- SECTION: services-grid | BLOCK: kt-columns -->
+<!-- SECTION: 03_services_grid | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Our Rockford Video Camera Ductwork Inspection Solutions
 
@@ -58,7 +58,7 @@ Concealed residential duct systems frequently suffer from disconnected joints, u
 Schedule Structural Ductwork Inspection
 
 <!-- ========================================================================= -->
-<!-- SECTION: why-choose-us | BLOCK: kt-columns -->
+<!-- SECTION: 04_why_choose_us | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Why Rockford Property Owners Choose Us for Duct Camera Inspections
 
@@ -70,7 +70,7 @@ Property owners across Winnebago County choose Rockford Air Duct Pros because ou
 * **Specialized for Older Rockford Architecture**: Historic homes throughout Central Rockford and Churchill Grove feature custom duct transitions that require steerable cameras to navigate restrictive elbows.
 
 <!-- ========================================================================= -->
-<!-- SECTION: process | BLOCK: kt-columns -->
+<!-- SECTION: 05_process | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## How Our Video Camera Duct Inspection Process Works in Rockford
 
@@ -83,7 +83,7 @@ Our systematic camera diagnostic process captures comprehensive optical evidence
 | **Phase 3: Client Review & Reporting** | Our certified technician reviews the recorded video footage with you on-site, providing honest recommendations and documented proof of ductwork condition. | 10-15 min |
 
 <!-- ========================================================================= -->
-<!-- SECTION: local-proof | BLOCK: kt-testimonials -->
+<!-- SECTION: 06_local_proof | BLOCK: kt-testimonials -->
 <!-- ========================================================================= -->
 ## What Rockford Customers Say About Our Video Camera Inspections
 
@@ -104,7 +104,7 @@ Property owners throughout Rockford trust our optical diagnostics for honest eva
 Our local technicians have performed over 520 certified video camera ductwork inspections across Rockford and Winnebago County, maintaining a 4.9-star customer satisfaction rating.
 
 <!-- ========================================================================= -->
-<!-- SECTION: service-area | BLOCK: kt-row -->
+<!-- SECTION: 07_service_area | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Greater Rockford Video Camera Duct Inspection Service Area
 
@@ -119,10 +119,8 @@ We routinely dispatch service vehicles throughout the following Rockford distric
 * Midtown and Downtown Rockford
 * Zip codes: 61101, 61102, 61103, 61104, 61107, 61108, 61109, and 61114
 
-Our crews also service adjacent regional communities including [Loves Park](air-duct-cleaning-loves-park-il.html), Machesney Park, Belvidere, and Cherry Valley.
-
 <!-- ========================================================================= -->
-<!-- SECTION: mid-cta | BLOCK: kt-row -->
+<!-- SECTION: 08_mid_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Schedule Video Camera Ductwork Inspection in Rockford
 
@@ -133,7 +131,7 @@ Stop wondering what is circulating through your home heating and cooling system.
 Prompt Scheduling Available • High-Definition Digital Evidence • NADCA ASCS Certified
 
 <!-- ========================================================================= -->
-<!-- SECTION: faq | BLOCK: kt-accordion -->
+<!-- SECTION: 09_faq | BLOCK: kt-accordion -->
 <!-- ========================================================================= -->
 ## Frequently Asked Questions About Video Duct Inspection in Rockford
 
@@ -162,7 +160,7 @@ Yes. Video camera duct inspection is strongly recommended during home buying due
 Yes. Upon request, our technicians provide homeowners and commercial facility managers with digital video clips and high-resolution still photographs showing interior duct conditions both before and after service.
 
 <!-- ========================================================================= -->
-<!-- SECTION: bottom-cta | BLOCK: kt-row -->
+<!-- SECTION: 10_bottom_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Ready for Certified Video Ductwork Inspection in Rockford?
 

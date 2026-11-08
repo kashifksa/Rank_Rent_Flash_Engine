@@ -1,7 +1,7 @@
 ---
 page_id: negative-air-vacuum-trunk-line-cleaning
 page_type: service
-phase: 2
+phase: 1
 slug: negative-air-vacuum-trunk-line-cleaning
 h1: Negative Air Vacuum Trunk Line Cleaning in Rockford, IL
 meta_title: Negative Air Vacuum Trunk Line Cleaning Rockford IL | NADCA Pros
@@ -17,7 +17,7 @@ canonical: https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleani
 ---
 
 <!-- ========================================================================= -->
-<!-- SECTION: gradient-hero | BLOCK: kt-hero -->
+<!-- SECTION: 01_hero | BLOCK: kt-hero -->
 <!-- ========================================================================= -->
 # Negative Air Vacuum Trunk Line Cleaning in Rockford, IL
 
@@ -28,7 +28,7 @@ Restore engineered heating airflow, eliminate decades of compacted dust, and pro
 Direct Dispatch: (815) 555-0142 | Licensed and Insured in Illinois
 
 <!-- ========================================================================= -->
-<!-- SECTION: trust-bar | BLOCK: kt-row -->
+<!-- SECTION: 02_trust_bar | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 * **NADCA ASCS Certified Technicians**
 * **5,000 CFM Negative Air HEPA Extraction**
@@ -36,7 +36,7 @@ Direct Dispatch: (815) 555-0142 | Licensed and Insured in Illinois
 * **Serving Winnebago County Since 2014**
 
 <!-- ========================================================================= -->
-<!-- SECTION: services-grid | BLOCK: kt-columns -->
+<!-- SECTION: 03_services_grid | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Our Rockford Negative Air Trunk Line Cleaning Solutions
 
@@ -58,7 +58,7 @@ Individual branch duct runs feeding bedrooms and family rooms receive targeted h
 Schedule Branch Run Cleaning
 
 <!-- ========================================================================= -->
-<!-- SECTION: why-choose-us | BLOCK: kt-columns -->
+<!-- SECTION: 04_why_choose_us | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Why Rockford Property Owners Choose Us for Trunk Line Cleaning
 
@@ -70,7 +70,7 @@ Property owners across Winnebago County choose Rockford Air Duct Pros because ne
 * **Airtight Service Port Sealing**: After vacuum cleaning concludes, access openings in main trunks are closed with 26-gauge galvanized steel patch plates and sealed with mastic tape to preserve static pressure.
 
 <!-- ========================================================================= -->
-<!-- SECTION: process | BLOCK: kt-columns -->
+<!-- SECTION: 05_process | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## How Our Negative Air Vacuum Cleaning Process Works in Rockford
 
@@ -83,7 +83,7 @@ Our systematic source removal process protects your living areas and guarantees 
 | **Phase 3: Trunk Extraction & Closure** | High-pressure agitation scours the main trunk line while continuous suction draws dislodged particulates into triple-stage HEPA filtration, followed by airtight galvanized steel plate installation. | 45-60 min |
 
 <!-- ========================================================================= -->
-<!-- SECTION: local-proof | BLOCK: kt-testimonials -->
+<!-- SECTION: 06_local_proof | BLOCK: kt-testimonials -->
 <!-- ========================================================================= -->
 ## What Rockford Customers Say About Our Negative Air Cleaning
 
@@ -104,7 +104,7 @@ Verified homeowners throughout Rockford trust our technicians for prompt arrival
 Our local technicians have performed over 450 certified negative air trunk line extractions across Rockford and Winnebago County, maintaining a 4.9-star customer satisfaction rating.
 
 <!-- ========================================================================= -->
-<!-- SECTION: service-area | BLOCK: kt-row -->
+<!-- SECTION: 07_service_area | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Greater Rockford Negative Air Service Area
 
@@ -119,10 +119,8 @@ We routinely dispatch service vehicles throughout the following Rockford distric
 * Midtown and Downtown Rockford
 * Zip codes: 61101, 61102, 61103, 61104, 61107, 61108, 61109, and 61114
 
-Our crews also service adjacent regional communities including [Loves Park](air-duct-cleaning-loves-park-il.html), Machesney Park, Belvidere, and Cherry Valley.
-
 <!-- ========================================================================= -->
-<!-- SECTION: mid-cta | BLOCK: kt-row -->
+<!-- SECTION: 08_mid_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Schedule Negative Air Vacuum Trunk Cleaning in Rockford
 
@@ -133,7 +131,7 @@ Stop circulating decades of settled dust, pet dander, and renovation grit throug
 Prompt Scheduling Available • 100% Negative Air Containment • NADCA ASCS Certified
 
 <!-- ========================================================================= -->
-<!-- SECTION: faq | BLOCK: kt-accordion -->
+<!-- SECTION: 09_faq | BLOCK: kt-accordion -->
 <!-- ========================================================================= -->
 ## Frequently Asked Questions About Negative Air Trunk Line Cleaning in Rockford
 
@@ -162,7 +160,7 @@ A comprehensive negative air cleaning appointment for an average Rockford single
 NADCA recommends whole-system negative air cleaning every three to five years under normal residential conditions. Homes with shedding pets, recent construction or remodeling projects, family members with respiratory sensitivities, or older historic Rockford homes should consider inspection every two to three years.
 
 <!-- ========================================================================= -->
-<!-- SECTION: bottom-cta | BLOCK: kt-row -->
+<!-- SECTION: 10_bottom_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Ready for Certified Negative Air Trunk Line Cleaning in Rockford?
 

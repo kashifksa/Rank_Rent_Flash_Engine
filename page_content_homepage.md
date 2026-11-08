@@ -41,7 +41,7 @@ Schedule Inspection | Explore Core Services
 * Locally Owned and Operated Since 2014
 * NADCA ASCS Certified Technicians
 * Same or Next-Day Dispatch Available Today
-* Upfront Flat-Rate Pricing with Zero Surcharges
+* Written Scope of Work Approved Before Service
 * EPA Clean Air Guidelines Compliant
 
 <!-- ========================================================================= -->
@@ -51,7 +51,7 @@ Schedule Inspection | Explore Core Services
 
 Professional air duct cleaning in Rockford is a comprehensive mechanical decontamination of supply and return ductwork using commercial negative air pressure vacuum equipment running at five thousand CFM and motorized agitation brushes. This certified source removal process eliminates accumulated drywall dust, pet dander, furnace soot, and biological mold spores without releasing debris back into your indoor living spaces.
 
-Every residential and commercial heating and cooling system cycles thousands of cubic feet of air through central ductwork every hour. Over years of seasonal temperature swings, moisture condensation, and routine living activities, galvanized sheet metal trunks accumulate heavy dust blankets that standard furnace filters cannot prevent. Our locally based technicians provide certified source removal, upfront flat-rate quotes, hospital-grade containment protocols, and transparent fiberoptic camera verification for properties throughout Winnebago County.
+Every residential and commercial heating and cooling system cycles thousands of cubic feet of air through central ductwork every hour. Over years of seasonal temperature swings, moisture condensation, and routine living activities, galvanized sheet metal trunks accumulate heavy dust blankets that standard furnace filters cannot prevent. Our locally based technicians provide certified source removal, upfront written scopes of work, hospital-grade containment protocols, and transparent fiberoptic camera verification for properties throughout Winnebago County.
 
 <!-- ========================================================================= -->
 <!-- SECTION: services-grid | BLOCK: CS-02                                     -->
@@ -128,7 +128,7 @@ Before hiring an air duct cleaning contractor in Rockford, examine how certified
 | Mechanical Brush Agitation | 360-Degree Rotary Motorized Scrubbing | Compressed Air Wand Only | Manual Hand Brush Near Register Grille |
 | Technician Accreditation | NADCA ASCS Certified Technicians | Uncertified Subcontractors | Uncertified Homeowner |
 | Live Video Verification | High-Definition Borescope Before and After | Refuse to Show Duct Interior | Limited Flashlight View Only |
-| Pricing Transparency | Upfront Flat-Rate Quotes with Zero Surcharges | Low Bait-and-Switch Rate with High Upsells | Tool Rental Costs and Damaged Duct Vents |
+| Scope Transparency | Written Scope Approved Before Work Starts | Vague Scope with Add-On Upsells | Rented Equipment and Damaged Duct Vents |
 
 <!-- ========================================================================= -->
 <!-- SECTION: process | BLOCK: CS-04                                           -->
@@ -180,8 +180,8 @@ Not an out-of-state call center or coupon franchise. Dedicated trade technicians
 ### EPA-Registered Botanical Standards
 We exclusively apply hospital-grade botanical thyme antimicrobial treatments that are non-toxic and child-and-pet safe.
 
-### Upfront Flat-Rate Pricing Guarantee
-Zero hidden travel fees, zero per-vent surprise charges, and zero bait-and-switch coupon tactics. You approve the price before work starts.
+### Written Scope Guarantee
+Zero bait-and-switch coupon tactics and zero surprise add-ons. You approve the full scope of work before service starts.
 
 <!-- ========================================================================= -->
 <!-- SECTION: testimonials | BLOCK: CS-08                                      -->
@@ -197,7 +197,7 @@ Reviewer: Marcus T., Verified Homeowner
 
 ### Rockford Homeowner (Edgebrook)
 Rating: 5.0 out of 5 stars
-We got caught two years ago by a forty-nine dollar coupon company that blew dust into our master bedroom. These technicians brought real truck-mounted five thousand CFM negative air equipment and sealed every register. No hidden fees and the flat rate was honored exactly.
+We got caught two years ago by a forty-nine dollar coupon company that blew dust into our master bedroom. These technicians brought real truck-mounted five thousand CFM negative air equipment and sealed every register. The scope was explained up front and followed exactly.
 Reviewer: Sarah and David K., Verified Homeowners
 
 ### Machesney Park Homeowner
@@ -250,7 +250,7 @@ Yes. We apply an EPA-registered botanical antimicrobial fog derived from natural
 <!-- ========================================================================= -->
 ## Breathe Cleaner Air in Your Rockford Home Today
 
-Speak directly with an ASCS certified technician. Get transparent flat-rate quotes with zero hidden fees and same or next-day dispatch availability across Winnebago County.
+Speak directly with an ASCS certified technician. Get a clear written scope of work and same or next-day dispatch availability across Winnebago County.
 
 Direct Dispatch: (815) 555-0142
 Certified Technicians On Duty Today Across Greater Rockford

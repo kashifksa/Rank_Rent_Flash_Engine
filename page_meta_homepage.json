@@ -23,7 +23,6 @@
         "@id": "https://rockfordairductpros.com/#business",
         "name": "Rockford Air Duct Pros",
         "telephone": "+18155550142",
-        "priceRange": "$$",
         "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=900&q=80",
         "address": {
           "@type": "PostalAddress",

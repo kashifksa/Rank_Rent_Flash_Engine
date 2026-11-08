@@ -57,7 +57,7 @@ Botanical antimicrobial fogging neutralizes microbial odors, pet dander proteins
 <!-- SECTION: 04_local_proof -->
 ## What Loves Park Customers Are Saying
 
-Local homeowners across Loves Park depend on our honest pricing, punctual arrival, and documented camera verification.
+Local homeowners across Loves Park depend on our honest service, punctual arrival, and documented camera verification.
 
 > "Our home is on the Loves Park side of the river, a 1967 split-level near Machesney Park Road. The ducts were original and visibly dusty at every register. The crew did a camera pass first, then cleaned the full trunk system cleanly."
 > - Tom R., North Loves Park
@@ -86,7 +86,7 @@ Our service vans reach Loves Park addresses within twenty to thirty minutes of d
 Elevated summer humidity along the Rock River basin often causes moisture condensation on cold basement supply boots. When high indoor humidity combines with accumulated pet hair and household lint inside uncleaned ducts, it creates an environment ripe for microbial growth. Regular mechanical cleaning keeps interior surfaces dry and free of organic fuel sources.
 
 ### Do you service properties across both Loves Park and Machesney Park?
-Yes, our service territory covers both Loves Park and Machesney Park with equal responsiveness. Because both communities share municipal borders and similar residential architecture, our crews operate across both municipalities without adding secondary travel surcharges or out-of-area dispatch fees.
+Yes, our service territory covers both Loves Park and Machesney Park with equal responsiveness. Because both communities share municipal borders and similar residential architecture, our crews operate across both municipalities without out-of-area dispatch delays.
 
 ### What time of year is best to schedule duct cleaning in Loves Park?
 Late summer and early autumn represent the ideal window for Loves Park duct cleaning, just before northern Illinois winter temperatures trigger continuous furnace operation. Cleaning your ventilation system ahead of heating season ensures dust settled over summer months is not recirculated when your furnace blower starts running continuously.
@@ -107,7 +107,7 @@ We frequently service homes within the following Loves Park districts and postal
 <!-- SECTION: 07_bottom_cta -->
 ## Serving Loves Park - Call for a Free Estimate Today
 
-Restore clean indoor airflow and eliminate deep-seated allergen accumulation in your Loves Park home. Contact our certified team today to schedule an inspection and receive an upfront, written estimate.
+Restore clean indoor airflow and eliminate deep-seated allergen accumulation in your Loves Park home. Contact our certified team today to schedule an inspection and receive a written scope of work.
 
 **Call (815) 555-0142**
 

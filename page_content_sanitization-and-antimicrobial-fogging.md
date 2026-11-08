@@ -17,7 +17,7 @@ canonical: https://rockfordairductpros.com/sanitization-and-antimicrobial-foggin
 ---
 
 <!-- ========================================================================= -->
-<!-- SECTION: gradient-hero | BLOCK: kt-hero -->
+<!-- SECTION: 01_hero | BLOCK: kt-hero -->
 <!-- ========================================================================= -->
 # Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL
 
@@ -28,7 +28,7 @@ Safeguard indoor air quality, eliminate deep-seated microbial growth caused by N
 Direct Dispatch: (815) 555-0142 | EPA-Registered Botanical Standards
 
 <!-- ========================================================================= -->
-<!-- SECTION: trust-bar | BLOCK: kt-row -->
+<!-- SECTION: 02_trust_bar | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 * **EPA-Registered Botanical Solutions**
 * **Child and Pet Safe Organic Decontaminants**
@@ -36,7 +36,7 @@ Direct Dispatch: (815) 555-0142 | EPA-Registered Botanical Standards
 * **Serving Winnebago County Since 2014**
 
 <!-- ========================================================================= -->
-<!-- SECTION: services-grid | BLOCK: kt-columns -->
+<!-- SECTION: 03_services_grid | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Our Rockford Air Duct Sanitization and Antimicrobial Fogging Solutions
 
@@ -58,7 +58,7 @@ Persistent odors caused by dead rodents, past water infiltration, cigar smoke, o
 Schedule Odor Remediation Treatment
 
 <!-- ========================================================================= -->
-<!-- SECTION: why-choose-us | BLOCK: kt-columns -->
+<!-- SECTION: 04_why_choose_us | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## Why Rockford Property Owners Choose Us for Air Duct Sanitization
 
@@ -70,7 +70,7 @@ Property owners across Winnebago County trust Rockford Air Duct Pros because our
 * **Ultra-Low Volume Micro-Atomization**: Commercial cold ULV atomizers produce microscopic droplets that stay suspended in moving air currents, guaranteeing complete surface coverage across the longest residential and commercial duct trunks.
 
 <!-- ========================================================================= -->
-<!-- SECTION: process | BLOCK: kt-columns -->
+<!-- SECTION: 05_process | BLOCK: kt-columns -->
 <!-- ========================================================================= -->
 ## How Our Air Duct Sanitization Process Works in Rockford
 
@@ -83,7 +83,7 @@ Our certified multi-phase sanitization process eliminates microbial pathogens sa
 | **Phase 3: Airflow Dwell & Recirculation** | The HVAC blower circulates the botanical mist across all branch registers for twenty minutes, completing contact dwell times and leaving clean, fresh indoor air. | 20-30 min |
 
 <!-- ========================================================================= -->
-<!-- SECTION: local-proof | BLOCK: kt-testimonials -->
+<!-- SECTION: 06_local_proof | BLOCK: kt-testimonials -->
 <!-- ========================================================================= -->
 ## What Rockford Customers Say About Our Air Duct Sanitization
 
@@ -104,7 +104,7 @@ Property owners throughout Rockford rely on our certified technicians for thorou
 Our local technicians have performed over 380 certified antimicrobial duct fogging treatments across Rockford and Winnebago County, maintaining a 4.9-star customer satisfaction rating.
 
 <!-- ========================================================================= -->
-<!-- SECTION: service-area | BLOCK: kt-row -->
+<!-- SECTION: 07_service_area | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Greater Rockford Air Duct Sanitization Service Area
 
@@ -119,10 +119,8 @@ We routinely dispatch service vehicles throughout the following Rockford distric
 * Midtown and Downtown Rockford
 * Zip codes: 61101, 61102, 61103, 61104, 61107, 61108, 61109, and 61114
 
-Our crews also service adjacent regional communities including [Loves Park](air-duct-cleaning-loves-park-il.html), Machesney Park, Belvidere, and Cherry Valley.
-
 <!-- ========================================================================= -->
-<!-- SECTION: mid-cta | BLOCK: kt-row -->
+<!-- SECTION: 08_mid_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Schedule Air Duct Sanitization and Antimicrobial Fogging in Rockford
 
@@ -133,7 +131,7 @@ Stop circulating musty odors, mold spores, and airborne bacteria through your ho
 Prompt Scheduling Available • 100% Botanical EPA-Registered Solutions • NADCA ASCS Certified
 
 <!-- ========================================================================= -->
-<!-- SECTION: faq | BLOCK: kt-accordion -->
+<!-- SECTION: 09_faq | BLOCK: kt-accordion -->
 <!-- ========================================================================= -->
 ## Frequently Asked Questions About Duct Sanitization and Fogging in Rockford
 
@@ -162,7 +160,7 @@ Most Rockford homeowners benefit from duct sanitization every three to five year
 No. Our commercial ULV foggers generate a dry mist with droplet sizes between ten and twenty microns. This microscopic particle size ensures thorough surface contact without pooling liquid or wetting sensitive electrical sensors, fiberglass duct board, or external blower wiring.
 
 <!-- ========================================================================= -->
-<!-- SECTION: bottom-cta | BLOCK: kt-row -->
+<!-- SECTION: 10_bottom_cta | BLOCK: kt-row -->
 <!-- ========================================================================= -->
 ## Ready for Certified Air Duct Sanitization in Rockford?
 
