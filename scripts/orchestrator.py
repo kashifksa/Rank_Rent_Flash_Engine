@@ -1,21 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-orchestrator.py — Rank & Rent Flash Engine
-==========================================
-Coordinates atomic section generation, stitching, validation, and golden example tracking.
+orchestrator.py — Rank & Rent Flash Engine (Whole-Website Orchestrator)
+=======================================================================
+Coordinates atomic section generation, stitching, validation, builder data
+compilation, and 1-command whole-website HTML generation across any template.
 
 Usage:
   python scripts/orchestrator.py --status
-  python scripts/orchestrator.py --prep --page residential-air-duct-cleaning --type service
-  python scripts/orchestrator.py --stitch --page residential-air-duct-cleaning --type service
-  python scripts/orchestrator.py --validate --page residential-air-duct-cleaning
-  python scripts/orchestrator.py --save-golden --type service --page residential-air-duct-cleaning
+  python scripts/orchestrator.py --prep-phase1
+  python scripts/orchestrator.py --prep --page commercial-hvac-duct-cleaning --type service
+  python scripts/orchestrator.py --stitch --page commercial-hvac-duct-cleaning --type service
+  python scripts/orchestrator.py --validate --page commercial-hvac-duct-cleaning
+  python scripts/orchestrator.py --compile
+  python scripts/orchestrator.py --build-site --template stitch_modern_industrial
+  python scripts/orchestrator.py --build-site --template cornerstone --out dist
 """
 
 import os
 import sys
 import json
+import shutil
 import argparse
 import subprocess
 from pathlib import Path
@@ -31,13 +36,14 @@ PROMPTS_DIR = ROOT_DIR / "prompts"
 EXAMPLES_DIR = ROOT_DIR / "examples"
 WIP_DIR = ROOT_DIR / "work_in_progress"
 STATE_FILE = ROOT_DIR / "pipeline_state.json"
-DATA_BRIEF = ROOT_DIR / "data_brief.txt"
-DATA_TXT = ROOT_DIR / "data.txt"
+BRIEF_FILE = ROOT_DIR / "master_brief.json"
+TOPICAL_FILE = ROOT_DIR / "topical_authority.json"
 
 PAGE_TYPES = {
     "service": {
         "prompt_folder": "P7_service",
         "prefix": "P7s_",
+        "structure_file": "SERVICE_PAGE_STRUCTURE.md",
         "example_file": "service_page_example.md",
         "sections": [
             "01_hero",
@@ -55,6 +61,7 @@ PAGE_TYPES = {
     "location": {
         "prompt_folder": "P7_location",
         "prefix": "P7l_",
+        "structure_file": "LOCATION_PAGE_STRUCTURE.md",
         "example_file": "location_page_example.md",
         "sections": [
             "01_hero",
@@ -69,6 +76,7 @@ PAGE_TYPES = {
     "blog": {
         "prompt_folder": "P7_blog",
         "prefix": "P7b_",
+        "structure_file": "BLOG_POST_STRUCTURE.md",
         "example_file": "blog_post_example.md",
         "sections": [
             "01_header",
@@ -84,6 +92,7 @@ PAGE_TYPES = {
     "about": {
         "prompt_folder": "P7_about",
         "prefix": "P7a_",
+        "structure_file": "ABOUT_PAGE_STRUCTURE.md",
         "example_file": "about_page_example.md",
         "sections": [
             "01_identity_hook",
@@ -96,62 +105,94 @@ PAGE_TYPES = {
             "08_bottom_cta",
         ],
     },
+    "contact": {
+        "prompt_folder": "P7_about",
+        "prefix": "P7a_",
+        "structure_file": "ABOUT_PAGE_STRUCTURE.md",
+        "example_file": "about_page_example.md",
+        "sections": [
+            "01_contact_hero",
+            "02_contact_form",
+            "03_nap_block",
+            "04_trust_bar",
+        ],
+    },
+}
+
+AVAILABLE_TEMPLATES = {
+    "cornerstone": "Cornerstone Classic (Customizable Builder)",
+    "stitch_modern_industrial": "Stitch: Modern Industrial Authority (5 Archetypes)",
 }
 
 
-def load_state():
-    if STATE_FILE.exists():
+def load_json(path: Path):
+    if path.exists():
         try:
-            with open(STATE_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+            return json.loads(path.read_text(encoding="utf-8"))
         except Exception:
             pass
-    return {
-        "project": "Rank & Rent Flash Engine",
-        "current_page": None,
-        "completed_pages": [],
-        "completed_sections": {},
-        "golden_examples_completed": [],
-    }
+    return {}
+
+
+def load_state():
+    state = load_json(STATE_FILE)
+    if not state:
+        return {
+            "project": "Rank & Rent Flash Engine",
+            "current_page": None,
+            "completed_pages": [],
+            "completed_sections": {},
+            "golden_examples_completed": [],
+        }
+    return state
 
 
 def save_state(state):
-    with open(STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
+    STATE_FILE.write_text(json.dumps(state, indent=2), encoding="utf-8")
 
 
 def get_status():
     state = load_state()
-    print("=" * 65)
-    print("  RANK & RENT FLASH ENGINE — ORCHESTRATOR STATUS")
-    print("=" * 65)
-    print(f"Current Page       : {state.get('current_page', 'None')}")
-    print(f"Completed Pages    : {len(state.get('completed_pages', []))}")
-    for p in state.get("completed_pages", []):
-        print(f"  ✓ {p}")
+    brief = load_json(BRIEF_FILE)
+    topical = load_json(TOPICAL_FILE)
+    nap = brief.get("nap", {})
 
-    print("\nGolden Examples Status:")
+    print("=" * 72)
+    print("  RANK & RENT FLASH ENGINE — WHOLE-WEBSITE ORCHESTRATOR STATUS")
+    print("=" * 72)
+    print(f"Project Company    : {nap.get('company_name', brief.get('project_name', 'Unknown'))}")
+    print(f"Niche & Location   : {brief.get('niche', 'N/A')} in {brief.get('city', 'N/A')}, {brief.get('state', 'N/A')}")
+    print(f"Dispatch Phone     : {nap.get('phone', 'N/A')}")
+
+    print("\nAvailable Website Templates:")
+    for tid, tname in AVAILABLE_TEMPLATES.items():
+        print(f"  • {tid:<26} -> {tname}")
+
+    # Audit Phase 1 Pages
+    md_files = sorted(ROOT_DIR.glob("page_content_*.md"))
+    print(f"\nValidated Content Pages Ready ({len(md_files)}):")
+    for mf in md_files:
+        slug = mf.stem.replace("page_content_", "")
+        if slug == "residential-air-duct-cleaning":
+            continue  # FIX 32
+        words = len(mf.read_text(encoding="utf-8", errors="ignore").split())
+        print(f"  ✓ {slug:<42} ({words:,} words)")
+
+    print("\nPipeline Page Structures & Golden Examples:")
     for ptype, cfg in PAGE_TYPES.items():
+        if ptype == "contact":
+            continue
         ex_path = EXAMPLES_DIR / cfg["example_file"]
-        is_ready = False
-        if ex_path.exists():
-            text = ex_path.read_text(encoding="utf-8", errors="ignore")
-            if "PENDING" not in text and len(text.strip()) > 300:
-                is_ready = True
-        status_str = "READY (Golden Example Active)" if is_ready else "PENDING generation"
-        print(f"  {ptype.upper():<10}: {status_str}")
+        is_ready = ex_path.exists() and len(ex_path.read_text(encoding="utf-8", errors="ignore").strip()) > 300
+        status_str = "READY" if is_ready else "PENDING"
+        print(f"  • {ptype.upper():<10} ({cfg['structure_file']:<28}) : {status_str} ({len(cfg['sections'])} sections)")
 
-    print("\nWork In Progress:")
-    if WIP_DIR.exists():
-        subdirs = [d for d in WIP_DIR.iterdir() if d.is_dir()]
-        if not subdirs:
-            print("  (No active work-in-progress directories)")
-        for sd in subdirs:
-            sec_files = list(sd.glob("section_*.md"))
-            print(f"  Page: {sd.name} ({len(sec_files)} sections in progress)")
-    else:
-        print("  (No work-in-progress directory)")
-    print("=" * 65)
+    print("\nQuick Whole-Website Commands:")
+    print("  1. Prep all Phase 1 pages : python scripts/orchestrator.py --prep-phase1")
+    print("  2. Compile to Builder     : python scripts/orchestrator.py --compile")
+    print("  3. Build Stitch Website   : python scripts/orchestrator.py --build-site --template stitch_modern_industrial")
+    print("  4. Build Cornerstone Site : python scripts/orchestrator.py --build-site --template cornerstone")
+    print("=" * 72)
 
 
 def prep_page(page_slug, page_type):
@@ -168,19 +209,33 @@ def prep_page(page_slug, page_type):
     state["current_type"] = page_type
     save_state(state)
 
-    print(f"Preparing {page_type.upper()} page: '{page_slug}'")
-    print(f"Target directory: {target_dir}")
-    print(f"Sections to generate: {len(cfg['sections'])}")
-
+    print(f"Preparing {page_type.upper()} page: '{page_slug}' ({cfg['structure_file']})")
     for idx, sec in enumerate(cfg["sections"], 1):
         sec_file = target_dir / f"section_{sec}.md"
         if not sec_file.exists():
-            # Create template with header
             header = f"# Section {idx:02d}: {sec}\n# Page: {page_slug}\n\n"
             sec_file.write_text(header, encoding="utf-8")
         print(f"  [{idx:02d}/{len(cfg['sections'])}] {sec_file.name}")
 
-    print("\nPage prep complete. You can now write or generate individual sections.")
+
+def prep_phase1_all():
+    topical = load_json(TOPICAL_FILE)
+    pages = topical.get("pages", [])
+    prepped = 0
+    for p in pages:
+        if p.get("phase") != 1:
+            continue
+        pid = p.get("page_id")
+        ptype = p.get("page_type")
+        if not pid or pid in ("homepage", "residential-air-duct-cleaning") or ptype not in PAGE_TYPES:
+            continue
+        md_file = ROOT_DIR / f"page_content_{pid}.md"
+        if md_file.exists():
+            print(f"  ✓ Skipping {pid} (page_content_{pid}.md already exists)")
+            continue
+        prep_page(pid, ptype)
+        prepped += 1
+    print(f"\nPhase 1 prep complete ({prepped} new page folders created in work_in_progress/).")
 
 
 def stitch_page(page_slug, page_type):
@@ -194,31 +249,33 @@ def stitch_page(page_slug, page_type):
         print(f"ERROR: Work in progress directory not found: {target_dir}")
         sys.exit(1)
 
-    output_file = ROOT_DIR / f"page_content_{page_slug}.md"
-    stitched_blocks = []
+    brief = load_json(BRIEF_FILE)
+    company = brief.get("nap", {}).get("company_name", brief.get("project_name", "Rockford Air Duct Pros"))
+    niche = brief.get("niche", "Air Duct Cleaning")
+    city = brief.get("city", "Rockford")
+    state_code = brief.get("state", "IL")
 
-    # YAML Frontmatter
+    output_file = ROOT_DIR / f"page_content_{page_slug}.md"
     frontmatter = f"""---
-title: "{page_slug.replace('-', ' ').title()} | Rockford Air Duct Pros"
+title: "{page_slug.replace('-', ' ').title()} | {company}"
 slug: "{page_slug}"
 page_type: "{page_type}"
-niche: "Air Duct Cleaning"
-city: "Rockford"
-state: "IL"
+niche: "{niche}"
+city: "{city}"
+state: "{state_code}"
 published: false
 ---
 
 """
-    stitched_blocks.append(frontmatter)
-
+    stitched_blocks = [frontmatter]
     missing = []
+
     for sec in cfg["sections"]:
         sec_file = target_dir / f"section_{sec}.md"
         if not sec_file.exists():
             missing.append(sec)
             continue
         text = sec_file.read_text(encoding="utf-8", errors="ignore").strip()
-        # Clean section header comment if present
         lines = text.splitlines()
         content_lines = [l for l in lines if not l.startswith("# Section ") and not l.startswith("# Page: ")]
         cleaned_sec = "\n".join(content_lines).strip()
@@ -226,16 +283,11 @@ published: false
             stitched_blocks.append(f"<!-- SECTION: {sec} -->\n" + cleaned_sec + "\n")
 
     if missing:
-        print(f"WARNING: The following {len(missing)} section(s) are missing:")
-        for m in missing:
-            print(f"  - section_{m}.md")
+        print(f"WARNING: {len(missing)} section(s) missing for {page_slug}: {', '.join(missing)}")
 
     full_content = "\n".join(stitched_blocks)
     output_file.write_text(full_content, encoding="utf-8")
-    print(f"\nStitched page saved to: {output_file}")
-    print(f"Total word count: {len(full_content.split())} words")
-
-    # Run pre_publish_filter.py validation
+    print(f"✓ Stitched {output_file.name} ({len(full_content.split())} words)")
     validate_page(page_slug)
 
 
@@ -247,15 +299,13 @@ def validate_page(page_slug):
 
     filter_script = SCRIPTS_DIR / "pre_publish_filter.py"
     if filter_script.exists():
-        print("\nRunning pre_publish_filter.py validation...")
-        try:
-            cmd = [sys.executable, str(filter_script), str(content_file)]
-            res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
-            print(res.stdout)
-            if res.stderr:
-                print(res.stderr)
-        except Exception as e:
-            print(f"Validation execution error: {e}")
+        print(f"Running pre_publish_filter.py on {content_file.name}...")
+        cmd = [sys.executable, str(filter_script), str(content_file)]
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if res.stdout.strip():
+            print(res.stdout.strip())
+        if res.stderr.strip():
+            print(res.stderr.strip())
 
 
 def save_as_golden(page_slug, page_type):
@@ -270,58 +320,151 @@ def save_as_golden(page_slug, page_type):
         sys.exit(1)
 
     target_example = EXAMPLES_DIR / cfg["example_file"]
-    content = content_file.read_text(encoding="utf-8", errors="ignore")
-    target_example.write_text(content, encoding="utf-8")
+    target_example.write_text(content_file.read_text(encoding="utf-8", errors="ignore"), encoding="utf-8")
 
     state = load_state()
     if page_type not in state.get("golden_examples_completed", []):
         state.setdefault("golden_examples_completed", []).append(page_type)
     save_state(state)
+    print(f"✓ Saved {content_file.name} as GOLDEN EXAMPLE -> {target_example}")
 
-    print(f"SUCCESS: Saved {content_file.name} as GOLDEN EXAMPLE -> {target_example}")
+
+def run_compile():
+    compiler_script = SCRIPTS_DIR / "compile_builder_data.py"
+    cmd = [sys.executable, str(compiler_script)]
+    res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    print(res.stdout.strip())
+    if res.stderr.strip():
+        print(res.stderr.strip())
+
+
+def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
+    """
+    Compiles all pipeline pages into Studio Builder, renders every page using
+    the chosen template (cornerstone OR stitch_modern_industrial OR any future
+    Stitch template), and writes the standalone HTML site + images to disk.
+    """
+    print("=" * 72)
+    print(f"  BUILDING FULL WEBSITE — TEMPLATE: {template_id}")
+    print("=" * 72)
+
+    # Step 1: Compile latest markdown content & metadata into Builder
+    run_compile()
+
+    if not out_folder:
+        out_folder = "dist_stitch" if template_id.startswith("stitch") else "build_site"
+    out_dir = ROOT_DIR / out_folder
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    builder_url = f"file:///{str(ROOT_DIR / 'studio_builder.html').replace(chr(92), '/')}"
+
+    from playwright.sync_api import sync_playwright
+
+    chrome_paths = [
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+    ]
+    exec_path = next((cp for cp in chrome_paths if os.path.exists(cp)), None)
+
+    with sync_playwright() as p:
+        launch_kwargs = {"headless": True}
+        if exec_path:
+            launch_kwargs["executable_path"] = exec_path
+        else:
+            launch_kwargs["channel"] = "msedge"
+
+        browser = p.chromium.launch(**launch_kwargs)
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        page.goto(builder_url)
+        page.wait_for_timeout(600)
+
+        # Select the requested template in the Builder
+        page.evaluate(f"selectWebsiteTemplate('{template_id}', 'homepage', true)")
+        page.wait_for_timeout(500)
+
+        pages = page.evaluate("Object.keys(window.BUILDER_PAGES_DATA)")
+        tpl_type = page.evaluate(f"(window.BUILDER_TEMPLATES['{template_id}'] || {{}}).type || 'native'")
+        print(f"Exporting {len(pages)} pages using '{template_id}' ({tpl_type}) -> {out_dir} ...")
+
+        for pid in pages:
+            filename = "index.html" if pid in ("homepage", "home") else f"{pid}.html"
+            if tpl_type == "stitch":
+                doc_html = page.evaluate(f"window.getActiveStitchDocumentHTML('{pid}')")
+            else:
+                doc_html = page.evaluate(f"generateProductionDocument('{pid}')")
+
+            if doc_html:
+                out_path = out_dir / filename
+                out_path.write_text(doc_html, encoding="utf-8")
+                print(f"  ✓ {filename:<46} ({len(doc_html) // 1024} KB)")
+
+        browser.close()
+
+    # Copy geotagged WebP images folder into output directory
+    src_images = ROOT_DIR / "images"
+    dst_images = out_dir / "images"
+    if src_images.exists():
+        if dst_images.exists():
+            shutil.rmtree(dst_images)
+        shutil.copytree(src_images, dst_images)
+        print(f"✓ Synced geotagged WebP images -> {dst_images}")
+
+    print("=" * 72)
+    print(f"SUCCESS: Complete {len(pages)}-page website generated in: {out_dir}")
+    print("=" * 72)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Rank & Rent Flash Engine Orchestrator")
-    parser.add_argument("--status", action="store_true", help="Show pipeline and page progress")
-    parser.add_argument("--prep", action="store_true", help="Prepare sections for a page in work_in_progress")
+    parser.add_argument("--status", action="store_true", help="Show pipeline, templates, and page progress")
+    parser.add_argument("--prep-phase1", action="store_true", help="Prepare all Phase 1 pages from topical_authority.json")
+    parser.add_argument("--prep", action="store_true", help="Prepare sections for a single page in work_in_progress")
     parser.add_argument("--stitch", action="store_true", help="Stitch sections into page_content_[slug].md")
     parser.add_argument("--validate", action="store_true", help="Validate page with pre_publish_filter")
     parser.add_argument("--save-golden", action="store_true", help="Save stitched page as a golden example")
-    parser.add_argument("--page", help="Page slug (e.g. residential-air-duct-cleaning)")
-    parser.add_argument("--type", choices=["service", "location", "blog", "about"], help="Page type")
+    parser.add_argument("--compile", action="store_true", help="Compile all page_content_*.md files into Studio Builder")
+    parser.add_argument("--build-site", action="store_true", help="Generate complete multi-page website using chosen template")
+    parser.add_argument("--template", default="stitch_modern_industrial", help="Template ID (cornerstone or stitch_modern_industrial)")
+    parser.add_argument("--out", default=None, help="Output directory for --build-site (e.g. dist_stitch)")
+    parser.add_argument("--page", help="Page slug (e.g. commercial-hvac-duct-cleaning)")
+    parser.add_argument("--type", choices=["service", "location", "blog", "about", "contact"], help="Page type")
 
     args = parser.parse_args()
 
-    if args.status or (not any([args.prep, args.stitch, args.validate, args.save_golden])):
+    if args.status or not any([
+        args.prep_phase1, args.prep, args.stitch, args.validate,
+        args.save_golden, args.compile, args.build_site
+    ]):
         get_status()
         return
 
-    if args.prep:
+    if args.prep_phase1:
+        prep_phase1_all()
+    elif args.prep:
         if not args.page or not args.type:
-            print("ERROR: --prep requires --page <slug> and --type <service|location|blog|about>")
+            print("ERROR: --prep requires --page <slug> and --type <service|location|blog|about|contact>")
             sys.exit(1)
         prep_page(args.page, args.type)
-
     elif args.stitch:
         if not args.page or not args.type:
-            print("ERROR: --stitch requires --page <slug> and --type <service|location|blog|about>")
+            print("ERROR: --stitch requires --page <slug> and --type <service|location|blog|about|contact>")
             sys.exit(1)
         stitch_page(args.page, args.type)
-
     elif args.validate:
         if not args.page:
             print("ERROR: --validate requires --page <slug>")
             sys.exit(1)
         validate_page(args.page)
-
     elif args.save_golden:
         if not args.page or not args.type:
             print("ERROR: --save-golden requires --page <slug> and --type <service|location|blog|about>")
             sys.exit(1)
         save_as_golden(args.page, args.type)
+    elif args.compile:
+        run_compile()
+    elif args.build_site:
+        build_full_website(template_id=args.template, out_folder=args.out)
 
 
 if __name__ == "__main__":
     main()
-

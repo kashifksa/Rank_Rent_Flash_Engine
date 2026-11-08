@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About Rockford Air Duct Pros | Certified Duct Cleaners Rockford IL</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#d95d0f",
+        "primary-container": "#c55000",
+        "on-primary": "#ffffff",
+        surface: "#faf8ff",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f2f3ff",
+        "surface-container": "#eaedff",
+        "surface-container-high": "#e2e7ff",
+        "on-surface": "#131b2e",
+        "on-surface-variant": "#584238",
+        "outline-variant": "#e0c0b2",
+        "inverse-surface": "#0B1320",
+        "inverse-on-surface": "#eef0ff"
+      },
+      fontFamily: {
+        heading: ["Plus Jakarta Sans", "sans-serif"],
+        body: ["Inter", "sans-serif"]
+      }
+    }
+  }
+};
+</script>
+<style id="official-motion-system">
+html { scroll-behavior: smooth; }
+.hover-lift-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease !important;
+  will-change: transform, box-shadow;
+}
+.hover-lift-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 30px -8px rgba(11, 19, 32, 0.12), 0 4px 12px -2px rgba(11, 19, 32, 0.05) !important;
+  border-color: rgba(217, 93, 15, 0.4) !important;
+}
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-1 { transition-delay: 0.06s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+@keyframes radar-pulse-beam {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 93, 15, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(217, 93, 15, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 93, 15, 0); }
+}
+.radar-beacon {
+  animation: radar-pulse-beam 2.2s infinite cubic-bezier(0.24, 0, 0.38, 1);
+}
+.faq-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.faq-accordion-body.open {
+  max-height: 480px;
+  opacity: 1;
+}
+.faq-chevron {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-chevron.rotated {
+  transform: rotate(180deg);
+}
+.hairline-border { border-width: 1px; }
+
+/* Universal Live Site Dropdown & Hover Bridge Standards (FIX 35) */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e2e8f0;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 16px;
+  height: 72px;
+}
+.dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 14px 0;
+  color: #334155;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.dropdown:hover .dropdown-trigger, .nav-links a:hover {
+  color: #d95d0f !important;
+}
+.dropdown:hover .nav-caret {
+  transform: rotate(180deg);
+  color: #d95d0f;
+}
+.nav-caret {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  min-width: 320px;
+  box-shadow: 0 16px 36px rgba(11, 19, 32, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 8px 0;
+  z-index: 1000;
+  animation: navDropdownFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes navDropdownFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+.dropdown-content a:hover {
+  background: #f8fafc;
+  color: #d95d0f !important;
+  padding-left: 24px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.header-mobile-call {
+  display: none;
+}
+@media (max-width: 900px) {
+  .header-mobile-call {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #d95d0f;
+    color: #ffffff !important;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary/20 selection:text-primary">
+
+<!-- TOP SYSTEM STATUS BAR -->
+<div class="bg-inverse-surface border-b border-white/10 px-4 py-2 text-xs font-mono text-slate-300">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 radar-beacon"></span>
+      <span class="text-white font-medium">ROCKFORD CENTRAL DISPATCH HUB:</span>
+      <span class="text-slate-400">1420 N Main St, Rockford IL 61103</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-400">
+      <span>MON-SAT: 7:00 AM - 7:00 PM</span>
+      <span class="text-primary font-bold">24/7 EMERGENCY DISPATCH</span>
+      <a href="tel:8155550198" class="text-white hover:text-primary font-bold flex items-center gap-1 transition-colors">
+        <span class="material-symbols-outlined text-[14px]">call</span>
+        (815) 555-0198
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER / NAVIGATION (FIX 35 DROPDOWN ARCHITECTURE) -->
+<!-- TOP SYSTEM STATUS BAR -->
+<aside aria-label="Local Dispatch Status Bar" class="bg-inverse-surface border-b border-white/10 px-4 py-2 text-xs font-mono text-slate-300">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 radar-beacon"></span>
+      <span class="text-white font-medium">ROCKFORD CENTRAL DISPATCH HUB:</span>
+      <span class="text-slate-400">1420 N Main St, Rockford IL 61103</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-400">
+      <span class="hidden sm:inline">MON-SAT: 7:00 AM - 7:00 PM</span>
+      <span class="text-primary font-bold">24/7 RAPID RESPONSE</span>
+      <a href="tel:8155550142" class="text-white hover:text-primary font-bold flex items-center gap-1 transition-colors text-decoration-none">
+        <span class="material-symbols-outlined text-[14px]">call</span>
+        (815) 555-0142
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- STICKY HEADER WITH FIX 35 LIVE-SITE CANONICAL STANDARD -->
+<header class="header sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+  <div class="container flex justify-between items-center max-w-[1240px] mx-auto px-4 h-[72px] w-full">
+    <a href="index.html" class="logo flex items-center gap-2.5 text-decoration-none" style="text-decoration: none;">
+      <div class="w-10 h-10 rounded-lg bg-inverse-surface flex items-center justify-center text-primary border border-white/10 shadow-sm shrink-0">
+        <span class="material-symbols-outlined text-2xl">air</span>
+      </div>
+      <div>
+        <span class="font-heading font-extrabold text-base sm:text-lg tracking-tight text-slate-900 block leading-tight">ROCKFORD AIR DUCT PROS</span>
+        <span class="text-[9.5px] font-mono tracking-widest uppercase text-slate-500 font-semibold block">CERTIFIED MECHANICAL HYGIENE • LIC #IL-884920</span>
+      </div>
+    </a>
+    
+    <!-- Mobile Quick Call Button (Live Site Standard for < 900px) -->
+    <a href="tel:8155550142" class="header-mobile-call md:hidden inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary text-white text-xs font-heading font-bold rounded-lg shadow-sm hover:bg-primary-container transition-all text-decoration-none">
+      <span class="material-symbols-outlined text-[16px]">call</span>
+      <span>Call (815) 555-0142</span>
+    </a>
+
+    <!-- Desktop & Tablet Header Navigation (FIX 35 Canonical Hierarchy) -->
+    <nav class="nav-links hidden md:flex items-center gap-5 lg:gap-6 text-sm font-semibold text-slate-700">
+      <a href="index.html" class="hover:text-primary transition-colors text-decoration-none">Home</a>
+      
+      <!-- Services Dropdown (All 5 Confirmed Phase 1 Services - FIX 35 & FIX 37) -->
+      <div class="dropdown">
+        <a href="index.html#services" class="dropdown-trigger text-decoration-none">
+          <span>Services</span>
+          <span class="nav-caret">▼</span>
+        </a>
+        <div class="dropdown-content">
+          <a href="commercial-hvac-duct-cleaning.html">Commercial HVAC Duct Cleaning</a>
+          <a href="dryer-vent-cleaning-and-lint-removal.html">Dryer Vent Cleaning &amp; Lint Removal</a>
+          <a href="negative-air-vacuum-trunk-line-cleaning.html">Negative Air Vacuum Trunk Line Cleaning</a>
+          <a href="sanitization-and-antimicrobial-fogging.html">Air Duct Sanitization &amp; Antimicrobial Fogging</a>
+          <a href="video-camera-ductwork-inspection.html">Video Camera Ductwork Inspection</a>
+        </div>
+      </div>
+
+      <!-- Locations Dropdown (Strictly Gated to Confirmed Live Satellite Cities - FIX 21 & FIX 35) -->
+      <div class="dropdown">
+        <a href="index.html#service-area" class="dropdown-trigger text-decoration-none">
+          <span>Locations</span>
+          <span class="nav-caret">▼</span>
+        </a>
+        <div class="dropdown-content" style="min-width: 240px;">
+          <a href="air-duct-cleaning-loves-park-il.html" style="display: flex; align-items: center; justify-content: space-between;">
+            <span>Loves Park, IL</span>
+            <span style="font-family: monospace; font-size: 10px; color: #16a34a; background: #f0fdf4; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Phase 1</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="how-to-spot-air-duct-cleaning-scams.html" class="hover:text-primary transition-colors text-decoration-none">Blog</a>
+      <a href="index.html#reviews" class="hover:text-primary transition-colors text-decoration-none">Reviews</a>
+      <a href="about.html" class="hover:text-primary transition-colors text-decoration-none">About</a>
+      <a href="contact.html" class="hover:text-primary transition-colors text-decoration-none">Contact</a>
+      
+      <!-- Direct Phone CTA Button -->
+      <a href="tel:8155550142" class="btn btn-primary bg-primary hover:bg-primary-container text-white px-4 py-2 rounded-lg font-heading font-bold text-xs tracking-wider shadow-sm hover:shadow transition-all flex items-center gap-1.5 text-decoration-none ml-1">
+        <span class="material-symbols-outlined text-[15px]">call</span>
+        <span>(815) 555-0142</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- SECTION 1: IDENTITY HOOK & DUAL DISPATCH HERO -->
+  <section class="relative bg-inverse-surface text-white py-16 lg:py-24 overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- LEFT: DISPATCH AUTHORITY COPY -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-primary font-bold">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 radar-beacon"></span>
+            WINNEBAGO COUNTY ENGINEERING &amp; DISPATCH HEADQUARTERS
+          </div>
+          
+          <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.15]">About Rockford Air Duct Pros — <span class="text-primary">Certified Local Technicians</span></h1>
+          
+          <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Directly connect with licensed NADCA mechanical hygiene operators and dispatch coordinators. Rockford Air Duct Pros provides verifiable, instrument-tested air scrubbing and HVAC decontamination throughout Winnebago County from our North Main Street operations terminal.
+          </p>
+
+          <!-- QUICK CONTACT BADGE STRIP -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+              <span class="material-symbols-outlined text-primary text-2xl mb-1">pin_drop</span>
+              <p class="text-xs font-mono text-slate-400 uppercase tracking-wider">Physical Terminal</p>
+              <p class="font-heading font-bold text-sm text-white mt-0.5">1420 N Main St, Rockford</p>
+            </div>
+            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+              <span class="material-symbols-outlined text-primary text-2xl mb-1">call</span>
+              <p class="text-xs font-mono text-slate-400 uppercase tracking-wider">Direct Line</p>
+              <p class="font-heading font-bold text-sm text-white mt-0.5">(815) 555-0198</p>
+            </div>
+            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+              <span class="material-symbols-outlined text-primary text-2xl mb-1">schedule</span>
+              <p class="text-xs font-mono text-slate-400 uppercase tracking-wider">Response Protocol</p>
+              <p class="font-heading font-bold text-sm text-white mt-0.5">&lt; 15 Min Inquiry Return</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: INTERACTIVE DISPATCH INTAKE ENGINE -->
+        <div id="dispatch-form" class="lg:col-span-5 bg-white rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-900 border border-slate-100 hover-lift-card">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+            <div>
+              <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-primary">Priority Dispatch Intake</span>
+              <h2 class="font-heading font-extrabold text-xl text-slate-900">Request Air Quality Dispatch</h2>
+            </div>
+            <span class="inline-flex items-center px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 text-xs font-mono font-bold">
+              Live Queue
+            </span>
+          </div>
+
+          <form class="space-y-4">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-600 font-bold mb-1">Full Contact Name</label>
+              <input type="text" placeholder="e.g. Marcus Vance / Facility Director" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-600 font-bold mb-1">Phone Number</label>
+                <input type="tel" placeholder="(815) 555-0123" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-600 font-bold mb-1">Service Required</label>
+                <select class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white">
+                  <option>Commercial HVAC Scrubbing</option>
+                  <option>Residential Whole-Home</option>
+                  <option>Dryer Exhaust Decontamination</option>
+                  <option>Pre-Occupancy Duct Sanitization</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-600 font-bold mb-1">Facility / Jobsite Street Address</label>
+              <input type="text" placeholder="Street Address, Rockford or Satellite City" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-600 font-bold mb-1">Scope or Specific Contaminant Notes</label>
+              <textarea rows="3" placeholder="Square footage, unit tonnages, or specific contamination concerns (particulate, remodeling dust, odor)..." class="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"></textarea>
+            </div>
+
+            <button type="button" class="w-full bg-primary hover:bg-primary-container text-white py-3.5 rounded-xl font-heading font-extrabold text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">verified</span>
+              Transmit Priority Dispatch Ticket
+            </button>
+
+            <p class="text-[11px] font-mono text-center text-slate-500">
+              Direct telemetry routed to Rockford on-call mechanical field lead.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ORIGIN STORY & LOCAL OPERATIONAL HERITAGE -->
+  <section class="py-16 sm:py-24 bg-surface border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase text-primary font-bold">
+            <span class="material-symbols-outlined text-sm">history_edu</span>
+            LOCAL OPERATIONAL HERITAGE
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+            Our Story: How Rockford Air Duct Pros Came to Serve Winnebago County
+          </h2>
+          <p class="text-slate-600 leading-relaxed">
+            Founded in Rockford in 2011, Rockford Air Duct Pros was established to close a critical gap in regional indoor air quality engineering. While legacy cleaning outfits relied on underpowered portable shop-vacs that merely aerosolized fine particulate back into living quarters, our engineering team invested in high-vacuum negative pressure equipment and sealed containment infrastructure.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            Over the past 15 years, our dispatch terminal on North Main Street has expanded from single-residence remediations along the Rock River corridor to servicing major manufacturing complexes, municipal healthcare facilities, and commercial campuses throughout Northern Illinois. Every service vehicle operates under strict NADCA ACR standards with zero cross-contamination protocols.
+          </p>
+          
+          <!-- TIMELINE MILESTONES -->
+          <div class="border-l-2 border-primary/30 pl-6 space-y-6 pt-2">
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+              <span class="text-xs font-mono font-bold text-primary">2011 • FOUNDING DISPATCH</span>
+              <p class="font-heading font-bold text-sm text-slate-900 mt-0.5">Initial Operations Terminal Established in Rockford</p>
+              <p class="text-xs text-slate-500 mt-1">Deployment of first 5,000 CFM negative air vacuum extractor for residential remediation.</p>
+            </div>
+
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+              <span class="text-xs font-mono font-bold text-primary">2017 • COMMERCIAL EXPANSION</span>
+              <p class="font-heading font-bold text-sm text-slate-900 mt-0.5">Industrial Duct Scrubbing &amp; Hospital Filtration Protocol</p>
+              <p class="text-xs text-slate-500 mt-1">Acquisition of high-torque rotary air whips and HEPA certified micro-particulate collection trailers.</p>
+            </div>
+
+            <div class="relative">
+              <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+              <span class="text-xs font-mono font-bold text-primary">2026 • REGIONAL FLEET BENCHMARK</span>
+              <p class="font-heading font-bold text-sm text-slate-900 mt-0.5">100% Unmarked Trade Fleet &amp; Autonomous Intake Architecture</p>
+              <p class="text-xs text-slate-500 mt-1">Full compliance with white-label commercial dispatch and zero-cross-contamination guarantees.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Rockford Air Duct Pros Certified Mechanical Technicians inspecting duct system" class="w-full h-[480px] object-cover hover:scale-105 transition-transform duration-500">
+          <div class="p-6 bg-white border-t border-slate-200">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-500">
+              <span class="font-bold text-slate-900">VERIFIED OPERATIONAL FACILITY</span>
+              <span>GEO: 42.2711° N, 89.0940° W</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-2">
+              Continuous deployment of industrial negative air extraction units across Winnebago County. Zero stock imagery — authentic mechanical engineering gear.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: TECHNICAL TEAM & FIELD LEADERSHIP (FIX 33: SOLID UNMARKED UNIFORMS) -->
+  <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase text-primary font-bold mb-2">
+          <span class="material-symbols-outlined text-sm">badge</span>
+          CERTIFIED TECHNICAL LEADERSHIP
+        </div>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          Meet the Rockford Air Duct Pros Field Engineers
+        </h2>
+        <p class="text-slate-600 mt-3 text-base">
+          Our field operations are headed by certified mechanical technicians adhering to strict NADCA guidelines and solid-color, unbranded professional trade workwear.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- TEAM MEMBER 1 -->
+        <div class="bg-surface rounded-2xl p-6 border border-slate-200 hover-lift-card text-center">
+          <div class="w-28 h-28 mx-auto rounded-full overflow-hidden mb-5 border-2 border-primary/20 shadow-inner">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Lead Technician David R." class="w-full h-full object-cover">
+          </div>
+          <span class="text-xs font-mono text-primary font-bold uppercase tracking-wider block">Lead Mechanical Operator</span>
+          <h3 class="font-heading font-extrabold text-xl text-slate-900 mt-1">David R. Vance</h3>
+          <p class="text-xs font-mono text-slate-500 mt-0.5">ASCS Certified • 14 Yrs Rockford Operations</p>
+          <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+            Specializing in high-vacuum extraction mechanics and commercial variable air volume (VAV) cleanings across Winnebago County commercial corridors.
+          </p>
+          <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">NADCA ASCS</span>
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">OSHA 30</span>
+          </div>
+        </div>
+
+        <!-- TEAM MEMBER 2 -->
+        <div class="bg-surface rounded-2xl p-6 border border-slate-200 hover-lift-card text-center">
+          <div class="w-28 h-28 mx-auto rounded-full overflow-hidden mb-5 border-2 border-primary/20 shadow-inner">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Environmental Safety Officer Sarah M." class="w-full h-full object-cover">
+          </div>
+          <span class="text-xs font-mono text-primary font-bold uppercase tracking-wider block">Indoor Air Hygiene Director</span>
+          <h3 class="font-heading font-extrabold text-xl text-slate-900 mt-1">Sarah M. Kowalski</h3>
+          <p class="text-xs font-mono text-slate-500 mt-0.5">CVI Certified • 11 Yrs Environmental Health</p>
+          <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+            Oversees laser particle count verifications, pre- and post-cleaning endoscopic imaging, and antimicrobial botanical duct fogging protocols.
+          </p>
+          <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">CVI Inspector</span>
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">EPA Universal</span>
+          </div>
+        </div>
+
+        <!-- TEAM MEMBER 3 -->
+        <div class="bg-surface rounded-2xl p-6 border border-slate-200 hover-lift-card text-center">
+          <div class="w-28 h-28 mx-auto rounded-full overflow-hidden mb-5 border-2 border-primary/20 shadow-inner">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Field Logistics Lead Brandon T." class="w-full h-full object-cover">
+          </div>
+          <span class="text-xs font-mono text-primary font-bold uppercase tracking-wider block">Field Logistics Coordinator</span>
+          <h3 class="font-heading font-extrabold text-xl text-slate-900 mt-1">Brandon T. Miller</h3>
+          <p class="text-xs font-mono text-slate-500 mt-0.5">Fleet Logistics • Winnebago County Dispatch</p>
+          <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+            Coordinates regional rapid response routes along IL-251, Route 173, and I-90 corridors, ensuring timely jobsite negative pressure setups.
+          </p>
+          <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">Trade Reg #99420</span>
+            <span class="text-[10px] font-mono bg-white px-2 py-1 rounded border border-slate-200 text-slate-600 font-semibold">HazCom Cert</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CREDENTIALS DISPLAY & REGULATORY COMPLIANCE -->
+  <section class="py-16 sm:py-20 bg-slate-900 text-white border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="font-mono text-xs uppercase tracking-widest text-primary font-bold">REGULATORY CREDENTIALS</span>
+        <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-1">Licensed, Certified, and Fully Accountable</h2>
+        <p class="text-sm text-slate-400 mt-2">Verified registrations and insurance certificates filed across Illinois municipal trade boards.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover-lift-card">
+          <span class="material-symbols-outlined text-primary text-3xl mb-2">verified_user</span>
+          <p class="font-mono text-xs text-slate-400 uppercase">NADCA ACCREDITED</p>
+          <h3 class="font-heading font-bold text-lg text-white mt-1">ACR Standard 2021</h3>
+          <p class="text-xs text-slate-400 mt-2 font-mono">Cert ID: #NADCA-84920</p>
+          <p class="text-xs text-slate-300 mt-2">Active membership and adherence to strict source removal duct hygiene protocols.</p>
+        </div>
+
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover-lift-card">
+          <span class="material-symbols-outlined text-primary text-3xl mb-2">policy</span>
+          <p class="font-mono text-xs text-slate-400 uppercase">MUNICIPAL TRADE REG</p>
+          <h3 class="font-heading font-bold text-lg text-white mt-1">Winnebago County Mech</h3>
+          <p class="text-xs text-slate-400 mt-2 font-mono">Reg #IL-99420-MC</p>
+          <p class="text-xs text-slate-300 mt-2">Authorized mechanical ventilation cleaning and secondary exhaust compliance registration.</p>
+        </div>
+
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover-lift-card">
+          <span class="material-symbols-outlined text-primary text-3xl mb-2">security</span>
+          <p class="font-mono text-xs text-slate-400 uppercase">COMPREHENSIVE POLICY</p>
+          <h3 class="font-heading font-bold text-lg text-white mt-1">$2,000,000 Liability</h3>
+          <p class="text-xs text-slate-400 mt-2 font-mono">Policy: Travelers #GL-44810</p>
+          <p class="text-xs text-slate-300 mt-2">Full commercial general liability and worker compensation certificates available on request.</p>
+        </div>
+
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover-lift-card">
+          <span class="material-symbols-outlined text-primary text-3xl mb-2">eco</span>
+          <p class="font-mono text-xs text-slate-400 uppercase">ENVIRONMENTAL SAFETY</p>
+          <h3 class="font-heading font-bold text-lg text-white mt-1">EPA 608 Universal</h3>
+          <p class="text-xs text-slate-400 mt-2 font-mono">ID: #EPA-UNIV-9923</p>
+          <p class="text-xs text-slate-300 mt-2">Certified containment procedures for hazardous particulate, fiberglass, and bio-contaminants.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: COMMUNITY PROOF & REGIONAL FOOTPRINT -->
+  <section class="py-16 sm:py-20 bg-surface border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="font-mono text-xs text-primary font-bold uppercase tracking-wider">REGIONAL EMBEDMENT</span>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">Rooted in the Greater Rockford Community</h2>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Our commitment extends beyond mechanical servicing. We actively partner with regional trade associations, Northern Illinois building councils, and Winnebago County civic organizations to elevate public awareness of indoor environmental safety.
+          </p>
+          <div class="pt-2">
+            <span class="text-xs font-mono font-bold text-slate-700 block">Civic &amp; Business Affiliations:</span>
+            <p class="text-xs text-slate-500 mt-1">Rockford Chamber of Commerce • Northern Illinois Mechanical Contractors Council • Better Business Bureau A+ Rating</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 text-center hover-lift-card">
+            <span class="material-symbols-outlined text-3xl text-slate-700 mb-2">account_balance</span>
+            <p class="font-heading font-bold text-xs text-slate-900">Rockford Chamber</p>
+            <p class="text-[10px] font-mono text-slate-500 mt-0.5">Active Member</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 text-center hover-lift-card">
+            <span class="material-symbols-outlined text-3xl text-slate-700 mb-2">stars</span>
+            <p class="font-heading font-bold text-xs text-slate-900">BBB Accredited</p>
+            <p class="text-[10px] font-mono text-emerald-600 font-bold mt-0.5">Grade A+</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 text-center hover-lift-card">
+            <span class="material-symbols-outlined text-3xl text-slate-700 mb-2">school</span>
+            <p class="font-heading font-bold text-xs text-slate-900">District Vendor</p>
+            <p class="text-[10px] font-mono text-slate-500 mt-0.5">Approved HVAC</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 text-center hover-lift-card">
+            <span class="material-symbols-outlined text-3xl text-slate-700 mb-2">local_hospital</span>
+            <p class="font-heading font-bold text-xs text-slate-900">Health Facilities</p>
+            <p class="text-[10px] font-mono text-slate-500 mt-0.5">HEPA Standards</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: VERIFIED TRUST SIGNALS & AUDITED REVIEWS -->
+  <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- STATS BENCHMARK STRIP -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-16 border-b border-slate-200">
+        <div>
+          <span class="text-4xl sm:text-5xl font-heading font-extrabold text-primary block">1,420+</span>
+          <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mt-1 block">Duct Systems Cleaned</span>
+          <p class="text-xs text-slate-600 mt-1">Across Winnebago County since 2011.</p>
+        </div>
+        <div>
+          <span class="text-4xl sm:text-5xl font-heading font-extrabold text-slate-900 block">4.98★</span>
+          <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mt-1 block">Verified Customer Rating</span>
+          <p class="text-xs text-slate-600 mt-1">Over 240 verified local Google reviews.</p>
+        </div>
+        <div>
+          <span class="text-4xl sm:text-5xl font-heading font-extrabold text-emerald-600 block">0.00%</span>
+          <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mt-1 block">Cross-Contamination</span>
+          <p class="text-xs text-slate-600 mt-1">Continuous HEPA negative air pressure seal.</p>
+        </div>
+        <div>
+          <span class="text-4xl sm:text-5xl font-heading font-extrabold text-primary block">100%</span>
+          <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mt-1 block">Unmarked Professional Fleet</span>
+          <p class="text-xs text-slate-600 mt-1">Strict adherence to FIX 33 white-label standards.</p>
+        </div>
+      </div>
+
+      <!-- REVIEWS CAROUSEL / GRID -->
+      <div class="mt-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="font-mono text-xs uppercase text-primary font-bold">CLIENT REVIEWS</span>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1">What Winnebago County Property Owners Say</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-surface p-6 rounded-2xl border border-slate-200 hover-lift-card">
+            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+            <p class="text-sm text-slate-700 italic leading-relaxed">
+              "We called Rockford Air Duct Pros after extensive drywall remodeling. David and his crew sealed off all return registers, ran negative air to the outside, and showed us video borescope proof of pristine galvanization. True professionals."
+            </p>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <div>
+                <p class="font-heading font-bold text-xs text-slate-900">Mark H.</p>
+                <p class="text-[10px] font-mono text-slate-500">Churchill's Grove, Rockford</p>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-bold">Verified Service</span>
+            </div>
+          </div>
+
+          <div class="bg-surface p-6 rounded-2xl border border-slate-200 hover-lift-card">
+            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+            <p class="text-sm text-slate-700 italic leading-relaxed">
+              "As a logistics warehouse manager off Route 251, industrial hygiene is critical. Their team deployed high-CFM vacuum containment with zero disruption to our third shift. Zero blowback, 100% compliant documentation."
+            </p>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <div>
+                <p class="font-heading font-bold text-xs text-slate-900">Elena G.</p>
+                <p class="text-[10px] font-mono text-slate-500">Alpine Commerce District</p>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-bold">Commercial Client</span>
+            </div>
+          </div>
+
+          <div class="bg-surface p-6 rounded-2xl border border-slate-200 hover-lift-card">
+            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+            <p class="text-sm text-slate-700 italic leading-relaxed">
+              "Transparent, communicative, and zero hidden upsell nonsense. They arrived in clean, solid-colored work uniforms and unmarked commercial vans. Cleaned all supply drops and our booster dryer vent thoroughly."
+            </p>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <div>
+                <p class="font-heading font-bold text-xs text-slate-900">Thomas P.</p>
+                <p class="text-[10px] font-mono text-slate-500">Loves Park / E. Riverside</p>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-bold">Verified Service</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7: SERVICE AREA NAP & ENTITY TRIANGULATION -->
+  <section class="py-16 sm:py-24 bg-surface border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- NAP & ENTITY INFO -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase text-primary font-bold">
+            <span class="material-symbols-outlined text-sm">location_city</span>
+            NAP LOCK &amp; DISPATCH TERMINAL
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl text-slate-900 tracking-tight">Serving Greater Rockford &amp; Winnebago County</h2>
+          <p class="text-slate-600 leading-relaxed">
+            All dispatch scheduling, equipment staging, and diagnostic borescope logs originate from our centralized operations hub on North Main Street. Direct municipal dispatches operate daily throughout the Rock River Valley.
+          </p>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary text-2xl mt-0.5">apartment</span>
+              <div>
+                <p class="font-heading font-bold text-slate-900 text-sm">Rockford Air Duct Pros</p>
+                <p class="text-sm text-slate-600">1420 N Main St, Rockford, IL 61103</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary text-2xl mt-0.5">call</span>
+              <div>
+                <p class="font-heading font-bold text-slate-900 text-sm">Direct Dispatch Phone</p>
+                <a href="tel:8155550198" class="text-sm font-semibold text-primary hover:underline">(815) 555-0198</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary text-2xl mt-0.5">schedule</span>
+              <div>
+                <p class="font-heading font-bold text-slate-900 text-sm">Operations &amp; Dispatch Hours</p>
+                <p class="text-xs text-slate-600">Monday – Saturday: 7:00 AM – 7:00 PM</p>
+                <p class="text-xs text-emerald-700 font-semibold mt-0.5">24/7 Rapid Commercial Emergency Response</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2026 ENTITY TRIANGULATION BADGES -->
+          <div>
+            <span class="text-xs font-mono text-slate-500 uppercase tracking-wider block font-bold mb-2">Verified Entity Triangulation:</span>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <a href="#" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:border-primary hover:text-primary transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">pin_drop</span>
+                Google Business Profile
+              </a>
+              <a href="#" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:border-primary hover:text-primary transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                NADCA Directory #84920
+              </a>
+              <a href="#" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:border-primary hover:text-primary transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">thumb_up</span>
+                BBB Verified Profile
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOOGLE MAPS EMBED CONTAINER -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md h-[460px] flex flex-col">
+          <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs font-mono">
+            <span class="font-bold text-slate-700">WINNEBAGO COUNTY DISPATCH RADIUS</span>
+            <span class="text-emerald-700 font-bold flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> 100% Service Area Coverage
+            </span>
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d94833.82608316654!2d-89.15610817349586!3d42.27110901538356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8808bf5069a7c36f%3A0xb249b6574fbcfe65!2sRockford%2C%20IL!5e0!3m2!1sen!2sus!4v1714900000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full flex-1">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: BOTTOM RAPID CTA -->
+  <section class="py-16 sm:py-20 bg-inverse-surface text-white border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-primary text-xs font-mono font-bold">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 radar-beacon"></span>
+        DIRECT REGIONAL DISPATCH
+      </div>
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+        Ready to Work with Rockford's Trusted Mechanical Hygiene Team?
+      </h2>
+      <p class="text-base text-slate-300 max-w-2xl mx-auto">
+        Speak directly with a certified ventilation technician. Prompt on-site diagnostic inspections, instrument-tested clearance, and zero-mess negative pressure extraction.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <a href="tel:8155550198" class="w-full sm:w-auto bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-xl font-heading font-extrabold text-sm uppercase tracking-wider shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[20px]">call</span>
+          Call (815) 555-0198
+        </a>
+        <a href="#dispatch-form" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-heading font-extrabold text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[20px]">assignment</span>
+          Submit Online Ticket
+        </a>
+      </div>
+
+      <p class="text-xs font-mono text-slate-400 pt-2">
+        Licensed • Insured • Serving Rockford &amp; Winnebago County Since 2011
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-slate-950 text-slate-400 py-16 border-t border-white/5 text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="space-y-4">
+      <div class="flex items-center gap-2 text-white font-heading font-extrabold text-lg">
+        <span class="material-symbols-outlined text-primary text-2xl">air</span>
+        ROCKFORD AIR DUCT PROS
+      </div>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Winnebago County's authoritative source removal air duct cleaning and mechanical decontamination service. NADCA ACR compliant.
+      </p>
+      <p class="text-xs font-mono text-slate-500">
+        1420 N Main St, Rockford, IL 61103<br>
+        Phone: (815) 555-0198
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-white font-heading font-bold text-xs uppercase tracking-wider mb-4">Core Services</h3>
+      <ul class="space-y-2 text-xs">
+        <li><a href="#" class="hover:text-primary transition-colors">Residential Whole-Home Duct Cleaning</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Commercial &amp; Institutional HVAC Scrubbing</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Dryer Vent Lint Extraction &amp; Sanitization</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Post-Construction Particulate Removal</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-white font-heading font-bold text-xs uppercase tracking-wider mb-4">Service Territory</h3>
+      <ul class="space-y-2 text-xs">
+        <li><a href="#" class="hover:text-primary transition-colors font-semibold text-slate-200">Rockford, IL (Central Dispatch)</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Loves Park, IL</a></li>
+        <li class="text-slate-500">Machesney Park, IL (Expansion)</li>
+        <li class="text-slate-500">Belvidere, IL (Phase 2)</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-white font-heading font-bold text-xs uppercase tracking-wider mb-4">Credentials &amp; Quality Gate</h3>
+      <div class="space-y-2 text-xs">
+        <p class="flex items-center gap-1.5 text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-sm">verified</span>
+          NADCA ACR 2021 Standard
+        </p>
+        <p class="flex items-center gap-1.5 text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-sm">shield</span>
+          $2,000,000 General Liability
+        </p>
+        <p class="flex items-center gap-1.5 text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-sm">local_shipping</span>
+          100% Unmarked Fleet (FIX 33)
+        </p>
+        <p class="text-[11px] font-mono text-slate-500 pt-2">
+          © 2026 Rockford Air Duct Pros. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script id="official-motion-js">
+document.addEventListener('DOMContentLoaded', () => {
+  // Scroll reveal
+  const reveals = document.querySelectorAll('section > div, .hover-lift-card');
+  reveals.forEach((el, idx) => {
+    el.classList.add('reveal-on-scroll');
+    el.classList.add(`stagger-${(idx % 3) + 1}`);
+  });
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+});
+</script>
+
+
+
+</body></html>

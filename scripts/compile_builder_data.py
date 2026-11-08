@@ -1,130 +1,184 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+compile_builder_data.py — Dynamic Pipeline-to-Builder Compiler
+==============================================================
+Reads master_brief.json + topical_authority.json + all page_content_[slug].md files
+AND all templates/*.html files, compiles them into scripts/builder_data.js, and
+syncs window.BUILDER_PAGES_DATA + window.STITCH_TEMPLATES_HTML inside studio_builder.html.
+"""
+
 import os
-import json
 import re
+import sys
+import json
+from pathlib import Path
 
-base_dir = r"D:\Projects\Rank_Rent_Flash_Engine"
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-pages_config = [
-    {
-        "id": "homepage",
-        "title": "Homepage (Primary Service)",
-        "slug": "/",
-        "type": "homepage",
-        "md": "page_content_homepage.md",
-        "meta": "page_meta_homepage.json",
-        "plan": "image_plan_homepage.json",
-        "img_dir": "images/homepage"
-    },
-    {
-        "id": "about",
-        "title": "About Us",
-        "slug": "about",
-        "type": "about",
-        "md": "page_content_about.md",
-        "meta": "page_meta_about.json",
-        "plan": "image_plan_about.json",
-        "img_dir": "images/about"
-    },
-    {
-        "id": "contact",
-        "title": "Contact Us",
-        "slug": "contact",
-        "type": "contact",
-        "md": "page_content_contact.md",
-        "meta": "page_meta_contact.json",
-        "plan": "image_plan_contact.json",
-        "img_dir": "images/contact"
-    },
-    {
-        "id": "air-duct-cleaning-loves-park-il",
-        "title": "Loves Park Location Page",
-        "slug": "air-duct-cleaning-loves-park-il",
-        "type": "location",
-        "md": "page_content_air-duct-cleaning-loves-park-il.md",
-        "meta": "page_meta_air-duct-cleaning-loves-park-il.json",
-        "plan": "image_plan_air-duct-cleaning-loves-park-il.json",
-        "img_dir": "images/air-duct-cleaning-loves-park-il"
-    },
-    {
-        "id": "commercial-hvac-duct-cleaning",
-        "title": "Commercial HVAC Duct Cleaning",
-        "slug": "commercial-hvac-duct-cleaning",
-        "type": "service",
-        "md": "page_content_commercial-hvac-duct-cleaning.md",
-        "meta": "page_meta_commercial-hvac-duct-cleaning.json",
-        "plan": "image_plan_commercial-hvac-duct-cleaning.json",
-        "img_dir": "images/commercial-hvac-duct-cleaning"
-    },
-    {
-        "id": "dryer-vent-cleaning-and-lint-removal",
-        "title": "Dryer Vent Cleaning & Lint Removal",
-        "slug": "dryer-vent-cleaning-and-lint-removal",
-        "type": "service",
-        "md": "page_content_dryer-vent-cleaning-and-lint-removal.md",
-        "meta": "page_meta_dryer-vent-cleaning-and-lint-removal.json",
-        "plan": "image_plan_dryer-vent-cleaning-and-lint-removal.json",
-        "img_dir": "images/dryer-vent-cleaning-and-lint-removal"
-    },
-    {
-        "id": "how-to-spot-air-duct-cleaning-scams",
-        "title": "Blog: How to Spot Duct Cleaning Scams",
-        "slug": "how-to-spot-air-duct-cleaning-scams",
-        "type": "blog",
-        "md": "page_content_how-to-spot-air-duct-cleaning-scams.md",
-        "meta": "",
-        "plan": "",
-        "img_dir": "images/homepage"
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def load_json_safe(path: Path):
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"  [WARN] Could not parse {path.name}: {e}")
+    return {}
+
+
+def parse_markdown_sections(md_text: str):
+    yaml_match = re.search(r"^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?", md_text)
+    body_str = md_text[yaml_match.end():].strip() if yaml_match else md_text.strip()
+
+    pattern = r"(?:<!--\s*=+\s*-->\s*)?<!--\s*SECTION:\s*([a-zA-Z0-9_-]+)(?:\s*\|\s*BLOCK:[^>]*)?\s*-->(?:\s*<!--\s*=+\s*-->)?"
+    parts = re.split(pattern, body_str)
+
+    canonical_map = {
+        "gradient-hero": "01_hero",
+        "hero": "01_hero",
+        "trust-bar": "02_trust_bar",
+        "services-grid": "03_services_grid",
+        "why-choose-us": "04_why_choose_us",
+        "process": "05_process",
+        "local-proof": "06_local_proof",
+        "service-area": "07_service_area",
+        "mid-cta": "08_mid_cta",
+        "faq": "09_faq",
+        "bottom-cta": "10_bottom_cta",
     }
-]
 
-compiled = {}
-
-for p in pages_config:
-    md_path = os.path.join(base_dir, p["md"])
-    meta_path = os.path.join(base_dir, p["meta"])
-    plan_path = os.path.join(base_dir, p["plan"])
-    
-    # Read MD
-    md_text = open(md_path, encoding="utf-8").read() if os.path.exists(md_path) else ""
-    
-    # Parse YAML
-    yaml_match = re.search(r"^---([\s\S]*?)---", md_text)
-    yaml_str = yaml_match.group(1) if yaml_match else ""
-    body_str = md_text[yaml_match.end():].strip() if yaml_match else md_text
-    
-    # Parse sections
-    raw_sections = re.split(r"<!-- SECTION: ([^>]+) -->", body_str)
     sections_dict = {}
-    if len(raw_sections) > 1:
-        for i in range(1, len(raw_sections), 2):
-            sec_name = raw_sections[i].strip()
-            sec_content = raw_sections[i+1].strip() if i+1 < len(raw_sections) else ""
-            sections_dict[sec_name] = sec_content
+    if len(parts) > 1:
+        for i in range(1, len(parts), 2):
+            sec_name = parts[i].strip()
+            sec_content = parts[i + 1].strip() if (i + 1) < len(parts) else ""
+            sec_content = re.sub(r"<!--\s*=+\s*-->\s*$", "", sec_content).strip()
+            mapped_key = canonical_map.get(sec_name, sec_name)
+            sections_dict[mapped_key] = sec_content
     else:
         sections_dict["main"] = body_str
-        
-    # Read Meta
-    meta_data = json.load(open(meta_path, encoding="utf-8")) if p.get("meta") and os.path.exists(meta_path) else {}
-    
-    # Read Image Plan
-    plan_data = json.load(open(plan_path, encoding="utf-8")) if p.get("plan") and os.path.exists(plan_path) else {}
-    images_list = plan_data.get("images", [])
-    
-    compiled[p["id"]] = {
-        "id": p["id"],
-        "title": p["title"],
-        "slug": p["slug"],
-        "type": p["type"],
-        "sections": sections_dict,
-        "meta": meta_data,
-        "images": images_list,
-        "img_dir": p["img_dir"]
-    }
 
-out_js = "window.BUILDER_PAGES_DATA = " + json.dumps(compiled, indent=2) + ";"
-out_path = os.path.join(base_dir, "scripts", "builder_data.js")
-with open(out_path, "w", encoding="utf-8") as f:
-    f.write(out_js)
+    return sections_dict
 
-print(f"Successfully compiled all 6 pages to {out_path} ({len(out_js)} bytes)")
 
+def discover_project_pages():
+    brief = load_json_safe(BASE_DIR / "master_brief.json")
+    topical = load_json_safe(BASE_DIR / "topical_authority.json")
+    nap = brief.get("nap", {})
+    company_name = nap.get("company_name", brief.get("project_name", "Rockford Air Duct Pros"))
+    phone = nap.get("phone", "(815) 555-0142")
+    default_city = brief.get("city", "Rockford")
+
+    default_pages = [
+        {"id": "homepage", "title": f"Homepage ({default_city} Primary Hub)", "slug": "/", "type": "homepage"},
+        {"id": "about", "title": "About Us", "slug": "about", "type": "about"},
+        {"id": "contact", "title": "Contact Us", "slug": "contact", "type": "contact"},
+        {"id": "air-duct-cleaning-loves-park-il", "title": "Loves Park Location Page", "slug": "air-duct-cleaning-loves-park-il", "type": "location"},
+        {"id": "commercial-hvac-duct-cleaning", "title": "Commercial HVAC Duct Cleaning", "slug": "commercial-hvac-duct-cleaning", "type": "service"},
+        {"id": "dryer-vent-cleaning-and-lint-removal", "title": "Dryer Vent Cleaning & Lint Removal", "slug": "dryer-vent-cleaning-and-lint-removal", "type": "service"},
+        {"id": "negative-air-vacuum-trunk-line-cleaning", "title": "Negative Air Vacuum Trunk Line Cleaning", "slug": "negative-air-vacuum-trunk-line-cleaning", "type": "service"},
+        {"id": "sanitization-and-antimicrobial-fogging", "title": "Air Duct Sanitization & Antimicrobial Fogging", "slug": "sanitization-and-antimicrobial-fogging", "type": "service"},
+        {"id": "video-camera-ductwork-inspection", "title": "Video Camera Ductwork Inspection", "slug": "video-camera-ductwork-inspection", "type": "service"},
+        {"id": "how-to-spot-air-duct-cleaning-scams", "title": "Blog: How to Spot Air Duct Cleaning Scams", "slug": "how-to-spot-air-duct-cleaning-scams", "type": "blog"},
+    ]
+
+    pages_by_id = {p["id"]: p for p in default_pages}
+
+    for tp in topical.get("pages", []):
+        pid = tp.get("page_id")
+        if not pid or pid == "residential-air-duct-cleaning":
+            continue  # FIX 32
+        md_file = BASE_DIR / f"page_content_{pid}.md"
+        if md_file.exists() and pid not in pages_by_id:
+            pages_by_id[pid] = {
+                "id": pid,
+                "title": tp.get("parent_service") or tp.get("h1_title") or pid.replace("-", " ").title(),
+                "slug": "/" if pid == "homepage" else pid,
+                "type": tp.get("page_type", "service"),
+                "city": tp.get("city", default_city),
+                "keyword": tp.get("target_keyword", ""),
+            }
+
+    return list(pages_by_id.values()), company_name, phone, default_city
+
+
+def discover_stitch_templates():
+    templates_dir = BASE_DIR / "templates"
+    templates_html = {}
+    if templates_dir.exists():
+        for html_file in sorted(templates_dir.glob("*.html")):
+            rel_key = f"templates/{html_file.name}"
+            raw_html = html_file.read_text(encoding="utf-8", errors="ignore")
+            templates_html[rel_key] = raw_html
+    return templates_html
+
+
+def sanitize_for_script_tag(json_str: str) -> str:
+    # Escape closing </script> tags inside JSON strings so inline HTML <script> block never breaks
+    return json_str.replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
+
+
+def compile_all_pages(sync_builder_html=True):
+    pages_config, company_name, phone, default_city = discover_project_pages()
+    compiled = {}
+
+    for p in pages_config:
+        pid = p["id"]
+        md_path = BASE_DIR / f"page_content_{pid}.md"
+        if not md_path.exists():
+            continue
+
+        meta_path = BASE_DIR / f"page_meta_{pid}.json"
+        plan_path = BASE_DIR / f"image_plan_{pid}.json"
+
+        md_text = md_path.read_text(encoding="utf-8", errors="ignore")
+        sections_dict = parse_markdown_sections(md_text)
+        meta_data = load_json_safe(meta_path)
+        plan_data = load_json_safe(plan_path)
+        images_list = plan_data.get("images", [])
+
+        img_dir = f"images/{pid}" if (BASE_DIR / "images" / pid).exists() else "images/homepage"
+
+        compiled[pid] = {
+            "id": pid,
+            "title": p["title"],
+            "slug": p["slug"],
+            "type": p["type"],
+            "company_name": company_name,
+            "phone": phone,
+            "city": p.get("city", meta_data.get("city", default_city)),
+            "sections": sections_dict,
+            "meta": meta_data,
+            "images": images_list,
+            "img_dir": img_dir,
+        }
+
+    templates_html = discover_stitch_templates()
+
+    pages_js = "window.BUILDER_PAGES_DATA = " + sanitize_for_script_tag(json.dumps(compiled, indent=2)) + ";"
+    templates_js = "window.STITCH_TEMPLATES_HTML = " + sanitize_for_script_tag(json.dumps(templates_html, indent=2)) + ";"
+    combined_js = pages_js + "\n" + templates_js
+
+    out_path = BASE_DIR / "scripts" / "builder_data.js"
+    out_path.write_text(combined_js, encoding="utf-8")
+    print(f"✓ Compiled {len(compiled)} pipeline pages + {len(templates_html)} Stitch archetype files -> {out_path}")
+
+    if sync_builder_html:
+        builder_path = BASE_DIR / "studio_builder.html"
+        if builder_path.exists():
+            html_text = builder_path.read_text(encoding="utf-8")
+            pattern = r"window\.BUILDER_PAGES_DATA\s*=\s*\{[\s\S]*?</script>"
+            replacement = f"{combined_js}\n  </script>"
+            if re.search(pattern, html_text):
+                new_html = re.sub(pattern, lambda _: replacement, html_text, count=1)
+                builder_path.write_text(new_html, encoding="utf-8")
+                print(f"✓ Synced window.BUILDER_PAGES_DATA & window.STITCH_TEMPLATES_HTML inside studio_builder.html")
+
+    return compiled
+
+
+if __name__ == "__main__":
+    compile_all_pages(sync_builder_html=True)
