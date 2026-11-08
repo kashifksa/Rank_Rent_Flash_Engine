@@ -116,6 +116,31 @@ Complete 360-degree motorized rotary scrub under five thousand CFM negative pres
 * 100% Video Camera Verification Before Dispatch Closes
 
 <!-- ========================================================================= -->
+<!-- SECTION: case-studies | BLOCK: CS-06                                      -->
+<!-- ========================================================================= -->
+## Recent Projects in Rockford, IL
+
+Three service calls from Winnebago County homes, showing the problem we found, what we did, and how the system looked afterward.
+
+### Churchill's Grove: 1938 Home with Original Ductwork
+**Neighborhood:** Churchill's Grove, Rockford
+**Problem:** Decades of plaster dust and pet hair from previous owners had settled inside the original galvanized trunk lines of this older home.
+**Solution:** Our crew set up negative air containment in the basement and sealed every register before any agitation began.
+**Result:** Pounds of debris came out of the trunk lines and no dust entered the living room at any point during the work.
+
+### Rolling Green: Drywall Dust After a Kitchen Remodel
+**Neighborhood:** Rolling Green, Rockford
+**Problem:** A kitchen remodel had filled the supply and return ducts of this ranch home with fine drywall dust throughout the system.
+**Solution:** We ran source removal under continuous negative pressure, then finished with a before and after camera inspection of the ductwork.
+**Result:** The camera pass showed clean galvanized metal from end to end, and the owners could see the finished result on screen.
+
+### Edgewater: Burning Odor Near the Laundry Room
+**Neighborhood:** Edgewater, Rockford
+**Problem:** A burning odor near the laundry room led the owner to call us, and the flexible vent pipe behind the dryer was crushed.
+**Solution:** The technician showed the damage on site, replaced the pipe with rigid metal, and cleaned the entire dryer exhaust line.
+**Result:** Airflow was restored through the full run, and the owner now has a rigid metal vent behind the machine.
+
+<!-- ========================================================================= -->
 <!-- SECTION: comparison-table | BLOCK: CS-17                                  -->
 <!-- ========================================================================= -->
 ## The Quality Standard of Care: Comparison Benchmark

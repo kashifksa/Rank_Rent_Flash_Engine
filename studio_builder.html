@@ -1243,6 +1243,26 @@
     }
 
     /* ========================================================
+       CORNERSTONE CASE STUDIES (HOMEPAGE CS-06)
+       ======================================================== */
+    .cs-section { width: 100%; padding: 84px 24px 80px; background: var(--background); position: relative; }
+    .cs-container { max-width: 1200px; margin: 0 auto; }
+    .cs-header { text-align: center; margin-bottom: 48px; }
+    .cs-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 9999px; background: rgba(var(--accent-rgb), 0.12); color: var(--secondary-container); font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+    .cs-heading { color: var(--on-surface); font-size: clamp(28px, 3.2vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 14px 0; }
+    .cs-subtitle { color: var(--on-surface-variant); font-size: 16px; line-height: 1.65; max-width: 720px; margin: 0 auto; }
+    .cs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .cs-card { display: flex; flex-direction: column; gap: 14px; background: #ffffff; border: 1px solid var(--outline-variant); border-radius: 18px; padding: 28px 24px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .cs-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(0, 0, 0, 0.12); border-color: rgba(var(--accent-rgb), 0.45); }
+    .cs-loc { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--secondary-container); }
+    .cs-title { font-size: 19px; font-weight: 800; line-height: 1.3; color: var(--on-surface); margin: 0; }
+    .cs-row { border-left: 3px solid var(--outline-variant); padding-left: 12px; }
+    .cs-row--result { border-left-color: var(--secondary-container); }
+    .cs-label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-surface-variant); margin-bottom: 2px; }
+    .cs-row p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--on-surface-variant); }
+    @media (max-width: 1024px) { .cs-grid { grid-template-columns: 1fr; } .cs-section { padding-left: 16px; padding-right: 16px; } }
+
+    /* ========================================================
        CORNERSTONE CUSTOMER REVIEWS / SOCIAL PROOF (SECTION 6)
        ======================================================== */
     .test-section {
@@ -5066,6 +5086,20 @@ th {
         </div>
 
         <div class="form-group">
+          <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Homepage: Case Studies</span>
+            <span style="font-size: 10px; color: #3b82f6; font-weight:700;">CORNERSTONE</span>
+          </label>
+          <div class="variation-pill-group">
+            <button class="variation-pill" id="cases-var-kadence" onclick="setSectionVariant('cases', 'kadence')">Keystone</button>
+            <button class="variation-pill active" id="cases-var-cornerstone" onclick="setSectionVariant('cases', 'cornerstone')">Cornerstone</button>
+          </div>
+          <div style="font-size: 10px; color: var(--app-text-muted); line-height: 1.3; margin-top: 4px;">
+            3 real project cards: problem, solution and result per job.
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-label">Before/After Gallery Mode</label>
           <div class="variation-pill-group">
             <button class="variation-pill active" id="ba-cards-btn" onclick="setBaMode('cards')">Gallery Cards</button>
@@ -5244,6 +5278,7 @@ window.BUILDER_PAGES_DATA = {
       "why-us": "## The Technical Standard for Indoor Airway Decontamination\n\nMost budget operators rely on standard portable shop vacuums that lack sufficient suction, blowing fine microscopic particles directly back into your breathing zone. We utilize high-capacity negative air vacuum equipment pulling five thousand CFM under sealed negative pressure, ensuring zero interior blowback during agitation.\n\n### Five Thousand CFM Negative Air Containment\nUnlike discount coupon contractors using shop vacs, our heavy-duty HEPA filtration units capture 99.97 percent of airborne particles down to 0.3 microns. Contaminants dislodged by mechanical brushes are drawn directly into sealed industrial hoses routed away from your living rooms, bedrooms, and finished basements.\n\n### EPA-Registered Botanical Sanitization\nFollowing thorough mechanical scrubbing, we apply an EPA-registered, thyme-based botanical antimicrobial fog that neutralizes biological mold spores and bacteria on contact without synthetic VOCs, harsh bleaches, or toxic chemical residue.\n* Illinois and Iowa EPA Code 455B Compliant: Zero synthetic toxic residues left in living spaces.\n* NADCA ACR-2021 Standard Verified: Mechanical agitation conducted prior to antimicrobial misting.\n* Before and After Endoscope Video Audit: Direct visual proof of clean galvanized bare metal interior.",
       "local-context": "## Why Rockford Homes Face Heavy Duct Contamination\n\nRockford residential properties experience unique environmental conditions that accelerate ductwork contamination compared to newer suburban developments. A significant portion of local housing in historic neighborhoods like Churchill's Grove, Edgewater, Highland Park, and Rolling Green features pre-1985 galvanized sheet metal duct installations. Over forty to seventy years of occupancy, these rigid square trunk lines accumulate dense layers of pet dander, sloughed skin cells, renovation debris, and furnace soot that basic disposable furnace filters cannot trap.\n\nNorthern Illinois winter weather patterns place extreme demands on residential heating infrastructure. Sub-zero temperatures and persistent lake effect cold fronts require forced-air gas furnaces to run continuously from October through late April. With windows sealed against freezing drafts, indoor air recirculates through uncleaned return air chases up to seven times each day. Furthermore, humidity variations near the Rock River basin and low-lying creek beds cause seasonal condensation inside cool basement duct plenums. This trapped moisture binds with settled household dust, creating stubborn fungal colonies and musty blower odors. Proper remediation in Rockford requires commercial-grade rotary agitation brushes designed for historic sheet metal ductwork rather than light-duty residential flex hoses.",
       "before-after": "## Verified Work: Before and After Decontamination\n\nReal internal duct inspection photography documented across Winnebago County homes using our high-definition fiberoptic camera probes.\n\n### Seven-Year Return Trunk Contamination\nMain return trunk line choked with dense pet hair, drywall renovation dust, and organic allergens restricting HVAC blower static pressure efficiency by thirty-eight percent.\n\n### Sanitized Bare-Metal Decontamination\nComplete 360-degree motorized rotary scrub under five thousand CFM negative pressure containment with EPA botanical thyme fogging. Airflow capacity and static pressure fully restored.\n\n* +42% Static Air Pressure Restored to Furnace Blower\n* 99.97% Particulate Capture at 0.3 Microns\n* 0.00% Zero-Blowback Interior Living Space Guarantee\n* 100% Video Camera Verification Before Dispatch Closes",
+      "case-studies": "## Recent Projects in Rockford, IL\n\nThree service calls from Winnebago County homes, showing the problem we found, what we did, and how the system looked afterward.\n\n### Churchill's Grove: 1938 Home with Original Ductwork\n**Neighborhood:** Churchill's Grove, Rockford\n**Problem:** Decades of plaster dust and pet hair from previous owners had settled inside the original galvanized trunk lines of this older home.\n**Solution:** Our crew set up negative air containment in the basement and sealed every register before any agitation began.\n**Result:** Pounds of debris came out of the trunk lines and no dust entered the living room at any point during the work.\n\n### Rolling Green: Drywall Dust After a Kitchen Remodel\n**Neighborhood:** Rolling Green, Rockford\n**Problem:** A kitchen remodel had filled the supply and return ducts of this ranch home with fine drywall dust throughout the system.\n**Solution:** We ran source removal under continuous negative pressure, then finished with a before and after camera inspection of the ductwork.\n**Result:** The camera pass showed clean galvanized metal from end to end, and the owners could see the finished result on screen.\n\n### Edgewater: Burning Odor Near the Laundry Room\n**Neighborhood:** Edgewater, Rockford\n**Problem:** A burning odor near the laundry room led the owner to call us, and the flexible vent pipe behind the dryer was crushed.\n**Solution:** The technician showed the damage on site, replaced the pipe with rigid metal, and cleaned the entire dryer exhaust line.\n**Result:** Airflow was restored through the full run, and the owner now has a rigid metal vent behind the machine.",
       "comparison-table": "## The Quality Standard of Care: Comparison Benchmark\n\nBefore hiring an air duct cleaning contractor in Rockford, examine how certified full-system decontamination compares against discount coupon companies and DIY attempts.\n\n| Inspection and Cleaning Factor | Rockford Air Duct Pros (Certified Standard) | Budget Forty-Nine Dollar Coupon Vans | DIY Shop-Vac Attempt |\n| :--- | :--- | :--- | :--- |\n| Vacuum Airflow Capacity | 5,000 CFM Sealed Negative Air | Portable 150 CFM Shop-Vac | Under 100 CFM Standard Vacuum |\n| Mechanical Brush Agitation | 360-Degree Rotary Motorized Scrubbing | Compressed Air Wand Only | Manual Hand Brush Near Register Grille |\n| Technician Accreditation | NADCA ASCS Certified Technicians | Uncertified Subcontractors | Uncertified Homeowner |\n| Live Video Verification | High-Definition Borescope Before and After | Refuse to Show Duct Interior | Limited Flashlight View Only |\n| Scope Transparency | Written Scope Approved Before Work Starts | Vague Scope with Add-On Upsells | Rented Equipment and Damaged Duct Vents |",
       "process": "## Our 4-Step Zero-Dust Decontamination Protocol\n\nEngineered to ensure complete contaminant removal without a single particle escaping into your Rockford home environment.\n\n### 1. Fiberoptic Video Inspection\nWe insert high resolution color fiberoptic cameras into main supply and return duct trunks to inspect structural joint integrity, detect heavy particulate buildup, identify biological mold growth, and establish initial diagnostic benchmarks.\n\n### 2. Negative Air Containment\nOur technicians seal every register grille with airtight protective film, isolate the furnace blower compartment, and attach industrial five thousand CFM negative air vacuum hoses directly to your central duct trunk lines.\n\n### 3. Rotary Power Scrubbing\nTechnicians feed motorized high torque flexible whip brushes through the entire ventilation network, dislodging stubborn adhered debris, drywall construction dust, pet dander, and soot while negative vacuum pressure extracts every particle outside.\n\n### 4. Botanical Mist and Final Sign-Off\nWe atomize an EPA registered botanical antimicrobial thyme mist throughout sanitized duct lines, run a final comparative video inspection with you, and issue an official written certification of clean bare metal verification.",
       "awards": "## Certified, Accredited, and Locally Trusted in Rockford, IL\n\nRockford Air Duct Pros holds active industry accreditations, certifications, and compliance standards required for precision indoor airway decontamination. Here is what backs every residential and commercial project we complete.\n\n### 10+ Years in Rockford\nOver a decade of dedicated negative-air mechanical duct cleaning and indoor air quality remediation serving Winnebago County homeowners.\n\n### 500+ Projects Completed\nWhole-home ventilation systems decontaminated across Rockford, Loves Park, Machesney Park, and surrounding communities.\n\n### 5-Star Customer Rating\nConsistently rated five stars by Northern Illinois property owners for spotless job sites and zero dust blowback.\n\n### Same or Next-Day Dispatch\nRapid mobile technician deployment staged across Winnebago and Boone counties for prompt response.\n\n### NADCA ASCS Certified Technicians\nEvery lead technician maintains active Air Systems Cleaning Specialist certification governed by strict NADCA ACR standards.\n\n### Better Business Bureau Accredited\nA+ rated accredited local business upholding ethical, transparent, and fair business practices.\n\n### 100% Locally Owned and Independent\nNot an out-of-state call center or coupon franchise. Dedicated trade technicians living and working right here in Rockford.\n\n### EPA-Registered Botanical Standards\nWe exclusively apply hospital-grade botanical thyme antimicrobial treatments that are non-toxic and child-and-pet safe.\n\n### Written Scope Guarantee\nZero bait-and-switch coupon tactics and zero surprise add-ons. You approve the full scope of work before service starts.",
@@ -6780,7 +6815,8 @@ window.STITCH_TEMPLATES_HTML = {
           comp: "cornerstone",
           area: "cornerstone",
           faq: "cornerstone",
-          cta: "cornerstone"
+          cta: "cornerstone",
+          cases: "cornerstone"
         },
         baMode: "cards",
         uncoveredDefault: "cornerstone"
@@ -6804,7 +6840,8 @@ window.STITCH_TEMPLATES_HTML = {
           comp: "kadence",
           area: "kadence",
           faq: "kadence",
-          cta: "kadence"
+          cta: "kadence",
+          cases: "kadence"
         },
         baMode: "slider",
         uncoveredDefault: "kadence"
@@ -6863,7 +6900,8 @@ window.STITCH_TEMPLATES_HTML = {
         comp: "kadence",
         area: "cornerstone",
         faq: "cornerstone",
-        cta: "cornerstone"
+        cta: "cornerstone",
+        cases: "cornerstone"
       },
       features: {
         radar: false,
@@ -7024,6 +7062,8 @@ window.STITCH_TEMPLATES_HTML = {
         targetControl = document.getElementById('faq-var-cornerstone')?.closest('.form-group');
       } else if (s.includes('cta') || s.includes('bottom')) {
         targetControl = document.getElementById('cta-var-cornerstone')?.closest('.form-group');
+      } else if (s.includes('case-stud') || s.includes('case_stud')) {
+        targetControl = document.getElementById('cases-var-cornerstone')?.closest('.form-group');
       } else if (s.includes('before') || s.includes('after')) {
         targetControl = document.getElementById('ba-cards-btn')?.closest('.form-group');
       } else if (s.includes('radar') || s.includes('beacon')) {
@@ -7613,7 +7653,7 @@ window.STITCH_TEMPLATES_HTML = {
     }
 
     function updateVariationCardPills() {
-      const sections = ['hero', 'intro', 'services', 'why', 'process', 'awards', 'reviews', 'comp', 'area', 'faq', 'cta'];
+      const sections = ['hero', 'intro', 'services', 'why', 'process', 'awards', 'reviews', 'comp', 'area', 'faq', 'cta', 'cases'];
       
       sections.forEach(sec => {
         const group = {
@@ -7627,7 +7667,8 @@ window.STITCH_TEMPLATES_HTML = {
           comp: ['kadence', 'cornerstone'],
           area: ['kadence', 'cornerstone'],
           faq: ['kadence', 'cornerstone'],
-          cta: ['kadence', 'cornerstone']
+          cta: ['kadence', 'cornerstone'],
+          cases: ['kadence', 'cornerstone']
         }[sec];
 
         const activeVar = sectionVariants[sec];
@@ -7789,6 +7830,8 @@ window.STITCH_TEMPLATES_HTML = {
             el = canvas.querySelector('.c-faq-section, [id*="faq"]');
           } else if (k === 'cta' || k.includes('cta') || k.includes('bottom')) {
             el = canvas.querySelector('.c-cta-section, [id*="bottom-cta"], [id*="bottom"], [id*="cta"]');
+          } else if (k === 'cases' || k.includes('case-stud') || k.includes('case_stud')) {
+            el = canvas.querySelector('.cs-section, [id*="case-stud"]');
           } else if (k.includes('before') || k.includes('after')) {
             el = canvas.querySelector('[id*="before-after"], [id*="before"], [id*="after"]');
           }
@@ -8857,6 +8900,32 @@ window.STITCH_TEMPLATES_HTML = {
         certs: defaultData.certs,
         cta: defaultData.cta
       };
+    }
+
+    function parseCaseStudiesFromContent(rawSec) {
+      const res = { heading: 'Recent Projects', subhead: '', cases: [] };
+      const clean = (rawSec || '').replace(/<!--[\s\S]*?-->/g, '').trim();
+      let cur = null;
+      clean.split(String.fromCharCode(10)).forEach(l => {
+        const line = l.trim();
+        if (!line) return;
+        if (line.startsWith('### ')) {
+          if (cur) res.cases.push(cur);
+          cur = { title: line.slice(4).replace(/[*_#]/g, '').trim(), loc: '', problem: '', solution: '', result: '' };
+        } else if (line.startsWith('## ')) {
+          res.heading = line.slice(3).replace(/[*_#]/g, '').trim();
+        } else if (!cur && !line.startsWith('#')) {
+          if (!res.subhead) res.subhead = line.replace(/[*_#]/g, '').trim();
+        } else if (cur) {
+          const m = line.match(/^\*\*(Neighborhood|Location|Problem|Solution|Result):\*\*\s*(.*)$/i);
+          if (m) {
+            const k = m[1].toLowerCase();
+            cur[(k === 'neighborhood' || k === 'location') ? 'loc' : k] = m[2].trim();
+          }
+        }
+      });
+      if (cur) res.cases.push(cur);
+      return res;
     }
 
     function parseReviewsFromContent(rawSec) {
@@ -10469,6 +10538,55 @@ window.STITCH_TEMPLATES_HTML = {
                 </div>
               </section>
             `;
+          }
+        }
+
+        // G2. CASE STUDIES (HOMEPAGE CS-06: PROBLEM, SOLUTION, RESULT)
+        else if (key.includes('case-stud') || key.includes('case_stud')) {
+          const csData = parseCaseStudiesFromContent(rawSec);
+          const csVar = sectionVariants.cases || 'cornerstone';
+          const rowsHtml = (c) => `
+            <div class="cs-row"><span class="cs-label">Problem</span><p contenteditable="true">${c.problem}</p></div>
+            <div class="cs-row"><span class="cs-label">Solution</span><p contenteditable="true">${c.solution}</p></div>
+            <div class="cs-row cs-row--result"><span class="cs-label">Result</span><p contenteditable="true">${c.result}</p></div>`;
+
+          if (csVar === 'cornerstone') {
+            const cardsHtml = csData.cases.map(c => `
+              <article class="cs-card">
+                <span class="cs-loc" contenteditable="true">${c.loc}</span>
+                <h3 class="cs-title" contenteditable="true">${c.title}</h3>
+                ${rowsHtml(c)}
+              </article>`).join('');
+            html += `
+              <section class="cs-section" id="sec-${key}">
+                <div class="cs-container">
+                  <div class="cs-header">
+                    <span class="cs-eyebrow">Real Projects</span>
+                    <h2 class="cs-heading" contenteditable="true">${csData.heading}</h2>
+                    <p class="cs-subtitle" contenteditable="true">${csData.subhead}</p>
+                  </div>
+                  <div class="cs-grid">${cardsHtml}</div>
+                </div>
+              </section>`;
+          } else {
+            const cardsHtml = csData.cases.map(c => `
+              <div class="card">
+                <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--secondary-container); margin-bottom: 6px;" contenteditable="true">${c.loc}</div>
+                <h3 contenteditable="true">${c.title}</h3>
+                <p contenteditable="true"><strong>Problem:</strong> ${c.problem}</p>
+                <p contenteditable="true"><strong>Solution:</strong> ${c.solution}</p>
+                <p contenteditable="true"><strong>Result:</strong> ${c.result}</p>
+              </div>`).join('');
+            html += `
+              <section class="section" style="background-color: var(--surface-container-low);" id="sec-${key}">
+                <div class="container">
+                  <div style="margin-bottom: var(--stack-lg); text-align: center;">
+                    <h2 contenteditable="true">${csData.heading}</h2>
+                    <p contenteditable="true">${csData.subhead}</p>
+                  </div>
+                  <div class="grid md:grid-cols-3" style="gap: var(--stack-md);">${cardsHtml}</div>
+                </div>
+              </section>`;
           }
         }
 

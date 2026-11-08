@@ -11,6 +11,7 @@
         {"id": "why-us", "block": "CS-03", "label": "Why Choose Us", "live": true},
         {"id": "local-context", "block": "CS-04B", "label": "Local Context", "live": true},
         {"id": "before-after", "block": "CS-05", "label": "Before & After", "live": true},
+        {"id": "case-studies", "block": "CS-06", "label": "Case Studies", "live": true},
         {"id": "comparison-table", "block": "CS-17", "label": "Comparison Table", "live": true},
         {"id": "process", "block": "CS-04", "label": "Process", "live": true},
         {"id": "awards", "block": "CS-07", "label": "Awards & Certifications", "live": true},
