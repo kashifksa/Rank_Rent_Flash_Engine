@@ -66,6 +66,10 @@ def find_stem(stems, exts):
 
 
 NAP_KEYS = {
+    "niche": ("niche", "primary service", "industry", "service"),
+    "city": ("city", "target city", "primary city", "hub city"),
+    "state": ("state", "state code", "province"),
+    "primary_kw": ("primary keyword", "main keyword", "target keyword"),
     "company": ("company", "company name", "business name", "business", "name"),
     "phone": ("phone", "telephone", "tel", "phone number", "tracking phone", "tracking number"),
     "address": ("address", "street address", "location"),
@@ -386,16 +390,16 @@ def categorize_research(raw_text):
 # =============================================================================
 
 brief = read_json(BASE / "master_brief.json")
-niche   = brief.get("niche", "Air Duct Cleaning")
-city    = brief.get("city", "Rockford")
-state   = brief.get("state", "IL")
-company = brief.get("nap", {}).get("company_name", "Rockford Air Duct Pros")
-phone   = brief.get("nap", {}).get("phone", "(815) 555-0142")
-address = brief.get("nap", {}).get("address", "1111 S Alpine Rd, Rockford, IL 61108")
-email   = brief.get("nap", {}).get("email", "service@rockfordairductpros.com")
-website = brief.get("nap", {}).get("website", "https://rockfordairductpros.com")
-founded = brief.get("founded_year", "2014")
-primary_kw = brief.get("primary_keyword", "air duct cleaning rockford il")
+niche   = brief.get("niche", "[NICHE]")
+city    = brief.get("city", "[CITY]")
+state   = brief.get("state", "[STATE]")
+company = brief.get("nap", {}).get("company_name", "[COMPANY NAME]")
+phone   = brief.get("nap", {}).get("phone", "[PHONE]")
+address = brief.get("nap", {}).get("address", "[ADDRESS]")
+email   = brief.get("nap", {}).get("email", "[EMAIL]")
+website = brief.get("nap", {}).get("website", "[WEBSITE]")
+founded = brief.get("founded_year", "[YEAR]")
+primary_kw = brief.get("primary_keyword", "[PRIMARY KEYWORD]")
 secondary_kws = brief.get("secondary_keywords", [])
 services_list = brief.get("services", [])
 sub_services  = brief.get("sub_services", [])
@@ -410,6 +414,10 @@ local_landmarks = brief.get("local_landmarks", [])
 # NAP + business facts supplied by you in raw_research/nap.txt (or nap.json) win over whatever the brief holds
 nap_file = find_stem({"nap", "business_info", "business-info", "company_info", "company-info"}, {".txt", ".json"})
 nap_core, nap_extra = parse_nap_file(nap_file)
+niche = nap_core.get("niche", niche)
+city = nap_core.get("city", city)
+state = nap_core.get("state", state)
+primary_kw = nap_core.get("primary_kw", primary_kw if primary_kw != "[PRIMARY KEYWORD]" else f"{niche} {city} {state}".lower())
 company = nap_core.get("company", company)
 phone = nap_core.get("phone", phone)
 address = nap_core.get("address", address)
@@ -645,6 +653,26 @@ output_parts += [
     "\n",
     "=" * 70 + "\n  END OF DATA FILE\n" + "=" * 70
 ]
+
+# Section 19: Prompt 1-3 Market & Competitor Intelligence Reports (if generated)
+market_report_file = find_file(["market_intelligence", "prompt2", "prompt_2"], exts=[".md", ".txt"])
+comp_report_file = find_file(["competitor_intelligence", "prompt3", "prompt_3"], exts=[".md", ".txt"])
+if market_report_file:
+    output_parts += [
+        "=" * 70,
+        "  SECTION 19A — PROMPT 2 MARKET INTELLIGENCE REPORT",
+        "=" * 70,
+        read_txt(market_report_file, max_chars=25000),
+        "\n"
+    ]
+if comp_report_file:
+    output_parts += [
+        "=" * 70,
+        "  SECTION 19B — PROMPT 3 COMPETITOR INTELLIGENCE REPORT",
+        "=" * 70,
+        read_txt(comp_report_file, max_chars=25000),
+        "\n"
+    ]
 
 final = "\n".join(output_parts)
 OUT.write_text(final, encoding="utf-8")

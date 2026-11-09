@@ -346,6 +346,64 @@ def save_as_golden(page_slug, page_type):
     print(f"✓ Saved {content_file.name} as GOLDEN EXAMPLE -> {target_example}")
 
 
+
+def run_init_research():
+    """Stage 0: Process logo, extract raw research, build data.txt, and run pre-brief validation."""
+    print("=" * 72)
+    print("  STAGE 0: INITIALIZING RAW RESEARCH, LOGO & DATA.TXT")
+    print("=" * 72)
+    # 1. Process logo if present in raw_research/
+    logo_script = SCRIPTS_DIR / "process_logo.py"
+    if logo_script.exists():
+        print("-> Running scripts/process_logo.py ...")
+        subprocess.run([sys.executable, str(logo_script)], cwd=str(ROOT_DIR))
+
+    # 2. Run data_extractor.py if raw research files exist
+    ext_script = SCRIPTS_DIR / "data_extractor.py"
+    if ext_script.exists():
+        print("-> Running scripts/data_extractor.py ...")
+        subprocess.run([sys.executable, str(ext_script)], cwd=str(ROOT_DIR))
+
+    # 3. Compile data.txt via build_data.py
+    bd_script = SCRIPTS_DIR / "build_data.py"
+    if bd_script.exists():
+        print("-> Running scripts/build_data.py ...")
+        subprocess.run([sys.executable, str(bd_script)], cwd=str(ROOT_DIR), check=True)
+
+    # 4. Clean research & pre-brief check
+    clean_script = ROOT_DIR / "clean_research.py"
+    if clean_script.exists():
+        print("-> Running clean_research.py ...")
+        subprocess.run([sys.executable, str(clean_script)], cwd=str(ROOT_DIR))
+
+    check_script = ROOT_DIR / "pre_brief_check.py"
+    if check_script.exists():
+        print("-> Running pre_brief_check.py ...")
+        subprocess.run([sys.executable, str(check_script)], cwd=str(ROOT_DIR))
+
+    print("✓ Stage 0 complete: data.txt and brand assets are ready.")
+
+
+def run_prompts_1_to_6():
+    """Stage 1: Execute Prompts 1 -> 6 via gemini_browser_bridge.py, then scaffold Phase 1 pages."""
+    run_init_research()
+    print("=" * 72)
+    print("  STAGE 1: EXECUTING PROMPTS 1 -> 6 (MARKET, COMPETITOR, BRIEF, TOPICAL, BLUEPRINT)")
+    print("=" * 72)
+    bridge = SCRIPTS_DIR / "gemini_browser_bridge.py"
+    for task in ["market", "competitor", "brief", "topical", "blueprint"]:
+        if task == "brief":
+            # Rebuild data.txt so Prompt 2 & Prompt 3 reports are merged before Prompt 4 runs
+            subprocess.run([sys.executable, str(SCRIPTS_DIR / "build_data.py")], cwd=str(ROOT_DIR), check=True)
+        print(f"\n>>> Running Gemini Browser Bridge Task: {task.upper()} ...")
+        r = subprocess.run([sys.executable, str(bridge), "--task", task], cwd=str(ROOT_DIR))
+        if r.returncode != 0:
+            print(f"ERROR: Task '{task}' stopped or required manual login. Fix and re-run --run-prompts.")
+            sys.exit(r.returncode)
+    print("\n>>> All Prompts 1 -> 6 complete! Preparing Phase 1 page workspaces...")
+    prep_phase1_all()
+
+
 def run_compile():
     compiler_script = SCRIPTS_DIR / "compile_builder_data.py"
     cmd = [sys.executable, str(compiler_script)]
@@ -526,6 +584,8 @@ def build_site_v5(template_id="cornerstone", out_folder=None):
 def main():
     parser = argparse.ArgumentParser(description="Rank & Rent Flash Engine Orchestrator")
     parser.add_argument("--status", action="store_true", help="Show pipeline, templates, and page progress")
+    parser.add_argument("--init-research", action="store_true", help="Stage 0: Process logo, extract raw_research, build data.txt, and validate")
+    parser.add_argument("--run-prompts", action="store_true", help="Stage 0 + Prompts 1-6: Run full strategy pipeline from Prompt 1 to Phase 1 prep")
     parser.add_argument("--prep-phase1", action="store_true", help="Prepare all Phase 1 pages from topical_authority.json")
     parser.add_argument("--prep", action="store_true", help="Prepare sections for a single page in work_in_progress")
     parser.add_argument("--stitch", action="store_true", help="Stitch sections into page_content_[slug].md")
@@ -543,13 +603,17 @@ def main():
     args = parser.parse_args()
 
     if args.status or not any([
-        args.prep_phase1, args.prep, args.stitch, args.validate,
+        args.init_research, args.run_prompts, args.prep_phase1, args.prep, args.stitch, args.validate,
         args.save_golden, args.compile, args.build_site
     ]):
         get_status()
         return
 
-    if args.prep_phase1:
+    if args.init_research:
+        run_init_research()
+    elif args.run_prompts:
+        run_prompts_1_to_6()
+    elif args.prep_phase1:
         prep_phase1_all()
     elif args.prep:
         if not args.page or not args.type:

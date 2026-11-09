@@ -125,7 +125,39 @@ def build_task_payload(task_name, input_file=None):
     _here = Path(__file__).resolve().parent
     base_dir = _here if (_here / 'AGENTS.md').exists() else _here.parent
 
-    if task_name == "brief":
+    if task_name == "market":
+        p1 = read_file_safe(base_dir / "prompts" / "P1_identity.md") if (base_dir / "prompts" / "P1_identity.md").exists() else read_file_safe(base_dir / "PromptOne.md")
+        p2 = read_file_safe(base_dir / "prompts" / "P2_market.md") if (base_dir / "prompts" / "P2_market.md").exists() else read_file_safe(base_dir / "PromptTwo.md")
+        nap_txt = read_file_safe(base_dir / "raw_research" / "nap.txt") if (base_dir / "raw_research" / "nap.txt").exists() else ""
+        payload = f"""{p1}
+
+=== PROJECT CONTEXT (FROM raw_research/nap.txt) ===
+{nap_txt}
+=== END PROJECT CONTEXT ===
+
+Now immediately execute Step 2 (Deep Market Intelligence Report) for this exact niche and city:
+
+{p2}"""
+        output_file = base_dir / "raw_research" / "market_intelligence.md"
+        return payload, str(output_file)
+
+    elif task_name == "competitor":
+        p3 = read_file_safe(base_dir / "prompts" / "P3_competitor.md") if (base_dir / "prompts" / "P3_competitor.md").exists() else read_file_safe(base_dir / "PromptThree.md")
+        nap_txt = read_file_safe(base_dir / "raw_research" / "nap.txt") if (base_dir / "raw_research" / "nap.txt").exists() else ""
+        data_txt = read_file_safe(base_dir / "data.txt")[:12000] if (base_dir / "data.txt").exists() else ""
+        payload = f"""{p3}
+
+=== PROJECT & SERP CONTEXT ===
+{nap_txt}
+
+{data_txt}
+=== END CONTEXT ===
+
+Analyze the top local competitors for this niche and city and produce the complete Competitor Intelligence Report."""
+        output_file = base_dir / "raw_research" / "competitor_intelligence.md"
+        return payload, str(output_file)
+
+    elif task_name == "brief":
         prompt_file = base_dir / "prompts" / "P4_brief.md"
         # Prioritize FULL data.txt — Argon / Gemini Advanced handles the entire 18 sections directly!
         data_file = Path(input_file) if input_file else (base_dir / "data.txt")
@@ -385,7 +417,7 @@ def send_to_gemini(payload, cdp_url=CDP_DEFAULT_URL):
 
 def main():
     parser = argparse.ArgumentParser(description="Automate Gemini Argon/Advanced web interface for Rank & Rent pipeline")
-    parser.add_argument("--task", choices=["brief", "topical", "blueprint"], default="brief",
+    parser.add_argument("--task", choices=["market", "competitor", "brief", "topical", "blueprint"], default="brief",
                         help="Pipeline task to execute (brief=P4, topical=P5, blueprint=P6)")
     parser.add_argument("--input", default=None, help="Optional custom input file path")
     parser.add_argument("--output", default=None, help="Optional custom output file path")
@@ -429,11 +461,14 @@ def main():
         if not raw_response:
             return
 
-        print("Parsing and validating JSON...")
-        data = extract_json_from_text(raw_response)
-
-        with open(target_output, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        if args.task in ("market", "competitor"):
+            with open(target_output, "w", encoding="utf-8") as f:
+                f.write(raw_response)
+        else:
+            print("Parsing and validating JSON...")
+            data = extract_json_from_text(raw_response)
+            with open(target_output, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
 
         print("\n" + "=" * 60)
         print(f"SUCCESS: Valid JSON successfully saved to:")
