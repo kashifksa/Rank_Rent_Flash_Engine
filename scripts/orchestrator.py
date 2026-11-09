@@ -358,24 +358,19 @@ def run_init_research():
         print("-> Running scripts/process_logo.py ...")
         subprocess.run([sys.executable, str(logo_script)], cwd=str(ROOT_DIR))
 
-    # 2. Run data_extractor.py if raw research files exist
-    ext_script = SCRIPTS_DIR / "data_extractor.py"
-    if ext_script.exists():
-        print("-> Running scripts/data_extractor.py ...")
-        subprocess.run([sys.executable, str(ext_script)], cwd=str(ROOT_DIR))
-
-    # 3. Compile data.txt via build_data.py
+    # 2. Compile full 18-section data.txt via build_data.py
     bd_script = SCRIPTS_DIR / "build_data.py"
     if bd_script.exists():
         print("-> Running scripts/build_data.py ...")
         subprocess.run([sys.executable, str(bd_script)], cwd=str(ROOT_DIR), check=True)
 
-    # 4. Clean research & pre-brief check
-    clean_script = ROOT_DIR / "clean_research.py"
-    if clean_script.exists():
-        print("-> Running clean_research.py ...")
-        subprocess.run([sys.executable, str(clean_script)], cwd=str(ROOT_DIR))
+    # 3. Run data_extractor.py to also produce compressed data_brief.txt from data.txt
+    ext_script = SCRIPTS_DIR / "data_extractor.py"
+    if ext_script.exists():
+        print("-> Running scripts/data_extractor.py ...")
+        subprocess.run([sys.executable, str(ext_script)], cwd=str(ROOT_DIR))
 
+    # 4. Pre-brief validation check on data.txt
     check_script = ROOT_DIR / "pre_brief_check.py"
     if check_script.exists():
         print("-> Running pre_brief_check.py ...")
