@@ -263,8 +263,20 @@
     const hv = B.tpl().header || 'classic';
     const lg = B.logoUrl(preview, hv === 'dark'), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
     const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
+    if (hv === 'decker') {
+      const cred = (d.brief.credentials && d.brief.credentials[0]) || 'Licensed & Insured';
+      return '<header class="hdr hdr-decker"><div class="deck-top"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a>' +
+        '<div class="deck-info"><div class="deck-pill">' + B.icon('pin') + '<div><small>Service Area</small><b>' + esc(d.brief.city + ', ' + d.brief.state) + '</b></div></div>' +
+        '<div class="deck-pill">' + B.icon('shield') + '<div><small>Accreditation</small><b>' + esc(cred) + '</b></div></div>' +
+        '<a class="btn btn-primary" href="' + tel + '">' + B.icon('phone') + ' ' + esc(nap.phone) + '</a></div>' +
+        '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
+        '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></div>' +
+        '<div class="deck-nav"><div class="wrap"><nav class="nav">' + links.join('') + '</nav>' +
+        (nap.email ? '<a class="deck-mail" href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a>' : '') + '</div></div></header>';
+    }
     const topbar = hv === 'topbar' ? '<div class="topbar"><div class="wrap"><span>Serving ' + esc(d.brief.city) + ', ' + esc(d.brief.state) + ' and nearby communities</span><span><a href="' + tel + '">Call ' + esc(nap.phone) + '</a>' + (nap.email ? '<a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a>' : '') + '</span></div></div>' : '';
-    return topbar + '<header class="hdr' + (hv === 'dark' ? ' hdr-dark' : '') + '"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
+    const hcls = hv === 'dark' ? ' hdr-dark' : hv === 'floating' ? ' hdr-floating' : '';
+    return topbar + '<header class="hdr' + hcls + '"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
       '<a class="btn btn-primary" href="' + tel + '">' + esc(nap.phone) + '</a></nav>' +
       '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';

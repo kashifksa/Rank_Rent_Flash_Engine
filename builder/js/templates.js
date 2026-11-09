@@ -47,6 +47,30 @@
       variants: { hero: 'split', split: 'image-right', cards: 'icons', steps: 'timeline', reviews: 'featured', faq: 'accordion', cta: 'box', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
       motion: { anim: 'rise', fx: 'none' },
       header: 'topbar', skin: 'clean'
+    },
+    authority: {
+      name: 'Executive Contractor', badge: '2-row nav + dispatch card',
+      desc: 'Double-decker utility header, hero with live dispatch card, numbered 01-06 service cards, sticky process rail.',
+      theme: { primary: '#0c1e35', accent: '#c83e1d', font: 'technical', radius: 6, density: 'balanced' },
+      variants: { hero: 'dispatch', split: 'image-right', cards: 'numbered', steps: 'rail', reviews: 'cards', faq: 'two-col', cta: 'band', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
+      motion: { anim: 'rise', fx: 'none' },
+      header: 'decker', skin: 'authority'
+    },
+    emergency: {
+      name: 'Rapid Dispatch', badge: 'Docked trust bar + stripe cards',
+      desc: 'High-visibility dispatch topbar, docked 4-column hero trust bar, horizontal stripe service cards, connected step track.',
+      theme: { primary: '#0f172a', accent: '#1d4ed8', font: 'trade', radius: 8, density: 'compact' },
+      variants: { hero: 'docked', split: 'image-left', cards: 'stripe', steps: 'track', reviews: 'featured', faq: 'accordion', cta: 'box', gallery: 'slider', badges: 'grid', area: 'map', table: 'cmp' },
+      motion: { anim: 'slide-left', fx: 'airflow' },
+      header: 'topbar', skin: 'emergency'
+    },
+    bento: {
+      name: 'Modern Bento', badge: 'Floating pill nav + Bento grid',
+      desc: 'Floating rounded navbar, warm architectural stone palette, multi-tile Bento hero, sticky process rail.',
+      theme: { primary: '#1c1917', accent: '#15614b', font: 'editorial', radius: 20, density: 'spacious' },
+      variants: { hero: 'bento', split: 'image-right', cards: 'icons', steps: 'rail', reviews: 'featured', faq: 'two-col', cta: 'box', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
+      motion: { anim: 'rise', fx: 'none' },
+      header: 'floating', skin: 'bento'
     }
   };
   B.DENSITY = { compact: 52, balanced: 76, spacious: 100 };

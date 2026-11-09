@@ -48,17 +48,19 @@
   const BLOCKS = {};
 
   BLOCKS.hero = {
-    label: 'Hero', variants: ['full', 'split', 'centered'],
+    label: 'Hero', variants: ['full', 'split', 'centered', 'dispatch', 'bento', 'docked'],
     render(m, c) {
       const title = m.h1 || m.h2 || c.page.title;
       const paras = m.paras.filter(p => !/\|/.test(p));
       const line = m.paras.find(p => /\|/.test(p));
       let chips = (c.merged || []).slice(0, 4);
       if (!chips.length && line) chips = line.split('|').map(s => s.trim()).filter(s => s && !/^direct|\d{3}[-\s)]/i.test(s)).slice(0, 4);
+      if (!chips.length && (c.brief.credentials || []).length) chips = c.brief.credentials.slice(0, 4);
       const img = c.img();
       const btn2 = m.btn2 || 'See Our Services';
       const fx = c.fx && c.fx !== 'none' ? ' data-fx="' + esc(c.fx) + '"' : '';
       const nextHref = c.nextSid ? '#sec-' + c.nextSid : '#';
+      const city = c.page.city || c.brief.city || '';
       const copy = '<h1>' + inline(title) + '</h1>' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') +
         '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div>' +
         (chips.length ? '<div class="proof">' + chips.map(x => '<span class="chip">' + icon('check') + ' ' + esc(x) + '</span>').join('') + '</div>' : '');
@@ -67,6 +69,35 @@
           (img ? '<img class="hero-img" src="' + esc(img.src) + '" alt="' + esc(img.alt) + '">' : '<div class="hero-img"></div>') + '</div></div>';
       }
       if (c.variant === 'centered') return '<div class="hero hero--centered"' + fx + '><div class="wrap">' + copy + '</div></div>';
+      if (c.variant === 'dispatch') {
+        const list = (chips.length ? chips : ['Licensed & Insured', 'Same or Next-Day Dispatch', 'Written Scope Before Work']).map(x =>
+          '<li><span class="tick">' + icon('check') + '</span><span>' + esc(x) + '</span></li>').join('');
+        const dcard = '<aside class="hero-dcard"><div class="hd-top"><span class="hd-dot"></span><span>Direct Local Dispatch' + (city ? ' &middot; ' + esc(city) : '') + '</span></div>' +
+          '<h3>Speak With a Certified Specialist</h3><a class="hd-phone" href="' + tel(c) + '">' + icon('phone') + ' ' + esc(c.phone) + '</a>' +
+          '<ul class="hd-list">' + list + '</ul><a class="btn btn-primary hd-btn" href="' + tel(c) + '">Request Immediate Dispatch</a></aside>';
+        return '<div class="hero hero--dispatch"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap"><div class="hd-copy">' +
+          (city ? '<span class="eyebrow">' + esc(city + (c.brief.state ? ', ' + c.brief.state : '')) + '</span>' : '') +
+          '<h1>' + inline(title) + '</h1>' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') +
+          '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div></div>' + dcard + '</div></div>';
+      }
+      if (c.variant === 'bento') {
+        const tiles = (chips.length ? chips : ['Certified Technicians', 'Same-Day Availability']).slice(0, 3).map(x =>
+          '<div class="bento-tile"><span class="ic">' + icon(pickIcon(x)) + '</span><b>' + esc(x) + '</b></div>').join('');
+        return '<div class="hero hero--bento"' + fx + '><div class="wrap"><div class="bento-main">' +
+          (city ? '<span class="eyebrow">' + esc(city + (c.brief.state ? ', ' + c.brief.state : '')) + '</span>' : '') +
+          '<h1>' + inline(title) + '</h1>' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') +
+          '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div></div>' +
+          '<div class="bento-side">' + (img ? '<div class="bento-photo"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"></div>' : '') +
+          '<div class="bento-tiles">' + tiles + '</div></div></div></div>';
+      }
+      if (c.variant === 'docked') {
+        const dock = (chips.length ? chips : ['Certified Specialists', 'Local Dispatch', 'Written Scope']).slice(0, 4).map(x =>
+          '<div class="dock-item"><span class="ic">' + icon(pickIcon(x)) + '</span><b>' + esc(x) + '</b></div>').join('');
+        return '<div class="hero hero--docked"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap"><div class="dock-copy">' +
+          '<h1>' + inline(title) + '</h1>' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') +
+          '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div></div>' +
+          '<div class="hero-dock">' + dock + '</div></div></div>';
+      }
       return '<div class="hero hero--full"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap">' + copy + '</div></div>';
     }
   };
@@ -87,12 +118,12 @@
   };
 
   BLOCKS.cards = {
-    label: 'Cards', variants: ['icons', 'grid', 'list'],
+    label: 'Cards', variants: ['icons', 'grid', 'list', 'numbered', 'stripe'],
     render(m, c) {
       let items = (m.items || []).slice();
       if (!items.length && m.bullets.length) items = m.bullets.map(b => ({ title: b.label || b.text, paras: b.label ? [b.text] : [], facts: [], bullets: [] }));
       const intro = m.paras[0];
-      const cards = items.map(it => {
+      const cards = items.map((it, idx) => {
         const facts = it.facts || [];
         const loc = facts.find(f => /neighbou?rhood|location/i.test(f.label));
         const rest = facts.filter(f => f !== loc);
@@ -103,18 +134,21 @@
         const fx = rest.length ? '<div class="facts">' + rest.map((f, i) => '<div class="fact' + (i === rest.length - 1 && /result/i.test(f.label) ? ' last' : '') + '"><b>' + esc(f.label) + '</b><span>' + inline(f.text) + '</span></div>').join('') + '</div>' : '';
         const showIcon = !rest.length;
         const ic = showIcon ? '<span class="ic">' + icon(pickIcon(it.title)) + '</span>' : '';
-        const inner = (c.variant === 'list' ? '<div><h3>' + inline(it.title) + '</h3>' : '<h3>' + inline(it.title) + '</h3>') +
+        const numBadge = c.variant === 'numbered' ? '<div class="cnum-top"><span class="cnum">' + String(idx + 1).padStart(2, '0') + '</span>' + ic + '</div>' : '';
+        const useBodyWrap = c.variant === 'list' || c.variant === 'stripe';
+        const inner = (useBodyWrap ? '<div><h3>' + inline(it.title) + '</h3>' : '<h3>' + inline(it.title) + '</h3>') +
           body.map(p => '<p>' + inline(p) + '</p>').join('') + (bl ? '<ul style="margin:6px 0 0;padding-left:18px;color:var(--muted)">' + bl + '</ul>' : '') + fx +
-          (cta ? '<a class="more" href="' + tel(c) + '">' + esc(cta) + ' &rarr;</a>' : '') + (c.variant === 'list' ? '</div>' : '');
-        return '<article class="card">' + (loc ? '<span class="loc">' + inline(loc.text) + '</span>' : '') + (c.variant === 'grid' ? '' : ic) + inner + '</article>';
+          (cta ? '<a class="more" href="' + tel(c) + '">' + esc(cta) + ' &rarr;</a>' : '') + (useBodyWrap ? '</div>' : '');
+        const lead = c.variant === 'numbered' ? numBadge : (c.variant === 'grid' ? '' : ic);
+        return '<article class="card">' + (loc ? '<span class="loc">' + inline(loc.text) + '</span>' : '') + lead + inner + '</article>';
       }).join('');
-      const wrapCls = c.variant === 'list' ? 'cards-list' : ('grid ' + (c.variant === 'icons' ? 'cards-icons' : ''));
+      const wrapCls = c.variant === 'list' ? 'cards-list' : c.variant === 'stripe' ? 'cards-stripe' : ('grid ' + (c.variant === 'icons' ? 'cards-icons' : c.variant === 'numbered' ? 'cards-numbered' : ''));
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="' + wrapCls + '">' + cards + '</div></div>';
     }
   };
 
   BLOCKS.steps = {
-    label: 'Process steps', variants: ['timeline', 'table'],
+    label: 'Process steps', variants: ['timeline', 'table', 'rail', 'track'],
     render(m, c) {
       const intro = m.paras[0];
       let rows = [];
@@ -124,7 +158,17 @@
       if (c.variant === 'table' && m.table) {
         return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + B.tableHtml(m.table) + '</div>';
       }
-      return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="steps">' + rows.map((r, i) =>
+      if (c.variant === 'rail') {
+        return '<div class="wrap"><div class="steps-rail"><div class="rail-side">' +
+          (c.eyebrow ? '<span class="eyebrow">' + esc(c.eyebrow) + '</span>' : '') +
+          '<h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + (intro ? '<p style="color:var(--muted)">' + inline(intro) + '</p>' : '') +
+          '<p style="margin-top:20px">' + callBtn(c) + '</p></div><div class="rail-list">' +
+          rows.map((r, i) => '<div class="rail-item"><div class="n">' + String(i + 1).padStart(2, '0') + '</div><div class="rail-body"><h3>' +
+            inline(strip(r.title)) + '</h3><p>' + inline(r.text) + '</p>' + (r.time ? '<span class="time">' + esc(strip(r.time)) + '</span>' : '') + '</div></div>').join('') +
+          '</div></div></div>';
+      }
+      const cls = c.variant === 'track' ? 'steps steps-track' : 'steps';
+      return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="' + cls + '">' + rows.map((r, i) =>
         '<div class="step"><div class="n">' + (i + 1) + '</div><h3>' + inline(strip(r.title)) + '</h3><p>' + inline(r.text) + '</p>' +
         (r.time ? '<span class="time">' + esc(strip(r.time)) + '</span>' : '') + '</div>').join('') + '</div></div>';
     }
