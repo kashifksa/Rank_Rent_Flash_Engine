@@ -656,6 +656,13 @@ def serve_builder(port=8765):
         def log_message(self, fmt, *args):
             pass
 
+        def do_OPTIONS(self):
+            self.send_response(204)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
+
         def do_POST(self):
             length = int(self.headers.get("Content-Length", "0"))
             raw = self.rfile.read(length).decode("utf-8", errors="replace") if length else "{}"
@@ -687,6 +694,7 @@ def serve_builder(port=8765):
         def _json(self, code, obj):
             data = json.dumps(obj).encode("utf-8")
             self.send_response(code)
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()

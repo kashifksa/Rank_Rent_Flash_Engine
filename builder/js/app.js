@@ -2,6 +2,7 @@
 (function () {
   const B = window.Builder, D = window.BUILDER_DATA, $ = s => document.querySelector(s), esc = B.esc;
   const KEY = 'site_builder_v5::' + (D.brief.project_name || 'project');
+  const API_BASE = location.protocol.startsWith('http') ? '' : 'http://127.0.0.1:8765';
   let pid = 'homepage', sel = null, lastY = 0, vp = 'desktop', saveT = null, frameT = null;
 
   /* ---------- helpers ---------- */
@@ -9,14 +10,15 @@
   function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200); }
   function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
   function setPath(o, p, v) { const k = p.split('.'); const last = k.pop(); const t = k.reduce((a, x) => a[x], o); t[last] = v; }
+  function syncStateToDisk() {
+    fetch(API_BASE + '/api/save-state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(B.state) }).catch(() => {});
+  }
   function save() {
     clearTimeout(saveT);
     saveT = setTimeout(() => {
       B.state.page = pid;
       try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {}
-      if (location.protocol.startsWith('http')) {
-        fetch('/api/save-state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(B.state) }).catch(() => {});
-      }
+      syncStateToDisk();
       seoRefresh();
     }, 250);
   }
@@ -230,19 +232,17 @@
     if (!repo) { toast('Enter your target GitHub repository URL first'); return; }
     B.state.githubRepo = repo; B.state.lockedTemplate = true; save();
     const log = $('#pubLog'); log.hidden = false;
-    if (location.protocol.startsWith('http')) {
-      log.textContent = 'Building website with locked template "' + B.state.template + '" and pushing dist/ to GitHub...\n';
-      fetch('/api/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ state: B.state, repo: repo }) })
-        .then(r => r.json())
-        .then(res => { log.textContent = res.output || (res.ok ? 'Published!' : 'Failed'); toast(res.ok ? 'Published to GitHub!' : 'Publish failed — check log'); })
-        .catch(err => { log.textContent = 'Error: ' + err.message; });
-    } else {
-      download('builder_state.json', JSON.stringify(B.state, null, 2), 'application/json');
-      const cmd = 'python scripts/orchestrator.py --publish ' + repo + ' --template ' + B.state.template;
-      try { navigator.clipboard.writeText(cmd); } catch (e) {}
-      log.textContent = '1. Saved builder_state.json (move to project root if needed).\n2. Copied publish command to clipboard! Run in PowerShell:\n\n' + cmd + '\n\n(Tip: Run "python scripts/orchestrator.py --serve" to enable 1-click browser publishing without PowerShell!)';
-      toast('Command copied to clipboard!');
-    }
+    log.textContent = 'Building website with locked template "' + B.state.template + '" and pushing dist/ to GitHub...\n';
+    fetch(API_BASE + '/api/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ state: B.state, repo: repo }) })
+      .then(r => r.json())
+      .then(res => { log.textContent = res.output || (res.ok ? 'Published!' : 'Failed'); toast(res.ok ? 'Published to GitHub!' : 'Publish failed — check log'); })
+      .catch(() => {
+        download('builder_state.json', JSON.stringify(B.state, null, 2), 'application/json');
+        const cmd = 'python scripts/orchestrator.py --publish ' + repo + ' --template ' + B.state.template;
+        try { navigator.clipboard.writeText(cmd); } catch (e) {}
+        log.textContent = '1. Saved builder_state.json (move to project root if needed).\n2. Copied publish command to clipboard! Run in PowerShell:\n\n' + cmd + '\n\n(Tip: Run "python scripts/orchestrator.py --serve" to enable 1-click browser publishing without PowerShell!)';
+        toast('Command copied to clipboard!');
+      });
   }
   function copyPublishCmd() {
     const repo = ($('#pubRepoUrl').value || 'https://github.com/YOUR_USERNAME/YOUR_SITE_REPO.git').trim();
@@ -488,6 +488,7 @@
     try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) { B.state = Object.assign({ template: 'cornerstone', theme: {}, pages: {} }, s); loaded = true; } } catch (e) {}
     if (!loaded && D.defaultState) B.state = Object.assign({ template: 'cornerstone', theme: {}, pages: {} }, D.defaultState);
     if (!B.TEMPLATES[B.state.template]) B.state.template = 'cornerstone';
+    if (loaded) syncStateToDisk();
     const dropped = B.reconcile();
     initTop();
     pid = D.pages[B.state.page] ? B.state.page : (D.pages.homepage ? 'homepage' : B.pageIds()[0]);
