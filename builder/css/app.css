@@ -60,3 +60,4 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 .seo-row b{display:block;color:#e5e9f5}.seo-row span{color:var(--muted)}
 .seo-heat{display:grid;gap:3px}.seo-heat div{display:grid;grid-template-columns:130px 1fr 48px;gap:6px;align-items:center;font-size:11px;color:#b4bdd2}
 .seo-heat i{display:block;height:6px;border-radius:3px;background:#3b82f6}.seo-heat i.over{background:#ef4444}
+.seo-row.info .st{background:#1e3a8a;color:#93c5fd}

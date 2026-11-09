@@ -21,7 +21,7 @@
   }
   function renderSeo(r) {
     r = r || B.seoAudit(pid); const box = $('#seoPop'); if (!r) { box.innerHTML = '<h4>SEO</h4><small>No SEO standards loaded.</small>'; return; }
-    const d = r.density, tag = { pass: 'PASS', warn: 'WARN', fail: 'FAIL' };
+    const d = r.density, tag = { pass: 'PASS', info: 'INFO', warn: 'WARN', fail: 'FAIL' };
     box.innerHTML = '<h4>SEO audit <small>warn-only, updates as you type</small></h4>' +
       '<div class="kw">Primary keyword: <b>' + esc(r.keyword || '(none)') + '</b>' + (d ? '<br>' + d.total + ' words | exact ' + d.exact + 'x (' + d.exactPct + '%) | variant "' + esc(d.variant) + '" +' + d.variantOnly + 'x | <b>combined ' + d.combinedPct + '%</b> (target ' + d.target[0] + '-' + d.target[1] + '%)' : '') + '</div>' +
       r.checks.map(c => '<div class="seo-row ' + c.status + '"><div class="st">' + tag[c.status] + '</div><div><b>' + esc(c.label) + '</b><span>' + esc(c.detail) + '</span></div></div>').join('') +

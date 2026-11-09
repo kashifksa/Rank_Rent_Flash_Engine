@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 seo_audit.py - Phase 1: primary keyword + density audit (WARN-only by default).
@@ -174,13 +174,15 @@ def audit_page(pid, std=None):
     need_more = max(0, int(-(-lo * total // 100)) - (exact + variant_only))
     allow = int(hi * total // 100)
     if comb_d < lo:
-        st, det = sev, f"{comb_d:.2f}% is below {lo}%. Add about {need_more} more natural mention(s) (exact or core variant)."
+        st = cfg.get("density_min_severity", sev)
+        det = (f"{comb_d:.2f}% is under {lo}%. Informational only: Google has no density target, so write naturally "
+               f"and just make sure the topic is clear (about {need_more} more mention(s) would reach {lo}%).")
     elif comb_d <= hi:
-        st, det = "pass", f"{comb_d:.2f}% is within {lo}-{hi}%."
+        st, det = "pass", f"{comb_d:.2f}% is within the natural range ({lo}-{hi}%)."
     elif comb_d <= wmax:
         st, det = "pass", f"{comb_d:.2f}% is slightly above {hi}% but under the {wmax}% warning line."
     elif comb_d <= fmax:
-        st, det = sev, f"{comb_d:.2f}% exceeds {wmax}%. Replace about {max(0, exact + variant_only - allow)} mention(s) with synonyms."
+        st, det = sev, f"{comb_d:.2f}% exceeds {wmax}% and may read as stuffing. Replace about {max(0, exact + variant_only - allow)} mention(s) with synonyms or pronouns."
     else:
         st, det = "fail", f"{comb_d:.2f}% exceeds {fmax}% (keyword stuffing). Replace about {max(0, exact + variant_only - allow)} mention(s)."
     report["checks"].append({"id": "density", "status": st, "label": "Primary keyword density (exact + core variant)",
@@ -219,14 +221,16 @@ def audit_page(pid, std=None):
     mt, md_ = meta.get("meta_title", ""), meta.get("meta_description", "")
     if "meta_title" in required:
         ok = count_phrase(tokens(mt), kt)[0] > 0 or (bool(core) and count_phrase(tokens(mt), core)[0] > 0)
-        lim = cfg["meta_title_max_chars"]
-        add("meta_title", "Keyword in meta title", ok and 0 < len(mt) <= lim,
-            f"{len(mt)} chars (max {lim}). " + ("Keyword present." if ok else "Keyword missing from meta title."))
+        add("meta_title", "Keyword in meta title", ok and len(mt) > 0, "Keyword present." if ok else "Keyword missing from meta title.")
+        lo_, hi_ = cfg["meta_title_min_chars"], cfg["meta_title_max_chars"]
+        add("meta_title_len", "Meta title length (display is pixel-based, ~50-60 chars)", lo_ <= len(mt) <= hi_,
+            f"{len(mt)} chars (target {lo_}-{hi_}). Google may rewrite titles that are too long or stuffed.")
     if "meta_description" in required:
         ok = count_phrase(tokens(md_), kt)[0] > 0 or (bool(core) and count_phrase(tokens(md_), core)[0] > 0)
-        lim = cfg["meta_description_max_chars"]
-        add("meta_description", "Keyword in meta description", ok and 0 < len(md_) <= lim,
-            f"{len(md_)} chars (max {lim}). " + ("Keyword present." if ok else "Keyword missing from meta description."))
+        add("meta_description", "Keyword in meta description", ok and len(md_) > 0, "Keyword present." if ok else "Keyword missing from meta description.")
+        lo_, hi_ = cfg["meta_description_min_chars"], cfg["meta_description_max_chars"]
+        add("meta_description_len", "Meta description length (snippet candidate)", lo_ <= len(md_) <= hi_,
+            f"{len(md_)} chars (target {lo_}-{hi_}).")
 
     if "slug" in required:
         slug = meta.get("slug") or fm.get("slug") or pid
@@ -274,7 +278,7 @@ def audit_page(pid, std=None):
     report["checks"].append({"id": "section_density", "status": status(not over, sev), "label": f"No section above {sec_limit}% keyword density",
                              "detail": "All sections OK." if not over else "Over limit: " + ", ".join(over)})
 
-    scores = {"pass": 1.0, "warn": 0.5, "fail": 0.0}
+    scores = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
     report["score"] = round(sum(scores[c["status"]] for c in report["checks"]) / len(report["checks"]) * 100)
     return report
 
@@ -284,7 +288,7 @@ def all_page_ids():
     return ids
 
 
-ICON = {"pass": "PASS", "warn": "WARN", "fail": "FAIL"}
+ICON = {"pass": "PASS", "info": "INFO", "warn": "WARN", "fail": "FAIL"}
 
 
 def print_report(r):

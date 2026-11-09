@@ -42,10 +42,10 @@
     const lo = cfg.density_min, hi = cfg.density_target_max, wmax = cfg.density_warn_max, fmax = cfg.density_fail_max;
     const hits = exact + vOnly, needMore = Math.max(0, Math.ceil(lo * total / 100) - hits), over = Math.max(0, hits - Math.floor(hi * total / 100));
     let s, det;
-    if (combPct < lo) { s = sev; det = combPct.toFixed(2) + '% is below ' + lo + '%. Add about ' + needMore + ' more natural mention(s).'; }
-    else if (combPct <= hi) { s = 'pass'; det = combPct.toFixed(2) + '% is within ' + lo + '-' + hi + '%.'; }
+    if (combPct < lo) { s = cfg.density_min_severity || sev; det = combPct.toFixed(2) + '% is under ' + lo + '%. Informational only: Google has no density target, so write naturally and keep the topic clear (about ' + needMore + ' more mention(s) would reach ' + lo + '%).'; }
+    else if (combPct <= hi) { s = 'pass'; det = combPct.toFixed(2) + '% is within the natural range (' + lo + '-' + hi + '%).'; }
     else if (combPct <= wmax) { s = 'pass'; det = combPct.toFixed(2) + '% is slightly above ' + hi + '% (under the ' + wmax + '% warning line).'; }
-    else if (combPct <= fmax) { s = sev; det = combPct.toFixed(2) + '% exceeds ' + wmax + '%. Replace about ' + over + ' mention(s) with synonyms.'; }
+    else if (combPct <= fmax) { s = sev; det = combPct.toFixed(2) + '% exceeds ' + wmax + '% and may read as stuffing. Replace about ' + over + ' mention(s) with synonyms or pronouns.'; }
     else { s = 'fail'; det = combPct.toFixed(2) + '% exceeds ' + fmax + '% (stuffing). Replace about ' + over + ' mention(s).'; }
     rep.checks.push({ id: 'density', status: s, label: 'Primary keyword density (exact + core variant)', detail: det + ' Exact only: ' + exactPct.toFixed(2) + '% (' + exact + 'x) of ' + total + ' words.' });
 
@@ -60,8 +60,14 @@
       add('h2_any', 'Keyword in at least one H2 (not all)', hit.length > 0 && !every, every ? 'Every H2 repeats the keyword (stuffing).' : hit.length + ' of ' + h2.length + ' H2s contain it.');
     }
     const meta = page.meta || {}, mt = meta.meta_title || '', md = meta.meta_description || '';
-    if (req.has('meta_title')) add('meta_title', 'Keyword in meta title', has(mt) && mt.length > 0 && mt.length <= cfg.meta_title_max_chars, mt.length + ' chars (max ' + cfg.meta_title_max_chars + '). ' + (has(mt) ? 'Keyword present.' : 'Keyword missing.'));
-    if (req.has('meta_description')) add('meta_description', 'Keyword in meta description', has(md) && md.length > 0 && md.length <= cfg.meta_description_max_chars, md.length + ' chars (max ' + cfg.meta_description_max_chars + '). ' + (has(md) ? 'Keyword present.' : 'Keyword missing.'));
+    if (req.has('meta_title')) {
+      add('meta_title', 'Keyword in meta title', has(mt) && mt.length > 0, has(mt) ? 'Keyword present.' : 'Keyword missing from meta title.');
+      add('meta_title_len', 'Meta title length (display is pixel-based, ~50-60 chars)', mt.length >= cfg.meta_title_min_chars && mt.length <= cfg.meta_title_max_chars, mt.length + ' chars (target ' + cfg.meta_title_min_chars + '-' + cfg.meta_title_max_chars + '). Google may rewrite titles that are too long or stuffed.');
+    }
+    if (req.has('meta_description')) {
+      add('meta_description', 'Keyword in meta description', has(md) && md.length > 0, has(md) ? 'Keyword present.' : 'Keyword missing from meta description.');
+      add('meta_description_len', 'Meta description length (snippet candidate)', md.length >= cfg.meta_description_min_chars && md.length <= cfg.meta_description_max_chars, md.length + ' chars (target ' + cfg.meta_description_min_chars + '-' + cfg.meta_description_max_chars + ').');
+    }
     if (req.has('slug')) {
       const slug = meta.slug || page.slug || pid;
       if ((cfg.slug_exempt_page_types || []).indexOf(page.type) > -1 || slug === '/' || slug === '') rep.checks.push({ id: 'slug', status: 'pass', label: 'Keyword in URL slug', detail: 'Exempt (homepage).' });
@@ -81,8 +87,9 @@
     const overS = rep.sections.filter(x => x.flag).map(x => x.label);
     add('section_density', 'No section above ' + lim + '% keyword density', overS.length === 0, overS.length ? 'Over limit: ' + overS.join(', ') : 'All sections OK.');
 
-    const sc = { pass: 1, warn: 0.5, fail: 0 };
+    const sc = { pass: 1, info: 1, warn: 0.5, fail: 0 };
     rep.score = Math.round(rep.checks.reduce((a, c) => a + sc[c.status], 0) / rep.checks.length * 100);
     return rep;
   };
 })();
+

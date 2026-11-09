@@ -431,16 +431,18 @@ window.BUILDER_DATA = {
   }
  },
  "seo": {
-  "_comment": "Single source of truth for SEO thresholds. Tune per niche here; seo_audit.py and the builder SEO panel both read this. Violations are WARN-only by default (severity can be raised to 'fail').",
+  "_comment": "Single source of truth for SEO thresholds. Tune per niche here; seo_audit.py and the builder SEO panel both read this. WARN-only by default.",
+  "_guidance_2026": "Google has no keyword-density target. Density here is a STUFFING GUARDRAIL, not a goal: the floor is informational only, the ceiling is what matters. Rankings rely on people-first, entity-rich, locally unique content (E-E-A-T), not keyword percentages.",
   "severity": {
    "default": "warn"
   },
   "primary_keyword": {
-   "density_min": 1.0,
-   "density_target_max": 1.5,
-   "density_warn_max": 2.0,
-   "density_fail_max": 2.5,
-   "section_density_max": 3.0,
+   "density_min": 0.3,
+   "density_min_severity": "info",
+   "density_target_max": 0.8,
+   "density_warn_max": 1.2,
+   "density_fail_max": 2.0,
+   "section_density_max": 2.0,
    "count_variants": true,
    "variant_drop_trailing_tokens": [
     "county"
@@ -457,9 +459,13 @@ window.BUILDER_DATA = {
     "conclusion"
    ],
    "slug_exempt_page_types": [
-    "homepage"
+    "homepage",
+    "about",
+    "contact"
    ],
+   "meta_title_min_chars": 30,
    "meta_title_max_chars": 60,
+   "meta_description_min_chars": 120,
    "meta_description_max_chars": 155,
    "image_alt_min": 1,
    "image_alt_max": 2
@@ -473,8 +479,15 @@ window.BUILDER_DATA = {
      "h1",
      "first_words",
      "meta_title",
-     "meta_description",
-     "slug"
+     "meta_description"
+    ]
+   },
+   "about": {
+    "required_in": [
+     "h1",
+     "first_words",
+     "meta_title",
+     "meta_description"
     ]
    }
   }
