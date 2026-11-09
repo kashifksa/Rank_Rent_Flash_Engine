@@ -21,6 +21,58 @@
     return core.length > 0 && core.length < kt.length ? core : [];
   }
 
+  /* ---- location pages: doorway guard + local proof (mirrors scripts/seo_local.py) ---- */
+  const ROAD_RE = /\b(?:Route|Rt\.?|IL|US|I|State Route|SR|Highway|Hwy|County Road|CR)[ -]?\d{1,3}[A-Z]?\b|\b[A-Z][a-z]+(?: [A-Z][a-z]+)? (?:Road|Rd|Avenue|Ave|Boulevard|Blvd|Parkway|Pkwy|Highway|Drive|Street)\b/g;
+  const LM_RE = /\b(?:[A-Z][A-Za-z.'&]+ ){0,3}(?:High School|Middle School|Elementary|Town Hall|Village Hall|City Hall|Library|Park District|Forest Preserve|Fairgrounds|Mall|Shopping Center|Plaza|Hospital|Museum|Golf Course|Community Center|Recreation Center|Sports Complex|Speedway|Ice Arena|Airport|Courthouse|Fire Station|Police Department)\b|\b[A-Z][a-z]+ (?:Park|Preserve|Lake|River|Creek|Heights|Village|Estates|Hills|Grove|Crossing)\b/g;
+  const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const shingles = (text, n) => { const t = raw(text), s = new Set(); for (let i = 0; i + n <= t.length; i++) s.add(t.slice(i, i + n).join(' ')); return s; };
+  const pageText = pid => clean(B.sectionList(pid).filter(s => !B.ps(pid).hidden[s]).map(s => B.serializeSection(B.getModel(pid, s))).join('\n\n'));
+
+  function localChecks(pid, page, secs, body, rt, rep, sev) {
+    const L = Object.assign({ shingle_size: 5, similarity_warn: 0.3, similarity_fail: 0.5, min_landmarks: 2, min_roads: 1, min_city_mentions_per_1000: 4, unique_body_min_words: 700 }, (D.seo || {}).location || {});
+    const city = page.city || '', hub = D.brief.city || '', company = D.nap.company_name || '';
+    const add = (id, label, status, detail) => rep.checks.push({ id, label, status, detail });
+    const plain = clean(body), mine = shingles(plain, L.shingle_size);
+    let worst = 0, top = { p: '-', v: 0 };
+    B.pageIds().forEach(o => {
+      if (o === pid) return;
+      const th = shingles(pageText(o), L.shingle_size); let shared = 0; mine.forEach(x => { if (th.has(x)) shared++; });
+      const v = shared / Math.max(mine.size, 1); if (v > worst) { worst = v; top = { p: o, v }; }
+    });
+    add('similarity', 'Unique vs other pages (doorway guard)', worst >= L.similarity_fail ? 'fail' : worst >= L.similarity_warn ? 'warn' : 'pass',
+      'Highest overlap ' + (top.v * 100).toFixed(1) + '% with ' + top.p + ' (warn ' + L.similarity_warn * 100 + '%, fail ' + L.similarity_fail * 100 + '%).');
+    add('unique_words', 'Body has at least ' + L.unique_body_min_words + ' words', rt.length >= L.unique_body_min_words ? 'pass' : 'warn', rt.length + ' words.');
+
+    const scrub = company ? plain.replace(new RegExp(esc(company), 'gi'), ' ') : plain;
+    const roads = [...new Set((scrub.match(ROAD_RE) || []).map(x => x.trim()))].sort();
+    const lms = [...new Set((scrub.match(LM_RE) || []).map(x => x.trim()))].filter(x => x !== city && x.toLowerCase() !== hub.toLowerCase() && !/^(our|the) /i.test(x)).sort();
+    add('landmarks', 'At least ' + L.min_landmarks + ' local landmarks (FIX 39)', lms.length >= L.min_landmarks ? 'pass' : 'warn', lms.length + ' found: ' + (lms.slice(0, 6).join(', ') || 'none') + '. (Pattern match: confirm they are real places in ' + city + '.)');
+    add('roads', 'At least ' + L.min_roads + ' numbered highway / thoroughfare (FIX 39)', roads.length >= L.min_roads ? 'pass' : 'warn', roads.length + ' found: ' + (roads.slice(0, 6).join(', ') || 'none') + '.');
+
+    const noBrand = t => company ? t.replace(new RegExp(esc(company), 'gi'), '') : t, hubRe = new RegExp('\\b' + esc(hub) + '\\b', 'i');
+    const heads = []; body.split('\n').forEach(l => { const m = l.match(/^(#{2,3})\s+(.+?)\s*#*\s*$/); if (m) heads.push(clean(m[2])); });
+    const leaks = hub ? heads.filter(t => hubRe.test(noBrand(t))) : [];
+    const introSec = secs.find(s => /intro/.test(s.sid)), introLeak = hub && introSec && hubRe.test(noBrand(clean(introSec.md)));
+    add('hub_leak', 'No hub city (' + hub + ') in H2/H3 or intro (FIX 36)', !leaks.length && !introLeak ? 'pass' : 'fail', !leaks.length && !introLeak ? 'Clean.' : 'Hub city found in: ' + (leaks.slice(0, 3).join(' | ') || 'intro paragraph') + '.');
+
+    const cm = city ? (plain.match(new RegExp(esc(city), 'gi')) || []).length : 0, per1k = cm / Math.max(rt.length, 1) * 1000;
+    add('city_mentions', 'City is named naturally and often enough', per1k >= L.min_city_mentions_per_1000 ? 'pass' : 'warn', cm + ' mentions (' + per1k.toFixed(1) + ' per 1000 words, min ' + L.min_city_mentions_per_1000 + ').');
+    const proofSec = secs.find(s => /proof|review/.test(s.sid)), cityRe = city ? new RegExp(esc(city), 'i') : null;
+    add('local_review', 'City-specific review present', proofSec && cityRe && cityRe.test(clean(proofSec.md)) ? 'pass' : 'warn', proofSec && cityRe && cityRe.test(clean(proofSec.md)) ? 'Found.' : 'No review text in the proof section mentions ' + city + '.');
+    const imgs = B.contentImages(pid), ci = imgs.filter(i => cityRe && cityRe.test(i.alt_text || ''));
+    add('local_photo', 'Real local photo with city in alt text', ci.length ? 'pass' : 'warn', ci.length + ' of ' + imgs.length + ' images mention ' + city + '. Use genuine, geotagged job photos, not stock.');
+    const nb = plain.match(/\b(?:Colonial Village|Meadow|Heights|Estates|Subdivision|neighbou?rhood)\b/g) || [];
+    add('neighborhoods', 'Neighbourhood-level detail', nb.length >= 1 ? 'pass' : 'warn', nb.length + ' neighbourhood references.');
+    const meta = page.meta || {};
+    add('meta_city', 'City in meta title and description', cityRe && cityRe.test(meta.meta_title || '') && cityRe.test(meta.meta_description || '') ? 'pass' : 'warn', 'title: "' + String(meta.meta_title || '').slice(0, 60) + '"');
+
+    const svcSec = secs.find(s => /service/.test(s.sid)), cards = [];
+    if (svcSec) svcSec.md.split('\n').forEach(l => { const m = l.match(/^###\s+(.+)/); if (m) cards.push(clean(m[1])); });
+    const canon = Object.values(D.pages).filter(p => p.type === 'service').map(p => new Set(ft(raw(p.title))));
+    const bad = cards.filter(c => { const ct = new Set(ft(raw(c))); return !canon.some(k => [...ct].filter(x => k.has(x)).length / Math.max(ct.size, 1) >= 0.67); });
+    add('service_cards', 'Service cards match canonical Phase 1 services (FIX 36)', bad.length ? 'warn' : 'pass', bad.length ? 'Not canonical: ' + bad.join('; ') : 'All cards map to a Phase 1 service.');
+  }
+
   B.seoAudit = function (pid) {
     const std = D.seo || {}, page = B.page(pid); if (!std.primary_keyword || !page) return null;
     const cfg = Object.assign({}, std.primary_keyword, (std.page_type_overrides || {})[page.type] || {});
@@ -86,6 +138,8 @@
     });
     const overS = rep.sections.filter(x => x.flag).map(x => x.label);
     add('section_density', 'No section above ' + lim + '% keyword density', overS.length === 0, overS.length ? 'Over limit: ' + overS.join(', ') : 'All sections OK.');
+
+    if (page.type === 'location') localChecks(pid, page, secs, body, rt, rep, sev);
 
     const sc = { pass: 1, info: 1, warn: 0.5, fail: 0 };
     rep.score = Math.round(rep.checks.reduce((a, c) => a + sc[c.status], 0) / rep.checks.length * 100);

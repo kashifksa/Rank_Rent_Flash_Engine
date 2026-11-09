@@ -94,6 +94,19 @@ def main():
                 drift.append((pid_, py["density"]["combined_pct"], val[0]))
         check("SEO panel (JS) density matches seo_audit.py (+-0.15)", not drift, drift)
         check("SEO audit covers every page with a keyword", len(js) - nopy >= 8, f"{len(js) - nopy}/{len(js)}")
+        # location page: the single SEO panel must also run the doorway / local-proof checks and agree with seo_local.py
+        loc_js = pg.evaluate("() => { const r = Builder.seoAudit('air-duct-cleaning-loves-park-il'); return r.checks.map(c => [c.id, c.status]); }")
+        loc_js = dict(loc_js)
+        import seo_local
+        hub, state, company = seo_local.brief_info()
+        texts = {}
+        for pid_ in seo_audit.all_page_ids():
+            fm_, body_ = seo_audit.split_front_matter((ROOT / f"page_content_{pid_}.md").read_text(encoding="utf-8", errors="ignore"))
+            texts[pid_] = seo_audit.clean_text(body_)
+        loc_py = {c["id"]: c["status"] for c in seo_local.audit_location("air-duct-cleaning-loves-park-il", texts, hub, state, company)["checks"]}
+        mism = {k: (loc_py[k], loc_js.get(k)) for k in loc_py if loc_js.get(k) != loc_py[k]}
+        check("SEO panel runs location checks and matches seo_local.py", "similarity" in loc_js and not mism, mism)
+        check("non-location pages do not get location checks", "similarity" not in dict(pg.evaluate("() => Builder.seoAudit('commercial-hvac-duct-cleaning').checks.map(c => [c.id, c.status])")))
         before = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
         pg.evaluate("""() => { const B = Builder, m = B.editModel('homepage', 'intro');
           m.paras = (m.paras || []).concat(['We provide air duct cleaning in Rockford. '.repeat(30)]); }""")

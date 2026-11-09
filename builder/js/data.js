@@ -470,6 +470,15 @@ window.BUILDER_DATA = {
    "image_alt_min": 1,
    "image_alt_max": 2
   },
+  "location": {
+   "shingle_size": 5,
+   "similarity_warn": 0.3,
+   "similarity_fail": 0.5,
+   "min_landmarks": 2,
+   "min_roads": 1,
+   "min_city_mentions_per_1000": 4,
+   "unique_body_min_words": 700
+  },
   "page_type_overrides": {
    "blog": {
     "slug_exempt_page_types": []

@@ -25,14 +25,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import seo_audit as sa  # reuse parsing helpers
 
 STD = {
-    "shingle_size": 5,
-    "similarity_warn": 0.30,   # share of the location page's shingles found in another page
-    "similarity_fail": 0.50,
-    "min_landmarks": 2,
-    "min_roads": 1,
-    "min_city_mentions_per_1000": 4,
-    "unique_body_min_words": 700,
+    "shingle_size": 5, "similarity_warn": 0.30, "similarity_fail": 0.50,
+    "min_landmarks": 2, "min_roads": 1, "min_city_mentions_per_1000": 4, "unique_body_min_words": 700,
 }
+STD.update(sa.load_json(ROOT / "seo_standards.json").get("location", {}))  # seo_standards.json is the single source of truth
 
 ROAD_RE = re.compile(r"\b(?:Route|Rt\.?|IL|US|I|State Route|SR|Highway|Hwy|County Road|CR)[ -]?\d{1,3}[A-Z]?\b|"
                      r"\b[A-Z][a-z]+(?: [A-Z][a-z]+)? (?:Road|Rd|Avenue|Ave|Boulevard|Blvd|Parkway|Pkwy|Highway|Drive|Street)\b")
@@ -190,3 +186,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
