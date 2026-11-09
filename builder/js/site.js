@@ -255,9 +255,11 @@
       contact ? '<a href="' + B.fileName(contact.id) + '">Contact</a>' : ''
     ].filter(Boolean);
     const tel = 'tel:' + nap.phone.replace(/[^\d+]/g, '');
-    const lg = B.logoUrl(preview), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
+    const hv = B.tpl().header || 'classic';
+    const lg = B.logoUrl(preview, hv === 'dark'), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
     const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
-    return '<header class="hdr"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
+    const topbar = hv === 'topbar' ? '<div class="topbar"><div class="wrap"><span>Serving ' + esc(d.brief.city) + ', ' + esc(d.brief.state) + ' and nearby communities</span><span><a href="' + tel + '">Call ' + esc(nap.phone) + '</a>' + (nap.email ? '<a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a>' : '') + '</span></div></div>' : '';
+    return topbar + '<header class="hdr' + (hv === 'dark' ? ' hdr-dark' : '') + '"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
       '<a class="btn btn-primary" href="' + tel + '" style="color:#fff">' + esc(nap.phone) + '</a></nav>' +
       '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
@@ -296,7 +298,7 @@
     return '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
       '<title>' + esc(title) + '</title><meta name="description" content="' + esc(desc) + '">' + (canon ? '<link rel="canonical" href="' + esc(canon) + '">' : '') +
       '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-      (B.faviconUrl(opts.preview) ? '<link rel="icon" type="image/webp" href="' + esc(B.faviconUrl(opts.preview)) + '">' : '') + '<link href="https://fonts.googleapis.com/css2?' + f.q + '&display=swap" rel="stylesheet"><style>' + B.cssVars() + B.SITE_CSS + '</style>' + ld + '</head><body>' +
+      (B.faviconUrl(opts.preview) ? '<link rel="icon" type="image/webp" href="' + esc(B.faviconUrl(opts.preview)) + '">' : '') + '<link href="https://fonts.googleapis.com/css2?' + f.q + '&display=swap" rel="stylesheet"><style>' + B.cssVars() + B.SITE_CSS + (B.SKIN_BASE_CSS || '') + ((B.SKINS || {})[B.tpl().skin] || '') + '</style>' + ld + '</head><body class="skin-' + (B.tpl().skin || 'base') + '">' +
       header(pid, opts.preview) + '<main>' + body + '</main>' + footer(opts.preview) +
       '<script>' + RUNTIME_JS + '<\/script>' + (opts.preview ? '<script>' + PREVIEW_JS + '<\/script>' : '') + '</body></html>';
   };

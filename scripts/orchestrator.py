@@ -570,7 +570,7 @@ def main():
         global FORCE_BUILD
         FORCE_BUILD = args.force
         if args.engine == "v5":
-            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial") else "cornerstone", out_folder=args.out)
+            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial", "bold", "clean") else "cornerstone", out_folder=args.out)
         else:
             build_full_website(template_id=args.template, out_folder=args.out)
 

@@ -74,6 +74,21 @@ def main():
                    caseStudies: home.includes('id="sec-case-studies"') };
         }""")
         check("every template x page renders (%d combos)" % r["combos"], not r["bad"], r["bad"])
+        # templates: each skin must exist, headers valid, and the primary button must be readable (WCAG AA 4.5:1)
+        tc = pg.evaluate("""() => { const B = Builder, lum = h => { h = h.replace('#',''); if (h.length === 3) h = h.split('').map(c => c + c).join('');
+            const c = [0,2,4].map(i => parseInt(h.substr(i,2),16)/255).map(v => v <= .03928 ? v/12.92 : Math.pow((v+.055)/1.055, 2.4)); return .2126*c[0]+.7152*c[1]+.0722*c[2]; };
+          const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); };
+          const out = {}; Object.keys(B.TEMPLATES).forEach(k => { const t = B.TEMPLATES[k], css = (B.SKINS || {})[t.skin] || '';
+            const m = css.match(/\.btn-primary\{color:(#[0-9a-fA-F]{3,6})/), txt = m ? m[1] : '#ffffff';
+            out[k] = { skin: t.skin, header: t.header, skinOk: !t.skin || css.length > 50, hdrOk: ['classic','topbar','dark'].indexOf(t.header || 'classic') > -1, ratio: +ratio(t.theme.accent, txt).toFixed(2) }; });
+          return out; }""")
+        bad_t = [k for k, v in tc.items() if not v["skinOk"] or not v["hdrOk"]]
+        check("every template has a valid skin and header variant", not bad_t, bad_t)
+        low = {k: v["ratio"] for k, v in tc.items() if v["skin"] and v["ratio"] < 4.5}
+        check("templates with their own skin keep the primary button readable (>= 4.5:1)", not low, low)
+        legacy = {k: v["ratio"] for k, v in tc.items() if not v["skin"] and v["ratio"] < 4.5}
+        if legacy:
+            print("NOTE  legacy templates below 4.5:1 button contrast (white text on accent): " + str(legacy))
         check("Before/After: 3 comparison cards (Cornerstone)", r["cards"] == 3, r["cards"])
         check("Before/After: wipe slider cases (Keystone)", r["cases"] >= 1, r["cases"])
         check("animation attribute exported (Cornerstone = rise)", r["anim"])
