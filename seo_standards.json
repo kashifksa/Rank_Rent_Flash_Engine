@@ -31,6 +31,27 @@
     "min_city_mentions_per_1000": 4,
     "unique_body_min_words": 700
   },
+  "structure": {
+    "_comment": "Phase 3. Word budgets come from the *_STRUCTURE.md 'WORD COUNT TARGETS' tables. Section keys = live section id without the leading number, underscores as hyphens. [min, max]; null = no limit.",
+    "answer_first": { "min_words": 20, "max_words": 60 },
+    "faq": { "min_questions": 5, "max_avg_answer_words": 90, "page_types": ["service", "location", "blog", "homepage"] },
+    "budgets": {
+      "service": { "total": [1100, 2500], "hero": [null, 120], "services-grid": [180, 420], "why-choose-us": [120, 200], "process": [80, 120], "local-proof": [100, 200], "service-area": [80, 150], "mid-cta": [20, 60], "faq": [200, 800], "bottom-cta": [null, 60] },
+      "location": { "total": [700, 1600], "hero": [null, 120], "localized-intro": [120, 200], "services-overview": [120, 220], "local-proof": [100, 200], "local-faq": [150, 350], "service-area": [60, 100], "bottom-cta": [null, 60] },
+      "blog": { "total": [1000, 1800], "header": [80, 130], "cause-context": [150, 250], "diy-vs-pro": [150, 220], "structured-data": [60, 120], "how-it-works": [150, 200], "local-considerations": [120, 180], "faq": [150, 400], "conclusion-cta": [60, 100] },
+      "about": { "total": [800, 1400], "identity-hook": [60, 110], "origin-story": [150, 230], "team-credentials": [150, 260], "credentials-display": [60, 130], "community-proof": [80, 160], "trust-signals": [120, 190], "service-area-nap": [80, 130], "bottom-cta": [null, 60] },
+      "contact": { "total": [150, 300] },
+      "homepage": { "hero": [null, 120] }
+    },
+    "schema_expected": {
+      "homepage": [["LocalBusiness", "HVACBusiness", "Organization"]],
+      "service": [["Service"], ["FAQPage"]],
+      "location": [["Service", "LocalBusiness", "HVACBusiness"], ["FAQPage"]],
+      "blog": [["Article", "BlogPosting"], ["FAQPage"]],
+      "about": [["AboutPage", "Person", "LocalBusiness", "HVACBusiness"]],
+      "contact": [["ContactPage", "LocalBusiness", "HVACBusiness"]]
+    }
+  },
   "page_type_overrides": {
     "blog": { "slug_exempt_page_types": [] },
     "contact": { "required_in": ["h1", "first_words", "meta_title", "meta_description"] },

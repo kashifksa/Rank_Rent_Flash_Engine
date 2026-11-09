@@ -74,6 +74,68 @@
     add('service_cards', 'Service cards match canonical Phase 1 services (FIX 36)', bad.length ? 'warn' : 'pass', bad.length ? 'Not canonical: ' + bad.join('; ') : 'All cards map to a Phase 1 service.');
   }
 
+  /* ---- Phase 3: word budgets, answer-first, headings, FAQ, schema + NAP (mirrors structure_checks in scripts/seo_audit.py) ---- */
+  const digits = s => String(s || '').replace(/\D/g, '');
+  const normSid = s => String(s).replace(/^\d+[_-]/, '').replace(/_/g, '-');
+  const PHONE_RE = /\(?\b\d{3}\)?[ .-]\d{3}[ .-]\d{4}\b/g;
+
+  function structureChecks(pid, page, secs, body, rep, sev) {
+    const S = (D.seo || {}).structure; if (!S) return;
+    const type = page.type, meta = page.meta || {}, add = (id, label, st, detail) => rep.checks.push({ id, label, status: st, detail });
+    const okSt = ok => ok ? 'pass' : sev;
+
+    const bud = (S.budgets || {})[type] || {}, counts = {}; let total = 0;
+    secs.forEach(s => { const n = raw(clean(s.md)).length; counts[normSid(s.sid)] = n; total += n; });
+    if (bud.total) add('word_total', 'Total words within structure target (' + bud.total[0] + '-' + bud.total[1] + ')', okSt(total >= bud.total[0] && total <= bud.total[1]), total + ' words.');
+    const bad = [];
+    Object.keys(bud).forEach(k => { if (k === 'total' || !(k in counts)) return; const lo = bud[k][0], hi = bud[k][1], n = counts[k]; if ((lo !== null && n < lo) || (hi !== null && n > hi)) bad.push(k + ' ' + n + ' (allowed ' + (lo !== null ? lo : 0) + '-' + (hi !== null ? hi : 'any') + ')'); });
+    if (Object.keys(bud).length) add('word_sections', 'Every section within its word budget', okSt(!bad.length), bad.length ? bad.slice(0, 5).join('; ') + (bad.length > 5 ? ' (+' + (bad.length - 5) + ' more)' : '') : 'All sections in range.');
+
+    const af = S.answer_first; let first = '';
+    for (const s of secs) {
+      for (const blk of s.md.replace(/<!--[\s\S]*?-->/g, '').split(/\n\s*\n/)) { const b = blk.trim(); if (b && !/^[#|\-*>!]/.test(b) && raw(b).length >= 8) { first = clean(b); break; } }
+      if (first) break;
+    }
+    const nfp = raw(first).length;
+    if (af) add('answer_first', 'Answer-first opening paragraph (' + af.min_words + '-' + af.max_words + ' words)', okSt(nfp >= af.min_words && nfp <= af.max_words), 'First paragraph is ' + nfp + ' words. AI Overviews and snippets favour a direct answer near the top.');
+
+    const lv = []; body.split('\n').forEach(l => { const m = l.match(/^(#{1,6})\s+/); if (m) lv.push(m[1].length); });
+    let h1n = lv.filter(x => x === 1).length, skips = 0, prev = 0;
+    lv.forEach(x => { if (prev && x > prev + 1) skips++; prev = x; });
+    add('headings', 'One H1, no skipped heading levels', okSt(h1n <= 1 && skips === 0), h1n + ' H1, ' + skips + ' skipped level(s).' + (h1n === 0 ? ' Sections may hold the H1 elsewhere.' : ''));
+
+    const hasList = /^\s*(?:[-*]\s+\S|\d+\.\s+\S)/m.test(body), hasTable = /^\s*\|.+\|\s*$/m.test(body);
+    add('parseable', 'Has a list or table (easy for AI answers to cite)', okSt(hasList || hasTable), 'list: ' + (hasList ? 'True' : 'False') + ', table: ' + (hasTable ? 'True' : 'False') + '.');
+
+    const F = S.faq || {}, faq = [];
+    if ((F.page_types || []).indexOf(type) > -1) {
+      secs.filter(s => /faq/.test(s.sid)).forEach(s => { const parts = s.md.split(/^###\s+(.+)$/m); for (let i = 1; i < parts.length; i += 2) faq.push([clean(parts[i]), raw(clean(parts[i + 1] || '')).length]); });
+      const avg = faq.length ? faq.reduce((a, q) => a + q[1], 0) / faq.length : 0;
+      add('faq', 'FAQ has ' + F.min_questions + '+ questions with concise answers', okSt(faq.length >= F.min_questions && avg <= F.max_avg_answer_words), faq.length + ' questions, average answer ' + Math.round(avg) + ' words (max ' + F.max_avg_answer_words + ').');
+    }
+
+    const sch = meta.schema || {};
+    let graph = Array.isArray(sch['@graph']) ? sch['@graph'] : (Array.isArray(sch) ? sch : []);
+    if (!graph.length && sch['@type']) graph = [sch];
+    const types = new Set(); graph.forEach(g => [].concat(g['@type'] || []).forEach(t => types.add(t)));
+    const exp = (S.schema_expected || {})[type] || [], missing = exp.filter(o => !o.some(t => types.has(t))).map(o => o.join(' / '));
+    add('schema_types', 'Structured data present for this page type', okSt(graph.length > 0 && !missing.length), 'Found: ' + ([...types].sort().join(', ') || 'none') + '.' + (missing.length ? ' Missing: ' + missing.join('; ') + '.' : ''));
+    const faqNode = graph.find(g => g['@type'] === 'FAQPage');
+    if (faqNode && (F.page_types || []).indexOf(type) > -1) { const n = (faqNode.mainEntity || []).length; add('schema_faq_match', 'FAQ schema matches the visible FAQ', okSt(n === faq.length), 'Schema has ' + n + ' questions, page shows ' + faq.length + '. Schema must match what users see.'); }
+
+    const bphone = digits(D.nap.phone), bname = (D.nap.company_name || '').trim(), host = u => String(u || '').toLowerCase().replace(/^https?:\/\/(www\.)?/, '').split('/')[0], probs = [];
+    graph.forEach(g => [g].concat(g.provider && typeof g.provider === 'object' ? [g.provider] : []).forEach(n => {
+      if (n.telephone && [bphone, '1' + bphone].indexOf(digits(n.telephone)) < 0) probs.push('schema phone ' + n.telephone);
+      if (['HVACBusiness', 'LocalBusiness', 'Organization'].indexOf(n['@type']) > -1 && n.name && bname && n.name.trim() !== bname) probs.push("schema name '" + n.name + "'");
+      if (n.url && D.nap.website && host(n.url) !== host(D.nap.website)) probs.push('schema url ' + n.url);
+    }));
+    const odd = [...new Set((clean(body).match(PHONE_RE) || []).map(digits))].filter(p => [bphone, '1' + bphone].indexOf(p) < 0);
+    if (odd.length) probs.push('page phone(s) ' + odd.sort().join(', '));
+    const street = String(D.nap.address || '').split(',')[0].trim(), cb = clean(body);
+    if (street && /\b\d{3,5} [NSEW]\.? [A-Z][a-z]+ (?:Rd|Road|St|Street|Ave|Avenue|Blvd|Dr|Drive)\b/.test(cb) && cb.toLowerCase().indexOf(street.toLowerCase()) < 0) probs.push('a street address on the page differs from the brief');
+    add('nap', 'Name, address and phone match the brief (schema + page)', probs.length ? 'fail' : 'pass', probs.length ? 'Mismatch: ' + probs.slice(0, 4).join('; ') : 'Consistent.');
+  }
+
   B.seoAudit = function (pid) {
     const std = D.seo || {}, page = B.page(pid); if (!std.primary_keyword || !page) return null;
     const cfg = Object.assign({}, std.primary_keyword, (std.page_type_overrides || {})[page.type] || {});
@@ -141,6 +203,8 @@
     add('section_density', 'No section above ' + lim + '% keyword density', overS.length === 0, overS.length ? 'Over limit: ' + overS.join(', ') : 'All sections OK.');
 
     if (page.type === 'location') localChecks(pid, page, secs, body, rt, rep, sev);
+
+    structureChecks(pid, page, secs, body, rep, sev);
 
     const sc = { pass: 1, info: 1, warn: 0.5, fail: 0 };
     rep.score = Math.round(rep.checks.reduce((a, c) => a + sc[c.status], 0) / rep.checks.length * 100);

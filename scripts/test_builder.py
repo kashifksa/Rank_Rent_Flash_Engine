@@ -106,6 +106,20 @@ def main():
         loc_py = {c["id"]: c["status"] for c in seo_local.audit_location("air-duct-cleaning-loves-park-il", texts, hub, state, company)["checks"]}
         mism = {k: (loc_py[k], loc_js.get(k)) for k in loc_py if loc_js.get(k) != loc_py[k]}
         check("SEO panel runs location checks and matches seo_local.py", "similarity" in loc_js and not mism, mism)
+        # Phase 3 structure / schema / NAP checks: JS panel must give the same verdicts as seo_audit.py on every page
+        P3 = ["word_total", "word_sections", "answer_first", "headings", "parseable", "faq", "schema_types", "schema_faq_match", "nap"]
+        js3 = pg.evaluate("() => { const o = {}; Builder.pageIds().forEach(id => { const r = Builder.seoAudit(id); o[id] = r ? Object.fromEntries(r.checks.map(c => [c.id, c.status])) : {}; }); return o; }")
+        diff3 = []
+        for pid_ in js3:
+            py = seo_audit.audit_page(pid_)
+            if not py:
+                continue
+            pys = {c["id"]: c["status"] for c in py["checks"]}
+            for k in P3:
+                if k in pys and js3[pid_].get(k) != pys[k]:
+                    diff3.append((pid_, k, pys[k], js3[pid_].get(k)))
+        check("Phase 3 checks (JS) match seo_audit.py on every page", not diff3, diff3[:4])
+        check("Phase 3 checks exist in the panel", all(k in js3["commercial-hvac-duct-cleaning"] for k in ["word_total", "answer_first", "schema_types", "nap"]))
         check("non-location pages do not get location checks", "similarity" not in dict(pg.evaluate("() => Builder.seoAudit('commercial-hvac-duct-cleaning').checks.map(c => [c.id, c.status])")))
         before = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
         pg.evaluate("""() => { const B = Builder, m = B.editModel('homepage', 'intro');

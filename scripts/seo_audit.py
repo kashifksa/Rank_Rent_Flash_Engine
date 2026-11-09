@@ -278,9 +278,136 @@ def audit_page(pid, std=None):
     report["checks"].append({"id": "section_density", "status": status(not over, sev), "label": f"No section above {sec_limit}% keyword density",
                              "detail": "All sections OK." if not over else "Over limit: " + ", ".join(over)})
 
+    structure_checks(pid, ptype, body, meta, brief, std, sev, report)
+
     scores = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
     report["score"] = round(sum(scores[c["status"]] for c in report["checks"]) / len(report["checks"]) * 100)
     return report
+
+
+PHONE_RE = re.compile(r"\(?\b\d{3}\)?[ .-]\d{3}[ .-]\d{4}\b")
+
+
+def digits(s):
+    return re.sub(r"\D", "", s or "")
+
+
+def norm_sid(sid):
+    return re.sub(r"^\d+[_-]", "", sid).replace("_", "-")
+
+
+def structure_checks(pid, ptype, body, meta, brief, std, sev, report):
+    """Phase 3: word budgets, answer-first, heading order, AI-parseable elements, FAQ, schema + NAP consistency."""
+    S = std.get("structure", {})
+    if not S:
+        return
+    add = lambda cid, label, st, detail: report["checks"].append({"id": cid, "status": st, "label": label, "detail": detail})
+    ok_st = lambda ok: "pass" if ok else sev
+    sections = split_sections(body)
+
+    # ---- word budgets (from the *_STRUCTURE.md tables)
+    bud = S.get("budgets", {}).get(ptype, {})
+    # count only sections the live site renders (merged ones such as the trust bar are part of the hero, not separate sections)
+    sch = load_json(ROOT / "sections_schema.json").get("page_types", {}).get(ptype, {})
+    live_ids = {s["id"] for s in sch.get("sections", []) if s.get("live", True)}
+    live_secs = [(sid, txt) for sid, txt in sections if sid in live_ids] or sections
+    counts = {norm_sid(sid): len(raw_tokens(clean_text(txt))) for sid, txt in live_secs}
+    total = sum(counts.values())
+    if "total" in bud:
+        lo, hi = bud["total"]
+        add("word_total", f"Total words within structure target ({lo}-{hi})", ok_st(lo <= total <= hi), f"{total} words.")
+    bad = []
+    for key, (lo, hi) in ((k, v) for k, v in bud.items() if k != "total"):
+        if key in counts:
+            n = counts[key]
+            if (lo is not None and n < lo) or (hi is not None and n > hi):
+                bad.append(f"{key} {n} (allowed {lo if lo is not None else 0}-{hi if hi is not None else 'any'})")
+    if bud:
+        add("word_sections", "Every section within its word budget", ok_st(not bad), "All sections in range." if not bad else "; ".join(bad[:5]) + (f" (+{len(bad) - 5} more)" if len(bad) > 5 else ""))
+
+    # ---- answer-first: first real paragraph under the H1
+    af = S.get("answer_first", {})
+    first_para = ""
+    for sid, txt in sections:
+        for block in re.split(r"\n\s*\n", re.sub(r"<!--[\s\S]*?-->", "", txt)):
+            b = block.strip()
+            if b and not b.startswith(("#", "|", "-", "*", ">", "!")) and len(raw_tokens(b)) >= 8:
+                first_para = clean_text(b)
+                break
+        if first_para:
+            break
+    n_fp = len(raw_tokens(first_para))
+    if af:
+        add("answer_first", f"Answer-first opening paragraph ({af['min_words']}-{af['max_words']} words)", ok_st(af["min_words"] <= n_fp <= af["max_words"]),
+            f"First paragraph is {n_fp} words. AI Overviews and snippets favour a direct answer near the top.")
+
+    # ---- heading order
+    hs = [lvl for lvl, _ in headings(body)]
+    h1n, skips, prev = hs.count(1), 0, 0
+    for lvl in hs:
+        if prev and lvl > prev + 1:
+            skips += 1
+        prev = lvl
+    add("headings", "One H1, no skipped heading levels", ok_st(h1n <= 1 and skips == 0),
+        f"{h1n} H1, {skips} skipped level(s)." + (" Sections may hold the H1 elsewhere." if h1n == 0 else ""))
+
+    # ---- AI-parseable elements
+    has_list = bool(re.search(r"^\s*(?:[-*]\s+\S|\d+\.\s+\S)", body, re.M))
+    has_table = bool(re.search(r"^\s*\|.+\|\s*$", body, re.M))
+    add("parseable", "Has a list or table (easy for AI answers to cite)", ok_st(has_list or has_table), f"list: {has_list}, table: {has_table}.")
+
+    # ---- FAQ
+    F = S.get("faq", {})
+    faq_qs = []
+    if ptype in F.get("page_types", []):
+        for sid, txt in sections:
+            if "faq" in sid:
+                parts = re.split(r"^###\s+(.+)$", txt, flags=re.M)
+                for i in range(1, len(parts), 2):
+                    faq_qs.append((clean_text(parts[i]), len(raw_tokens(clean_text(parts[i + 1])))))
+        avg = sum(w for _, w in faq_qs) / len(faq_qs) if faq_qs else 0
+        add("faq", f"FAQ has {F['min_questions']}+ questions with concise answers", ok_st(len(faq_qs) >= F["min_questions"] and avg <= F["max_avg_answer_words"]),
+            f"{len(faq_qs)} questions, average answer {avg:.0f} words (max {F['max_avg_answer_words']}).")
+
+    # ---- schema
+    schema = meta.get("schema") or {}
+    graph = schema.get("@graph") if isinstance(schema, dict) else (schema if isinstance(schema, list) else [])
+    graph = graph or ([schema] if isinstance(schema, dict) and schema.get("@type") else [])
+    types = set()
+    for g in graph:
+        t = g.get("@type")
+        types.update(t if isinstance(t, list) else [t])
+    exp = S.get("schema_expected", {}).get(ptype, [])
+    missing = [" / ".join(opts) for opts in exp if not (set(opts) & types)]
+    add("schema_types", "Structured data present for this page type", ok_st(bool(graph) and not missing),
+        f"Found: {', '.join(sorted(t for t in types if t)) or 'none'}." + (f" Missing: {'; '.join(missing)}." if missing else ""))
+    faq_node = next((g for g in graph if g.get("@type") == "FAQPage"), None)
+    if faq_node is not None and ptype in F.get("page_types", []):
+        sc = len(faq_node.get("mainEntity", []))
+        add("schema_faq_match", "FAQ schema matches the visible FAQ", ok_st(sc == len(faq_qs)), f"Schema has {sc} questions, page shows {len(faq_qs)}. Schema must match what users see.")
+
+    # ---- NAP consistency
+    nap = brief.get("nap", {})
+    bphone, bname, bsite = digits(nap.get("phone")), (nap.get("company_name") or "").strip(), (nap.get("website") or "").lower()
+    host = lambda u: re.sub(r"^https?://(www\.)?", "", (u or "").lower()).split("/")[0]
+    probs = []
+    for g in graph:
+        for node in [g] + ([g["provider"]] if isinstance(g.get("provider"), dict) else []):
+            if node.get("telephone") and digits(node["telephone"]) not in (bphone, "1" + bphone):
+                probs.append(f"schema phone {node['telephone']}")
+            if node.get("@type") in ("HVACBusiness", "LocalBusiness", "Organization") and node.get("name") and bname and node["name"].strip() != bname:
+                probs.append(f"schema name '{node['name']}'")
+            if node.get("url") and bsite and host(node["url"]) != host(bsite):
+                probs.append(f"schema url {node['url']}")
+    page_phones = {digits(m.group(0)) for m in PHONE_RE.finditer(clean_text(body))}
+    odd = [p for p in page_phones if p not in (bphone, "1" + bphone)]
+    if odd:
+        probs.append("page phone(s) " + ", ".join(sorted(odd)))
+    street = re.split(r",", nap.get("address", ""))[0].strip()
+    wrong_addr = bool(street) and bool(re.search(r"\b\d{3,5} [NSEW]\.? [A-Z][a-z]+ (?:Rd|Road|St|Street|Ave|Avenue|Blvd|Dr|Drive)\b", clean_text(body))) and street.lower() not in clean_text(body).lower()
+    if wrong_addr:
+        probs.append("a street address on the page differs from the brief")
+    add("nap", "Name, address and phone match the brief (schema + page)", "pass" if not probs else "fail", "Consistent." if not probs else "Mismatch: " + "; ".join(probs[:4]))
 
 
 def all_page_ids():
