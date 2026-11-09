@@ -1,5 +1,155 @@
 {
-  "githubRepo": "https://github.com/kashifksa/air-duct-rockford.git",
-  "template": "bold",
-  "lockedTemplate": true
+  "template": "clean",
+  "theme": {},
+  "pages": {
+    "homepage": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {
+        "hero": "negative-air-containment-vacuum-rockford-home.webp"
+      },
+      "models": {
+        "hero": {
+          "h1": "Air Duct Cleaning in Rockford, IL",
+          "h2": "",
+          "paras": [
+            "Professional residential and commercial ventilation decontamination removing accumulated dust, allergens, and biological contaminants using high-powered negative air containment.",
+            "Direct line: (815) 555-0142",
+            "Schedule Inspection | Explore Core Services"
+          ],
+          "bullets": [],
+          "items": [],
+          "table": null,
+          "quotes": [],
+          "facts": [],
+          "cta": ""
+        }
+      },
+      "srcHash": {
+        "hero": "756028530"
+      },
+      "added": {},
+      "opts": {
+        "hero": {
+          "anim": "none"
+        },
+        "local-context": {
+          "anim": "rise"
+        },
+        "awards": {
+          "anim": "slide-left"
+        },
+        "intro": {
+          "anim": "fade"
+        },
+        "services-grid": {
+          "anim": "slide-left"
+        }
+      }
+    },
+    "commercial-hvac-duct-cleaning": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "dryer-vent-cleaning-and-lint-removal": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "sanitization-and-antimicrobial-fogging": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "how-to-spot-air-duct-cleaning-scams": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "negative-air-vacuum-trunk-line-cleaning": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "about": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "contact": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "air-duct-cleaning-loves-park-il": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    },
+    "video-camera-ductwork-inspection": {
+      "order": null,
+      "hidden": {},
+      "variants": {},
+      "bg": {},
+      "images": {},
+      "models": {},
+      "srcHash": {},
+      "added": {},
+      "opts": {}
+    }
+  },
+  "page": "homepage",
+  "lockedTemplate": true,
+  "githubRepo": "https://github.com/kashifksa/air-duct-rockford"
 }

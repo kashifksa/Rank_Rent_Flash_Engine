@@ -496,14 +496,76 @@ V5_TEMPLATES = ("cornerstone", "keystone", "industrial", "bold", "clean", "autho
 BUILDER_STATE_FILE = ROOT_DIR / "builder_state.json"
 
 
+def sync_browser_local_storage():
+    """Read latest site_builder_v5::<project> state from local browser storage (when opened via file://) into builder_state.json."""
+    brief = load_json(BRIEF_FILE)
+    company = (
+        brief.get("business_identity", {}).get("company_name")
+        or brief.get("company_name")
+        or brief.get("project_name")
+        or ""
+    ).strip()
+    key_prefix = f"site_builder_v5::{company}".encode("utf-8") if company else b"site_builder_v5::"
+    local = Path(os.environ.get("LOCALAPPDATA", ""))
+    roots = [
+        local / "Google" / "Chrome" / "User Data",
+        local / "Microsoft" / "Edge" / "User Data",
+        local / "BraveSoftware" / "Brave-Browser" / "User Data",
+    ]
+    candidates = []
+    for r in roots:
+        if not r.exists():
+            continue
+        for f in r.rglob("Local Storage/leveldb/*"):
+            if f.suffix not in (".log", ".ldb"):
+                continue
+            try:
+                raw = f.read_bytes()
+            except Exception:
+                continue
+            if key_prefix not in raw:
+                continue
+            pos = 0
+            seq = 0
+            while True:
+                idx = raw.find(key_prefix, pos)
+                if idx == -1:
+                    break
+                pos = idx + len(key_prefix)
+                brace = raw.find(b'{"', pos, pos + 96)
+                if brace == -1:
+                    continue
+                chunk = raw[brace:brace + 300000].decode("utf-8", errors="ignore")
+                try:
+                    obj, _ = json.JSONDecoder().raw_decode(chunk)
+                    if isinstance(obj, dict) and obj.get("template") in V5_TEMPLATES:
+                        seq += 1
+                        candidates.append((f.stat().st_mtime, seq, obj))
+                except Exception:
+                    pass
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    latest_obj = candidates[0][2]
+    st = load_json(BUILDER_STATE_FILE)
+    if st.get("githubRepo") and not latest_obj.get("githubRepo"):
+        latest_obj["githubRepo"] = st["githubRepo"]
+    latest_obj["lockedTemplate"] = True
+    BUILDER_STATE_FILE.write_text(json.dumps(latest_obj, indent=2, ensure_ascii=False), encoding="utf-8")
+    return latest_obj
+
+
 def get_locked_template(explicit_tpl=None):
-    """Resolve active template: explicit CLI flag > saved builder_state.json > 'blueprint'."""
+    """Resolve active template: explicit CLI flag > browser localStorage / saved builder_state.json > 'cornerstone'."""
     st = load_json(BUILDER_STATE_FILE)
     if explicit_tpl and explicit_tpl in V5_TEMPLATES:
         st["template"] = explicit_tpl
         st["lockedTemplate"] = True
         BUILDER_STATE_FILE.write_text(json.dumps(st, indent=2, ensure_ascii=False), encoding="utf-8")
         return explicit_tpl
+    browser_st = sync_browser_local_storage()
+    if browser_st and browser_st.get("template") in V5_TEMPLATES:
+        return browser_st["template"]
     saved = st.get("template")
     if saved in V5_TEMPLATES:
         return saved
@@ -572,7 +634,12 @@ def build_site_v5(template_id=None, out_folder=None):
             print("Unknown template. Available:", page.evaluate("Object.keys(Builder.TEMPLATES)"))
             browser.close()
             return
-        page.evaluate(f"Builder.state.template = '{template_id}'")
+        saved_state = load_json(BUILDER_STATE_FILE)
+        if saved_state and isinstance(saved_state, dict):
+            saved_state["template"] = template_id
+            page.evaluate("(st) => { Object.assign(Builder.state, st); if (Builder.reconcile) Builder.reconcile(); }", saved_state)
+        else:
+            page.evaluate(f"Builder.state.template = '{template_id}'")
         files = page.evaluate("Builder.exportAll()")
         browser.close()
     if errs:
