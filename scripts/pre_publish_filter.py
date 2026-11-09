@@ -111,6 +111,10 @@ def filter_markdown(content: str) -> str:
         if any(marker in line for marker in PENDING_MARKERS):
             continue
 
+        # Normalize any index.html link to clean root /
+        line = re.sub(r'\]\((?:/)?index\.html(#[^\)]*)?\)', lambda m: '](/' + (m.group(1) or '') + ')', line, flags=re.IGNORECASE)
+        line = re.sub(r'href=(["\'])(?:/)?index\.html(#[^"\']*)?\1', lambda m: 'href=' + m.group(1) + '/' + (m.group(2) or '') + m.group(1), line, flags=re.IGNORECASE)
+
         result.append(line)
 
     return '\n'.join(result)
@@ -151,6 +155,9 @@ def filter_html(html: str) -> str:
 
     # Remove empty heading blocks
     html = re.sub(r'<!-- wp:heading[^>]*-->\n<h\d[^>]*>\s*</h\d>\n<!-- /wp:heading -->', '', html)
+
+    # Normalize any href="index.html" to clean root /
+    html = re.sub(r'href=(["\'])(?:/)?index\.html(#[^"\']*)?\1', lambda m: 'href=' + m.group(1) + '/' + (m.group(2) or '') + m.group(1), html, flags=re.IGNORECASE)
 
     # Remove consecutive blank lines left by removals
     html = re.sub(r'\n{3,}', '\n\n', html)
@@ -302,6 +309,13 @@ if __name__ == "__main__":
         print(f"=== pre_publish_filter checking: {target} ===")
         with open(target, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
+        normalized = re.sub(r'\]\((?:/)?index\.html(#[^\)]*)?\)', lambda m: '](/' + (m.group(1) or '') + ')', content, flags=re.IGNORECASE)
+        normalized = re.sub(r'href=(["\'])(?:/)?index\.html(#[^"\']*)?\1', lambda m: 'href=' + m.group(1) + '/' + (m.group(2) or '') + m.group(1), normalized, flags=re.IGNORECASE)
+        if normalized != content:
+            with open(target, 'w', encoding='utf-8') as f:
+                f.write(normalized)
+            content = normalized
+            print("[FIX] Normalized index.html link(s) to clean root '/' in " + target)
         try:
             check_no_pricing(content, label=target)
             print("[PASS] Gate 1: No pricing detected.")

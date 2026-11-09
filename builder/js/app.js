@@ -11,7 +11,9 @@
   function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
   function setPath(o, p, v) { const k = p.split('.'); const last = k.pop(); const t = k.reduce((a, x) => a[x], o); t[last] = v; }
   function syncStateToDisk() {
-    fetch(API_BASE + '/api/save-state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(B.state) }).catch(() => {});
+    if (location.protocol.startsWith('http')) {
+      fetch('/api/save-state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(B.state) }).catch(() => {});
+    }
   }
   function save() {
     clearTimeout(saveT);
@@ -324,7 +326,7 @@
     else if (d.b5 === 'scroll') lastY = d.y;
     else if (d.b5 === 'nav') {
       const parts = String(d.href).split('#'), file = parts[0].replace(/^\.?\//, ''), hash = parts[1] || '';
-      const hit = B.pageIds().find(p => B.fileName(p) === file);
+      const hit = (!file || file === 'index.html') ? (D.pages.homepage ? 'homepage' : B.pageIds()[0]) : B.pageIds().find(p => B.fileName(p) === file);
       if (hit) {
         if (hit !== pid) go(hit);
         if (hash) { const sid = hash.replace(/^sec-/, ''); setTimeout(() => { if (B.sectionList(pid).indexOf(sid) > -1) select(sid, true); }, 180); }

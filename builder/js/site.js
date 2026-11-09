@@ -250,7 +250,7 @@
     const hasRev = home && home.sections && home.sections['testimonials'];
     const dd = (label, items, href) => '<div class="dd"><a href="' + href + '">' + label + ' <span class="caret">&#9660;</span></a><div class="dd-menu">' +
       items.map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('') + '</div></div>';
-    const homeHref = preview ? 'index.html' : '/';
+    const homeHref = '/';
     const links = [
       '<a href="' + homeHref + '">Home</a>',
       svc.length ? dd('Services', svc, homeHref + '#sec-services-grid') : '',
@@ -299,7 +299,7 @@
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
   }
   function footer(preview) {
-    const d = D(), nap = d.nap, pages = Object.values(d.pages), homeHref = preview ? 'index.html' : '/';
+    const d = D(), nap = d.nap, pages = Object.values(d.pages), homeHref = '/';
     const list = t => pages.filter(p => p.type === t).map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('');
     const flg = B.brand().footer ? B.logoUrl(preview, true) : '';
     const tel = 'tel:' + nap.phone.replace(/[^\d+]/g, '');

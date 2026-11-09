@@ -469,6 +469,7 @@ def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
                 doc_html = page.evaluate(f"generateProductionDocument('{pid}')")
 
             if doc_html:
+                doc_html = re.sub(r'href=(["\'])(?:/)?index\.html(#[^"\']*)?\1', lambda m: 'href=' + m.group(1) + '/' + (m.group(2) or '') + m.group(1), doc_html, flags=re.IGNORECASE)
                 out_path = out_dir / filename
                 out_path.write_text(doc_html, encoding="utf-8")
                 print(f"  ✓ {filename:<46} ({len(doc_html) // 1024} KB)")
