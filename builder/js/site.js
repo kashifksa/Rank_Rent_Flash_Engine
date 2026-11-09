@@ -250,12 +250,13 @@
     const hasRev = home && home.sections && home.sections['testimonials'];
     const dd = (label, items, href) => '<div class="dd"><a href="' + href + '">' + label + ' <span class="caret">&#9660;</span></a><div class="dd-menu">' +
       items.map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('') + '</div></div>';
+    const homeHref = preview ? 'index.html' : '/';
     const links = [
-      '<a href="index.html">Home</a>',
-      svc.length ? dd('Services', svc, 'index.html#sec-services-grid') : '',
-      loc.length ? dd('Locations', loc, 'index.html#sec-service-area') : '',
+      '<a href="' + homeHref + '">Home</a>',
+      svc.length ? dd('Services', svc, homeHref + '#sec-services-grid') : '',
+      loc.length ? dd('Locations', loc, homeHref + '#sec-service-area') : '',
       blog ? '<a href="' + B.fileName(blog.id) + '">Blog</a>' : '',
-      hasRev ? '<a href="index.html#sec-testimonials">Reviews</a>' : '',
+      hasRev ? '<a href="' + homeHref + '#sec-testimonials">Reviews</a>' : '',
       about ? '<a href="' + B.fileName(about.id) + '">About</a>' : '',
       contact ? '<a href="' + B.fileName(contact.id) + '">Contact</a>' : ''
     ].filter(Boolean);
@@ -266,14 +267,14 @@
     if (hv === 'console') {
       const cred = (d.brief.credentials && d.brief.credentials[0]) || 'Certified Specialists';
       return '<div class="console-strip"><div class="wrap"><span>SYS.STATUS // ACTIVE FIELD DISPATCH</span><span>ZONE: ' + esc((d.brief.city + ', ' + d.brief.state).toUpperCase()) + '</span><span>ACCREDITATION: ' + esc(cred.toUpperCase()) + '</span></div></div>' +
-        '<header class="hdr hdr-console"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a>' +
+        '<header class="hdr hdr-console"><div class="wrap"><a class="logo" href="' + homeHref + '">' + logoInner + '</a>' +
         '<nav class="nav console-nav">' + links.join('') + '</nav>' +
         '<a class="console-cta" href="' + tel + '"><span class="c-dot"></span><div><small>DIRECT DISPATCH</small><b>' + esc(nap.phone) + '</b></div></a>' +
         '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
         '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
     }
     if (hv === 'gridline') {
-      return '<header class="hdr hdr-gridline"><div class="wrap"><a class="logo gl-cell gl-logo" href="index.html">' + logoInner + '</a>' +
+      return '<header class="hdr hdr-gridline"><div class="wrap"><a class="logo gl-cell gl-logo" href="' + homeHref + '">' + logoInner + '</a>' +
         '<nav class="nav gl-cell gl-nav">' + links.join('') + '</nav>' +
         '<a class="gl-cta" href="' + tel + '"><small>DIRECT DISPATCH</small><b>' + esc(nap.phone) + ' &rarr;</b></a>' +
         '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
@@ -281,7 +282,7 @@
     }
     if (hv === 'decker') {
       const cred = (d.brief.credentials && d.brief.credentials[0]) || 'Licensed & Insured';
-      return '<header class="hdr hdr-decker"><div class="deck-top"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a>' +
+      return '<header class="hdr hdr-decker"><div class="deck-top"><div class="wrap"><a class="logo" href="' + homeHref + '">' + logoInner + '</a>' +
         '<div class="deck-info"><div class="deck-pill">' + B.icon('pin') + '<div><small>Service Area</small><b>' + esc(d.brief.city + ', ' + d.brief.state) + '</b></div></div>' +
         '<div class="deck-pill">' + B.icon('shield') + '<div><small>Accreditation</small><b>' + esc(cred) + '</b></div></div>' +
         '<a class="btn btn-primary" href="' + tel + '">' + B.icon('phone') + ' ' + esc(nap.phone) + '</a></div>' +
@@ -292,26 +293,26 @@
     }
     const topbar = hv === 'topbar' ? '<div class="topbar"><div class="wrap"><span>Serving ' + esc(d.brief.city) + ', ' + esc(d.brief.state) + ' and nearby communities</span><span><a href="' + tel + '">Call ' + esc(nap.phone) + '</a>' + (nap.email ? '<a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a>' : '') + '</span></div></div>' : '';
     const hcls = hv === 'dark' ? ' hdr-dark' : hv === 'floating' ? ' hdr-floating' : '';
-    return topbar + '<header class="hdr' + hcls + '"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
+    return topbar + '<header class="hdr' + hcls + '"><div class="wrap"><a class="logo" href="' + homeHref + '">' + logoInner + '</a><nav class="nav">' + links.join('') +
       '<a class="btn btn-primary" href="' + tel + '">' + esc(nap.phone) + '</a></nav>' +
       '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
   }
   function footer(preview) {
-    const d = D(), nap = d.nap, pages = Object.values(d.pages);
+    const d = D(), nap = d.nap, pages = Object.values(d.pages), homeHref = preview ? 'index.html' : '/';
     const list = t => pages.filter(p => p.type === t).map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('');
     const flg = B.brand().footer ? B.logoUrl(preview, true) : '';
     const tel = 'tel:' + nap.phone.replace(/[^\d+]/g, '');
     if (B.tpl().skin === 'blueprint') {
       return '<footer class="ftr ftr-blueprint"><div class="wrap"><div class="ftr-banner"><div><small>24/7 FIELD DISPATCH DESK // ' + esc((d.brief.city + ', ' + d.brief.state).toUpperCase()) + '</small><h3>Ready to Schedule Your Inspection?</h3></div>' +
         '<a class="btn btn-primary" href="' + tel + '">' + B.icon('phone') + ' Call ' + esc(nap.phone) + '</a></div>' +
-        '<div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
+        '<div class="cols"><div>' + (flg ? '<a class="logo" href="' + homeHref + '"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
         '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
         '</div><div><h4>Direct Telemetry</h4><a href="' + tel + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +
         '<div class="copy">&copy; ' + new Date().getFullYear() + ' ' + esc(nap.company_name) + '. All rights reserved.</div></div></footer>' +
         '<a class="callbar" href="' + tel + '">' + B.icon('phone') + ' Call ' + esc(nap.phone) + '</a>';
     }
-    return '<footer class="ftr"><div class="wrap"><div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
+    return '<footer class="ftr"><div class="wrap"><div class="cols"><div>' + (flg ? '<a class="logo" href="' + homeHref + '"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
       '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
       '</div><div><h4>Contact</h4><a href="tel:' + nap.phone.replace(/[^\d+]/g, '') + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +
       '<div class="copy">&copy; ' + new Date().getFullYear() + ' ' + esc(nap.company_name) + '. All rights reserved.</div></div></footer>' +
@@ -325,7 +326,8 @@
     'if(d.b5==="setScroll"){window.scrollTo(0,d.y||0)}if(d.b5==="select"){document.querySelectorAll(".is-selected").forEach(function(x){x.classList.remove("is-selected")});var t=document.querySelector("[data-sec=\\""+d.sid+"\\"]");if(t){t.classList.add("is-selected");if(d.scroll)t.scrollIntoView({behavior:"smooth",block:"start"})}}});' +
     'var tk=0;window.addEventListener("scroll",function(){if(tk)return;tk=1;requestAnimationFrame(function(){tk=0;parent.postMessage({b5:"scroll",y:window.scrollY},"*")})});})();';
 
-  const RUNTIME_JS = '(function(){var d=document;d.documentElement.classList.add("js-anim");function chk(){var l=d.querySelectorAll("[data-anim]:not(.in)");for(var i=0;i<l.length;i++){var r=l[i].getBoundingClientRect();if(r.top<innerHeight*0.92&&r.bottom>0)l[i].classList.add("in")}}' +
+  const RUNTIME_JS = '(function(){if(/^https?:/.test(location.protocol)&&/\\/index\\.html$/i.test(location.pathname)){try{history.replaceState(null,"",location.pathname.replace(/index\\.html$/i,"")+location.search+location.hash)}catch(e){}}' +
+    'var d=document;d.documentElement.classList.add("js-anim");function chk(){var l=d.querySelectorAll("[data-anim]:not(.in)");for(var i=0;i<l.length;i++){var r=l[i].getBoundingClientRect();if(r.top<innerHeight*0.92&&r.bottom>0)l[i].classList.add("in")}}' +
     'addEventListener("scroll",chk,{passive:true});addEventListener("resize",chk);addEventListener("load",chk);setTimeout(chk,60);setTimeout(chk,500);' +
     'd.addEventListener("input",function(e){var t=e.target;if(t.classList&&t.classList.contains("ba-range")){t.closest(".ba-slider").style.setProperty("--pos",t.value+"%")}});' +
     'd.addEventListener("click",function(e){var b=e.target.closest(".ba-tab");if(!b)return;var w=b.closest(".ba-wrap");w.querySelectorAll(".ba-tab").forEach(function(x){x.classList.toggle("on",x===b)});w.querySelectorAll(".ba-case").forEach(function(c,i){c.hidden=(String(i)!==b.getAttribute("data-i"))})});})();';

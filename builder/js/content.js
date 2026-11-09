@@ -7,7 +7,7 @@
   }
   function inline(s) {
     let t = esc(s);
-    t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, lbl, u) => '<a href="' + u.replace(/^\/?index\.html(?=#|$)/i, '/') + '">' + lbl + '</a>')
          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
          .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
     return t;

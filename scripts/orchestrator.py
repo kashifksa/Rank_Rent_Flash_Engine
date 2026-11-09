@@ -651,6 +651,22 @@ def build_site_v5(template_id=None, out_folder=None):
         (out_dir / fname).write_text(html, encoding="utf-8")
         print(f"  OK {fname:<48} ({len(html) // 1024} KB)")
 
+    htaccess = (
+        "DirectoryIndex index.html\n"
+        "<IfModule mod_rewrite.c>\n"
+        "  RewriteEngine On\n"
+        "  RewriteBase /\n"
+        "  # Redirect /index.html to clean root domain /\n"
+        "  RewriteCond %{THE_REQUEST} \\s/+index\\.html[\\s?] [NC]\n"
+        "  RewriteRule ^index\\.html$ / [R=301,L]\n"
+        "  # Internally resolve clean extensionless URLs to .html\n"
+        "  RewriteCond %{REQUEST_FILENAME} !-d\n"
+        "  RewriteCond %{REQUEST_FILENAME}\\.html -f\n"
+        "  RewriteRule ^([^\\.]+)$ $1.html [NC,L]\n"
+        "</IfModule>\n"
+    )
+    (out_dir / ".htaccess").write_text(htaccess, encoding="utf-8")
+
     src_images = ROOT_DIR / "images"
     dst_images = out_dir / "images"
     if src_images.exists():
