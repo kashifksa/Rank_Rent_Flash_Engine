@@ -31,7 +31,8 @@ from pathlib import Path
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE = Path(__file__).parent.parent          # D:\Projects\Rank_Rent_Flash_Engine
+_here = Path(__file__).resolve().parent
+BASE = _here if (_here / "raw_research").exists() else _here.parent   # project root (works from the root or from scripts/)
 RAW  = BASE / "raw_research"
 OUT  = BASE / "data.txt"
 
@@ -52,6 +53,59 @@ def find_file(patterns, exts=None):
             if any(pat.lower() in nl for pat in patterns):
                 return p
     return None
+
+
+def find_stem(stems, exts):
+    """Exact file-name match (without extension) inside raw_research/, e.g. nap.txt, nap.json."""
+    if not RAW.exists():
+        return None
+    for p in sorted(RAW.iterdir()):
+        if p.is_file() and p.stem.lower() in stems and p.suffix.lower() in exts:
+            return p
+    return None
+
+
+NAP_KEYS = {
+    "company": ("company", "company name", "business name", "business", "name"),
+    "phone": ("phone", "telephone", "tel", "phone number", "tracking phone", "tracking number"),
+    "address": ("address", "street address", "location"),
+    "email": ("email", "e-mail", "email address"),
+    "website": ("website", "url", "domain", "site"),
+    "founded": ("founded", "founded year", "year founded", "established", "since"),
+}
+
+
+def parse_nap_file(path):
+    """nap.txt ('Key: value' lines) or nap.json -> ({company, phone, address, email, website, founded}, {extra facts})."""
+    core, extra = {}, {}
+    if path is None:
+        return core, extra
+    pairs = []
+    if path.suffix.lower() == ".json":
+        try:
+            d = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+            d = d.get("nap", d) if isinstance(d, dict) else {}
+            pairs = [(str(k), v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)) for k, v in d.items()]
+        except Exception:
+            pairs = []
+    else:
+        for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or ":" not in line:
+                continue
+            k, v = line.split(":", 1)
+            pairs.append((k, v))
+    for k, v in pairs:
+        key, val = re.sub(r"[_\-]+", " ", k.strip().lower()), str(v).strip()
+        if not val:
+            continue
+        for std, names in NAP_KEYS.items():
+            if key in names:
+                core[std] = val
+                break
+        else:
+            extra[k.strip().replace("_", " ").title()] = val
+    return core, extra
 
 
 def read_txt(filepath, max_chars=30000):
@@ -353,6 +407,17 @@ credentials = brief.get("credentials", [])
 local_challenge = brief.get("local_challenge", "")
 local_landmarks = brief.get("local_landmarks", [])
 
+# NAP + business facts supplied by you in raw_research/nap.txt (or nap.json) win over whatever the brief holds
+nap_file = find_stem({"nap", "business_info", "business-info", "company_info", "company-info"}, {".txt", ".json"})
+nap_core, nap_extra = parse_nap_file(nap_file)
+company = nap_core.get("company", company)
+phone = nap_core.get("phone", phone)
+address = nap_core.get("address", address)
+email = nap_core.get("email", email)
+website = nap_core.get("website", website)
+founded = nap_core.get("founded", founded)
+logo_file = find_file(["logo"], exts=[".webp", ".png", ".jpg", ".jpeg"])
+
 print("=" * 70)
 print("  BUILD_DATA.PY — ADAPTIVE RESEARCH COMPILER")
 print(f"  Niche  : {niche}")
@@ -380,6 +445,11 @@ print(f"  ✓ AnswerThePublic    : {answerthepublic_file.name if answerthepublic
 print(f"  ✓ SERP / Competitors : {serp_file.name if serp_file else '[None found]'}")
 print(f"  ✓ Topical Relevance  : {topical_file.name if topical_file else '[None found]'}")
 print(f"  ✓ YouTube File       : {youtube_file.name if youtube_file else '[None found]'}")
+print(f"  ✓ NAP file           : {nap_file.name if nap_file else '[None found: REQUIRED, see raw_research/README.md]'}")
+print(f"  ✓ Logo file          : {logo_file.name if logo_file else '[None found: REQUIRED for the build, see raw_research/README.md]'}")
+_missing = [n for n, v in (("Company Name", company), ("Phone", phone), ("Address", address)) if str(v).startswith("[")]
+if _missing:
+    print(f"  !! NAP incomplete ({', '.join(_missing)}). Create raw_research/nap.txt (copy nap.example.txt) and re-run.")
 print()
 
 
@@ -400,7 +470,8 @@ project_info = [
     f"Founded Year    : {founded}",
     f"Date Compiled   : {datetime.now().strftime('%Y-%m-%d')}",
     f"Primary Keyword : {primary_kw}",
-]
+    f"Logo File       : {logo_file.name if logo_file else '[NOT PROVIDED]'}",
+] + [f"{k:<16}: {v}" for k, v in nap_extra.items()]
 
 
 # =============================================================================

@@ -1,0 +1,21 @@
+# nap.example.txt  ->  copy to nap.txt in this folder and fill it in. One "Key: value" per line. Lines starting with # are ignored.
+# NAP = Name, Address, Phone. Write them EXACTLY as they appear on the Google Business Profile: the pipeline copies them
+# into schema and every page, and the gate fails if any page shows a different phone number.
+
+Company Name: Example Gutter Pros
+Phone: (555) 555-0100
+Address: 100 Main St, Springfield, IL 62701
+Email: hello@example.com
+Website: https://example.com
+Founded: 2015
+
+# Optional facts (anything you add is passed to the brief; the writer may only state facts that appear here)
+License Number:
+Insurance:
+Hours: Mon-Fri 7:00 AM to 6:00 PM; Sat 8:00 AM to 2:00 PM; Sun closed
+Service Area: Springfield, Chatham, Rochester
+Google Business Profile:
+Facebook:
+BBB:
+Yelp:
+External Phones:
