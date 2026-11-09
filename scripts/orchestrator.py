@@ -577,7 +577,7 @@ def main():
         global FORCE_BUILD
         FORCE_BUILD = args.force
         if args.engine == "v5" or not (ROOT_DIR / "studio_builder.html").exists():
-            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial", "bold", "clean", "authority", "emergency", "bento", "atelier") else "cornerstone", out_folder=args.out)
+            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial", "bold", "clean", "authority", "emergency", "bento", "atelier", "blueprint") else "cornerstone", out_folder=args.out)
         else:
             build_full_website(template_id=args.template, out_folder=args.out)
 

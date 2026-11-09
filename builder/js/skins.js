@@ -125,6 +125,183 @@
 .steps-spec .spec-title h3{margin:0 0 6px;font-size:1.25rem}
 .steps-spec .spec-desc p{margin:0;color:var(--muted)}
 @media (max-width:820px){.steps-spec .spec-row{grid-template-columns:1fr;gap:8px}}
+/* --- Precision Blueprint Dossier: 14 Unique Section Layouts --- */
+.console-strip{background:#070d17;color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:.12em;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.console-strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hdr-console{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:2px solid var(--dark)}
+.hdr-console .wrap{height:80px;gap:20px}
+.hdr-console .console-nav{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 18px;gap:20px}
+.hdr-console .console-cta{display:flex;align-items:center;gap:12px;background:var(--dark);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;border:2px solid var(--dark);transition:transform .15s,background .15s}
+.hdr-console .console-cta:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.hdr-console .console-cta small{display:block;font-size:10px;letter-spacing:.12em;color:#93c5fd;font-weight:700}
+.hdr-console .console-cta b{font-size:1rem;font-family:var(--font-h)}
+.hdr-console .c-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.25)}
+@media (max-width:960px){.console-strip{display:none}.hdr-console .console-nav,.hdr-console .console-cta{display:none}}
+
+/* 1. Hero Dossier */
+.hero--dossier{background:radial-gradient(circle at 85% 20%,rgba(var(--accent-rgb),.14),transparent 45%),linear-gradient(180deg,#0b1320 0%,#111c2d 100%);color:#fff;padding:64px 0 72px;border-bottom:3px solid var(--accent)}
+.hero--dossier h1{color:#fff;font-size:clamp(2.2rem,4vw,3.35rem);line-height:1.08;margin-bottom:18px}
+.hero--dossier p{color:#cbd5e1;font-size:1.06rem}
+.dos-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.dos-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);padding:7px 14px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.12em;color:#93c5fd;margin-bottom:18px}
+.dos-dot{width:8px;height:8px;border-radius:50%;background:#38bdf8}
+.dos-matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+.dos-cell{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-left:3px solid var(--accent);padding:12px 14px;border-radius:6px}
+.dos-k{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;color:#60a5fa;margin-bottom:3px}
+.dos-cell b{font-size:.9rem;color:#f8fafc;display:block;line-height:1.35}
+.dos-viewport{position:relative;background:#070d17;border:2px solid rgba(255,255,255,.22);border-radius:10px;padding:14px;box-shadow:0 28px 60px rgba(0,0,0,.45)}
+.dos-viewport img{width:100%;height:390px;object-fit:cover;border-radius:6px;display:block}
+.dos-viewport .ret{position:absolute;color:#60a5fa;font-family:monospace;font-weight:700;font-size:16px;line-height:1;pointer-events:none}
+.dos-viewport .ret.tl{top:4px;left:6px}.dos-viewport .ret.tr{top:4px;right:6px}.dos-viewport .ret.bl{bottom:64px;left:6px}.dos-viewport .ret.br{bottom:64px;right:6px}
+.dos-readout{margin-top:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.dos-readout small{display:block;font-size:10px;letter-spacing:.12em;color:#94a3b8;font-weight:700}
+.dos-readout b{font-size:1.1rem;color:#fff;font-family:var(--font-h)}
+.dos-readout > span{background:rgba(34,197,94,.18);color:#4ade80;border:1px solid rgba(34,197,94,.4);font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.08em}
+@media (max-width:960px){.dos-grid{grid-template-columns:1fr}.dos-matrix{grid-template-columns:1fr}}
+
+/* 2. Split Diagnostic */
+.split-diagnostic{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:start}
+.diag-panel{background:var(--card);border:1.5px solid var(--line);border-top:4px solid var(--accent);border-radius:var(--radius);padding:34px;box-shadow:0 12px 32px rgba(15,23,42,.05)}
+.diag-bar{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--accent);padding-bottom:14px;margin-bottom:18px;border-bottom:1px dashed var(--line)}
+.diag-img{position:relative;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--line);margin-bottom:16px}
+.diag-img img{width:100%;height:280px;object-fit:cover;display:block}
+.diag-badge{position:absolute;top:12px;left:12px;background:rgba(11,19,32,.88);color:#fff;font-size:10px;font-weight:800;letter-spacing:.12em;padding:6px 12px;border-radius:4px}
+.diag-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.diag-chip{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--dark);border-radius:6px;padding:12px 14px}
+.diag-code{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--accent);margin-bottom:4px}
+.diag-chip p{margin:0;font-size:.86rem;line-height:1.45;color:var(--text);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:960px){.split-diagnostic,.diag-chips{grid-template-columns:1fr}}
+
+/* 3. Cards Bento Mosaic */
+.cards-bento-mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bm-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
+.bm-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 16px 36px rgba(15,23,42,.08)}
+.bm-card.bm-hero{grid-column:span 2;background:var(--dark);color:#fff;border-color:var(--dark)}
+.bm-card.bm-hero h3{color:#fff;font-size:1.45rem}
+.bm-card.bm-hero p{color:#cbd5e1}
+.bm-card.bm-hero .bm-idx{color:#60a5fa}
+.bm-card.bm-hero .ic{background:rgba(255,255,255,.1);color:#fff}
+.bm-card.bm-hero .bm-link{color:#60a5fa}
+.bm-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.bm-idx{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent)}
+.bm-link{margin-top:auto;padding-top:14px;font-weight:700;color:var(--accent);text-decoration:none;font-size:.92rem}
+@media (max-width:960px){.cards-bento-mosaic{grid-template-columns:1fr}.bm-card.bm-hero{grid-column:span 1}}
+
+/* 4. Cards Pillars (Why Choose Us) */
+.cards-pillars{display:flex;flex-direction:column;gap:14px}
+.pillar-row{display:grid;grid-template-columns:120px 260px 1fr;gap:28px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:22px 28px;transition:border-color .2s}
+.pillar-row:hover{border-color:var(--accent)}
+.pil-num{display:flex;align-items:center;gap:14px}
+.pil-num > span:first-child{font-family:var(--font-h);font-size:1.75rem;font-weight:800;color:var(--accent);line-height:1}
+.pil-num .ic{margin:0;width:42px;height:42px}
+.pil-title h3{margin:0;font-size:1.15rem}
+.pil-body p{margin:0;color:var(--text);font-size:.96rem}
+@media (max-width:900px){.pillar-row{grid-template-columns:1fr;gap:12px}}
+
+/* 5. Split Spotlight (Local Context) */
+.split-spotlight{background:var(--dark);color:#fff;border-radius:calc(var(--radius) + 4px);padding:44px;box-shadow:0 24px 54px rgba(11,19,32,.18)}
+.spot-head{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.14)}
+.spot-head h2{color:#fff;margin:8px 0 0}
+.spot-body{display:grid;grid-template-columns:.95fr 1.05fr;gap:36px;align-items:center}
+.spot-media{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);overflow:hidden}
+.spot-media img{width:100%;height:340px;object-fit:cover;display:block}
+.spot-cap{padding:10px 14px;font-size:12px;color:#94a3b8;border-top:1px solid rgba(255,255,255,.1)}
+.spot-copy p{color:#e2e8f0}
+@media (max-width:900px){.spot-body{grid-template-columns:1fr}.split-spotlight{padding:26px}}
+
+/* 6. Gallery Filmstrip (Before & After) */
+.film-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.film-plate{margin:0;background:#0b1320;color:#fff;border-radius:var(--radius);overflow:hidden;border:2px solid #1e293b;box-shadow:0 14px 32px rgba(11,19,32,.14)}
+.fp-bar{display:flex;justify-content:space-between;padding:10px 16px;font-size:11px;font-weight:800;letter-spacing:.12em;color:#60a5fa;background:#070d17;border-bottom:1px solid rgba(255,255,255,.1)}
+.film-plate img{width:100%;height:240px;object-fit:cover;display:block}
+.film-plate figcaption{padding:14px 16px;font-size:.9rem;color:#cbd5e1}
+
+/* 7. Cards Dossier (Case Studies) */
+.cards-dossier{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.dc-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.dc-hdr{background:var(--dark);color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:.1em}
+.dc-loc{background:var(--accent);color:#fff;padding:3px 9px;border-radius:4px}
+.dc-body{padding:24px}
+.dc-facts{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.dc-fact{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dark);padding:10px 14px;border-radius:5px;font-size:.9rem}
+.dc-fact small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:3px}
+.dc-fact.dc-result{border-left-color:#16a34a;background:rgba(22,163,74,.06)}
+.dc-fact.dc-result small{color:#15803d}
+
+/* 8. Table Matrix (Comparison Table) */
+.cmp-matrix .mx-win{background:rgba(var(--accent-rgb),.08);font-weight:600;border-left:2px solid var(--accent);border-right:2px solid var(--accent)}
+.cmp-matrix thead th.mx-win{background:var(--accent);color:#fff;position:relative}
+.mx-tag{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.9;margin-bottom:2px}
+.mx-feat{font-weight:700;color:var(--heading)}
+.mx-foot{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+
+/* 9. Steps Chevron (Process) */
+.steps-chevron{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.chev-step{background:var(--card);border:1.5px solid var(--line);border-top:4px solid var(--accent);border-radius:var(--radius);padding:24px;position:relative}
+.chev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.chev-stage{font-family:var(--font-h);font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent)}
+.chev-time{font-size:11px;font-weight:700;background:var(--surface);border:1px solid var(--line);padding:3px 9px;border-radius:99px;color:var(--heading)}
+
+/* 10. Badges Seal Strip (Awards & Certifications) */
+.badges-seals{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.seal-card{display:grid;grid-template-columns:84px 1fr;gap:18px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:20px}
+.seal-emblem{background:var(--dark);color:#fff;border-radius:8px;padding:12px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.seal-emblem .ic{margin:0;width:36px;height:36px;background:rgba(255,255,255,.12);color:#60a5fa}
+.seal-emblem small{font-size:9px;font-weight:800;letter-spacing:.1em;color:#93c5fd}
+.seal-body b{display:block;color:var(--heading);font-size:1.02rem;margin-bottom:4px}
+.seal-body span{font-size:.88rem;color:var(--muted);line-height:1.45;display:block}
+
+/* 11. Reviews Editorial Wall */
+.wall-banner{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:32px;padding-bottom:22px;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.wall-banner h2{margin:6px 0 8px}
+.wall-banner p{margin:0;max-width:640px;color:var(--muted)}
+.wall-score{display:flex;align-items:center;gap:14px;background:var(--dark);color:#fff;padding:14px 22px;border-radius:var(--radius)}
+.ws-num{font-family:var(--font-h);font-size:2.2rem;font-weight:800;line-height:1;color:#fbbf24}
+.wall-score small{display:block;font-size:11px;color:#cbd5e1}
+.wall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.wall-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.wall-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.wall-v{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--accent);background:rgba(var(--accent-rgb),.1);padding:4px 8px;border-radius:4px}
+.wall-card q{font-style:normal;color:var(--heading);font-size:.98rem;line-height:1.6;margin-bottom:18px;display:block;quotes:none}
+.wall-card q::before,.wall-card q::after{content:none}
+.wall-who{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.wall-who small{display:block;color:var(--muted);font-size:.82rem}
+
+/* 12. Area Radar (Service Area & Map) */
+.area-radar{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:stretch}
+.radar-map{background:var(--dark);border-radius:var(--radius);overflow:hidden;border:2px solid var(--dark);display:flex;flex-direction:column}
+.radar-bar{display:flex;justify-content:space-between;padding:12px 18px;font-size:11px;font-weight:800;letter-spacing:.12em;color:#60a5fa;background:#070d17}
+.radar-map iframe{width:100%;flex:1;min-height:380px;border:0}
+.radar-board{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+.radar-tag{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line)}
+.radar-tag svg{width:14px;height:14px;color:var(--accent)}
+@media (max-width:900px){.area-radar{grid-template-columns:1fr}}
+
+/* 13. FAQ Numbered Grid */
+.faq-ngrid{display:grid !important;grid-template-columns:repeat(2,1fr) !important;gap:18px !important}
+.faq-ncard{margin:0 !important;background:var(--card);border:1.5px solid var(--line) !important;border-radius:var(--radius) !important}
+.faq-ncard summary{display:flex !important;align-items:center;gap:14px;padding:18px 20px !important}
+.fn-idx{font-family:var(--font-h);font-size:12px;font-weight:800;letter-spacing:.1em;background:rgba(var(--accent-rgb),.12);color:var(--accent);padding:5px 10px;border-radius:5px;flex-shrink:0}
+.fn-q{flex:1;font-weight:700}
+@media (max-width:860px){.faq-ngrid{grid-template-columns:1fr !important}}
+
+/* 14. CTA Split Ticket */
+.cta-ticket{display:grid;grid-template-columns:1.3fr .7fr;background:var(--dark);color:#fff;border-radius:calc(var(--radius) + 4px);overflow:hidden;border:2px solid var(--dark);box-shadow:0 24px 56px rgba(11,19,32,.22)}
+.ct-left{padding:44px}
+.ct-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;color:#60a5fa;margin-bottom:10px}
+.ct-left h2{color:#fff;margin-bottom:12px}
+.ct-left p{color:#cbd5e1}
+.ct-note{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:.88rem;color:#94a3b8}
+.ct-right{background:#070d17;border-left:2px dashed rgba(255,255,255,.18);padding:44px 34px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.ct-label{font-size:11px;font-weight:800;letter-spacing:.14em;color:#93c5fd;margin-bottom:8px}
+.ct-phone{font-family:var(--font-h);font-size:1.75rem;font-weight:800;color:#fff;text-decoration:none;margin-bottom:8px}
+.ct-right p{color:#94a3b8;font-size:.88rem;margin:0 0 18px}
+@media (max-width:860px){.cta-ticket{grid-template-columns:1fr}.ct-right{border-left:0;border-top:2px dashed rgba(255,255,255,.18)}}
+
+/* 15. Architectural Footer */
+.ftr-blueprint .ftr-banner{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:32px;margin-bottom:36px;border-bottom:1px solid rgba(255,255,255,.14);flex-wrap:wrap}
+.ftr-blueprint .ftr-banner small{display:block;font-size:11px;letter-spacing:.14em;color:#60a5fa;font-weight:800;margin-bottom:4px}
+.ftr-blueprint .ftr-banner h3{color:#fff;margin:0;font-size:1.5rem}
 `;
 
   B.SKINS = {
@@ -230,6 +407,15 @@
 .skin-atelier .tag{border-radius:0;border:1.5px solid var(--heading);background:var(--card)}
 .skin-atelier .area iframe,.skin-atelier .dba-card{border-radius:0;border:2px solid var(--heading);box-shadow:8px 8px 0 var(--heading)}
 .skin-atelier .cta-band{border-top:3px solid var(--heading)}
+`
+  ,    /* Precision Blueprint Dossier: 14 unique section designs, technical telemetry chrome, cool architectural slate & cobalt */
+    blueprint: `
+.skin-blueprint{--bg:#f4f7fb;--surface:#e8eef6;--card:#ffffff;--line:#cbd5e1;--text:#1e293b;--muted:#475569}
+.skin-blueprint .bg-light{background:#e8eef6}
+.skin-blueprint .sec{border-bottom:1px solid var(--line)}
+.skin-blueprint .head{text-align:left;max-width:none;display:flex;flex-direction:column;align-items:flex-start;margin-bottom:36px}
+.skin-blueprint .head p{max-width:720px}
+.skin-blueprint .eyebrow{background:rgba(var(--accent-rgb),.1);color:var(--accent);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-weight:800;letter-spacing:.12em}
 `
   };
 })();

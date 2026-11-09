@@ -94,8 +94,8 @@
   B.tpl = () => B.TEMPLATES[B.state.template] || B.TEMPLATES.cornerstone;
   B.variantsFor = type => (B.BLOCKS[type] || B.BLOCKS.article).variants;
   B.getVariant = function (pid, sid) {
-    const type = B.sectionType(pid, sid), list = B.variantsFor(type);
-    const v = B.ps(pid).variants[sid] || B.tpl().variants[type];
+    const type = B.sectionType(pid, sid), list = B.variantsFor(type), tpl = B.tpl();
+    const v = B.ps(pid).variants[sid] || (tpl.sectionVariants && tpl.sectionVariants[sid]) || tpl.variants[type];
     return list.indexOf(v) > -1 ? v : list[0];
   };
   B.theme = function () { return Object.assign({}, B.tpl().theme, B.state.theme || {}); };
@@ -263,6 +263,15 @@
     const hv = B.tpl().header || 'classic';
     const lg = B.logoUrl(preview, hv === 'dark'), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
     const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
+    if (hv === 'console') {
+      const cred = (d.brief.credentials && d.brief.credentials[0]) || 'Certified Specialists';
+      return '<div class="console-strip"><div class="wrap"><span>SYS.STATUS // ACTIVE FIELD DISPATCH</span><span>ZONE: ' + esc((d.brief.city + ', ' + d.brief.state).toUpperCase()) + '</span><span>ACCREDITATION: ' + esc(cred.toUpperCase()) + '</span></div></div>' +
+        '<header class="hdr hdr-console"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a>' +
+        '<nav class="nav console-nav">' + links.join('') + '</nav>' +
+        '<a class="console-cta" href="' + tel + '"><span class="c-dot"></span><div><small>DIRECT DISPATCH</small><b>' + esc(nap.phone) + '</b></div></a>' +
+        '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
+        '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
+    }
     if (hv === 'gridline') {
       return '<header class="hdr hdr-gridline"><div class="wrap"><a class="logo gl-cell gl-logo" href="index.html">' + logoInner + '</a>' +
         '<nav class="nav gl-cell gl-nav">' + links.join('') + '</nav>' +
@@ -292,6 +301,16 @@
     const d = D(), nap = d.nap, pages = Object.values(d.pages);
     const list = t => pages.filter(p => p.type === t).map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('');
     const flg = B.brand().footer ? B.logoUrl(preview, true) : '';
+    const tel = 'tel:' + nap.phone.replace(/[^\d+]/g, '');
+    if (B.tpl().skin === 'blueprint') {
+      return '<footer class="ftr ftr-blueprint"><div class="wrap"><div class="ftr-banner"><div><small>24/7 FIELD DISPATCH DESK // ' + esc((d.brief.city + ', ' + d.brief.state).toUpperCase()) + '</small><h3>Ready to Schedule Your Inspection?</h3></div>' +
+        '<a class="btn btn-primary" href="' + tel + '">' + B.icon('phone') + ' Call ' + esc(nap.phone) + '</a></div>' +
+        '<div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
+        '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
+        '</div><div><h4>Direct Telemetry</h4><a href="' + tel + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +
+        '<div class="copy">&copy; ' + new Date().getFullYear() + ' ' + esc(nap.company_name) + '. All rights reserved.</div></div></footer>' +
+        '<a class="callbar" href="' + tel + '">' + B.icon('phone') + ' Call ' + esc(nap.phone) + '</a>';
+    }
     return '<footer class="ftr"><div class="wrap"><div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
       '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
       '</div><div><h4>Contact</h4><a href="tel:' + nap.phone.replace(/[^\d+]/g, '') + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +

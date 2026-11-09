@@ -48,7 +48,7 @@
   const BLOCKS = {};
 
   BLOCKS.hero = {
-    label: 'Hero', variants: ['full', 'split', 'centered', 'dispatch', 'bento', 'docked', 'magazine'],
+    label: 'Hero', variants: ['full', 'split', 'centered', 'dispatch', 'bento', 'docked', 'magazine', 'dossier'],
     render(m, c) {
       const title = m.h1 || m.h2 || c.page.title;
       const paras = m.paras.filter(p => !/\|/.test(p));
@@ -109,12 +109,25 @@
           '<div class="mag-visual">' + (img ? '<div class="mag-frame"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><div class="mag-cap">FIG. 01 &mdash; ' + esc(img.alt || c.page.title) + '</div></div>' : '') +
           '</div></div><div class="mag-bar">' + specs + '</div></div></div>';
       }
+      if (c.variant === 'dossier') {
+        const specs = (chips.length ? chips : ['Certified Field Technicians', 'Same or Next-Day Dispatch', 'Written Scope Before Work', 'Verified Source Removal']).slice(0, 4).map((x, i) =>
+          '<div class="dos-cell"><span class="dos-k">SPEC // 0' + (i + 1) + '</span><b>' + esc(x) + '</b></div>').join('');
+        return '<div class="hero hero--dossier"' + fx + '><div class="wrap"><div class="dos-grid"><div class="dos-left">' +
+          '<div class="dos-tag"><span class="dos-dot"></span><span>FIELD DOSSIER // ' + esc((city ? city + (c.brief.state ? ', ' + c.brief.state : '') : c.nap.company_name).toUpperCase()) + '</span></div>' +
+          '<h1>' + inline(title) + '</h1>' +
+          '<div class="dos-lead">' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') + '</div>' +
+          '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div>' +
+          '<div class="dos-matrix">' + specs + '</div></div>' +
+          '<div class="dos-right"><div class="dos-viewport"><span class="ret tl">+</span><span class="ret tr">+</span><span class="ret bl">+</span><span class="ret br">+</span>' +
+          (img ? '<img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '">' : '') +
+          '<div class="dos-readout"><div><small>DIRECT DISPATCH TELEMETRY</small><b>' + esc(c.phone) + '</b></div><span>ACTIVE</span></div></div></div></div></div></div>';
+      }
       return '<div class="hero hero--full"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap">' + copy + '</div></div>';
     }
   };
 
   BLOCKS.split = {
-    label: 'Text + image', variants: ['image-right', 'image-left', 'text-only', 'frame'],
+    label: 'Text + image', variants: ['image-right', 'image-left', 'text-only', 'frame', 'diagnostic', 'spotlight'],
     render(m, c) {
       const img = c.img();
       const bullets = m.bullets.length ? m.bullets : (m.items || []).map(i => ({ label: i.title, text: (i.paras || [])[0] || '' }));
@@ -127,6 +140,20 @@
           '<div class="split-media"><div class="arch-frame"><div class="arch-top"><span>FIELD DOCUMENTATION</span><span>' + esc(c.page.city || c.brief.city || '') + '</span></div>' +
           '<img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><div class="arch-cap">' + esc(img.alt || m.h2 || '') + '</div></div></div></div></div>';
       }
+      if (c.variant === 'diagnostic') {
+        const sym = (bullets.length ? bullets.map(b => (b.label ? b.label + ': ' : '') + b.text) : m.paras.slice(0, 2)).slice(0, 4);
+        const symHtml = sym.map((s, i) => '<div class="diag-chip"><span class="diag-code">DIAG-0' + (i + 1) + '</span><p>' + inline(s) + '</p></div>').join('');
+        return '<div class="wrap"><div class="split-diagnostic"><div class="diag-panel"><div class="diag-bar"><span>DIAGNOSTIC BRIEFING</span><span>STATUS: CRITICAL CHECK</span></div>' +
+          '<h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') +
+          '<div class="diag-cta">' + callBtn(c) + '</div></div>' +
+          '<div class="diag-visual">' + (img ? '<div class="diag-img"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><span class="diag-badge">FIELD INSPECTION VISUAL</span></div>' : '') +
+          '<div class="diag-chips">' + symHtml + '</div></div></div></div>';
+      }
+      if (c.variant === 'spotlight') {
+        return '<div class="wrap"><div class="split-spotlight"><div class="spot-head"><span class="eyebrow">' + esc(c.eyebrow || 'REGIONAL DISPATCH BRIEF') + '</span><h2>' + inline(m.h2 || m.h1 || '') + '</h2></div>' +
+          '<div class="spot-body">' + (img ? '<div class="spot-media"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><div class="spot-cap">' + esc(img.alt || '') + '</div></div>' : '') +
+          '<div class="spot-copy">' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') + list + '<div style="margin-top:20px">' + callBtn(c) + '</div></div></div></div></div>';
+      }
       const cls = c.variant === 'text-only' || !img ? 'text-only' : (c.variant === 'image-left' ? 'rev' : '');
       return '<div class="wrap"><div class="split ' + cls + '">' + copy +
         (cls === 'text-only' ? '' : '<div class="split-media"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"></div>') + '</div></div>';
@@ -134,11 +161,43 @@
   };
 
   BLOCKS.cards = {
-    label: 'Cards', variants: ['icons', 'grid', 'list', 'numbered', 'stripe', 'ledger'],
+    label: 'Cards', variants: ['icons', 'grid', 'list', 'numbered', 'stripe', 'ledger', 'bento-mosaic', 'pillars', 'dossier-cards'],
     render(m, c) {
       let items = (m.items || []).slice();
       if (!items.length && m.bullets.length) items = m.bullets.map(b => ({ title: b.label || b.text, paras: b.label ? [b.text] : [], facts: [], bullets: [] }));
       const intro = m.paras[0];
+      if (c.variant === 'bento-mosaic') {
+        const mcards = items.map((it, idx) => {
+          const paras = (it.paras || []);
+          const cta = paras.find(p => /^(schedule|request|call|get)/i.test(p));
+          const body = paras.filter(p => p !== cta);
+          return '<article class="bm-card' + (idx === 0 ? ' bm-hero' : '') + '"><div class="bm-top"><span class="bm-idx">SVC // 0' + (idx + 1) + '</span><span class="ic">' + icon(pickIcon(it.title)) + '</span></div>' +
+            '<h3>' + inline(it.title) + '</h3>' + body.map(p => '<p>' + inline(p) + '</p>').join('') +
+            '<a class="bm-link" href="' + tel(c) + '">' + esc(cta || 'Schedule Service') + ' &rarr;</a></article>';
+        }).join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="cards-bento-mosaic">' + mcards + '</div></div>';
+      }
+      if (c.variant === 'pillars') {
+        const rows = items.map((it, idx) => {
+          const paras = (it.paras || []);
+          return '<article class="pillar-row"><div class="pil-num"><span>0' + (idx + 1) + '</span><span class="ic">' + icon(pickIcon(it.title)) + '</span></div>' +
+            '<div class="pil-title"><h3>' + inline(it.title) + '</h3></div>' +
+            '<div class="pil-body">' + paras.map(p => '<p>' + inline(p) + '</p>').join('') + '</div></article>';
+        }).join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="cards-pillars">' + rows + '</div></div>';
+      }
+      if (c.variant === 'dossier-cards') {
+        const dcards = items.map((it, idx) => {
+          const facts = it.facts || [];
+          const loc = facts.find(f => /neighbou?rhood|location/i.test(f.label));
+          const rest = facts.filter(f => f !== loc);
+          const paras = (it.paras || []);
+          const fx = rest.length ? '<div class="dc-facts">' + rest.map((f, i) => '<div class="dc-fact' + (i === rest.length - 1 ? ' dc-result' : '') + '"><small>' + esc(f.label) + '</small><div>' + inline(f.text) + '</div></div>').join('') + '</div>' : '';
+          return '<article class="dc-card"><div class="dc-hdr"><span>CASE FILE #0' + (idx + 1) + '</span>' + (loc ? '<span class="dc-loc">' + inline(loc.text) + '</span>' : '<span>VERIFIED LOG</span>') + '</div>' +
+            '<div class="dc-body"><h3>' + inline(it.title) + '</h3>' + paras.map(p => '<p>' + inline(p) + '</p>').join('') + fx + '</div></article>';
+        }).join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="cards-dossier">' + dcards + '</div></div>';
+      }
       const cards = items.map((it, idx) => {
         const facts = it.facts || [];
         const loc = facts.find(f => /neighbou?rhood|location/i.test(f.label));
@@ -164,7 +223,7 @@
   };
 
   BLOCKS.steps = {
-    label: 'Process steps', variants: ['timeline', 'table', 'rail', 'track', 'spec'],
+    label: 'Process steps', variants: ['timeline', 'table', 'rail', 'track', 'spec', 'chevron'],
     render(m, c) {
       const intro = m.paras[0];
       let rows = [];
@@ -188,6 +247,12 @@
           '<div class="spec-row"><div class="spec-idx">PHASE // ' + String(i + 1).padStart(2, '0') + '</div><div class="spec-title"><h3>' + inline(strip(r.title)) + '</h3>' +
           (r.time ? '<span class="time">' + esc(strip(r.time)) + '</span>' : '') + '</div><div class="spec-desc"><p>' + inline(r.text) + '</p></div></div>').join('') + '</div></div>';
       }
+      if (c.variant === 'chevron') {
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="steps-chevron">' + rows.map((r, i) =>
+          '<div class="chev-step"><div class="chev-top"><span class="chev-stage">STAGE 0' + (i + 1) + '</span>' +
+          (r.time ? '<span class="chev-time">' + esc(strip(r.time)) + '</span>' : '') + '</div>' +
+          '<h3>' + inline(strip(r.title)) + '</h3><p>' + inline(r.text) + '</p></div>').join('') + '</div></div>';
+      }
       const cls = c.variant === 'track' ? 'steps steps-track' : 'steps';
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="' + cls + '">' + rows.map((r, i) =>
         '<div class="step"><div class="n">' + (i + 1) + '</div><h3>' + inline(strip(r.title)) + '</h3><p>' + inline(r.text) + '</p>' +
@@ -196,8 +261,15 @@
   };
 
   BLOCKS.table = {
-    label: 'Comparison table', variants: ['cmp'],
+    label: 'Comparison table', variants: ['cmp', 'matrix'],
     render(m, c) {
+      if (c.variant === 'matrix' && m.table) {
+        const ths = (m.table.headers || []).map((h, i) => '<th class="' + (i === 1 ? 'mx-win' : '') + '">' + (i === 1 ? '<span class="mx-tag">OUR STANDARD</span>' : '') + inline(h) + '</th>').join('');
+        const trs = (m.table.rows || []).map(r => '<tr>' + r.map((cell, i) => '<td class="' + (i === 0 ? 'mx-feat' : i === 1 ? 'mx-win' : '') + '">' + inline(cell) + '</td>').join('') + '</tr>').join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) +
+          '<div class="cmp-matrix"><div class="tbl"><table><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
+          '<div class="mx-foot"><span>' + inline(m.paras[1] || 'Verified equipment and certified source-removal protocols on every dispatch.') + '</span>' + callBtn(c) + '</div></div></div>';
+      }
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="cmp">' + B.tableHtml(m.table) + '</div>' +
         (m.paras.length > 1 ? '<p style="margin-top:18px;color:var(--muted)">' + inline(m.paras.slice(1).join(' ')) + '</p>' : '') +
         '<p style="text-align:center;margin-top:26px">' + callBtn(c) + '</p></div>';
@@ -205,7 +277,7 @@
   };
 
   BLOCKS.reviews = {
-    label: 'Reviews', variants: ['cards', 'featured'],
+    label: 'Reviews', variants: ['cards', 'featured', 'wall'],
     render(m, c) {
       const stars = n => '<div class="stars">' + '\u2605'.repeat(n || 5) + '</div>';
       const card = (q, big) => '<article class="card rev' + (big ? ' big' : '') + '">' + stars(q.rating) + '<q>' + inline('\u201c' + q.text + '\u201d') + '</q>' +
@@ -227,6 +299,13 @@
           return { text: texts.join(' '), author: author, loc: loc, rating: rating };
         }).filter(q => q.text);
       }
+            if (c.variant === 'wall') {
+        const wcards = qs.map((q, i) => '<article class="wall-card"><div class="wall-top">' + stars(q.rating) + '<span class="wall-v">VERIFIED CLIENT // 0' + (i + 1) + '</span></div>' +
+          '<q>' + inline('“' + q.text + '”') + '</q><div class="wall-who"><span class="av">' + esc((q.author || '?').trim().charAt(0)) + '</span><div><b>' + esc(q.author) + '</b><small>' + esc(q.loc) + '</small></div></div></article>').join('');
+        return '<div class="wrap"><div class="wall-banner"><div><span class="eyebrow">' + esc(c.eyebrow || 'CLIENT TELEMETRY') + '</span><h2>' + inline(m.h2 || m.h1 || '') + '</h2>' +
+          (m.paras[0] ? '<p>' + inline(m.paras[0]) + '</p>' : '') + '</div><div class="wall-score"><div class="ws-num">5.0</div><div><div class="stars">★★★★★</div><small>Verified Local Reviews</small></div></div></div>' +
+          '<div class="wall-grid">' + wcards + '</div></div>';
+      }
       const body = c.variant === 'featured' && qs.length > 1
         ? '<div class="rev-featured">' + card(qs[0], true) + '<div class="stack">' + qs.slice(1).map(q => card(q)).join('') + '</div></div>'
         : '<div class="grid">' + qs.map(q => card(q)).join('') + '</div>';
@@ -236,9 +315,13 @@
   };
 
   BLOCKS.faq = {
-    label: 'FAQ', variants: ['two-col', 'accordion'],
+    label: 'FAQ', variants: ['two-col', 'accordion', 'numbered-grid'],
     render(m, c) {
       const list = (m.items || []).map((it, i) => '<details' + (i === 0 ? ' open' : '') + '><summary>' + inline(it.title) + '</summary><div class="ans">' + (it.paras || []).map(p => '<p>' + inline(p) + '</p>').join('') + '</div></details>').join('');
+            if (c.variant === 'numbered-grid') {
+        const gitems = (m.items || []).map((it, i) => '<details class="faq-ncard"' + (i < 2 ? ' open' : '') + '><summary><span class="fn-idx">Q.0' + (i + 1) + '</span><span class="fn-q">' + inline(it.title) + '</span></summary><div class="ans">' + (it.paras || []).map(p => '<p>' + inline(p) + '</p>').join('') + '</div></details>').join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="faq-wrap faq-ngrid">' + gitems + '</div></div>';
+      }
       if (c.variant === 'accordion') return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="faq-wrap one"><div>' + list + '</div></div></div>';
       return '<div class="wrap"><div class="faq-wrap"><div class="faq-side">' + (c.eyebrow ? '<span class="eyebrow">' + esc(c.eyebrow) + '</span>' : '') +
         '<h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + (m.paras[0] ? '<p style="color:var(--muted)">' + inline(m.paras[0]) + '</p>' : '') + '<p>' + callBtn(c) + '</p></div><div>' + list + '</div></div></div>';
@@ -246,29 +329,40 @@
   };
 
   BLOCKS.cta = {
-    label: 'Call to action', variants: ['box', 'band'],
+    label: 'Call to action', variants: ['box', 'band', 'split-ticket'],
     render(m, c) {
       const paras = m.paras.slice();
       const note = paras.length > 1 ? paras.pop() : '';
       const inner = '<div class="cta-inner"><h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + paras.map(p => '<p>' + inline(p) + '</p>').join('') +
         '<p style="margin-top:24px">' + callBtn(c) + '</p>' + (note ? '<div class="cta-note">' + inline(note) + '</div>' : '') + '</div>';
+            if (c.variant === 'split-ticket') {
+        return '<div class="wrap"><div class="cta-ticket"><div class="ct-left"><span class="ct-tag">DIRECT FIELD DISPATCH</span><h2>' + inline(m.h2 || m.h1 || '') + '</h2>' +
+          paras.map(p => '<p>' + inline(p) + '</p>').join('') + (note ? '<div class="ct-note">' + inline(note) + '</div>' : '') + '</div>' +
+          '<div class="ct-right"><span class="ct-label">IMMEDIATE DISPATCH LINE</span><a class="ct-phone" href="' + tel(c) + '">' + esc(c.phone) + '</a>' +
+          '<p>Speak directly with our local dispatch desk</p>' + callBtn(c) + '</div></div></div>';
+      }
       if (c.variant === 'band') return '<div class="cta-band">' + inner + '</div>';
       return '<div class="wrap"><div class="cta-box">' + inner + '</div></div>';
     }
   };
 
   BLOCKS.badges = {
-    label: 'Badges / credentials', variants: ['grid'],
+    label: 'Badges / credentials', variants: ['grid', 'seal-strip'],
     render(m, c) {
       let items = (m.items || []).map(i => ({ t: i.title, d: (i.paras || [])[0] || '' }));
       if (!items.length) items = (m.bullets || []).map(b => ({ t: b.label || b.text, d: b.label ? b.text : '' }));
+            if (c.variant === 'seal-strip') {
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="badges-seals">' + items.map((i, idx) =>
+          '<div class="seal-card"><div class="seal-emblem"><span class="ic">' + icon(pickIcon(i.t)) + '</span><small>CERT // 0' + (idx + 1) + '</small></div>' +
+          '<div class="seal-body"><b>' + inline(i.t) + '</b>' + (i.d ? '<span>' + inline(i.d) + '</span>' : '') + '</div></div>').join('') + '</div></div>';
+      }
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, m.paras[0]) + '<div class="badges">' + items.map(i =>
         '<div class="badge"><span class="ic">' + icon(pickIcon(i.t)) + '</span><b>' + inline(i.t) + '</b>' + (i.d ? '<span>' + inline(i.d) + '</span>' : '') + '</div>').join('') + '</div></div>';
     }
   };
 
   BLOCKS.area = {
-    label: 'Service area + map', variants: ['map'],
+    label: 'Service area + map', variants: ['map', 'radar'],
     render(m, c) {
       const allBullets = (m.bullets || []).concat(...(m.items || []).map(it => it.bullets || []));
       const tags = allBullets.map(b => '<span class="tag">' + inline((b.label ? b.label + ': ' : '') + b.text) + '</span>').join('');
@@ -276,6 +370,15 @@
         '<p style="margin:12px 0 0;font-size:.93rem;color:var(--muted)"><strong style="color:var(--heading)">' + inline(it.title) + ':</strong> ' + it.paras.map(p => inline(p)).join(' &middot; ') + '</p>'
       ).join('');
       const q = encodeURIComponent(c.nap.address || (c.brief.city + ', ' + c.brief.state));
+            if (c.variant === 'radar') {
+        const rtags = allBullets.map(b => '<span class="tag radar-tag">' + icon('pin') + ' ' + inline((b.label ? b.label + ': ' : '') + b.text) + '</span>').join('');
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, '') + '<div class="area-radar">' +
+          '<div class="radar-map"><div class="radar-bar"><span>LIVE COVERAGE RADAR</span><span>' + esc(c.brief.city + ', ' + c.brief.state) + '</span></div>' +
+          '<iframe loading="lazy" title="Service area map" src="https://www.google.com/maps?q=' + q + '&z=10&output=embed"></iframe></div>' +
+          '<div class="radar-board"><div class="radar-intro">' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') + '</div>' +
+          (rtags ? '<div class="tags radar-tags">' + rtags + '</div>' : '') + '<div class="radar-meta">' + itemParas + '</div>' +
+          '<div style="margin-top:20px">' + callBtn(c) + '</div></div></div></div>';
+      }
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, '') + '<div class="area"><div>' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') +
         (tags ? '<div class="tags">' + tags + '</div>' : '') + itemParas + '<p style="margin-top:22px">' + callBtn(c) + '</p></div>' +
         '<iframe loading="lazy" title="Service area map" src="https://www.google.com/maps?q=' + q + '&z=10&output=embed"></iframe></div></div>';
@@ -283,7 +386,7 @@
   };
 
   BLOCKS.gallery = {
-    label: 'Before / after', variants: ['cards', 'slider'],
+    label: 'Before / after', variants: ['cards', 'slider', 'filmstrip'],
     render(m, c) {
       const cards = c.galleryCards(m), pairs = c.galleryPairs(m);
       const metrics = (m.bullets || []).map(x => {
@@ -292,6 +395,12 @@
       }).join('');
       const strip = metrics ? '<div class="metrics">' + metrics + '</div>' : '';
       const h = head(c.eyebrow, m.h2 || m.h1, m.paras[0]);
+            if (c.variant === 'filmstrip' && cards.length) {
+        const plates = cards.map((k, i) => '<figure class="film-plate"><div class="fp-bar"><span>EVIDENCE PLATE // 0' + (i + 1) + '</span><span>VERIFIED</span></div>' +
+          '<img src="' + esc(c.src(k.img)) + '" alt="' + esc(k.alt || '') + '" loading="lazy">' +
+          (k.caption ? '<figcaption>' + inline(k.caption) + '</figcaption>' : '') + '</figure>').join('');
+        return '<div class="wrap">' + h + '<div class="film-grid">' + plates + '</div>' + strip + '</div>';
+      }
       let mode = c.variant;
       if (mode === 'slider' && !pairs.length) mode = 'cards';
       if (mode === 'cards' && !cards.length && pairs.length) mode = 'slider';

@@ -80,6 +80,42 @@
       variants: { hero: 'magazine', split: 'frame', cards: 'ledger', steps: 'spec', reviews: 'cards', faq: 'two-col', cta: 'band', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
       motion: { anim: 'fade', fx: 'none' },
       header: 'gridline', skin: 'atelier'
+    }    ,
+    blueprint: {
+      name: 'Precision Blueprint Dossier', badge: '14 unique section layouts',
+      desc: 'Every single section uses its own custom layout: console header, dossier hero, diagnostic split, bento mosaic services, horizontal pillars, spotlight local brief, evidence filmstrip, case study dossiers, winner-column matrix, chevron pipeline, certificate seals, review wall, radar map, 2-col Q&A grid, and split dispatch ticket.',
+      theme: { primary: '#0b1320', accent: '#0052cc', font: 'technical', radius: 8, density: 'balanced' },
+      variants: {
+        hero: 'dossier',
+        split: 'diagnostic',
+        cards: 'bento-mosaic',
+        steps: 'chevron',
+        reviews: 'wall',
+        faq: 'numbered-grid',
+        cta: 'split-ticket',
+        gallery: 'filmstrip',
+        badges: 'seal-strip',
+        area: 'radar',
+        table: 'matrix'
+      },
+      sectionVariants: {
+        'hero': 'dossier',
+        'problem-diagnosis': 'diagnostic',
+        'services-grid': 'bento-mosaic',
+        'why-us': 'pillars',
+        'local-context': 'spotlight',
+        'before-after': 'filmstrip',
+        'case-studies': 'dossier-cards',
+        'comparison-table': 'matrix',
+        'process': 'chevron',
+        'awards': 'seal-strip',
+        'testimonials': 'wall',
+        'service-area': 'radar',
+        'faq': 'numbered-grid',
+        'bottom-cta': 'split-ticket'
+      },
+      motion: { anim: 'rise', fx: 'blueprint' },
+      header: 'console', skin: 'blueprint'
     }
   };
   B.DENSITY = { compact: 52, balanced: 76, spacious: 100 };
