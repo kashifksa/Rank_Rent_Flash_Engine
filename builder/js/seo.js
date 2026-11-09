@@ -69,6 +69,7 @@
     const svcSec = secs.find(s => /service/.test(s.sid)), cards = [];
     if (svcSec) svcSec.md.split('\n').forEach(l => { const m = l.match(/^###\s+(.+)/); if (m) cards.push(clean(m[1])); });
     const canon = Object.values(D.pages).filter(p => p.type === 'service').map(p => new Set(ft(raw(p.title))));
+    try { const hi0 = (B.getModel('homepage', 'services-grid').items || [])[0]; if (hi0) canon.push(new Set(ft(raw(hi0.title)))); } catch (e) { /* homepage primary service card is canonical too */ }
     const bad = cards.filter(c => { const ct = new Set(ft(raw(c))); return !canon.some(k => [...ct].filter(x => k.has(x)).length / Math.max(ct.size, 1) >= 0.67); });
     add('service_cards', 'Service cards match canonical Phase 1 services (FIX 36)', bad.length ? 'warn' : 'pass', bad.length ? 'Not canonical: ' + bad.join('; ') : 'All cards map to a Phase 1 service.');
   }

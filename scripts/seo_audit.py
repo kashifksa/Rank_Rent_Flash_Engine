@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 seo_audit.py - Phase 1: primary keyword + density audit (WARN-only by default).

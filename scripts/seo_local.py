@@ -55,6 +55,14 @@ def canonical_services():
     for p in ta.get("pages", []):
         if p.get("page_type") == "service" and p.get("phase", 1) == 1:
             out.append(p.get("parent_service") or p.get("h1_title") or p.get("page_id", "").replace("-", " "))
+    # The primary service lives on the homepage (FIX 32), so its card is also canonical (it routes to #contact, not an inner page).
+    hp = ROOT / "page_content_homepage.md"
+    if hp.exists():
+        _, hbody = sa.split_front_matter(hp.read_text(encoding="utf-8", errors="ignore"))
+        grid = next((t for s, t in sa.split_sections(hbody) if "services-grid" in s), "")
+        first = [t for l, t in sa.headings(grid) if l == 3]
+        if first:
+            out.append(first[0])
     return out
 
 

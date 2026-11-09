@@ -27,3 +27,4 @@ check("road regex finds Route 251 and Perryville Road", len(sl.ROAD_RE.findall("
 check("landmark regex finds school and park", len({m.group(0) for m in sl.LANDMARK_RE.finditer("near Harlem High School and Rock River Park")}) >= 2)
 print("\nRESULT: " + ("ALL PASSED" if not fails else f"{len(fails)} FAILED"))
 sys.exit(1 if fails else 0)
+
