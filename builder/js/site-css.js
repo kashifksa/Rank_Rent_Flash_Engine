@@ -44,8 +44,9 @@ svg{width:1em;height:1em}
 /* header */
 .hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.hdr .logo{margin-right:clamp(16px, 2.5vw, 36px);flex-shrink:0}
 .logo{font-family:var(--font-h);font-weight:800;font-size:1.25rem;text-decoration:none;color:var(--heading)}
-.nav{display:flex;align-items:center;gap:22px}
+.nav{display:flex;align-items:center;gap:clamp(10px, 1.6vw, 20px);flex-wrap:nowrap}
 .nav>a,.dd>a{color:#334155;font-weight:600;font-size:14.5px;text-decoration:none;transition:color .15s}
 .nav>a:hover,.dd:hover>a{color:var(--accent)}
 .dd{position:relative;display:inline-flex}.dd>a{padding:14px 0;display:inline-flex;align-items:center;gap:5px}

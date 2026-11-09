@@ -256,9 +256,65 @@ window.BUILDER_PAGES_DATA = {
         "status": "geotagged",
         "filesize_kb": 79.3,
         "gps": "42.2713945, -89.093966"
+      },
+      {
+        "slot": "before-after-1",
+        "filename": "single-card-air-duct-trunk-rockford-residence.webp",
+        "alt_text": "Churchill Grove residential return air duct decontamination before and after",
+        "priority": 3,
+        "wp_media_id": null,
+        "geotag": true,
+        "status": "geotagged",
+        "file_size_kb": 92.6,
+        "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+      },
+      {
+        "slot": "before-after-2",
+        "filename": "single-card-dryer-vent-exhaust-rockford-residence.webp",
+        "alt_text": "Rolling Green laundry dryer vent lint hazard cleanout before and after",
+        "priority": 3,
+        "wp_media_id": null,
+        "geotag": true,
+        "status": "geotagged",
+        "file_size_kb": 72.4,
+        "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+      },
+      {
+        "slot": "before-after-3",
+        "filename": "single-card-blower-wheel-rockford-residence.webp",
+        "alt_text": "Midtown residential furnace blower wheel before and after sanitization",
+        "priority": 3,
+        "wp_media_id": null,
+        "geotag": true,
+        "status": "geotagged",
+        "file_size_kb": 94.9,
+        "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+      },
+      {
+        "slot": "logo",
+        "filename": "rockford-air-duct-pros-logo.webp",
+        "alt_text": "Rockford Air Duct Pros logo",
+        "priority": 0,
+        "wp_media_id": null,
+        "geotag": false,
+        "status": "generated",
+        "note": "Vector-built by scripts/make_logo.py (transparent WebP under 100 KB). Not a photo, no GPS needed."
+      },
+      {
+        "slot": "logo-light",
+        "filename": "rockford-air-duct-pros-logo-light.webp",
+        "alt_text": "Rockford Air Duct Pros logo for dark backgrounds",
+        "priority": 0,
+        "wp_media_id": null,
+        "geotag": false,
+        "status": "generated",
+        "note": "Vector-built by scripts/make_logo.py (transparent WebP under 100 KB). Not a photo, no GPS needed."
       }
     ],
-    "img_dir": "images/homepage"
+    "img_dir": "images/homepage",
+    "merged": {
+      "trust-bar": "* Locally Owned and Operated Since 2014\n* NADCA ASCS Certified Technicians\n* Same or Next-Day Dispatch Available Today\n* Written Scope of Work Approved Before Service\n* EPA Clean Air Guidelines Compliant"
+    }
   },
   "about": {
     "id": "about",
@@ -458,7 +514,8 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 94.2
       }
     ],
-    "img_dir": "images/about"
+    "img_dir": "images/about",
+    "merged": {}
   },
   "contact": {
     "id": "contact",
@@ -573,7 +630,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 87.2
       }
     ],
-    "img_dir": "images/contact"
+    "img_dir": "images/contact",
+    "merged": {
+      "04_trust_bar": "## Transparent Standards, Certified Equipment\n\nEvery inspection and remediation project follows strict National Air Duct Cleaners Association protocols to ensure verifiable indoor air safety.\n\n- **NADCA ASCS Certification:** All lead technicians hold active credentials adhering to the national ACR standard.\n- **Fiberoptic Borescope Proof:** Live video inspection recordings provided before and after mechanical cleaning.\n- **EPA Lead-Safe Containment:** Certified containment procedures protecting pre-1978 Rockford residences.\n- **Zero Aggressive Upselling:** Honest assessments without whole-house coupon traps or fabricated contamination claims."
+    }
   },
   "air-duct-cleaning-loves-park-il": {
     "id": "air-duct-cleaning-loves-park-il",
@@ -719,7 +779,8 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 88.9
       }
     ],
-    "img_dir": "images/air-duct-cleaning-loves-park-il"
+    "img_dir": "images/air-duct-cleaning-loves-park-il",
+    "merged": {}
   },
   "commercial-hvac-duct-cleaning": {
     "id": "commercial-hvac-duct-cleaning",
@@ -872,7 +933,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 93.8
       }
     ],
-    "img_dir": "images/commercial-hvac-duct-cleaning"
+    "img_dir": "images/commercial-hvac-duct-cleaning",
+    "merged": {
+      "02_trust_bar": "NADCA ASCS Certified \u2022 OSHA Compliant \u2022 Illinois Licensed & Insured \u2022 Commercial Grade Negative Air Containment"
+    }
   },
   "dryer-vent-cleaning-and-lint-removal": {
     "id": "dryer-vent-cleaning-and-lint-removal",
@@ -1025,7 +1089,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 89.9
       }
     ],
-    "img_dir": "images/dryer-vent-cleaning-and-lint-removal"
+    "img_dir": "images/dryer-vent-cleaning-and-lint-removal",
+    "merged": {
+      "02_trust_bar": "Certified Technicians \u2022 Fire Safety Compliant \u2022 Illinois Licensed & Insured \u2022 Complete Lint Extraction"
+    }
   },
   "negative-air-vacuum-trunk-line-cleaning": {
     "id": "negative-air-vacuum-trunk-line-cleaning",
@@ -1180,7 +1247,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 98.5
       }
     ],
-    "img_dir": "images/negative-air-vacuum-trunk-line-cleaning"
+    "img_dir": "images/negative-air-vacuum-trunk-line-cleaning",
+    "merged": {
+      "02_trust_bar": "* **NADCA ASCS Certified Technicians**\n* **5,000 CFM Negative Air HEPA Extraction**\n* **Zero Blowback Living Space Guarantee**\n* **Serving Winnebago County Since 2014**"
+    }
   },
   "sanitization-and-antimicrobial-fogging": {
     "id": "sanitization-and-antimicrobial-fogging",
@@ -1335,7 +1405,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 100.9
       }
     ],
-    "img_dir": "images/sanitization-and-antimicrobial-fogging"
+    "img_dir": "images/sanitization-and-antimicrobial-fogging",
+    "merged": {
+      "02_trust_bar": "* **EPA-Registered Botanical Solutions**\n* **Child and Pet Safe Organic Decontaminants**\n* **Hospital-Grade Microbial Neutralization**\n* **Serving Winnebago County Since 2014**"
+    }
   },
   "video-camera-ductwork-inspection": {
     "id": "video-camera-ductwork-inspection",
@@ -1490,7 +1563,10 @@ window.BUILDER_PAGES_DATA = {
         "file_size_kb": 100.9
       }
     ],
-    "img_dir": "images/video-camera-ductwork-inspection"
+    "img_dir": "images/video-camera-ductwork-inspection",
+    "merged": {
+      "02_trust_bar": "* **High-Definition Fiber-Optic Borescopes**\n* **Real-Time Client Monitor Verification**\n* **Zero Guesswork Photographic Reporting**\n* **Serving Winnebago County Since 2014**"
+    }
   },
   "how-to-spot-air-duct-cleaning-scams": {
     "id": "how-to-spot-air-duct-cleaning-scams",
@@ -1512,7 +1588,8 @@ window.BUILDER_PAGES_DATA = {
     },
     "meta": {},
     "images": [],
-    "img_dir": "images/homepage"
+    "img_dir": "images/homepage",
+    "merged": {}
   }
 };
 window.STITCH_TEMPLATES_HTML = {
