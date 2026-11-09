@@ -98,10 +98,26 @@
         },
         {
           "@type": "Question",
+          "name": "How does negative air cleaning improve furnace and air conditioner efficiency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Settled debris blankets internal sheet metal surfaces, increasing friction and static air pressure resistance against the furnace blower wheel. By removing compacted debris down to bare metal, negative air cleaning restores designed cubic feet per minute airflow, reducing equipment run times and cutting seasonal utility bills."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "How long does a complete negative air trunk cleaning appointment take?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "A comprehensive negative air cleaning appointment for an average Rockford single-family home typically takes three to four hours. This timeframe allows our two-technician crew to seal all registers, establish negative vacuum containment, pneumatically sweep every supply and return branch, and complete visual camera inspection passes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should Rockford homeowners schedule negative air trunk cleaning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NADCA recommends whole-system negative air cleaning every three to five years under normal residential conditions. Homes with shedding pets, recent construction or remodeling projects, family members with respiratory sensitivities, or older historic Rockford homes should consider inspection every two to three years."
           }
         }
       ]

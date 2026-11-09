@@ -43,7 +43,7 @@ The localized microclimate of the Rock River valley creates pronounced seasonal 
 Providing premier air duct cleaning loves park il residents trust, our technicians eliminate stubborn contaminants from central heating and cooling networks with commercial-grade equipment.
 
 ### Residential Air Duct Cleaning
-Full supply, return, and trunk cleaning for Loves Park homes using NADCA source removal, with negative air machines sized for mid-century ranch and split-level layouts.
+Full supply, return, and trunk cleaning for Loves Park homes using NADCA source removal, with [negative air machines](negative-air-vacuum-trunk-line-cleaning.html) sized for mid-century ranch and split-level layouts.
 
 ### Commercial HVAC Duct Cleaning
 After-hours cleaning of rooftop units, trunk lines, and VAV boxes for Loves Park offices, clinics, and retail along Perryville Road, with camera-verified results shared afterward.
@@ -55,10 +55,10 @@ Rotary brush lint removal clears long dryer exhaust runs in Loves Park homes, re
 Five thousand CFM negative air holds ductwork under constant vacuum while brushes loosen debris, sending dust into sealed collection instead of Loves Park living spaces.
 
 ### Video Camera Ductwork Inspection
-Borescope camera passes before and after cleaning show Loves Park homeowners the interior of every trunk line, with recorded footage confirming the contaminants are gone.
+[Borescope camera](video-camera-ductwork-inspection.html) passes before and after cleaning show Loves Park homeowners the interior of every trunk line, with recorded footage confirming the contaminants are gone.
 
 ### Sanitization and Antimicrobial Fogging
-Botanical antimicrobial fog follows mechanical scrubbing to neutralize odors, pet dander, and mold spores in Loves Park basement plenums without harsh chemical residues left behind.
+[Botanical antimicrobial](sanitization-and-antimicrobial-fogging.html) fog follows mechanical scrubbing to neutralize odors, pet dander, and mold spores in Loves Park basement plenums without harsh chemical residues left behind.
 
 <!-- SECTION: 04_local_proof -->
 ## What Loves Park Customers Are Saying

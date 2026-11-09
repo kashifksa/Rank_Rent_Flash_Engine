@@ -40,10 +40,10 @@ Direct Dispatch: (815) 555-0142 | NADCA ASCS Certified Diagnostics
 <!-- ========================================================================= -->
 ## Our Rockford Video Camera Ductwork Inspection Solutions
 
-Our commercial optical camera systems provide full-spectrum diagnostic imaging across every inch of your concealed heating and cooling ventilation infrastructure.
+Our commercial optical camera systems provide full-spectrum diagnostic imaging across every inch of your concealed heating and cooling ventilation infrastructure. When footage shows heavy buildup, [negative air trunk line cleaning](negative-air-vacuum-trunk-line-cleaning.html) is the usual next step.
 
 ### Pre-Cleaning Diagnostic Camera Traversals
-Our high-resolution inspection cameras travel through supply and return trunks to identify internal particulate depth, biological colonization, and mechanical obstructions. We project real-time digital video onto portable monitors, allowing property owners to examine actual interior conditions and determine whether comprehensive mechanical source removal or specialized antimicrobial sanitization is genuinely warranted.
+Our high-resolution inspection cameras travel through supply and return trunks to identify internal particulate depth, biological colonization, and mechanical obstructions. We project real-time digital video onto portable monitors, allowing property owners to examine actual interior conditions and determine whether comprehensive mechanical source removal or specialized antimicrobial [sanitization](sanitization-and-antimicrobial-fogging.html) is genuinely warranted.
 
 Schedule Diagnostic Camera Inspection
 

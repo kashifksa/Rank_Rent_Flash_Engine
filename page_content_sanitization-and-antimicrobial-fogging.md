@@ -40,7 +40,7 @@ Direct Dispatch: (815) 555-0142 | EPA-Registered Botanical Standards
 <!-- ========================================================================= -->
 ## Our Rockford Air Duct Sanitization and Antimicrobial Fogging Solutions
 
-Our botanical antimicrobial treatments treat the entire interior surface area of your HVAC network, neutralizing active pathogens and protecting bare metal ductwork from persistent biological colonization.
+Our botanical antimicrobial treatments treat the entire interior surface area of your HVAC network, neutralizing active pathogens and protecting bare metal ductwork from persistent biological colonization. A [video camera ductwork inspection](video-camera-ductwork-inspection.html) confirms the results, and [dryer vent cleaning](dryer-vent-cleaning-and-lint-removal.html) covers the laundry exhaust line.
 
 ### Whole-System Botanical Fogging Treatment
 We disperse an ultra-fine botanical aerosol mist throughout your entire central supply and return duct system. This hospital-grade antimicrobial mist penetrates inaccessible branch corners, coating interior sheet metal and neutralizing active airborne pathogens, volatile organic compounds, and fungal spores without leaving sticky chemical films or emitting hazardous synthetic fumes into your living areas.

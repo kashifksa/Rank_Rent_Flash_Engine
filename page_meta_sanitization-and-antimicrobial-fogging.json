@@ -103,6 +103,22 @@
             "@type": "Answer",
             "text": "No. Because our botanical disinfectants are non-toxic and non-corrosive, you and your pets may remain comfortably inside your home during the fogging procedure. Technicians manage airflow circulation so the mist remains confined within the duct system until dwell times are achieved."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should Rockford homeowners have their air ducts sanitized?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most Rockford homeowners benefit from duct sanitization every three to five years in conjunction with comprehensive mechanical cleaning. However, households with severe allergy sufferers, homes recovering from water leaks, or properties with multiple shedding pets may choose annual or biennial treatments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will antimicrobial fogging damage electronic HVAC controls or duct insulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Our commercial ULV foggers generate a dry mist with droplet sizes between ten and twenty microns. This microscopic particle size ensures thorough surface contact without pooling liquid or wetting sensitive electrical sensors, fiberglass duct board, or external blower wiring."
+          }
         }
       ]
     }

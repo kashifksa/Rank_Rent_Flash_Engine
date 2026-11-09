@@ -40,7 +40,7 @@ Direct Dispatch: (815) 555-0142 | Licensed and Insured in Illinois
 <!-- ========================================================================= -->
 ## Our Rockford Negative Air Trunk Line Cleaning Solutions
 
-Our dedicated negative air equipment provides hospital-grade source removal across all primary components of your central heating and cooling ventilation network.
+Our dedicated negative air equipment provides hospital-grade source removal across all primary components of your central heating and cooling ventilation network. Once the trunk lines are clean, [antimicrobial fogging](sanitization-and-antimicrobial-fogging.html) can treat the surfaces to control odors and microbial growth.
 
 ### Main Supply Trunk Negative Air Extraction
 Commercial 5,000 CFM negative pressure is applied directly to central supply trunks, capturing all dislodged dust, pet dander, and renovation grit. Pneumatic forward-sweeping air whips propel heavy debris directly toward sealed HEPA collection chambers without allowing airborne dust to escape into living areas.
@@ -154,7 +154,7 @@ Yes. NADCA ACR 2021 standards require cutting temporary access ports into the ma
 Settled debris blankets internal sheet metal surfaces, increasing friction and static air pressure resistance against the furnace blower wheel. By removing compacted debris down to bare metal, negative air cleaning restores designed cubic feet per minute airflow, reducing equipment run times and cutting seasonal utility bills.
 
 ### How long does a complete negative air trunk cleaning appointment take?
-A comprehensive negative air cleaning appointment for an average Rockford single-family home typically takes three to four hours. This timeframe allows our two-technician crew to seal all registers, establish negative vacuum containment, pneumatically sweep every supply and return branch, and complete visual camera inspection passes.
+A comprehensive negative air cleaning appointment for an average Rockford single-family home typically takes three to four hours. This timeframe allows our two-technician crew to seal all registers, establish negative vacuum containment, pneumatically sweep every supply and return branch, and complete visual [camera inspection](video-camera-ductwork-inspection.html) passes.
 
 ### How often should Rockford homeowners schedule negative air trunk cleaning?
 NADCA recommends whole-system negative air cleaning every three to five years under normal residential conditions. Homes with shedding pets, recent construction or remodeling projects, family members with respiratory sensitivities, or older historic Rockford homes should consider inspection every two to three years.

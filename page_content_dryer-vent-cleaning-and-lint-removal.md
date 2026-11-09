@@ -33,7 +33,7 @@ Certified Technicians • Fire Safety Compliant • Illinois Licensed & Insured 
 <!-- SECTION: 03_services_grid -->
 ## Our Rockford Dryer Vent Cleaning Solutions
 
-Homeowners and property managers across Winnebago County trust our dedicated dryer vent services to prevent residential fires and extend appliance lifespan. When scheduling dryer vent cleaning rockford il residents count on our rotary brush equipment to clear even the longest exhaust runs.
+Homeowners and property managers across Winnebago County trust our dedicated dryer vent services to prevent residential fires and extend appliance lifespan. When scheduling dryer vent cleaning rockford il residents count on our rotary brush equipment to clear even the longest exhaust runs. Homes with long exhaust runs often pair this work with [negative air duct cleaning](negative-air-vacuum-trunk-line-cleaning.html) or a [video camera ductwork inspection](video-camera-ductwork-inspection.html).
 
 ### Residential Dryer Vent Lint Extraction
 We remove dangerous lint buildup from residential clothes dryer exhaust ducts using rotary brush agitation and high-suction vacuum extraction. Our certified technicians thoroughly clean rigid transitions from the laundry room wall to exterior exhaust hoods, eliminating appliance overheating and restoring efficient drying cycles across Rockford homes.

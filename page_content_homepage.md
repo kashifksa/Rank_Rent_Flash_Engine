@@ -49,7 +49,7 @@ Schedule Inspection | Explore Core Services
 <!-- ========================================================================= -->
 ## Professional Air Duct Cleaning in Rockford
 
-Professional air duct cleaning in Rockford is a comprehensive mechanical decontamination of supply and return ductwork using commercial negative air pressure vacuum equipment running at five thousand CFM and motorized agitation brushes. This certified source removal process eliminates accumulated drywall dust, pet dander, furnace soot, and biological mold spores without releasing debris back into your indoor living spaces.
+Professional air duct cleaning in Rockford is a comprehensive mechanical decontamination of supply and return ductwork using commercial [negative air](negative-air-vacuum-trunk-line-cleaning.html) pressure vacuum equipment running at five thousand CFM and motorized agitation brushes. This certified source removal process eliminates accumulated drywall dust, pet dander, furnace soot, and biological mold spores without releasing debris back into your indoor living spaces.
 
 Every residential and commercial heating and cooling system cycles thousands of cubic feet of air through central ductwork every hour. Over years of seasonal temperature swings, moisture condensation, and routine living activities, galvanized sheet metal trunks accumulate heavy dust blankets that standard furnace filters cannot prevent. Our locally based technicians provide certified source removal, upfront written scopes of work, hospital-grade containment protocols, and transparent fiberoptic camera verification for properties throughout Winnebago County.
 
@@ -83,7 +83,7 @@ Most budget operators rely on standard portable shop vacuums that lack sufficien
 Unlike discount coupon contractors using shop vacs, our heavy-duty HEPA filtration units capture 99.97 percent of airborne particles down to 0.3 microns. Contaminants dislodged by mechanical brushes are drawn directly into sealed industrial hoses routed away from your living rooms, bedrooms, and finished basements.
 
 ### EPA-Registered Botanical Sanitization
-Following thorough mechanical scrubbing, we apply an EPA-registered, thyme-based botanical antimicrobial fog that neutralizes biological mold spores and bacteria on contact without synthetic VOCs, harsh bleaches, or toxic chemical residue.
+Following thorough mechanical scrubbing, we apply an EPA-registered, thyme-based [botanical antimicrobial](sanitization-and-antimicrobial-fogging.html) fog that neutralizes biological mold spores and bacteria on contact without synthetic VOCs, harsh bleaches, or toxic chemical residue.
 * Illinois and Iowa EPA Code 455B Compliant: Zero synthetic toxic residues left in living spaces.
 * NADCA ACR-2021 Standard Verified: Mechanical agitation conducted prior to antimicrobial misting.
 * Before and After Endoscope Video Audit: Direct visual proof of clean galvanized bare metal interior.
@@ -131,7 +131,7 @@ Three service calls from Winnebago County homes, showing the problem we found, w
 ### Rolling Green: Drywall Dust After a Kitchen Remodel
 **Neighborhood:** Rolling Green, Rockford
 **Problem:** A kitchen remodel had filled the supply and return ducts of this ranch home with fine drywall dust throughout the system.
-**Solution:** We ran source removal under continuous negative pressure, then finished with a before and after camera inspection of the ductwork.
+**Solution:** We ran source removal under continuous negative pressure, then finished with a before and after [camera inspection](video-camera-ductwork-inspection.html) of the ductwork.
 **Result:** The camera pass showed clean galvanized metal from end to end, and the owners could see the finished result on screen.
 
 ### Edgewater: Burning Odor Near the Laundry Room

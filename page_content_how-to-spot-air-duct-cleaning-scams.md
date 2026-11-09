@@ -76,7 +76,7 @@ A legitimate air duct cleaning follows the NADCA ACR 2013 standard for source re
 
 **Step 1: Pre-cleaning camera inspection.** A flexible camera is inserted into the supply and return trunks before any equipment is connected. You see the interior of your ductwork on a screen before cleaning begins. This documents the baseline condition and identifies any structural issues.
 
-**Step 2: Negative air machine connection.** A commercial-grade vacuum with HEPA filtration is connected to your main supply trunk. This creates negative air pressure inside the duct system, meaning all air and dislodged debris flows toward the vacuum rather than into your living space.
+**Step 2: Negative air machine connection.** A commercial-grade vacuum with HEPA filtration is connected to your main supply trunk. This creates [negative air](negative-air-vacuum-trunk-line-cleaning.html) pressure inside the duct system, meaning all air and dislodged debris flows toward the vacuum rather than into your living space.
 
 **Step 3: Agitation and source removal.** Technicians move branch by branch through every supply and return run, using rotating brushes and compressed air tools to dislodge material from duct walls while the negative air machine maintains suction throughout the system.
 
@@ -114,7 +114,7 @@ No. **Legitimate mold identification requires laboratory analysis** of a physica
 
 ### How do I know if the duct cleaning I already had done was actually completed properly?
 
-If you did not receive before-and-after camera documentation, you have no verifiable proof that source removal was performed. **The only reliable way to verify a past cleaning** is to schedule a new camera inspection, which a legitimate company will perform. If interior duct surfaces still show heavy particulate adhesion to walls, the previous cleaning did not meet NADCA source removal standards.
+If you did not receive before-and-after camera documentation, you have no verifiable proof that source removal was performed. **The only reliable way to verify a past cleaning** is to schedule a new [camera inspection](video-camera-ductwork-inspection.html), which a legitimate company will perform. If interior duct surfaces still show heavy particulate adhesion to walls, the previous cleaning did not meet NADCA source removal standards.
 
 <!-- SECTION: 08_conclusion_cta -->
 ## Get Expert Air Duct Cleaning Help in Rockford

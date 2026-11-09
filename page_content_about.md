@@ -22,7 +22,7 @@ published: false
 <!-- SECTION: 01_identity_hook -->
 # About Rockford Air Duct Pros - Air Duct Cleaning Experts in Rockford, IL
 
-**Rockford Air Duct Pros has served Winnebago County homeowners** with certified residential and commercial ventilation cleaning since 2014. As an established rockford air duct cleaning company, our work follows one founding principle: deliver verifiable indoor air improvements using documented fiberoptic camera inspections before any work begins and after all debris is removed. We never use high-pressure upselling tactics or whole-house coupon gimmicks.
+**Rockford Air Duct Pros has served Winnebago County homeowners** with certified residential and commercial ventilation cleaning since 2014. As an established rockford air duct cleaning company, our work follows one founding principle: deliver verifiable indoor air improvements using documented fiberoptic [camera inspections](video-camera-ductwork-inspection.html) before any work begins and after all debris is removed. We never use high-pressure upselling tactics or whole-house coupon gimmicks.
 
 Serving Rockford Since 2014 | Licensed and Insured in Illinois | Call (815) 555-0142
 
@@ -31,7 +31,7 @@ Serving Rockford Since 2014 | Licensed and Insured in Illinois | Call (815) 555-
 
 **Rockford Air Duct Pros was established in 2014** after founder Marcus Miller spent years inspecting regional heating and cooling installations throughout northern Illinois. Marcus repeatedly encountered frustrated homeowners who paid for discount duct cleanings only to discover blow-and-go operators had merely vacuumed surface registers while leaving main trunk lines packed with dust, drywall grit, and accumulated pet dander. He founded [Rockford Air Duct Pros](/) to provide genuine, NADCA-standard remediation with unedited photo proof.
 
-During our first two seasons, our team concentrated on historic neighborhoods along the Rock River, including Churchill Grove and Highland Park. These classic brick bungalows and mid-century ranches feature heavy-gauge galvanized sheet metal ductwork that requires high-velocity negative air extraction rather than weak portable shop vacuums. By solving chronic allergy issues and furnace airflow restrictions in older homes, our local reputation grew steadily through homeowner referrals and community recommendations.
+During our first two seasons, our team concentrated on historic neighborhoods along the Rock River, including Churchill Grove and Highland Park. These classic brick bungalows and mid-century ranches feature heavy-gauge galvanized sheet metal ductwork that requires high-velocity [negative air](negative-air-vacuum-trunk-line-cleaning.html) extraction rather than weak portable shop vacuums. By solving chronic allergy issues and furnace airflow restrictions in older homes, our local reputation grew steadily through homeowner referrals and community recommendations.
 
 | Operational Milestone | Year Achieved |
 |---|---|
