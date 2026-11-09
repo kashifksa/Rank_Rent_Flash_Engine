@@ -92,39 +92,57 @@ def discover_project_pages():
     brief = load_json_safe(BASE_DIR / "master_brief.json")
     topical = load_json_safe(BASE_DIR / "topical_authority.json")
     nap = brief.get("nap", {})
-    company_name = nap.get("company_name", brief.get("project_name", "Rockford Air Duct Pros"))
-    phone = nap.get("phone", "(815) 555-0142")
-    default_city = brief.get("city", "Rockford")
+    company_name = nap.get("company_name", brief.get("project_name", ""))
+    phone = nap.get("phone", "")
+    default_city = brief.get("city", "")
+    primary_svc_slug = f"residential-{brief.get('niche', '').lower().replace(' ', '-')}"
 
     default_pages = [
-        {"id": "homepage", "title": f"Homepage ({default_city} Primary Hub)", "slug": "/", "type": "homepage"},
+        {"id": "homepage", "title": f"Homepage ({default_city} Primary Hub)" if default_city else "Homepage", "slug": "/", "type": "homepage"},
         {"id": "about", "title": "About Us", "slug": "about", "type": "about"},
         {"id": "contact", "title": "Contact Us", "slug": "contact", "type": "contact"},
-        {"id": "air-duct-cleaning-loves-park-il", "title": "Loves Park Location Page", "slug": "air-duct-cleaning-loves-park-il", "type": "location"},
-        {"id": "commercial-hvac-duct-cleaning", "title": "Commercial HVAC Duct Cleaning", "slug": "commercial-hvac-duct-cleaning", "type": "service"},
-        {"id": "dryer-vent-cleaning-and-lint-removal", "title": "Dryer Vent Cleaning & Lint Removal", "slug": "dryer-vent-cleaning-and-lint-removal", "type": "service"},
-        {"id": "negative-air-vacuum-trunk-line-cleaning", "title": "Negative Air Vacuum Trunk Line Cleaning", "slug": "negative-air-vacuum-trunk-line-cleaning", "type": "service"},
-        {"id": "sanitization-and-antimicrobial-fogging", "title": "Air Duct Sanitization & Antimicrobial Fogging", "slug": "sanitization-and-antimicrobial-fogging", "type": "service"},
-        {"id": "video-camera-ductwork-inspection", "title": "Video Camera Ductwork Inspection", "slug": "video-camera-ductwork-inspection", "type": "service"},
-        {"id": "how-to-spot-air-duct-cleaning-scams", "title": "Blog: How to Spot Air Duct Cleaning Scams", "slug": "how-to-spot-air-duct-cleaning-scams", "type": "blog"},
     ]
 
     pages_by_id = {p["id"]: p for p in default_pages}
 
     for tp in topical.get("pages", []):
         pid = tp.get("page_id")
-        if not pid or pid == "residential-air-duct-cleaning":
+        if not pid or pid in ("residential-air-duct-cleaning", primary_svc_slug):
             continue  # FIX 32
         md_file = BASE_DIR / f"page_content_{pid}.md"
         if md_file.exists() and pid not in pages_by_id:
+            ptype = tp.get("page_type", "service")
+            raw_title = tp.get("parent_service") or tp.get("h1_title") or tp.get("title") or pid.replace("-", " ").title()
+            if ptype == "location" and tp.get("city") and "location" not in raw_title.lower():
+                raw_title = f"{tp.get('city')} Location Page"
             pages_by_id[pid] = {
                 "id": pid,
-                "title": tp.get("parent_service") or tp.get("h1_title") or pid.replace("-", " ").title(),
+                "title": raw_title,
                 "slug": "/" if pid == "homepage" else pid,
-                "type": tp.get("page_type", "service"),
+                "type": ptype,
                 "city": tp.get("city", default_city),
                 "keyword": tp.get("target_keyword", ""),
             }
+
+    # Also discover any page_content_*.md on disk not listed in topical_authority.json
+    for md_file in sorted(BASE_DIR.glob("page_content_*.md")):
+        pid = md_file.stem.replace("page_content_", "")
+        if not pid or pid in pages_by_id or pid in ("residential-air-duct-cleaning", primary_svc_slug):
+            continue
+        meta = load_json_safe(BASE_DIR / f"page_meta_{pid}.json")
+        md_head = md_file.read_text(encoding="utf-8", errors="ignore")[:1200]
+        fm_type = re.search(r'^page_type:\s*["\']?([a-z_]+)["\']?\s*$', md_head, re.M)
+        fm_title = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', md_head, re.M)
+        ptype = meta.get("page_type") or (fm_type.group(1).strip() if fm_type else "service")
+        title = meta.get("h1") or (fm_title.group(1).split("|")[0].strip() if fm_title else pid.replace("-", " ").title())
+        pages_by_id[pid] = {
+            "id": pid,
+            "title": title,
+            "slug": "/" if pid == "homepage" else pid,
+            "type": ptype,
+            "city": meta.get("city", default_city),
+            "keyword": meta.get("target_keyword", ""),
+        }
 
     return list(pages_by_id.values()), company_name, phone, default_city
 

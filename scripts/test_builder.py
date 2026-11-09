@@ -70,6 +70,7 @@ def main():
           const key = B.exportPage('homepage');
           B.setTemplate('cornerstone');
           return { bad, combos: rows.length, cards: (home.match(/class="dba-card"/g) || []).length,
+                   revs: (home.match(/class="card rev/g) || []).length, areaTags: (home.match(/class="tag"/g) || []).length,
                    cases: (key.match(/class="ba-case"/g) || []).length, anim: /data-anim="rise"/.test(home), fx: /data-fx="airflow"/.test(home),
                    caseStudies: home.includes('id="sec-case-studies"') };
         }""")
@@ -78,17 +79,16 @@ def main():
         tc = pg.evaluate("""() => { const B = Builder, lum = h => { h = h.replace('#',''); if (h.length === 3) h = h.split('').map(c => c + c).join('');
             const c = [0,2,4].map(i => parseInt(h.substr(i,2),16)/255).map(v => v <= .03928 ? v/12.92 : Math.pow((v+.055)/1.055, 2.4)); return .2126*c[0]+.7152*c[1]+.0722*c[2]; };
           const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); };
-          const out = {}; Object.keys(B.TEMPLATES).forEach(k => { const t = B.TEMPLATES[k], css = (B.SKINS || {})[t.skin] || '';
-            const m = css.match(/\.btn-primary\{color:(#[0-9a-fA-F]{3,6})/), txt = m ? m[1] : '#ffffff';
+          const out = {}; Object.keys(B.TEMPLATES).forEach(k => { B.setTemplate(k); const t = B.TEMPLATES[k], css = (B.SKINS || {})[t.skin] || '', vars = B.cssVars();
+            const mv = vars.match(/--btn-fg:(#[0-9a-fA-F]{3,6})/), ms = css.match(/\.btn-primary\{color:(#[0-9a-fA-F]{3,6})/), txt = ms ? ms[1] : (mv ? mv[1] : '#ffffff');
             out[k] = { skin: t.skin, header: t.header, skinOk: !t.skin || css.length > 50, hdrOk: ['classic','topbar','dark'].indexOf(t.header || 'classic') > -1, ratio: +ratio(t.theme.accent, txt).toFixed(2) }; });
-          return out; }""")
+          B.setTemplate('cornerstone'); return out; }""")
         bad_t = [k for k, v in tc.items() if not v["skinOk"] or not v["hdrOk"]]
         check("every template has a valid skin and header variant", not bad_t, bad_t)
-        low = {k: v["ratio"] for k, v in tc.items() if v["skin"] and v["ratio"] < 4.5}
-        check("templates with their own skin keep the primary button readable (>= 4.5:1)", not low, low)
-        legacy = {k: v["ratio"] for k, v in tc.items() if not v["skin"] and v["ratio"] < 4.5}
-        if legacy:
-            print("NOTE  legacy templates below 4.5:1 button contrast (white text on accent): " + str(legacy))
+        low = {k: v["ratio"] for k, v in tc.items() if v["ratio"] < 4.5}
+        check("every template keeps the primary button readable (>= 4.5:1)", not low, tc)
+        check("Homepage customer reviews render (>= 3 review cards)", r["revs"] >= 3, r["revs"])
+        check("Homepage service area tags render (>= 3 tags)", r["areaTags"] >= 3, r["areaTags"])
         check("Before/After: 3 comparison cards (Cornerstone)", r["cards"] == 3, r["cards"])
         check("Before/After: wipe slider cases (Keystone)", r["cases"] >= 1, r["cases"])
         check("animation attribute exported (Cornerstone = rise)", r["anim"])

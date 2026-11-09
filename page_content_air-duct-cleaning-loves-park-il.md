@@ -40,7 +40,7 @@ The localized microclimate of the Rock River valley creates pronounced seasonal 
 <!-- SECTION: 03_services_overview -->
 ## Our Air Duct Cleaning Services in Loves Park
 
-Providing premier air duct cleaning loves park il residents trust, our technicians eliminate stubborn contaminants from central heating and cooling networks with commercial-grade equipment.
+Providing certified air duct cleaning loves park il residents trust, our technicians eliminate stubborn contaminants from central heating and cooling networks with commercial-grade equipment.
 
 ### Residential Air Duct Cleaning
 Full supply, return, and trunk cleaning for Loves Park homes using NADCA source removal, with [negative air machines](negative-air-vacuum-trunk-line-cleaning.html) sized for mid-century ranch and split-level layouts.

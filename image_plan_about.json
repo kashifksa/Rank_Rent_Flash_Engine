@@ -23,8 +23,8 @@
       "priority": 2,
       "wp_media_id": null,
       "geotag": true,
-      "status": "un-geotagged",
-      "filesize_kb": 97.8,
+      "status": "geotagged",
+      "filesize_kb": 89.9,
       "gps": "42.2713945, -89.093966",
       "file_size_kb": 94.2
     }

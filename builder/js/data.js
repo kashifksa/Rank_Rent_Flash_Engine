@@ -1146,8 +1146,8 @@ window.BUILDER_DATA = {
      "alt_text": "Air duct technician cleaning supply register in Rolling Green neighborhood, Rockford, IL",
      "geotag": true,
      "exists": true,
-     "kb": 85.4,
-     "gps": false
+     "kb": 82.3,
+     "gps": true
     },
     {
      "slot": "equipment-negative-air",
@@ -1457,8 +1457,8 @@ window.BUILDER_DATA = {
      "alt_text": "Rockford Air Duct Pros team at Rockford community event in Winnebago County, IL",
      "geotag": true,
      "exists": true,
-     "kb": 94.4,
-     "gps": false
+     "kb": 89.9,
+     "gps": true
     }
    ],
    "img_dir": "images/about"
@@ -1597,7 +1597,7 @@ window.BUILDER_DATA = {
    "sections": {
     "01_hero": "# Air Duct Cleaning in Loves Park, IL\n\nWhen searching for professional air duct cleaning loves park il homeowners turn to [Rockford Air Duct Pros](/) for certified ventilation remediation across Winnebago County. [Rockford Air Duct Pros](/) provides complete source removal, negative air vacuum extraction, and fiberoptic camera inspections throughout Loves Park neighborhoods along the Rock River corridor.\n\nLoves Park homeowners receive punctual local dispatch, NADCA-standard cleanliness, and transparent before-and-after photo verification on every residential project.\n\nDirect Dispatch: (815) 555-0142 | Licensed and Insured in Illinois",
     "02_localized_intro": "## Air Duct Cleaning Services for Loves Park Residents\n\n**Loves Park residential neighborhoods** extend along the north bank of the Rock River from the Harlem High School corridor west toward Perryville Road. Most homes throughout these established subdivisions were constructed between 1955 and 1982. This era of construction featured rigid galvanized sheet metal supply trunks and narrow return air cavities that trap settled dust, pet dander, and furnace soot over decades of continuous heating and cooling.\n\nThe localized microclimate of the Rock River valley creates pronounced seasonal humidity swings that promote interior duct condensation and elevated mold risks in finished basement plenums. When homeowners replace older windows with airtight modern glass without rebalancing forced-air registers, moisture-laden air often lingers in ductwork, accelerating allergen accumulation.\n\n[Rockford Air Duct Pros](/) has actively serviced Loves Park residences since 2014. Our technicians understand local home architectural styles and arrive with specialized agitation equipment that reaches every branch duct without causing cosmetic damage to walls or ceilings.",
-    "03_services_overview": "## Our Air Duct Cleaning Services in Loves Park\n\nProviding premier air duct cleaning loves park il residents trust, our technicians eliminate stubborn contaminants from central heating and cooling networks with commercial-grade equipment.\n\n### Residential Air Duct Cleaning\nFull supply, return, and trunk cleaning for Loves Park homes using NADCA source removal, with [negative air machines](negative-air-vacuum-trunk-line-cleaning.html) sized for mid-century ranch and split-level layouts.\n\n### Commercial HVAC Duct Cleaning\nAfter-hours cleaning of rooftop units, trunk lines, and VAV boxes for Loves Park offices, clinics, and retail along Perryville Road, with camera-verified results shared afterward.\n\n### Dryer Vent Cleaning and Lint Removal\nRotary brush lint removal clears long dryer exhaust runs in Loves Park homes, restores airflow, and cuts the fire risk from lint packed inside ducting.\n\n### Negative Air Vacuum Trunk Line Cleaning\nFive thousand CFM negative air holds ductwork under constant vacuum while brushes loosen debris, sending dust into sealed collection instead of Loves Park living spaces.\n\n### Video Camera Ductwork Inspection\n[Borescope camera](video-camera-ductwork-inspection.html) passes before and after cleaning show Loves Park homeowners the interior of every trunk line, with recorded footage confirming the contaminants are gone.\n\n### Sanitization and Antimicrobial Fogging\n[Botanical antimicrobial](sanitization-and-antimicrobial-fogging.html) fog follows mechanical scrubbing to neutralize odors, pet dander, and mold spores in Loves Park basement plenums without harsh chemical residues left behind.",
+    "03_services_overview": "## Our Air Duct Cleaning Services in Loves Park\n\nProviding certified air duct cleaning loves park il residents trust, our technicians eliminate stubborn contaminants from central heating and cooling networks with commercial-grade equipment.\n\n### Residential Air Duct Cleaning\nFull supply, return, and trunk cleaning for Loves Park homes using NADCA source removal, with [negative air machines](negative-air-vacuum-trunk-line-cleaning.html) sized for mid-century ranch and split-level layouts.\n\n### Commercial HVAC Duct Cleaning\nAfter-hours cleaning of rooftop units, trunk lines, and VAV boxes for Loves Park offices, clinics, and retail along Perryville Road, with camera-verified results shared afterward.\n\n### Dryer Vent Cleaning and Lint Removal\nRotary brush lint removal clears long dryer exhaust runs in Loves Park homes, restores airflow, and cuts the fire risk from lint packed inside ducting.\n\n### Negative Air Vacuum Trunk Line Cleaning\nFive thousand CFM negative air holds ductwork under constant vacuum while brushes loosen debris, sending dust into sealed collection instead of Loves Park living spaces.\n\n### Video Camera Ductwork Inspection\n[Borescope camera](video-camera-ductwork-inspection.html) passes before and after cleaning show Loves Park homeowners the interior of every trunk line, with recorded footage confirming the contaminants are gone.\n\n### Sanitization and Antimicrobial Fogging\n[Botanical antimicrobial](sanitization-and-antimicrobial-fogging.html) fog follows mechanical scrubbing to neutralize odors, pet dander, and mold spores in Loves Park basement plenums without harsh chemical residues left behind.",
     "04_local_proof": "## What Loves Park Customers Are Saying\n\nLocal homeowners across Loves Park depend on our honest service, punctual arrival, and documented camera verification.\n\n> \"Our home is on the Loves Park side of the river, a 1967 split-level near Machesney Park Road. The ducts were original and visibly dusty at every register. The crew did a camera pass first, then cleaned the full trunk system cleanly.\"\n> - Tom R., North Loves Park\n> ★★★★★\n\n> \"I scheduled them after my neighbor in Colonial Village recommended their team. Our ranch home had never had the ducts cleaned and our two kids have seasonal allergies. Within two weeks of their visit, my daughter coughing stopped completely. Great local service.\"\n> - Michelle K., Colonial Village, Loves Park\n> ★★★★★\n\n> \"Fast to schedule, on time, and very respectful of our floors. They explained exactly what their camera inspection revealed, operated their negative air system outside, and showed us pristine bare metal afterward. Truly the most reliable home service company in Loves Park.\"\n> - Brian S., Riverside Corridor, Loves Park\n> ★★★★★\n\nOur service crews have completed over eighty documented residential air duct and dryer vent restorations throughout Loves Park and neighboring Winnebago County communities with an average customer satisfaction rating of 4.9 stars.",
     "05_local_faq": "## Air Duct Cleaning FAQs for Loves Park Homeowners\n\n### Does Loves Park require a municipal permit for air duct cleaning?\nNo permit is required in Loves Park for residential duct cleaning. Routine air duct cleaning is categorized as preventative maintenance rather than structural mechanical alteration under City of Loves Park building regulations and Winnebago County codes. Permit requirements apply solely to new furnace installations or sheet metal duct reconfigurations.\n\n### How quickly can technicians reach homes in Colonial Village and along Perryville Road?\nOur service vans reach Loves Park addresses within twenty to thirty minutes of dispatch from our central location. We maintain recurring route schedules throughout the 61111 zip code Monday through Saturday, frequently accommodating same-week service appointments for non-emergency residential inspections.\n\n### How does Rock River valley humidity impact ductwork in Loves Park basements?\nElevated summer humidity along the Rock River basin often causes moisture condensation on cold basement supply boots. When high indoor humidity combines with accumulated pet hair and household lint inside uncleaned ducts, it creates an environment ripe for microbial growth. Regular mechanical cleaning keeps interior surfaces dry and free of organic fuel sources.\n\n### Do you service properties across both Loves Park and Machesney Park?\nYes, our service territory covers both Loves Park and Machesney Park with equal responsiveness. Because both communities share municipal borders and similar residential architecture, our crews operate across both municipalities without out-of-area dispatch delays.\n\n### What time of year is best to schedule duct cleaning in Loves Park?\nLate summer and early autumn represent the ideal window for Loves Park duct cleaning, just before northern Illinois winter temperatures trigger continuous furnace operation. Cleaning your ventilation system ahead of heating season ensures dust settled over summer months is not recirculated when your furnace blower starts running continuously.",
     "06_service_area": "## Areas We Serve in and Around Loves Park\n\nOur service personnel provide comprehensive coverage across Loves Park and neighboring northern Winnebago County neighborhoods.\n\nWe frequently service homes within the following Loves Park districts and postal codes:\n- North Loves Park riverfront corridor\n- Colonial Village residential district\n- Harlem High School neighborhood\n- Perryville Road residential subdivisions\n- Loves Park primary zip code: 61111\n- Adjacent northern communities: Machesney Park, Roscoe, and Rockton",
@@ -1728,8 +1728,8 @@ window.BUILDER_DATA = {
      "alt_text": "Technician cleaning air duct in Colonial Village neighborhood home, Loves Park, IL",
      "geotag": true,
      "exists": true,
-     "kb": 89.1,
-     "gps": false
+     "kb": 84.2,
+     "gps": true
     }
    ],
    "img_dir": "images/air-duct-cleaning-loves-park-il"
@@ -1897,8 +1897,8 @@ window.BUILDER_DATA = {
   },
   "dryer-vent-cleaning-and-lint-removal": {
    "id": "dryer-vent-cleaning-and-lint-removal",
-   "title": "Dryer Vent Cleaning & Lint Removal",
-   "nav": "Dryer Vent Cleaning & Lint Removal",
+   "title": "Dryer Vent Cleaning and Lint Removal",
+   "nav": "Dryer Vent Cleaning and Lint Removal",
    "slug": "dryer-vent-cleaning-and-lint-removal",
    "type": "service",
    "keyword": "dryer vent cleaning rockford il",
@@ -2050,8 +2050,8 @@ window.BUILDER_DATA = {
      "alt_text": "Compacted lint accumulation removed from residential clothes dryer exhaust duct in Rockford, IL",
      "geotag": true,
      "exists": true,
-     "kb": 90.1,
-     "gps": false
+     "kb": 86.2,
+     "gps": true
     }
    ],
    "img_dir": "images/dryer-vent-cleaning-and-lint-removal"
@@ -2236,8 +2236,8 @@ window.BUILDER_DATA = {
   },
   "sanitization-and-antimicrobial-fogging": {
    "id": "sanitization-and-antimicrobial-fogging",
-   "title": "Air Duct Sanitization & Antimicrobial Fogging",
-   "nav": "Air Duct Sanitization & Antimicrobial Fogging",
+   "title": "Sanitization and Antimicrobial Fogging",
+   "nav": "Sanitization and Antimicrobial Fogging",
    "slug": "sanitization-and-antimicrobial-fogging",
    "type": "service",
    "keyword": "air duct sanitization and antimicrobial fogging rockford",
@@ -2592,11 +2592,11 @@ window.BUILDER_DATA = {
   },
   "how-to-spot-air-duct-cleaning-scams": {
    "id": "how-to-spot-air-duct-cleaning-scams",
-   "title": "Blog: How to Spot Air Duct Cleaning Scams",
-   "nav": "How to Spot Air Duct Cleaning Scams",
+   "title": "Residential Air Duct Cleaning",
+   "nav": "Residential Air Duct Cleaning",
    "slug": "how-to-spot-air-duct-cleaning-scams",
    "type": "blog",
-   "keyword": "how to spot fake blow and go coupon scams",
+   "keyword": "how to spot air duct cleaning scams",
    "city": "Rockford",
    "sections": {
     "01_header": "# How to Spot Air Duct Cleaning Scams Before They Waste Your Money\n\nThe most reliable way to spot an air duct cleaning scam is to ask for NADCA certification before anyone enters your home. **NADCA-certified technicians** must pass the ASCS examination and use commercial-grade source removal equipment. The low-price coupon operations that dominate Facebook groups have neither. If the company cannot produce a NADCA membership number, treat that as the first red flag.\n\nBy the Rockford Air Duct Pros Team | NADCA ASCS Certified, Serving Rockford, IL Since 2014",
@@ -2624,9 +2624,9 @@ window.BUILDER_DATA = {
     "page_type": "blog",
     "slug": "how-to-spot-air-duct-cleaning-scams",
     "h1": "How to Spot Air Duct Cleaning Scams Before They Waste Your Money",
-    "target_keyword": "how to spot fake blow and go coupon scams",
-    "meta_title": "How To Spot Air Duct Cleaning Scams | Rockford Air Duct Pros",
-    "meta_description": "The most reliable way to spot an air duct cleaning scam is to ask for NADCA certification before anyone enters your home.",
+    "target_keyword": "how to spot air duct cleaning scams",
+    "meta_title": "How to Spot Air Duct Cleaning Scams | Illinois Pro Guide",
+    "meta_description": "Learn how to spot air duct cleaning scams in Illinois, identify forty-nine dollar blow-and-go bait-and-switch tactics, and verify NADCA credentials.",
     "canonical": "https://rockfordairductpros.com/how-to-spot-air-duct-cleaning-scams/",
     "word_count": 1631,
     "schema": {
@@ -2696,11 +2696,7 @@ window.BUILDER_DATA = {
        ]
       }
      ]
-    },
-    "_drafts": [
-     "meta_description",
-     "meta_title"
-    ]
+    }
    },
    "images": [],
    "img_dir": "images/homepage"

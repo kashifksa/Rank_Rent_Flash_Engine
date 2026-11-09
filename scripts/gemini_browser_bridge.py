@@ -122,7 +122,8 @@ def read_file_safe(path):
 
 def build_task_payload(task_name, input_file=None):
     """Assemble the complete prompt and input data for the task."""
-    base_dir = Path(__file__).resolve().parent.parent
+    _here = Path(__file__).resolve().parent
+    base_dir = _here if (_here / 'AGENTS.md').exists() else _here.parent
 
     if task_name == "brief":
         prompt_file = base_dir / "prompts" / "P4_brief.md"

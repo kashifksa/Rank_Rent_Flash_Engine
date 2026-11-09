@@ -55,7 +55,8 @@ def main():
     parser.add_argument("--output", default="data_brief.txt", help="Output file (default: data_brief.txt)")
     args = parser.parse_args()
 
-    base_dir = Path(__file__).resolve().parent.parent
+    _here = Path(__file__).resolve().parent
+    base_dir = _here if (_here / 'AGENTS.md').exists() else _here.parent
 
     input_path = args.input
     if not os.path.exists(input_path):

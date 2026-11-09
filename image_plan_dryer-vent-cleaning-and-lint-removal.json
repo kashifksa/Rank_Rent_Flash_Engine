@@ -27,9 +27,10 @@
       "priority": 2,
       "wp_media_id": null,
       "geotag": true,
-      "status": "un-geotagged",
+      "status": "geotagged",
       "note": "Ready to generate upon quota reset at ~21:25 UTC.",
-      "file_size_kb": 89.9
+      "file_size_kb": 89.9,
+      "filesize_kb": 86.2
     }
   ]
 }

@@ -145,7 +145,23 @@
       const stars = n => '<div class="stars">' + '\u2605'.repeat(n || 5) + '</div>';
       const card = (q, big) => '<article class="card rev' + (big ? ' big' : '') + '">' + stars(q.rating) + '<q>' + inline('\u201c' + q.text + '\u201d') + '</q>' +
         '<div class="who"><span class="av">' + esc((q.author || '?').trim().charAt(0)) + '</span><div><b>' + esc(q.author) + '</b><small>' + esc(q.loc) + '</small></div></div></article>';
-      const qs = m.quotes || [];
+      let qs = (m.quotes || []).slice();
+      if (!qs.length && (m.items || []).length) {
+        qs = m.items.map(it => {
+          let rating = 5, author = it.title || '', loc = '', texts = [];
+          (it.paras || []).forEach(p => {
+            let m1;
+            if ((m1 = p.match(/^rating:\s*([\d.]+)/i))) { rating = Math.round(parseFloat(m1[1])) || 5; }
+            else if ((m1 = p.match(/^reviewer:\s*(.+)$/i))) {
+              const raw = m1[1].trim(), idx = raw.indexOf(',');
+              author = (idx > -1 ? raw.slice(0, idx) : raw).trim();
+              const sub = idx > -1 ? raw.slice(idx + 1).trim() : '';
+              loc = it.title && sub && !sub.includes(it.title) ? (sub + ' · ' + it.title) : (sub || it.title || '');
+            } else { texts.push(p.replace(/^["\u201c]+|["\u201d]+$/g, '')); }
+          });
+          return { text: texts.join(' '), author: author, loc: loc, rating: rating };
+        }).filter(q => q.text);
+      }
       const body = c.variant === 'featured' && qs.length > 1
         ? '<div class="rev-featured">' + card(qs[0], true) + '<div class="stack">' + qs.slice(1).map(q => card(q)).join('') + '</div></div>'
         : '<div class="grid">' + qs.map(q => card(q)).join('') + '</div>';
@@ -189,10 +205,14 @@
   BLOCKS.area = {
     label: 'Service area + map', variants: ['map'],
     render(m, c) {
-      const tags = (m.bullets || []).map(b => '<span class="tag">' + inline((b.label ? b.label + ' ' : '') + b.text) + '</span>').join('');
+      const allBullets = (m.bullets || []).concat(...(m.items || []).map(it => it.bullets || []));
+      const tags = allBullets.map(b => '<span class="tag">' + inline((b.label ? b.label + ': ' : '') + b.text) + '</span>').join('');
+      const itemParas = (m.items || []).filter(it => (it.paras || []).length).map(it =>
+        '<p style="margin:12px 0 0;font-size:.93rem;color:var(--muted)"><strong style="color:var(--heading)">' + inline(it.title) + ':</strong> ' + it.paras.map(p => inline(p)).join(' &middot; ') + '</p>'
+      ).join('');
       const q = encodeURIComponent(c.nap.address || (c.brief.city + ', ' + c.brief.state));
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, '') + '<div class="area"><div>' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') +
-        (tags ? '<div class="tags">' + tags + '</div>' : '') + '<p style="margin-top:22px">' + callBtn(c) + '</p></div>' +
+        (tags ? '<div class="tags">' + tags + '</div>' : '') + itemParas + '<p style="margin-top:22px">' + callBtn(c) + '</p></div>' +
         '<iframe loading="lazy" title="Service area map" src="https://www.google.com/maps?q=' + q + '&z=10&output=embed"></iframe></div></div>';
     }
   };

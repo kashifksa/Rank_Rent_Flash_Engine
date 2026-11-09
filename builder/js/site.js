@@ -125,12 +125,17 @@
     const n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
   }
   function lum(h) { const [r, g, b] = hexRgb(h); return (0.299 * r + 0.587 * g + 0.114 * b) / 255; }
+  function relLum(h) {
+    const c = hexRgb(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
 
   B.cssVars = function () {
     const t = B.theme(), f = B.FONTS[t.font] || B.FONTS.technical;
     const [ar, ag, ab] = hexRgb(t.accent), [pr, pg, pb] = hexRgb(t.primary);
+    const al = relLum(t.accent), btnFg = (1.05 / (al + 0.05)) >= 4.5 ? '#ffffff' : '#111418';
     const pad = B.DENSITY[t.density] || 76;
-    return ':root{--primary:' + t.primary + ';--dark:' + t.primary + ';--dark-rgb:' + pr + ',' + pg + ',' + pb + ';--accent:' + t.accent + ';--accent-rgb:' + ar + ',' + ag + ',' + ab +
+    return ':root{--primary:' + t.primary + ';--dark:' + t.primary + ';--dark-rgb:' + pr + ',' + pg + ',' + pb + ';--accent:' + t.accent + ';--accent-rgb:' + ar + ',' + ag + ',' + ab + ';--btn-fg:' + btnFg +
       ';--logo-h:' + (B.brand().height || 56) + 'px;--heading:' + (lum(t.primary) < 0.4 ? t.primary : '#0f172a') + ';--text:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafc;--card:#fff;--line:#e2e8f0;--radius:' + t.radius + 'px;--pad:' + pad +
       'px;--font-h:"' + f.h + '",sans-serif;--font-b:"' + f.b + '",sans-serif}';
   };
@@ -260,7 +265,7 @@
     const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
     const topbar = hv === 'topbar' ? '<div class="topbar"><div class="wrap"><span>Serving ' + esc(d.brief.city) + ', ' + esc(d.brief.state) + ' and nearby communities</span><span><a href="' + tel + '">Call ' + esc(nap.phone) + '</a>' + (nap.email ? '<a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a>' : '') + '</span></div></div>' : '';
     return topbar + '<header class="hdr' + (hv === 'dark' ? ' hdr-dark' : '') + '"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a><nav class="nav">' + links.join('') +
-      '<a class="btn btn-primary" href="' + tel + '" style="color:#fff">' + esc(nap.phone) + '</a></nav>' +
+      '<a class="btn btn-primary" href="' + tel + '">' + esc(nap.phone) + '</a></nav>' +
       '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
       '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
   }

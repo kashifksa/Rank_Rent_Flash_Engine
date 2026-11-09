@@ -27,7 +27,7 @@
     industrial: {
       name: 'Modern Industrial', badge: 'Stitch palette',
       desc: 'Stitch-style palette and type: centered dark hero, list cards, timeline, featured review, boxed CTA.',
-      theme: { primary: '#131b2e', accent: '#d95d0f', font: 'editorial', radius: 12, density: 'spacious' },
+      theme: { primary: '#131b2e', accent: '#c2410c', font: 'editorial', radius: 12, density: 'spacious' },
       variants: { hero: 'centered', split: 'image-right', cards: 'list', steps: 'timeline', reviews: 'featured', faq: 'accordion', cta: 'box', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
       motion: { anim: 'stagger', fx: 'blueprint' },
       header: 'dark', skin: ''

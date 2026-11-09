@@ -120,8 +120,11 @@ PAGE_TYPES = {
 }
 
 AVAILABLE_TEMPLATES = {
-    "cornerstone": "Cornerstone Classic (Customizable Builder)",
-    "stitch_modern_industrial": "Stitch: Modern Industrial Authority (5 Archetypes)",
+    "cornerstone": "Cornerstone ProFlow (Full-bleed authority)",
+    "keystone": "Keystone Classic (Kadence split + info topbar)",
+    "industrial": "Modern Industrial (Dark header + blueprint)",
+    "bold": "Bold Trade (Rugged dark + amber skin)",
+    "clean": "Clean Local (Friendly teal + rounded skin)",
 }
 
 
@@ -250,10 +253,10 @@ def stitch_page(page_slug, page_type):
         sys.exit(1)
 
     brief = load_json(BRIEF_FILE)
-    company = brief.get("nap", {}).get("company_name", brief.get("project_name", "Rockford Air Duct Pros"))
-    niche = brief.get("niche", "Air Duct Cleaning")
-    city = brief.get("city", "Rockford")
-    state_code = brief.get("state", "IL")
+    company = brief.get("nap", {}).get("company_name", brief.get("project_name", ""))
+    niche = brief.get("niche", "")
+    city = brief.get("city", "")
+    state_code = brief.get("state", "")
 
     output_file = ROOT_DIR / f"page_content_{page_slug}.md"
     frontmatter = f"""---
@@ -569,7 +572,7 @@ def main():
     elif args.build_site:
         global FORCE_BUILD
         FORCE_BUILD = args.force
-        if args.engine == "v5":
+        if args.engine == "v5" or not (ROOT_DIR / "studio_builder.html").exists():
             build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial", "bold", "clean") else "cornerstone", out_folder=args.out)
         else:
             build_full_website(template_id=args.template, out_folder=args.out)

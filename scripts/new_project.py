@@ -9,7 +9,8 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 
-ROOT = Path(__file__).resolve().parent.parent
+_here = Path(__file__).resolve().parent
+ROOT = _here if (_here / 'AGENTS.md').exists() else _here.parent
 
 def reset_project(archive=True):
     print("=" * 60)
