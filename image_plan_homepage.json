@@ -145,6 +145,26 @@
       "status": "geotagged",
       "file_size_kb": 94.9,
       "note": "Composite before/after card (Denton split standard). Image-only card, no overlay text."
+    },
+    {
+      "slot": "logo",
+      "filename": "rockford-air-duct-pros-logo.webp",
+      "alt_text": "Rockford Air Duct Pros logo",
+      "priority": 0,
+      "wp_media_id": null,
+      "geotag": false,
+      "status": "generated",
+      "note": "Vector-built by scripts/make_logo.py (transparent WebP under 100 KB). Not a photo, no GPS needed."
+    },
+    {
+      "slot": "logo-light",
+      "filename": "rockford-air-duct-pros-logo-light.webp",
+      "alt_text": "Rockford Air Duct Pros logo for dark backgrounds",
+      "priority": 0,
+      "wp_media_id": null,
+      "geotag": false,
+      "status": "generated",
+      "note": "Vector-built by scripts/make_logo.py (transparent WebP under 100 KB). Not a photo, no GPS needed."
     }
   ]
 }

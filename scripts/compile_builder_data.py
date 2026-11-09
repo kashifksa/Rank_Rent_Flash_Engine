@@ -169,12 +169,15 @@ def write_v5_data(compiled):
             "sections": p["sections"], "order": list(p["sections"].keys()), "merged": p.get("merged", {}),
             "meta": p.get("meta", {}), "images": plan_imgs, "img_dir": p.get("img_dir", "images/homepage"),
         }
-    brand = {"logo": None, "favicon": None}
+    brand = {"logo": None, "logoLight": None, "favicon": None}
     for f in sorted((BASE_DIR / "images").rglob("*.webp")) if (BASE_DIR / "images").exists() else []:
         rel = f.relative_to(BASE_DIR).as_posix()
-        if "favicon" in f.name.lower() and not brand["favicon"]:
+        name = f.name.lower()
+        if "favicon" in name and not brand["favicon"]:
             brand["favicon"] = rel
-        elif "logo" in f.name.lower() and not brand["logo"]:
+        elif "logo" in name and "light" in name and not brand["logoLight"]:
+            brand["logoLight"] = rel  # variant for dark backgrounds (footer)
+        elif "logo" in name and "light" not in name and not brand["logo"]:
             brand["logo"] = rel
     state_path = BASE_DIR / "builder_state.json"
     default_state = load_json_safe(state_path) if state_path.exists() else None

@@ -79,6 +79,11 @@ def main():
         check("animation attribute exported (Cornerstone = rise)", r["anim"])
         check("hero effect exported (Cornerstone = airflow)", r["fx"])
         check("Case Studies section present on homepage", r["caseStudies"])
+        hh = pg.evaluate("Builder.exportPage('homepage')")
+        hdr, ftr = hh.split("</header>")[0], hh.split("<footer")[1]
+        check("logo auto-detected in header (images/*logo*.webp)", "logo.webp" in hdr)
+        check("light logo variant used in footer", "logo-light.webp" in ftr)
+        check("logo is never used as a content image", "logo" not in "".join(pg.evaluate("Builder.imageOptions('homepage').map(i => i.file)")))
 
         # edit -> export
         pg.select_option("#tplSel", "keystone"); pg.wait_for_timeout(400)
@@ -104,3 +109,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+

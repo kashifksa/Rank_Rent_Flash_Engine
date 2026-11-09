@@ -107,12 +107,13 @@
   B.effFx = o => o.fx !== 'auto' ? o.fx : (B.theme().fx || (B.tpl().motion || {}).fx || 'none');
 
   /* brand: webp logo + favicon */
-  B.brand = () => Object.assign({ logoSrc: 'auto', logoData: '', height: 44, mode: 'auto', favicon: true, footer: true }, B.state.brand || {});
-  B.logoUrl = function (preview) {
+  B.brand = () => Object.assign({ logoSrc: 'auto', logoData: '', height: 56, mode: 'auto', favicon: true, footer: true }, B.state.brand || {});
+  B.logoUrl = function (preview, dark) {
     const b = B.brand(), d = D().brand || {};
     if (b.logoSrc === 'none') return '';
     if (b.logoSrc === 'upload' && b.logoData) return b.logoData;
-    return d.logo ? (preview ? '../' : '') + d.logo : '';
+    const f = (dark && d.logoLight) ? d.logoLight : d.logo;
+    return f ? (preview ? '../' : '') + f : '';
   };
   B.faviconUrl = function (preview) {
     const b = B.brand(), d = D().brand || {};
@@ -130,7 +131,7 @@
     const [ar, ag, ab] = hexRgb(t.accent), [pr, pg, pb] = hexRgb(t.primary);
     const pad = B.DENSITY[t.density] || 76;
     return ':root{--primary:' + t.primary + ';--dark:' + t.primary + ';--dark-rgb:' + pr + ',' + pg + ',' + pb + ';--accent:' + t.accent + ';--accent-rgb:' + ar + ',' + ag + ',' + ab +
-      ';--logo-h:' + (B.brand().height || 44) + 'px;--heading:' + (lum(t.primary) < 0.4 ? t.primary : '#0f172a') + ';--text:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafc;--card:#fff;--line:#e2e8f0;--radius:' + t.radius + 'px;--pad:' + pad +
+      ';--logo-h:' + (B.brand().height || 56) + 'px;--heading:' + (lum(t.primary) < 0.4 ? t.primary : '#0f172a') + ';--text:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafc;--card:#fff;--line:#e2e8f0;--radius:' + t.radius + 'px;--pad:' + pad +
       'px;--font-h:"' + f.h + '",sans-serif;--font-b:"' + f.b + '",sans-serif}';
   };
 
@@ -140,7 +141,7 @@
     return base + dir + '/' + filename;
   }
   function makeImageCtx(pid, base, used) {
-    const page = B.page(pid), imgs = page.images || [];
+    const page = B.page(pid), imgs = B.contentImages(pid);
     const mk = i => ({ src: imgSrc(page, i.filename, base), alt: i.alt_text || page.title, file: i.filename });
     return {
       pick: re => { const i = imgs.find(x => re.test(x.filename) || re.test(x.slot || '')); return i ? mk(i) : null; },
@@ -159,7 +160,8 @@
       }
     };
   }
-  B.imageOptions = pid => (B.page(pid).images || []).map(i => ({ file: i.filename, alt: i.alt_text || i.filename }));
+  B.contentImages = pid => (B.page(pid).images || []).filter(i => !/logo|favicon/i.test((i.slot || '') + ' ' + (i.filename || '')));
+  B.imageOptions = pid => B.contentImages(pid).map(i => ({ file: i.filename, alt: i.alt_text || i.filename }));
 
   function mergedChips(pid) {
     const m = B.page(pid).merged || {}, k = Object.keys(m)[0];
@@ -212,7 +214,7 @@
 
   B.siteCtx = function (pid, preview) {
     const d = D(), page = B.page(pid);
-    const base = preview ? '../images/' : 'images/', imgs = page.images || [];
+    const base = preview ? '../images/' : 'images/', imgs = B.contentImages(pid);
     const num = s => parseInt((String(s).match(/(\d+)$/) || [0, 0])[1], 10);
     const pretty = s => String(s).replace(/[-_]+/g, ' ').trim().replace(/\b\w/g, x => x.toUpperCase());
     return {
@@ -263,7 +265,7 @@
   function footer(preview) {
     const d = D(), nap = d.nap, pages = Object.values(d.pages);
     const list = t => pages.filter(p => p.type === t).map(p => '<a href="' + B.fileName(p.id) + '">' + esc(p.nav || p.title) + '</a>').join('');
-    const flg = B.brand().footer ? B.logoUrl(preview) : '';
+    const flg = B.brand().footer ? B.logoUrl(preview, true) : '';
     return '<footer class="ftr"><div class="wrap"><div class="cols"><div>' + (flg ? '<a class="logo" href="index.html"><img src="' + esc(flg) + '" alt="' + esc(nap.company_name) + '"></a>' : '') + '<h4>' + esc(nap.company_name) + '</h4><p>' + esc(d.brief.niche) + ' in ' + esc(d.brief.city) + ', ' + esc(d.brief.state) +
       '.</p><p>' + esc(nap.address) + '</p></div><div><h4>Services</h4>' + list('service') + '</div><div><h4>Locations</h4>' + list('location') +
       '</div><div><h4>Contact</h4><a href="tel:' + nap.phone.replace(/[^\d+]/g, '') + '">' + esc(nap.phone) + '</a><a href="mailto:' + esc(nap.email) + '">' + esc(nap.email) + '</a></div></div>' +

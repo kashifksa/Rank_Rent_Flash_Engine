@@ -431,7 +431,8 @@ window.BUILDER_DATA = {
   }
  },
  "brand": {
-  "logo": null,
+  "logo": "images/homepage/rockford-air-duct-pros-logo.webp",
+  "logoLight": "images/homepage/rockford-air-duct-pros-logo-light.webp",
   "favicon": "images/homepage/rockford-air-duct-pros-favicon.webp"
  },
  "pages": {
@@ -658,6 +659,16 @@ window.BUILDER_DATA = {
      "slot": "before-after-3",
      "filename": "single-card-blower-wheel-rockford-residence.webp",
      "alt_text": "Midtown residential furnace blower wheel before and after sanitization"
+    },
+    {
+     "slot": "logo",
+     "filename": "rockford-air-duct-pros-logo.webp",
+     "alt_text": "Rockford Air Duct Pros logo"
+    },
+    {
+     "slot": "logo-light",
+     "filename": "rockford-air-duct-pros-logo-light.webp",
+     "alt_text": "Rockford Air Duct Pros logo for dark backgrounds"
     }
    ],
    "img_dir": "images/homepage"
