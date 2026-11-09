@@ -1,0 +1,83 @@
+{
+  "page_id": "how-to-spot-air-duct-cleaning-scams",
+  "page_type": "blog",
+  "slug": "how-to-spot-air-duct-cleaning-scams",
+  "h1": "How to Spot Air Duct Cleaning Scams Before They Waste Your Money",
+  "target_keyword": "how to spot fake blow and go coupon scams",
+  "meta_title": "How To Spot Air Duct Cleaning Scams | Rockford Air Duct Pros",
+  "meta_description": "The most reliable way to spot an air duct cleaning scam is to ask for NADCA certification before anyone enters your home.",
+  "canonical": "https://rockfordairductpros.com/how-to-spot-air-duct-cleaning-scams/",
+  "word_count": 1631,
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://rockfordairductpros.com/how-to-spot-air-duct-cleaning-scams/#article",
+        "headline": "How to Spot Air Duct Cleaning Scams Before They Waste Your Money",
+        "description": "The most reliable way to spot an air duct cleaning scam is to ask for NADCA certification before anyone enters your home.",
+        "author": {
+          "@type": "Organization",
+          "name": "Rockford Air Duct Pros",
+          "url": "https://rockfordairductpros.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Rockford Air Duct Pros",
+          "url": "https://rockfordairductpros.com/"
+        },
+        "mainEntityOfPage": "https://rockfordairductpros.com/how-to-spot-air-duct-cleaning-scams/"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://rockfordairductpros.com/how-to-spot-air-duct-cleaning-scams/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How can I verify that a duct cleaning company is actually NADCA certified?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can verify NADCA membership directly at nadca.com using the company's name or ZIP code. NADCA maintains a public member directory that is updated in real time. Any company claiming certification that does not appear in that directory is misrepresenting their credentials. You can also call NADCA directly at 1-855-NADCA-NOW to verify a membership number."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it safe to let a duct cleaning company into my home if they cannot show certification?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Allowing an uncertified company access to your duct system carries real risk beyond the financial. Unqualified technicians can physically damage flexible ducts , disconnect branch runs, or use equipment that blows debris into your living space rather than extracting it. Insist on NADCA certification and proof of liability insurance before any technician enters."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I do if I already paid a duct cleaning company and suspect it was a scam?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you paid by credit card, file a chargeback dispute with your card issuer immediately and document your reason. If you paid by cash or check, file a complaint with the Illinois Attorney General's Consumer Protection Hotline at 1-800-386-5438 . Also report the company to the Better Business Bureau so other Rockford homeowners see the complaint record."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a duct cleaning company test for mold on the spot during a cleaning appointment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Legitimate mold identification requires laboratory analysis of a physical sample sent to an accredited environmental testing lab. Visual identification during a duct cleaning is not a valid mold diagnosis. Any company that claims to have found mold and offers to treat it immediately without a lab report is using a well-documented upsell tactic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know if the duct cleaning I already had done was actually completed properly?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you did not receive before-and-after camera documentation, you have no verifiable proof that source removal was performed. The only reliable way to verify a past cleaning is to schedule a new camera inspection, which a legitimate company will perform. If interior duct surfaces still show heavy particulate adhesion to walls, the previous cleaning did not meet NADCA source removal standards."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "_drafts": [
+    "meta_description",
+    "meta_title"
+  ]
+}

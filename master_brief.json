@@ -131,5 +131,8 @@
     "Scratched hardwood floors, damaged drywall, and torn flexible ductwork from careless crews"
   ],
   "monetization_model": "rank_and_rent",
-  "phase": 1
+  "phase": 1,
+  "external_phones": [
+    "1-800-386-5438"
+  ]
 }

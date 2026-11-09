@@ -14,7 +14,7 @@
     "commercial dryer vent cleaning winnebago county",
     "dryer fire prevention rockford"
   ],
-  "word_count": 1448,
+  "word_count": 1383,
   "schema": {
     "@context": "https://schema.org",
     "@graph": [
@@ -56,7 +56,7 @@
             "name": "How do I know if my clothes dryer vent is clogged?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Common indicators include clothing requiring multiple cycles to dry, laundry coming out unusually hot to the touch, a burning odor during operation, and the exterior damper flap remaining shut while running."
+              "text": "Common indicators of a clogged dryer vent include clothing requiring multiple cycles to dry, laundry coming out unusually hot to the touch, a burning odor during operation, lint collecting around the appliance door seal, and the exterior damper flap remaining shut while the dryer is running."
             }
           },
           {
@@ -64,7 +64,7 @@
             "name": "How often should residential dryer vents be cleaned in Rockford?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The National Fire Protection Association recommends professional inspection and cleaning of residential dryer exhaust vents at least once every twelve months."
+              "text": "The National Fire Protection Association recommends professional inspection and cleaning of residential dryer exhaust vents at least once every twelve months. Homes with large families running daily laundry loads, households with multiple pets, or homes with vent runs exceeding fifteen feet should be inspected every six to nine months."
             }
           },
           {
@@ -72,7 +72,7 @@
             "name": "Can a clogged dryer vent cause a house fire?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. According to the United States Fire Administration, uncleaned clothes dryer exhaust ducts are the leading cause of residential dryer fires nationwide."
+              "text": "Yes. According to the United States Fire Administration, uncleaned clothes dryer exhaust ducts are the leading cause of residential dryer fires nationwide. Highly combustible lint accumulates in transition bends and along the interior duct walls, where it can easily ignite if heating elements overheat or backpressure builds up."
             }
           },
           {
@@ -80,7 +80,7 @@
             "name": "How long does a professional dryer vent cleaning appointment take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A standard residential dryer vent cleaning appointment typically takes forty-five to sixty minutes."
+              "text": "A standard residential dryer vent cleaning appointment typically takes forty-five to sixty minutes. Longer duct runs that route through second-story attics, roofline exterior terminations, or heavily compacted lint blockages requiring booster fan disassembly may take up to ninety minutes."
             }
           },
           {
@@ -88,7 +88,7 @@
             "name": "Do you clean dryer vents from the inside of the home or outside?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We clean dryer vents from both sides to ensure thorough extraction using motorized rotary brush whips and negative pressure vacuum lines."
+              "text": "We clean dryer vents from both sides to ensure thorough extraction. Our technicians disconnect the indoor transition pipe to inspect the rear appliance blower housing, then pass motorized rotary brush whips and negative pressure vacuum lines from both indoor and outdoor access points to extract all dislodged debris."
             }
           },
           {
@@ -96,7 +96,7 @@
             "name": "What type of duct material is required by building codes for dryer vents?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Current residential mechanical building codes require rigid, smooth-walled galvanized steel or aluminum ducting for clothes dryer exhaust lines."
+              "text": "Current residential mechanical building codes require rigid, smooth-walled galvanized steel or aluminum ducting for clothes dryer exhaust lines. Flexible vinyl and thin plastic accordion hoses are strictly prohibited by code because their ribbed interior surfaces trap lint rapidly and can easily melt under high exhaust temperatures."
             }
           }
         ]
@@ -104,4 +104,3 @@
     ]
   }
 }
-

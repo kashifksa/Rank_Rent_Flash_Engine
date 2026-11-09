@@ -14,7 +14,7 @@
     "NADCA certified air duct cleaning rockford",
     "licensed duct cleaner winnebago county"
   ],
-  "word_count": 1138,
+  "word_count": 1083,
   "schema": {
     "@context": "https://schema.org",
     "@graph": [
@@ -42,11 +42,11 @@
         "image": "https://rockfordairductpros.com/images/about/rockford-air-duct-pros-owner-team-photo.webp",
         "address": {
           "@type": "PostalAddress",
+          "addressCountry": "US",
           "streetAddress": "1111 S Alpine Rd",
           "addressLocality": "Rockford",
           "addressRegion": "IL",
-          "postalCode": "61108",
-          "addressCountry": "US"
+          "postalCode": "61108"
         },
         "geo": {
           "@type": "GeoCoordinates",
@@ -150,4 +150,3 @@
     ]
   }
 }
-

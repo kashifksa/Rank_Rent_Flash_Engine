@@ -16,111 +16,108 @@
   "canonical": "https://rockfordairductpros.com/sanitization-and-antimicrobial-fogging/",
   "published_date": "2026-11-07",
   "author": "Rockford Air Duct Pros Technical Board",
-  "schema": [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "@id": "https://rockfordairductpros.com/sanitization-and-antimicrobial-fogging/#service",
-      "name": "Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL",
-      "serviceType": "HVAC Antimicrobial Sanitization and Fogging",
-      "description": "Hospital-grade botanical antimicrobial duct fogging and odor remediation for residential and commercial properties in Rockford, Illinois.",
-      "provider": {
-        "@type": "HVACBusiness",
-        "@id": "https://rockfordairductpros.com/#business",
-        "name": "Rockford Air Duct Pros",
-        "telephone": "+18155550142",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "1111 S Alpine Rd",
-          "addressLocality": "Rockford",
-          "addressRegion": "IL",
-          "postalCode": "61108",
-          "addressCountry": "US"
-        }
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://rockfordairductpros.com/sanitization-and-antimicrobial-fogging/#service",
+        "name": "Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL",
+        "serviceType": "HVAC Antimicrobial Sanitization and Fogging",
+        "description": "Hospital-grade botanical antimicrobial duct fogging and odor remediation for residential and commercial properties in Rockford, Illinois.",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://rockfordairductpros.com/#business",
+          "name": "Rockford Air Duct Pros",
+          "telephone": "+18155550142",
+          "url": "https://rockfordairductpros.com/"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Rockford",
+            "sameAs": "https://en.wikipedia.org/wiki/Rockford,_Illinois"
+          },
+          {
+            "@type": "City",
+            "name": "Loves Park",
+            "sameAs": "https://en.wikipedia.org/wiki/Loves_Park,_Illinois"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Rockford",
-          "sameAs": "https://en.wikipedia.org/wiki/Rockford,_Illinois"
-        },
-        {
-          "@type": "City",
-          "name": "Loves Park",
-          "sameAs": "https://en.wikipedia.org/wiki/Loves_Park,_Illinois"
-        }
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://rockfordairductpros.com/sanitization-and-antimicrobial-fogging/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is antimicrobial duct fogging and how does it work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Antimicrobial duct fogging is a professional sanitization treatment that introduces an atomized mist of hospital-grade disinfectant into your HVAC ventilation system. Using an ultra-low volume cold fogger, technicians transform the botanical liquid into microscopic droplets that travel through all supply and return trunks, destroying bacteria, fungal spores, and viral pathogens on contact."
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://rockfordairductpros.com/sanitization-and-antimicrobial-fogging/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is antimicrobial duct fogging and how does it work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Antimicrobial duct fogging is a professional sanitization treatment that introduces an atomized mist of hospital-grade disinfectant into your HVAC ventilation system. Using an ultra-low volume cold fogger, technicians transform the botanical liquid into microscopic droplets that travel through all supply and return trunks, destroying bacteria, fungal spores, and viral pathogens on contact."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the sanitizing solution safe for children, seniors, and pets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We exclusively apply hospital-grade botanical solutions derived from natural thyme oil, such as EPA-registered Benefect Decon 30. These organic formulations require no warning labels or hazard symbols, emit zero toxic fumes, and contain no synthetic fragrances, making them safe for children, elderly individuals, and domestic pets."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why must air ducts be vacuum cleaned before applying antimicrobial fogging?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Applying sanitizing mist to dirty ductwork is ineffective because dust and pet hair prevent the disinfectant from contacting interior sheet metal surfaces. Under NADCA ACR 2021 standards, mechanical source removal using negative air vacuum containment must always precede sanitization, ensuring the antimicrobial agent coats bare metal rather than settled debris."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does the botanical aroma linger after treatment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The mild, pleasant herbal aroma of botanical thyme typically dissipates within two to four hours following application. Because our formulations contain no artificial perfumes or chemical masking agents, the scent fades naturally as fresh air circulates, leaving neutral, odor-free indoor air."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can antimicrobial fogging eliminate musty odors from air conditioning ducts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Musty odors are primarily produced by microbial colonies growing on evaporator coils, condensate drain pans, and interior duct insulation. Our botanical fogging penetrates biofilm layers, killing odor-causing mold and bacteria at their cellular source rather than temporarily covering up the smell."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do residents need to vacate the property during duct sanitization?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Because our botanical disinfectants are non-toxic and non-corrosive, you and your pets may remain comfortably inside your home during the fogging procedure. Technicians manage airflow circulation so the mist remains confined within the duct system until dwell times are achieved."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How often should Rockford homeowners have their air ducts sanitized?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most Rockford homeowners benefit from duct sanitization every three to five years in conjunction with comprehensive mechanical cleaning. However, households with severe allergy sufferers, homes recovering from water leaks, or properties with multiple shedding pets may choose annual or biennial treatments."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will antimicrobial fogging damage electronic HVAC controls or duct insulation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Our commercial ULV foggers generate a dry mist with droplet sizes between ten and twenty microns. This microscopic particle size ensures thorough surface contact without pooling liquid or wetting sensitive electrical sensors, fiberglass duct board, or external blower wiring."
+            }
           }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the sanitizing solution safe for children, seniors, and pets?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We exclusively apply hospital-grade botanical solutions derived from natural thyme oil, such as EPA-registered Benefect Decon 30. These organic formulations require no warning labels or hazard symbols, emit zero toxic fumes, and contain no synthetic fragrances, making them safe for children, elderly individuals, and domestic pets."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why must air ducts be vacuum cleaned before applying antimicrobial fogging?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Applying sanitizing mist to dirty ductwork is ineffective because dust and pet hair prevent the disinfectant from contacting interior sheet metal surfaces. Under NADCA ACR 2021 standards, mechanical source removal using negative air vacuum containment must always precede sanitization, ensuring the antimicrobial agent coats bare metal rather than settled debris."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does the botanical aroma linger after treatment?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The mild, pleasant herbal aroma of botanical thyme typically dissipates within two to four hours following application. Because our formulations contain no artificial perfumes or chemical masking agents, the scent fades naturally as fresh air circulates, leaving neutral, odor-free indoor air."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can antimicrobial fogging eliminate musty odors from air conditioning ducts?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Musty odors are primarily produced by microbial colonies growing on evaporator coils, condensate drain pans, and interior duct insulation. Our botanical fogging penetrates biofilm layers, killing odor-causing mold and bacteria at their cellular source rather than temporarily covering up the smell."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do residents need to vacate the property during duct sanitization?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Because our botanical disinfectants are non-toxic and non-corrosive, you and your pets may remain comfortably inside your home during the fogging procedure. Technicians manage airflow circulation so the mist remains confined within the duct system until dwell times are achieved."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How often should Rockford homeowners have their air ducts sanitized?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Most Rockford homeowners benefit from duct sanitization every three to five years in conjunction with comprehensive mechanical cleaning. However, households with severe allergy sufferers, homes recovering from water leaks, or properties with multiple shedding pets may choose annual or biennial treatments."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will antimicrobial fogging damage electronic HVAC controls or duct insulation?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Our commercial ULV foggers generate a dry mist with droplet sizes between ten and twenty microns. This microscopic particle size ensures thorough surface contact without pooling liquid or wetting sensitive electrical sensors, fiberglass duct board, or external blower wiring."
-          }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
+  },
+  "word_count": 1487
 }

@@ -200,7 +200,7 @@ def write_v5_data(compiled):
             "project_name": brief.get("project_name", ""), "niche": brief.get("niche", ""),
             "city": brief.get("city", ""), "state": brief.get("state", ""),
             "primary_keyword": brief.get("primary_keyword", ""),
-            "credentials": brief.get("credentials", []), "neighborhoods": [h for h in brief.get("neighborhoods", []) if isinstance(h, str)],
+            "credentials": brief.get("credentials", []), "external_phones": brief.get("external_phones", []), "neighborhoods": [h for h in brief.get("neighborhoods", []) if isinstance(h, str)],
         },
         "schema": SCHEMA,
         "seo": load_json_safe(BASE_DIR / "seo_standards.json"),

@@ -130,7 +130,8 @@
       if (['HVACBusiness', 'LocalBusiness', 'Organization'].indexOf(n['@type']) > -1 && n.name && bname && n.name.trim() !== bname) probs.push("schema name '" + n.name + "'");
       if (n.url && D.nap.website && host(n.url) !== host(D.nap.website)) probs.push('schema url ' + n.url);
     }));
-    const odd = [...new Set((clean(body).match(PHONE_RE) || []).map(digits))].filter(p => [bphone, '1' + bphone].indexOf(p) < 0);
+    const ext = (D.brief.external_phones || []).map(x => digits(x).slice(-10));
+    const odd = [...new Set((clean(body).match(PHONE_RE) || []).map(digits))].filter(p => [bphone, '1' + bphone].indexOf(p) < 0 && ext.indexOf(p.slice(-10)) < 0);
     if (odd.length) probs.push('page phone(s) ' + odd.sort().join(', '));
     const street = String(D.nap.address || '').split(',')[0].trim(), cb = clean(body);
     if (street && /\b\d{3,5} [NSEW]\.? [A-Z][a-z]+ (?:Rd|Road|St|Street|Ave|Avenue|Blvd|Dr|Drive)\b/.test(cb) && cb.toLowerCase().indexOf(street.toLowerCase()) < 0) probs.push('a street address on the page differs from the brief');

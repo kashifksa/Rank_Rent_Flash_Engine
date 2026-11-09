@@ -16,111 +16,108 @@
   "canonical": "https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleaning/",
   "published_date": "2026-11-07",
   "author": "Rockford Air Duct Pros Technical Board",
-  "schema": [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "@id": "https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleaning/#service",
-      "name": "Negative Air Vacuum Trunk Line Cleaning in Rockford, IL",
-      "serviceType": "HVAC Negative Air Vacuum Duct Cleaning",
-      "description": "Commercial 5,000 CFM negative air vacuum source removal for residential and commercial supply and return trunk lines across Rockford, Illinois.",
-      "provider": {
-        "@type": "HVACBusiness",
-        "@id": "https://rockfordairductpros.com/#business",
-        "name": "Rockford Air Duct Pros",
-        "telephone": "+18155550142",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "1111 S Alpine Rd",
-          "addressLocality": "Rockford",
-          "addressRegion": "IL",
-          "postalCode": "61108",
-          "addressCountry": "US"
-        }
+  "schema": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleaning/#service",
+        "name": "Negative Air Vacuum Trunk Line Cleaning in Rockford, IL",
+        "serviceType": "HVAC Negative Air Vacuum Duct Cleaning",
+        "description": "Commercial 5,000 CFM negative air vacuum source removal for residential and commercial supply and return trunk lines across Rockford, Illinois.",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://rockfordairductpros.com/#business",
+          "name": "Rockford Air Duct Pros",
+          "telephone": "+18155550142",
+          "url": "https://rockfordairductpros.com/"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Rockford",
+            "sameAs": "https://en.wikipedia.org/wiki/Rockford,_Illinois"
+          },
+          {
+            "@type": "City",
+            "name": "Loves Park",
+            "sameAs": "https://en.wikipedia.org/wiki/Loves_Park,_Illinois"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Rockford",
-          "sameAs": "https://en.wikipedia.org/wiki/Rockford,_Illinois"
-        },
-        {
-          "@type": "City",
-          "name": "Loves Park",
-          "sameAs": "https://en.wikipedia.org/wiki/Loves_Park,_Illinois"
-        }
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleaning/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is negative air vacuum trunk line cleaning?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Negative air vacuum trunk line cleaning is an engineered HVAC decontamination method that uses high-volume commercial extractors to place an entire ventilation network under continuous negative pressure. While the vacuum pulls airborne particulates toward high-efficiency HEPA filters, technicians mechanically agitate duct interiors, ensuring extracted debris cannot escape into indoor living spaces."
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://rockfordairductpros.com/negative-air-vacuum-trunk-line-cleaning/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is negative air vacuum trunk line cleaning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Negative air vacuum trunk line cleaning is an engineered HVAC decontamination method that uses high-volume commercial extractors to place an entire ventilation network under continuous negative pressure. While the vacuum pulls airborne particulates toward high-efficiency HEPA filters, technicians mechanically agitate duct interiors, ensuring extracted debris cannot escape into indoor living spaces."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is household or shop vacuum duct cleaning ineffective?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Standard household and portable shop vacuums produce less than 150 CFM of airflow, which is completely inadequate to lift settled debris inside large twelve-inch galvanized trunk lines. Furthermore, standard vacuums lack sealed HEPA containment, causing fine sub-micron dust and mold spores to exhaust directly back into your home through the vacuum exhaust port."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much airflow capacity is required for whole-home negative air cleaning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Professional whole-home trunk line cleaning requires between 3,500 and 5,000 CFM of negative airflow capacity. This volume creates high-velocity air movement across the entire cross-section of main trunks, keeping heavy dust particles suspended in the airstream until they reach the primary filtration chamber."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will negative air duct cleaning make a mess in my living areas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Because the ventilation system operates under continuous negative pressure during cleaning, air is constantly drawn inward from your living spaces into the ductwork. Even if a register cover is removed, room air rushes into the vent rather than blowing dust out, guaranteeing spotless living spaces with zero blowback."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do technicians need to cut access holes in the ductwork?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. NADCA ACR 2021 standards require cutting temporary access ports into the main supply and return trunks close to the furnace plenum to connect high-volume vacuum collars. Upon service completion, these openings are permanently sealed with heavy 26-gauge galvanized steel patch plates, self-tapping screws, and foil mastic tape."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does negative air cleaning improve furnace and air conditioner efficiency?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Settled debris blankets internal sheet metal surfaces, increasing friction and static air pressure resistance against the furnace blower wheel. By removing compacted debris down to bare metal, negative air cleaning restores designed cubic feet per minute airflow, reducing equipment run times and cutting seasonal utility bills."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a complete negative air trunk cleaning appointment take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A comprehensive negative air cleaning appointment for an average Rockford single-family home typically takes three to four hours. This timeframe allows our two-technician crew to seal all registers, establish negative vacuum containment, pneumatically sweep every supply and return branch, and complete visual camera inspection passes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How often should Rockford homeowners schedule negative air trunk cleaning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "NADCA recommends whole-system negative air cleaning every three to five years under normal residential conditions. Homes with shedding pets, recent construction or remodeling projects, family members with respiratory sensitivities, or older historic Rockford homes should consider inspection every two to three years."
+            }
           }
-        },
-        {
-          "@type": "Question",
-          "name": "Why is household or shop vacuum duct cleaning ineffective?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Standard household and portable shop vacuums produce less than 150 CFM of airflow, which is completely inadequate to lift settled debris inside large twelve-inch galvanized trunk lines. Furthermore, standard vacuums lack sealed HEPA containment, causing fine sub-micron dust and mold spores to exhaust directly back into your home through the vacuum exhaust port."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much airflow capacity is required for whole-home negative air cleaning?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Professional whole-home trunk line cleaning requires between 3,500 and 5,000 CFM of negative airflow capacity. This volume creates high-velocity air movement across the entire cross-section of main trunks, keeping heavy dust particles suspended in the airstream until they reach the primary filtration chamber."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will negative air duct cleaning make a mess in my living areas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Because the ventilation system operates under continuous negative pressure during cleaning, air is constantly drawn inward from your living spaces into the ductwork. Even if a register cover is removed, room air rushes into the vent rather than blowing dust out, guaranteeing spotless living spaces with zero blowback."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do technicians need to cut access holes in the ductwork?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. NADCA ACR 2021 standards require cutting temporary access ports into the main supply and return trunks close to the furnace plenum to connect high-volume vacuum collars. Upon service completion, these openings are permanently sealed with heavy 26-gauge galvanized steel patch plates, self-tapping screws, and foil mastic tape."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does negative air cleaning improve furnace and air conditioner efficiency?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Settled debris blankets internal sheet metal surfaces, increasing friction and static air pressure resistance against the furnace blower wheel. By removing compacted debris down to bare metal, negative air cleaning restores designed cubic feet per minute airflow, reducing equipment run times and cutting seasonal utility bills."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does a complete negative air trunk cleaning appointment take?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A comprehensive negative air cleaning appointment for an average Rockford single-family home typically takes three to four hours. This timeframe allows our two-technician crew to seal all registers, establish negative vacuum containment, pneumatically sweep every supply and return branch, and complete visual camera inspection passes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How often should Rockford homeowners schedule negative air trunk cleaning?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "NADCA recommends whole-system negative air cleaning every three to five years under normal residential conditions. Homes with shedding pets, recent construction or remodeling projects, family members with respiratory sensitivities, or older historic Rockford homes should consider inspection every two to three years."
-          }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
+  },
+  "word_count": 1492
 }

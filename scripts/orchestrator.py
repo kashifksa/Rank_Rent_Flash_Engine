@@ -289,6 +289,16 @@ published: false
     output_file.write_text(full_content, encoding="utf-8")
     print(f"✓ Stitched {output_file.name} ({len(full_content.split())} words)")
     validate_page(page_slug)
+    run_gate(page_slug)
+
+
+def run_gate(page_slug=None):
+    """pipeline_gate.py: page_meta generation + section validation + SEO checks. Returns True when nothing blocks."""
+    import subprocess
+    cmd = [sys.executable, str(SCRIPTS_DIR / "pipeline_gate.py")] + ([page_slug] if page_slug else [])
+    r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=str(ROOT_DIR))
+    print(r.stdout[-6000:])
+    return r.returncode == 0
 
 
 def validate_page(page_slug):
@@ -419,6 +429,9 @@ def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
     print("=" * 72)
 
 
+FORCE_BUILD = False
+
+
 def build_site_v5(template_id="cornerstone", out_folder=None):
     """
     Whole-site export with the section-registry builder (builder/index.html).
@@ -437,6 +450,15 @@ def build_site_v5(template_id="cornerstone", out_folder=None):
         print("ABORTED: fix the section errors above first (python validate_sections.py).")
         return
     print("OK sections match sections_schema.json")
+
+    # 1b. the pipeline gate: generate page_meta from content + brief, then run every SEO/quality check.
+    #     Any FAIL blocks the export (use --force only for a deliberate draft build).
+    if not run_gate():
+        if FORCE_BUILD:
+            print("WARNING: gate failed but --force was given, building anyway (do NOT publish this build).")
+        else:
+            print("ABORTED: fix the blocking issues listed by the gate (python scripts/pipeline_gate.py), or build a draft with --force.")
+            return
 
     # 2. compile md -> builder/js/data.js
     run_compile()
@@ -507,6 +529,7 @@ def main():
     parser.add_argument("--template", default="stitch_modern_industrial", help="Template ID (cornerstone or stitch_modern_industrial)")
     parser.add_argument("--engine", choices=["legacy", "v5"], default="legacy", help="v5 = new section-registry builder (builder/index.html); templates: cornerstone, keystone, industrial")
     parser.add_argument("--out", default=None, help="Output directory for --build-site (e.g. dist_stitch)")
+    parser.add_argument("--force", action="store_true", help="Build even if the pipeline gate has blocking issues (draft builds only)")
     parser.add_argument("--page", help="Page slug (e.g. commercial-hvac-duct-cleaning)")
     parser.add_argument("--type", choices=["service", "location", "blog", "about", "contact"], help="Page type")
 
@@ -544,6 +567,8 @@ def main():
     elif args.compile:
         run_compile()
     elif args.build_site:
+        global FORCE_BUILD
+        FORCE_BUILD = args.force
         if args.engine == "v5":
             build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial") else "cornerstone", out_folder=args.out)
         else:

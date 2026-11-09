@@ -402,7 +402,8 @@ def structure_checks(pid, ptype, body, meta, brief, std, sev, report):
             if node.get("url") and bsite and host(node["url"]) != host(bsite):
                 probs.append(f"schema url {node['url']}")
     page_phones = {digits(m.group(0)) for m in PHONE_RE.finditer(clean_text(body))}
-    odd = [p for p in page_phones if p not in (bphone, "1" + bphone)]
+    ext = {digits(x)[-10:] for x in brief.get("external_phones", [])}  # third-party numbers the project explicitly allows (declared in master_brief.json)
+    odd = [p for p in page_phones if p not in (bphone, "1" + bphone) and p[-10:] not in ext]
     if odd:
         probs.append("page phone(s) " + ", ".join(sorted(odd)))
     street = re.split(r",", nap.get("address", ""))[0].strip()

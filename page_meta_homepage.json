@@ -14,7 +14,7 @@
     "dryer vent cleaning rockford il",
     "HVAC duct cleaning rockford"
   ],
-  "word_count": 2121,
+  "word_count": 2296,
   "schema": {
     "@context": "https://schema.org",
     "@graph": [
@@ -26,11 +26,11 @@
         "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=900&q=80",
         "address": {
           "@type": "PostalAddress",
+          "addressCountry": "US",
           "streetAddress": "1111 S Alpine Rd",
           "addressLocality": "Rockford",
           "addressRegion": "IL",
-          "postalCode": "61108",
-          "addressCountry": "US"
+          "postalCode": "61108"
         },
         "geo": {
           "@type": "GeoCoordinates",
@@ -77,7 +77,9 @@
             "opens": "07:00",
             "closes": "19:00"
           }
-        ]
+        ],
+        "url": "https://rockfordairductpros.com/",
+        "email": "service@rockfordairductpros.com"
       },
       {
         "@type": "FAQPage",
@@ -88,7 +90,7 @@
             "name": "How often should residential air ducts be cleaned?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "According to National Air Duct Cleaners Association (NADCA) guidelines, typical residential ductwork should be inspected every two years and thoroughly cleaned every three to five years."
+              "text": "According to National Air Duct Cleaners Association (NADCA) guidelines, typical residential ductwork should be inspected every two years and thoroughly cleaned every three to five years. Homes with indoor pets, family members with respiratory allergies, recent drywall renovations, or older galvanized sheet metal ductwork benefit from inspections every two to three years."
             }
           },
           {
@@ -96,7 +98,7 @@
             "name": "Will dust or dirt blow into my living room during cleaning?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Certified technicians seal every supply and return register grille throughout your home with airtight protective covers before starting work under continuous negative air pressure."
+              "text": "No. Certified technicians seal every supply and return register grille throughout your home with airtight protective covers before starting work. The entire ventilation system is placed under continuous negative air pressure using a five thousand CFM vacuum system, ensuring all dislodged dust travels directly into sealed containment filtration units rather than living areas."
             }
           },
           {
@@ -104,7 +106,7 @@
             "name": "How long does a thorough residential duct cleaning take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A complete whole-home decontamination for a typical two thousand to twenty-five hundred square-foot Rockford home requires three to four and a half hours."
+              "text": "A complete whole-home decontamination for a typical two thousand to twenty-five hundred square-foot Rockford home requires three to four and a half hours. This includes preliminary fiberoptic camera diagnosis, sealing all registers, mechanical rotary brush scrubbing of all supply and return branches, trunk line vacuuming, and botanical sanitization."
             }
           },
           {
@@ -112,7 +114,7 @@
             "name": "Are the antimicrobial fogging solutions safe for children and pets?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. We apply an EPA-registered botanical antimicrobial fog derived from natural oil of thyme that leaves zero synthetic VOCs or chemical residues."
+              "text": "Yes. We apply an EPA-registered botanical antimicrobial fog derived from natural oil of thyme. It neutralizes mold spores, bacterial colonies, and musty odors on contact without synthetic fragrances, harsh bleaches, or toxic chemical residue, allowing families and pets to safely occupy the home immediately following treatment."
             }
           }
         ]

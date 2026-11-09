@@ -19,6 +19,29 @@ import seo_local as sl
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+SC = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
+
+
+def audit_all(ids):
+    """Full report (incl. location checks) for each page id. Returns [report]. Pages with no content file are skipped."""
+    hub, state, company = sl.brief_info()
+    texts = {}
+    for pid in sa.all_page_ids():
+        fm, body = sa.split_front_matter((sa.ROOT / f"page_content_{pid}.md").read_text(encoding="utf-8", errors="ignore"))
+        texts[pid] = sa.clean_text(body)
+    out = []
+    for pid in ids:
+        r = sa.audit_page(pid)
+        if not r:
+            continue
+        if r["page_type"] == "location":
+            loc = sl.audit_location(pid, texts, hub, state, company)
+            r["checks"] += loc["checks"]
+            r["similarity"] = loc["similarity"]
+            r["score"] = round(sum(SC[c["status"]] for c in r["checks"]) / len(r["checks"]) * 100)
+        out.append(r)
+    return out
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -27,24 +50,8 @@ def main():
     a = ap.parse_args()
 
     ids = [a.page] if a.page else sa.all_page_ids()
-    hub, state, company = sl.brief_info()
-    texts = {}
-    for pid in sa.all_page_ids():
-        fm, body = sa.split_front_matter((sa.ROOT / f"page_content_{pid}.md").read_text(encoding="utf-8", errors="ignore"))
-        texts[pid] = sa.clean_text(body)
-
     warns = fails = 0
-    for pid in ids:
-        r = sa.audit_page(pid)
-        if not r:
-            print(f"skip {pid}: no page_content_{pid}.md")
-            continue
-        if r["page_type"] == "location":
-            loc = sl.audit_location(pid, texts, hub, state, company)
-            r["checks"] += loc["checks"]
-            r["similarity"] = loc["similarity"]
-            sc = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
-            r["score"] = round(sum(sc[c["status"]] for c in r["checks"]) / len(r["checks"]) * 100)
+    for r in audit_all(ids):
         sa.print_report(r)
         warns += sum(c["status"] == "warn" for c in r["checks"])
         fails += sum(c["status"] == "fail" for c in r["checks"])
@@ -55,4 +62,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-
