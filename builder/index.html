@@ -84,11 +84,32 @@
         <div>
           <span class="modal-step">STEP 1 &mdash; CHOOSE YOUR STARTING DESIGN</span>
           <h2>Select a Template for This Website</h2>
-          <p>Pick a template below to lock it as your project's active design. Your content, SEO schema, and images automatically adapt to the chosen template.</p>
+          <p>Hover any template on the left to inspect its live Hero &amp; full page on the right, then click <b>Use This Template</b> to lock it in.</p>
         </div>
         <button type="button" class="btn2" id="closeTplModalBtn">Keep Current Template &#10005;</button>
       </div>
-      <div id="tplGrid" class="tpl-grid"></div>
+      <div class="tpl-split">
+        <div id="tplGrid" class="tpl-list"></div>
+        <div class="tpl-preview-pane">
+          <div class="tpp-bar">
+            <div class="tpp-info">
+              <span class="tpp-lbl">LIVE PREVIEW</span>
+              <b id="tppName">Precision Blueprint Dossier</b>
+              <span id="tppBadge" class="tcard-badge"></span>
+            </div>
+            <div class="seg" id="tppVp">
+              <button type="button" data-pvp="desktop" class="on">Desktop</button>
+              <button type="button" data-pvp="mobile">Mobile</button>
+            </div>
+            <button type="button" class="btn2 primary" id="tppUseBtn">Use This Template &rarr;</button>
+          </div>
+          <div class="tpp-stage">
+            <div id="tppFrameWrap" class="tpp-frame-wrap">
+              <iframe id="tplPreviewFrame" title="Template live preview"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

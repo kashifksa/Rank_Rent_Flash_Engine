@@ -125,35 +125,99 @@
     if ($('#tplModal')) $('#tplModal').hidden = true;
     if (showToast !== false) toast('Locked template: ' + B.tpl().name);
   }
+  let previewTplKey = null, hoverT = null;
+  function buildMiniThumb(k, t, heroImgSrc) {
+    const pri = t.theme.primary, acc = t.theme.accent;
+    const isLightHero = k === 'clean' || k === 'bento' || k === 'atelier' || t.variants.hero === 'split';
+    const bg = k === 'atelier' ? '#f4f0e6' : k === 'bento' ? '#f7f5f0' : k === 'clean' ? '#f3faf8' : pri;
+    const fg = isLightHero ? pri : '#ffffff';
+    const hdrBg = (t.header === 'dark' || t.header === 'console') ? pri : (k === 'atelier' ? '#f4f0e6' : '#ffffff');
+    const hdrFg = (t.header === 'dark' || t.header === 'console') ? '#ffffff' : pri;
+    const centered = t.variants.hero === 'centered' ? ' centered' : '';
+    const rightVisual = t.variants.hero === 'dispatch'
+      ? '<div class="tth-art" style="background:#fff;color:' + pri + ';padding:6px;display:flex;flex-direction:column;justify-content:space-between;border-top:3px solid ' + acc + '"><b style="font-size:7px;color:' + acc + '">LIVE DISPATCH</b><b style="font-size:8.5px">' + esc(D.nap.phone) + '</b><span style="background:' + acc + ';color:#fff;font-size:6.5px;padding:2px 4px;border-radius:2px;text-align:center">Immediate Dispatch</span></div>'
+      : '<div class="tth-art" style="background-image:url(\'' + esc(heroImgSrc) + '\');' + (k === 'atelier' ? 'border:2px solid #141413;border-radius:0;box-shadow:4px 4px 0 #141413' : '') + '"></div>';
+    return '<div class="tcard-thumb" style="background:' + esc(bg) + ';color:' + esc(fg) + '">' +
+      '<div class="tth-hdr" style="background:' + esc(hdrBg) + ';color:' + esc(hdrFg) + ';border-bottom:1px solid rgba(0,0,0,.12)">' +
+      '<span>' + esc((D.nap.company_name || 'BRAND').slice(0, 18)) + '</span>' +
+      '<span class="tth-dots"><i></i><i></i><i></i></span>' +
+      '<span class="tth-cta" style="background:' + esc(acc) + ';color:#fff">CALL</span></div>' +
+      '<div class="tth-body' + centered + '">' +
+      '<div class="tth-copy"><span class="tth-kicker" style="color:' + esc(acc) + '">' + esc(D.brief.city || 'LOCAL') + ' &middot; ' + esc(t.variants.hero.toUpperCase()) + ' HERO</span>' +
+      '<div class="tth-h1">' + esc((D.brief.niche || 'Professional Service') + ' in ' + (D.brief.city || 'Your City')) + '</div>' +
+      '<div class="tth-sub"></div>' +
+      '<div class="tth-btns"><span class="tth-btn" style="background:' + esc(acc) + ';color:#fff">Call Now</span><span class="tth-btn" style="border:1px solid currentColor">Services</span></div></div>' +
+      (centered ? '' : rightVisual) + '</div>' +
+      '<div class="tth-specbar"><span>01 // VERIFIED</span><span>02 // LOCAL HQ</span><span>03 // SAME-DAY</span><span>04 // CERTIFIED</span></div></div>';
+  }
+  function fitModalFrame() {
+    const w = $('#tppFrameWrap'), pf = $('#tplPreviewFrame');
+    if (!w || !pf || w.classList.contains('is-mobile')) { if (pf) { pf.style.width = '100%'; pf.style.height = '100%'; pf.style.transform = 'none'; } return; }
+    const availW = w.clientWidth || 900, targetW = 1380, s = Math.min(1, availW / targetW);
+    pf.style.width = targetW + 'px';
+    pf.style.height = Math.round(100 / s) + '%';
+    pf.style.transform = 'scale(' + s.toFixed(4) + ')';
+  }
+  window.addEventListener('resize', fitModalFrame);
+  function renderModalPreview(k) {
+    if (!B.TEMPLATES[k]) return;
+    previewTplKey = k;
+    const t = B.TEMPLATES[k];
+    if ($('#tppName')) $('#tppName').textContent = t.name;
+    if ($('#tppBadge')) $('#tppBadge').textContent = t.badge;
+    if ($('#tppUseBtn')) $('#tppUseBtn').textContent = 'Use "' + t.name + '" →';
+    document.querySelectorAll('#tplGrid .tcard').forEach(c => c.classList.toggle('previewing', c.dataset.tplCard === k));
+    const savedTpl = B.state.template, savedTheme = B.state.theme, savedPages = JSON.parse(JSON.stringify(B.state.pages || {}));
+    B.state.template = k; B.state.theme = {};
+    Object.keys(B.state.pages || {}).forEach(p => { B.state.pages[p].variants = {}; });
+    const html = B.buildDocument(pid || 'homepage', { preview: true });
+    B.state.template = savedTpl; B.state.theme = savedTheme; B.state.pages = savedPages;
+    const pf = $('#tplPreviewFrame');
+    if (pf) pf.srcdoc = html;
+  }
   function openTplModal() {
     const g = $('#tplGrid'); if (!g) return;
+    const heroImg = ((B.contentImages('homepage')[0]) || {}).filename;
+    const heroImgSrc = heroImg ? '../images/homepage/' + heroImg : '';
     g.innerHTML = Object.keys(B.TEMPLATES).map(k => {
       const t = B.TEMPLATES[k], isCur = k === B.state.template, fn = (B.FONTS[t.theme.font] || {}).label || t.theme.font;
-      const vcount = t.sectionVariants ? Object.keys(t.sectionVariants).length + ' custom section layouts' : ('Header: ' + (t.header || 'classic') + ' | Hero: ' + t.variants.hero + ' | Cards: ' + t.variants.cards);
-      return '<div class="tcard' + (isCur ? ' active' : '') + '">' +
+      const vcount = t.sectionVariants ? Object.keys(t.sectionVariants).length + ' unique section layouts' : ('Header: ' + (t.header || 'classic') + ' | Hero: ' + t.variants.hero + ' | Cards: ' + t.variants.cards);
+      return '<div class="tcard' + (isCur ? ' active' : '') + '" data-tpl-card="' + esc(k) + '">' +
+        buildMiniThumb(k, t, heroImgSrc) +
         '<div class="tcard-top"><div class="tcard-swatches"><span class="tcard-sw" style="background:' + esc(t.theme.primary) + '" title="Primary"></span><span class="tcard-sw" style="background:' + esc(t.theme.accent) + '" title="Accent"></span></div>' +
         '<span class="tcard-badge">' + esc(t.badge) + '</span></div>' +
         '<h3>' + esc(t.name) + (isCur ? ' &#10003;' : '') + '</h3>' +
         '<p>' + esc(t.desc) + '</p>' +
         '<div class="tcard-meta">' + esc(vcount) + ' &middot; ' + esc(fn.split('(')[0].trim()) + '</div>' +
         '<div class="tcard-btns">' +
-        '<button type="button" class="btn2" data-preview-tpl="' + esc(k) + '">Preview Behind</button>' +
         '<button type="button" class="btn2 primary" data-use-tpl="' + esc(k) + '">' + (isCur ? 'Keep This Template' : 'Use This Template') + '</button>' +
         '</div></div>';
     }).join('');
-    g.onclick = e => {
-      const pbtn = e.target.closest('button[data-preview-tpl]');
-      if (pbtn) {
-        const k = pbtn.dataset.previewTpl;
-        B.setTemplate(k); syncTheme(); renderAll();
-        openTplModal();
-        toast('Previewing ' + B.tpl().name + ' — click "Use This Template" to lock it in');
-        return;
+    g.onmouseover = e => {
+      const card = e.target.closest('.tcard');
+      if (!card) return;
+      const k = card.dataset.tplCard;
+      if (k && k !== previewTplKey) {
+        clearTimeout(hoverT);
+        hoverT = setTimeout(() => renderModalPreview(k), 70);
       }
+    };
+    g.onclick = e => {
       const ubtn = e.target.closest('button[data-use-tpl]');
-      if (ubtn) lockTemplate(ubtn.dataset.useTpl, true);
+      if (ubtn) { lockTemplate(ubtn.dataset.useTpl, true); return; }
+      const card = e.target.closest('.tcard');
+      if (card && card.dataset.tplCard) renderModalPreview(card.dataset.tplCard);
+    };
+    if ($('#tppUseBtn')) $('#tppUseBtn').onclick = () => { if (previewTplKey) lockTemplate(previewTplKey, true); };
+    if ($('#tppVp')) $('#tppVp').onclick = e => {
+      const b = e.target.closest('button[data-pvp]'); if (!b) return;
+      document.querySelectorAll('#tppVp button').forEach(x => x.classList.toggle('on', x === b));
+      $('#tppFrameWrap').classList.toggle('is-mobile', b.dataset.pvp === 'mobile');
+      fitModalFrame();
     };
     $('#tplModal').hidden = false;
+    fitModalFrame();
+    renderModalPreview(B.state.template || 'blueprint');
   }
   function openPubModal() {
     $('#pubTplLabel').textContent = B.tpl().name + ' (' + B.state.template + ')';
