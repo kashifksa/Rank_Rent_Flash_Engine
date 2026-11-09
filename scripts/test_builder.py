@@ -120,6 +120,25 @@ def main():
                     diff3.append((pid_, k, pys[k], js3[pid_].get(k)))
         check("Phase 3 checks (JS) match seo_audit.py on every page", not diff3, diff3[:4])
         check("Phase 3 checks exist in the panel", all(k in js3["commercial-hvac-duct-cleaning"] for k in ["word_total", "answer_first", "schema_types", "nap"]))
+        # Phase 4 link / cannibalization checks: same verdicts in the panel and in seo_audit.py
+        P4 = ["links_planned", "links_broken", "links_contextual", "links_self", "anchors", "cannibal", "blog_intent", "location_hub"]
+        diff4 = []
+        for pid_ in js3:
+            py = seo_audit.audit_page(pid_)
+            if not py:
+                continue
+            pys = {c["id"]: c["status"] for c in py["checks"]}
+            js_now = pg.evaluate("(id) => Object.fromEntries(Builder.seoAudit(id).checks.map(c => [c.id, c.status]))", pid_)
+            for k in P4:
+                if k in pys and js_now.get(k) != pys[k]:
+                    diff4.append((pid_, k, pys[k], js_now.get(k)))
+        check("Phase 4 link checks (JS) match seo_audit.py on every page", not diff4, diff4[:4])
+        # a link to an unbuilt page must FAIL, a link to a live page must pass
+        r4 = pg.evaluate("""() => { const B = Builder, m = B.editModel('commercial-hvac-duct-cleaning', '09_faq');
+          m.paras = (m.paras || []).concat(['See [air duct cleaning in Belvidere](air-duct-cleaning-belvidere-il.html) and [dryer vents](dryer-vent-cleaning-and-lint-removal.html).']);
+          const r = Builder.seoAudit('commercial-hvac-duct-cleaning'); const o = Object.fromEntries(r.checks.map(c => [c.id, c.status]));
+          B.resetSection('commercial-hvac-duct-cleaning', '09_faq'); return o; }""")
+        check("link to an unbuilt page fails (planned-link rule)", r4.get("links_planned") == "fail", r4)
         check("non-location pages do not get location checks", "similarity" not in dict(pg.evaluate("() => Builder.seoAudit('commercial-hvac-duct-cleaning').checks.map(c => [c.id, c.status])")))
         before = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
         pg.evaluate("""() => { const B = Builder, m = B.editModel('homepage', 'intro');

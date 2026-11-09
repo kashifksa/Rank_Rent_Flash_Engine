@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-compile_builder_data.py — Dynamic Pipeline-to-Builder Compiler
+compile_builder_data.py â€” Dynamic Pipeline-to-Builder Compiler
 ==============================================================
 Reads master_brief.json + topical_authority.json + all page_content_[slug].md files
 AND all templates/*.html files, compiles them into scripts/builder_data.js, and
@@ -198,6 +198,7 @@ def write_v5_data(compiled):
         },
         "schema": SCHEMA,
         "seo": load_json_safe(BASE_DIR / "seo_standards.json"),
+        "planned": sorted({tp.get("page_id") for tp in topical.get("pages", []) if tp.get("page_id")} - set(pages.keys())),
         "brand": brand,
         "pages": pages,
         "defaultState": default_state,
@@ -205,7 +206,7 @@ def write_v5_data(compiled):
     out = BASE_DIR / "builder" / "js" / "data.js"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("window.BUILDER_DATA = " + json.dumps(data, indent=1, ensure_ascii=False) + ";\n", encoding="utf-8")
-    print(f"✓ Wrote {len(pages)} pages -> {out}")
+    print(f"âœ“ Wrote {len(pages)} pages -> {out}")
 
 
 def compile_all_pages(sync_builder_html=True):
@@ -262,7 +263,7 @@ def compile_all_pages(sync_builder_html=True):
 
     out_path = BASE_DIR / "scripts" / "builder_data.js"
     out_path.write_text(combined_js, encoding="utf-8")
-    print(f"✓ Compiled {len(compiled)} pipeline pages + {len(templates_html)} Stitch archetype files -> {out_path}")
+    print(f"âœ“ Compiled {len(compiled)} pipeline pages + {len(templates_html)} Stitch archetype files -> {out_path}")
 
     if sync_builder_html:
         builder_path = BASE_DIR / "studio_builder.html"
@@ -273,7 +274,7 @@ def compile_all_pages(sync_builder_html=True):
             if re.search(pattern, html_text):
                 new_html = re.sub(pattern, lambda _: replacement, html_text, count=1)
                 builder_path.write_text(new_html, encoding="utf-8")
-                print(f"✓ Synced window.BUILDER_PAGES_DATA & window.STITCH_TEMPLATES_HTML inside studio_builder.html")
+                print(f"âœ“ Synced window.BUILDER_PAGES_DATA & window.STITCH_TEMPLATES_HTML inside studio_builder.html")
 
     write_v5_data(compiled)
     return compiled

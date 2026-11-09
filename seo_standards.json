@@ -52,6 +52,16 @@
       "contact": [["ContactPage", "LocalBusiness", "HVACBusiness"]]
     }
   },
+  "links": {
+    "_comment": "Phase 4. Live pages = pages the builder renders. Links must target a live page; planned-but-unbuilt pages must stay plain text (AGENTS.md). Cannibalization compares each page's keyword with every other page.",
+    "excluded_pages": ["residential-air-duct-cleaning"],
+    "min_contextual_links": 2,
+    "max_same_anchor": 2,
+    "generic_anchors": ["click here", "read more", "learn more", "here", "this page", "this link", "more", "link"],
+    "cannibal_jaccard": 0.6,
+    "blog_informational": ["how to", "how do", "how does", "signs of", "sign", "guide", "what is", "what are", "when to", "why", " vs ", "versus", "spot", "tips", "mistakes", "myths", "checklist"],
+    "blog_transactional": ["near me", "company", "companies", "cost", "price", "pricing", "cheap", "hire", "quote", "services", "service"]
+  },
   "page_type_overrides": {
     "blog": { "slug_exempt_page_types": [] },
     "contact": { "required_in": ["h1", "first_words", "meta_title", "meta_description"] },

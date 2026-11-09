@@ -136,6 +136,73 @@
     add('nap', 'Name, address and phone match the brief (schema + page)', probs.length ? 'fail' : 'pass', probs.length ? 'Mismatch: ' + probs.slice(0, 4).join('; ') : 'Consistent.');
   }
 
+  /* ---- Phase 4: internal links, anchors, cannibalization (mirrors link_checks in scripts/seo_audit.py) ---- */
+  const LINK_RE = /(^|[^!])\[([^\]]+)\]\(([^)\s]+)\)/g;
+  function resolveLink(href, live) {
+    let h = href.split('#')[0].split('?')[0].trim();
+    if (!h || /^(?:https?:|mailto:|tel:)/.test(h)) return null;
+    h = h.replace(/^\/+|\/+$/g, '');
+    if (h === '' || h === 'index' || h === 'index.html') return 'homepage';
+    h = h.replace(/\.html?$/, '');
+    return live.has(h) ? h : '?' + h;
+  }
+  function splitKw(kw, city, state, extra) {
+    const loc = new Set([...raw(city), ...raw(state), ...extra]), t = nt(kw);
+    return [new Set(t.filter(x => !loc.has(x))), new Set(t.filter(x => loc.has(x)))];
+  }
+  const inter = (a, b) => [...a].filter(x => b.has(x));
+
+  function linkChecks(pid, page, secs, rep, sev, kw) {
+    const L = (D.seo || {}).links; if (!L) return;
+    const add = (id, label, st, detail) => rep.checks.push({ id, label, status: st, detail }), okSt = ok => ok ? 'pass' : sev;
+    const live = new Set(Object.keys(D.pages)), planned = new Set(D.planned || []), company = (D.nap.company_name || '').trim().toLowerCase();
+    const text = secs.map(s => s.md).join('\n\n').replace(/<!--[\s\S]*?-->/g, ''), internal = [];
+    let m; LINK_RE.lastIndex = 0;
+    while ((m = LINK_RE.exec(text))) { const t = resolveLink(m[3].trim(), live); if (t !== null) internal.push([m[2].trim(), m[3].trim(), t]); }
+
+    const broken = internal.filter(x => x[2].startsWith('?')), ghost = broken.filter(x => planned.has(x[1].split('#')[0].replace(/^\/+|\/+$/g, '').replace(/\.html$/, '')));
+    const unknown = broken.filter(x => ghost.indexOf(x) < 0);
+    add('links_planned', 'No links to planned-but-unbuilt pages', ghost.length ? 'fail' : 'pass', ghost.length ? 'Plain text only until live (log in pending_links.json): ' + ghost.slice(0, 4).map(x => "'" + x[0] + "' -> " + x[1]).join('; ') : 'None.');
+    add('links_broken', 'Every internal link points to a live page', unknown.length ? 'fail' : 'pass', unknown.length ? 'Broken: ' + unknown.slice(0, 4).map(x => "'" + x[0] + "' -> " + x[1]).join('; ') : 'All resolve.');
+
+    const ctx = new Set(internal.filter(x => !x[2].startsWith('?') && x[2] !== pid && x[2] !== 'homepage' && x[0].toLowerCase() !== company).map(x => x[2]));
+    add('links_contextual', 'At least ' + L.min_contextual_links + ' contextual links to other live pages', okSt(ctx.size >= L.min_contextual_links), ctx.size + ' linked page(s): ' + ([...ctx].sort().join(', ') || 'none') + '. Contextual links help users and spread relevance between related pages.');
+    const selfl = internal.filter(x => x[2] === pid).map(x => x[0]);
+    add('links_self', 'No links pointing to the same page', okSt(!selfl.length), selfl.length ? 'Self-links: ' + selfl.slice(0, 3).join(', ') : 'None.');
+
+    const anchors = internal.filter(x => x[0].toLowerCase() !== company).map(x => [x[0].toLowerCase(), x[2]]), cnt = {};
+    anchors.forEach(a => { cnt[a[0]] = (cnt[a[0]] || 0) + 1; });
+    const generic = [...new Set(anchors.map(a => a[0]).filter(a => (L.generic_anchors || []).indexOf(a) > -1))].sort();
+    const same = Object.keys(cnt).filter(a => cnt[a] > L.max_same_anchor);
+    const splitT = [...new Set(anchors.map(a => a[0]))].filter(a => new Set(anchors.filter(x => x[0] === a).map(x => x[1])).size > 1);
+    const probs = [];
+    if (generic.length) probs.push('generic anchor(s): ' + generic.join(', '));
+    if (same.length) probs.push('anchor used more than ' + L.max_same_anchor + 'x: ' + same.join(', '));
+    if (splitT.length) probs.push('same anchor for different pages: ' + splitT.join(', '));
+    add('anchors', 'Descriptive, varied anchor text', okSt(!probs.length), probs.length ? probs.join('; ') : 'Good.');
+
+    if (!kw) return;
+    const extra = ((D.seo.primary_keyword || {}).variant_drop_trailing_tokens) || [];
+    const [core, loc] = splitKw(kw, page.city || D.brief.city, D.brief.state, extra), clash = [];
+    Object.keys(D.pages).sort().forEach(o => {
+      if (o === pid) return; const op = D.pages[o]; if (!op.keyword) return;
+      const [oc, ol] = splitKw(op.keyword, op.city || D.brief.city, D.brief.state, extra);
+      if (!core.size || !oc.size) return;
+      const jac = inter(core, oc).length / new Set([...core, ...oc]).size;
+      if (jac >= L.cannibal_jaccard && (inter(loc, ol).length || (!loc.size && !ol.size))) clash.push(o + ' (' + Math.floor(jac * 100) + '% same topic)');
+    });
+    add('cannibal', 'Keyword does not compete with another page', okSt(!clash.length), clash.length ? 'Same topic and place as: ' + clash.slice(0, 3).join('; ') : 'Unique target.');
+    if (page.type === 'blog') {
+      const k = ' ' + kw.toLowerCase() + ' ', info = (L.blog_informational || []).some(w => k.indexOf(w) > -1);
+      const trans = (L.blog_transactional || []).filter(w => new RegExp('\\b' + esc(w.trim()) + '\\b').test(k));
+      add('blog_intent', 'Blog keyword is informational, not transactional', okSt(info && !trans.length), (info ? 'Informational.' : 'No informational marker (how to, signs of, guide, what is, vs...).') + (trans.length ? ' Transactional words: ' + trans.join(', ') + '.' : ''));
+    }
+    if (page.type === 'location') {
+      const hub = (D.brief.city || '').toLowerCase(), has = nt(kw).indexOf(hub) > -1;
+      add('location_hub', 'Location keyword targets the satellite city, not the hub (FIX 32)', has ? 'fail' : 'pass', has ? "Keyword contains hub city '" + hub + "'." : 'Targets the satellite city.');
+    }
+  }
+
   B.seoAudit = function (pid) {
     const std = D.seo || {}, page = B.page(pid); if (!std.primary_keyword || !page) return null;
     const cfg = Object.assign({}, std.primary_keyword, (std.page_type_overrides || {})[page.type] || {});
@@ -205,6 +272,7 @@
     if (page.type === 'location') localChecks(pid, page, secs, body, rt, rep, sev);
 
     structureChecks(pid, page, secs, body, rep, sev);
+    linkChecks(pid, page, secs, rep, sev, kw);
 
     const sc = { pass: 1, info: 1, warn: 0.5, fail: 0 };
     rep.score = Math.round(rep.checks.reduce((a, c) => a + sc[c.status], 0) / rep.checks.length * 100);

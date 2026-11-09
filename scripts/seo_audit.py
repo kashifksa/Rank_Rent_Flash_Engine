@@ -279,6 +279,7 @@ def audit_page(pid, std=None):
                              "detail": "All sections OK." if not over else "Over limit: " + ", ".join(over)})
 
     structure_checks(pid, ptype, body, meta, brief, std, sev, report)
+    link_checks(pid, ptype, body, brief, std, sev, report, kw, city, state)
 
     scores = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
     report["score"] = round(sum(scores[c["status"]] for c in report["checks"]) / len(report["checks"]) * 100)
@@ -408,6 +409,120 @@ def structure_checks(pid, ptype, body, meta, brief, std, sev, report):
     if wrong_addr:
         probs.append("a street address on the page differs from the brief")
     add("nap", "Name, address and phone match the brief (schema + page)", "pass" if not probs else "fail", "Consistent." if not probs else "Mismatch: " + "; ".join(probs[:4]))
+
+
+LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)\s]+)\)")
+
+
+def keyword_for(pid):
+    md = ROOT / f"page_content_{pid}.md"
+    if not md.exists():
+        return "", "", ""
+    fm, _ = split_front_matter(md.read_text(encoding="utf-8", errors="ignore"))
+    meta = load_json(ROOT / f"page_meta_{pid}.json")
+    brief = load_json(ROOT / "master_brief.json")
+    kw = (fm.get("primary_keyword") or meta.get("target_keyword") or "").strip()
+    if not kw:
+        for tp in load_json(ROOT / "topical_authority.json").get("pages", []):
+            if tp.get("page_id") == pid:
+                kw = (tp.get("target_keyword") or "").strip()
+    return kw, fm.get("city") or meta.get("city") or brief.get("city", ""), fm.get("state") or meta.get("state") or brief.get("state", "")
+
+
+def split_kw(kw, city, state, extra):
+    """keyword tokens -> (core tokens, location tokens). Location = this page's own city/state words."""
+    loc = set(tokens(city or "")) | set(tokens(state or "")) | set(extra)
+    t = tokens(kw)
+    return {x for x in t if x not in loc}, {x for x in t if x in loc}
+
+
+def resolve_link(href, live_files):
+    h = href.split("#")[0].split("?")[0].strip()
+    if not h or re.match(r"^(?:https?:|mailto:|tel:)", h):
+        return None  # anchor-only or external
+    h = h.strip("/")
+    if h in ("", "index", "index.html"):
+        return "homepage"
+    h = re.sub(r"\.html?$", "", h)
+    return h if h in live_files else "?" + h
+
+
+def link_checks(pid, ptype, body, brief, std, sev, report, kw, city, state):
+    """Phase 4: internal link integrity, anchor variety, cannibalization."""
+    L = std.get("links", {})
+    if not L:
+        return
+    add = lambda cid, label, st, detail: report["checks"].append({"id": cid, "status": st, "label": label, "detail": detail})
+    ok_st = lambda ok: "pass" if ok else sev
+    excluded = set(L.get("excluded_pages", []))
+    live = {p for p in all_page_ids() if p not in excluded}
+    planned = {tp.get("page_id") for tp in load_json(ROOT / "topical_authority.json").get("pages", []) if tp.get("page_id")} - live
+    company = (brief.get("nap", {}).get("company_name") or "").strip().lower()
+
+    sch = load_json(ROOT / "sections_schema.json").get("page_types", {}).get(ptype, {})
+    live_ids = {s["id"] for s in sch.get("sections", []) if s.get("live", True)}
+    secs = [(s, t) for s, t in split_sections(body) if s in live_ids] or split_sections(body)
+    text = "\n\n".join(t for _, t in secs)
+    links = []
+    for m in LINK_RE.finditer(re.sub(r"<!--[\s\S]*?-->", "", text)):
+        links.append((m.group(1).strip(), m.group(2).strip(), resolve_link(m.group(2).strip(), live)))
+    internal = [(a, h, t) for a, h, t in links if t is not None]
+
+    broken = [(a, h) for a, h, t in internal if t.startswith("?")]
+    ghost = [(a, h) for a, h in broken if h.split("#")[0].strip("/").replace(".html", "") in planned]
+    unknown = [x for x in broken if x not in ghost]
+    if ghost:
+        add("links_planned", "No links to planned-but-unbuilt pages", "fail", "Plain text only until live (log in pending_links.json): " + "; ".join(f"'{a}' -> {h}" for a, h in ghost[:4]))
+    else:
+        add("links_planned", "No links to planned-but-unbuilt pages", "pass", "None.")
+    add("links_broken", "Every internal link points to a live page", "pass" if not unknown else "fail",
+        "All resolve." if not unknown else "Broken: " + "; ".join(f"'{a}' -> {h}" for a, h in unknown[:4]))
+
+    ctx = {t for a, h, t in internal if t and not t.startswith("?") and t != pid and t != "homepage" and a.strip().lower() != company}
+    add("links_contextual", f"At least {L['min_contextual_links']} contextual links to other live pages", ok_st(len(ctx) >= L["min_contextual_links"]),
+        f"{len(ctx)} linked page(s): {', '.join(sorted(ctx)) or 'none'}. Contextual links help users and spread relevance between related pages.")
+    selfl = [a for a, h, t in internal if t == pid]
+    add("links_self", "No links pointing to the same page", ok_st(not selfl), "None." if not selfl else f"Self-links: {', '.join(selfl[:3])}")
+
+    anchors = [(a.lower(), t) for a, h, t in internal if a.strip().lower() != company]
+    generic = sorted({a for a, _ in anchors if a in L.get("generic_anchors", [])})
+    from collections import Counter
+    same = [a for a, c in Counter(a for a, _ in anchors).items() if c > L["max_same_anchor"]]
+    split_t = [a for a in {x for x, _ in anchors} if len({t for x, t in anchors if x == a}) > 1]
+    probs = []
+    if generic: probs.append("generic anchor(s): " + ", ".join(generic))
+    if same: probs.append(f"anchor used more than {L['max_same_anchor']}x: " + ", ".join(same))
+    if split_t: probs.append("same anchor for different pages: " + ", ".join(split_t))
+    add("anchors", "Descriptive, varied anchor text", ok_st(not probs), "Good." if not probs else "; ".join(probs))
+
+    # ---- cannibalization (this page's keyword vs every other live page)
+    if kw:
+        extra = std["primary_keyword"].get("variant_drop_trailing_tokens", [])
+        core, loc = split_kw(kw, city, state, extra)
+        clash = []
+        for o in sorted(live):
+            if o == pid:
+                continue
+            okw, ocity, ostate = keyword_for(o)
+            if not okw:
+                continue
+            ocore, oloc = split_kw(okw, ocity, ostate, extra)
+            if not core or not ocore:
+                continue
+            jac = len(core & ocore) / len(core | ocore)
+            if jac >= L["cannibal_jaccard"] and (loc & oloc or (not loc and not oloc)):
+                clash.append(f"{o} ({int(jac * 100)}% same topic)")
+        add("cannibal", "Keyword does not compete with another page", ok_st(not clash), "Unique target." if not clash else "Same topic and place as: " + "; ".join(clash[:3]))
+        if ptype == "blog":
+            k = " " + kw.lower() + " "
+            info = any(w in k for w in L.get("blog_informational", []))
+            trans = [w for w in L.get("blog_transactional", []) if re.search(r"\b" + re.escape(w.strip()) + r"\b", k)]
+            add("blog_intent", "Blog keyword is informational, not transactional", ok_st(info and not trans),
+                ("Informational." if info else "No informational marker (how to, signs of, guide, what is, vs...).") + (f" Transactional words: {', '.join(trans)}." if trans else ""))
+        if ptype == "location":
+            hub = (brief.get("city") or "").lower()
+            add("location_hub", "Location keyword targets the satellite city, not the hub (FIX 32)", "pass" if hub not in tokens(kw) else "fail",
+                "Targets the satellite city." if hub not in tokens(kw) else f"Keyword contains hub city '{hub}'.")
 
 
 def all_page_ids():
