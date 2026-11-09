@@ -406,7 +406,7 @@
       if (mode === 'cards' && !cards.length && pairs.length) mode = 'slider';
       if (mode === 'slider') {
         const tabs = pairs.length > 1 ? '<div class="ba-tabs">' + pairs.map((p, i) => '<button type="button" class="ba-tab' + (i ? '' : ' on') + '" data-i="' + i + '">' + esc(p.label || ('Case ' + (i + 1))) + '</button>').join('') + '</div>' : '';
-        const cases = pairs.map((p, i) => '<div class="ba-case"' + (i ? ' hidden' : '') + '><div class="ba-slider"><img src="' + esc(c.src(p.before)) + '" alt="Before cleaning"><img class="aft" src="' + esc(c.src(p.after)) + '" alt="After cleaning">' +
+        const cases = pairs.map((p, i) => '<div class="ba-case"' + (i ? ' hidden' : '') + '><div class="ba-slider"><img src="' + esc(c.src(p.before)) + '" alt="Before service"><img class="aft" src="' + esc(c.src(p.after)) + '" alt="After service">' +
           '<span class="tg a">AFTER</span><span class="tg b">BEFORE</span><span class="bar"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider"></div>' +
           (p.caption ? '<p class="ba-cap">' + inline(p.caption) + '</p>' : '') + '</div>').join('');
         return '<div class="wrap">' + h + '<div class="ba-wrap">' + tabs + cases + '</div>' + strip + '</div>';
@@ -436,9 +436,11 @@
     label: 'Contact form', variants: ['card'],
     render(m, c) {
       const f = (l, t, extra) => '<div><label>' + l + '</label><input type="' + (t || 'text') + '" ' + (extra || '') + '></div>';
+      const svcs = Object.values((window.BUILDER_DATA || {}).pages || {}).filter(p => p.type === 'service').map(p => p.nav || p.title);
+      const opts = [c.brief.niche || 'Primary Service'].concat(svcs).filter(Boolean).map(s => '<option>' + esc(s) + '</option>').join('');
       return '<div class="wrap"><div class="split"><div><h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') + '</div>' +
         '<form class="form" onsubmit="event.preventDefault();alert(\'Thanks! We will call you shortly.\')">' + f('Full name', 'text', 'required') + f('Phone number', 'tel', 'required') + f('Service address') +
-        '<div><label>Service needed</label><select><option>Residential duct cleaning</option><option>Commercial HVAC</option><option>Dryer vent</option><option>Camera inspection</option></select></div>' +
+        '<div><label>Service needed</label><select>' + opts + '</select></div>' +
         '<div><label>Details</label><textarea rows="3"></textarea></div><button class="btn btn-primary" type="submit">Request a call back</button></form></div></div>';
     }
   };

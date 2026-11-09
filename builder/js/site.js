@@ -237,7 +237,7 @@
           const key = s.replace(/before|after/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
           (map[key] = map[key] || {})[/before/.test(s) ? 'before' : 'after'] = i.filename;
         });
-        return Object.keys(map).filter(k => map[k].before && map[k].after).map((k, n) => ({ before: map[k].before, after: map[k].after, label: 'Case ' + String(n + 1).padStart(2, '0') + ': ' + pretty(k || 'Cleaning'), caption: '' }));
+        return Object.keys(map).filter(k => map[k].before && map[k].after).map((k, n) => ({ before: map[k].before, after: map[k].after, label: 'Case ' + String(n + 1).padStart(2, '0') + ': ' + pretty(k || 'Service'), caption: '' }));
       }
     };
   };
