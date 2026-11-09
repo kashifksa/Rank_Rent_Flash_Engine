@@ -548,6 +548,8 @@ def sync_browser_local_storage():
     candidates.sort(key=lambda x: (x[2].get("lastUpdateClick", ""), x[0], x[1]), reverse=True)
     latest_obj = candidates[0][2]
     st = load_json(BUILDER_STATE_FILE)
+    if st.get("lastUpdateClick", "") > latest_obj.get("lastUpdateClick", ""):
+        return st
     if st.get("githubRepo") and not latest_obj.get("githubRepo"):
         latest_obj["githubRepo"] = st["githubRepo"]
     latest_obj["lockedTemplate"] = True
