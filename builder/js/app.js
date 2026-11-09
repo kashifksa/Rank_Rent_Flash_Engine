@@ -137,9 +137,12 @@
     if (d.b5 === 'select') select(d.sid, false);
     else if (d.b5 === 'scroll') lastY = d.y;
     else if (d.b5 === 'nav') {
-      const file = String(d.href).split('#')[0].replace(/^\.?\//, '');
+      const parts = String(d.href).split('#'), file = parts[0].replace(/^\.?\//, ''), hash = parts[1] || '';
       const hit = B.pageIds().find(p => B.fileName(p) === file);
-      if (hit) go(hit); else toast('Link: ' + d.href);
+      if (hit) {
+        if (hit !== pid) go(hit);
+        if (hash) { const sid = hash.replace(/^sec-/, ''); setTimeout(() => { if (B.sectionList(pid).indexOf(sid) > -1) select(sid, true); }, 180); }
+      } else toast('Link: ' + d.href);
     }
   });
 

@@ -202,6 +202,11 @@ def main():
         check("saved edit dropped when its source text changes (no drift)", pg.evaluate("""() => { const B=Builder; const sid='services-grid'; B.editModel('homepage',sid);
           B.ps('homepage').srcHash[sid]='x'; return B.reconcile() >= 1; }"""))
         pg.reload(); pg.wait_for_timeout(800)
+        fl = pg.frame_locator("#frame")
+        fl.locator("a[href^='#']").first.click()
+        pg.wait_for_timeout(300)
+        nested_builder = fl.locator("#tplSel").count()
+        check("clicking #hash link in preview never loads builder inside #frame", nested_builder == 0, nested_builder)
         pg.screenshot(path=str(SHOTS / "builder_home.png"))
         b.close()
     check("no console / page errors", not errors, errors[:4])
