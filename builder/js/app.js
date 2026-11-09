@@ -72,7 +72,8 @@
     $('#tplSel').onchange = e => { lockTemplate(e.target.value, false); };
     if ($('#openTplModalBtn')) $('#openTplModalBtn').onclick = () => openTplModal();
     if ($('#closeTplModalBtn')) $('#closeTplModalBtn').onclick = () => { $('#tplModal').hidden = true; };
-    if ($('#pubBtn')) $('#pubBtn').onclick = () => openPubModal();
+    if ($('#pubBtn')) $('#pubBtn').onclick = () => quickUpdateToGithub();
+    if ($('#pubCfgBtn')) $('#pubCfgBtn').onclick = () => openPubModal();
     if ($('#closePubModalBtn')) $('#closePubModalBtn').onclick = () => { $('#pubModal').hidden = true; };
     if ($('#pubNowBtn')) $('#pubNowBtn').onclick = publishNow;
     if ($('#pubCopyCmdBtn')) $('#pubCopyCmdBtn').onclick = copyPublishCmd;
@@ -220,6 +221,36 @@
     $('#tplModal').hidden = false;
     fitModalFrame();
     renderModalPreview(B.state.template || 'blueprint');
+  }
+  function quickUpdateToGithub() {
+    const repo = (B.state.githubRepo || ($('#pubRepoUrl') && $('#pubRepoUrl').value) || '').trim();
+    B.state.page = pid;
+    B.state.lockedTemplate = true;
+    B.state.githubRepo = repo;
+    B.state.lastUpdateClick = new Date().toISOString();
+    try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {}
+    syncStateToDisk();
+    const btn = $('#pubBtn');
+    const orig = btn ? btn.innerHTML : '&#10227; Update to GitHub';
+    if (btn) btn.textContent = '⟳ Updating GitHub...';
+    toast('Saving "' + B.tpl().name + '" & updating GitHub...');
+    fetch(API_BASE + '/api/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ state: B.state, repo: repo }) })
+      .then(r => r.json())
+      .then(res => {
+        if (res.ok) {
+          if (btn) btn.textContent = '✓ Updated on GitHub!';
+          toast('✓ Pushed "' + B.tpl().name + '" to GitHub!');
+        } else {
+          if (btn) btn.textContent = '✓ Saved (' + B.tpl().name + ')';
+          toast('✓ Changes saved — tell agent "push"');
+        }
+        setTimeout(() => { if (btn) btn.innerHTML = orig; }, 3500);
+      })
+      .catch(() => {
+        if (btn) btn.textContent = '✓ Ready to Push (' + B.tpl().name + ')';
+        toast('✓ Changes saved (' + B.tpl().name + ') — tell agent "push"!');
+        setTimeout(() => { if (btn) btn.innerHTML = orig; }, 3500);
+      });
   }
   function openPubModal() {
     $('#pubTplLabel').textContent = B.tpl().name + ' (' + B.state.template + ')';

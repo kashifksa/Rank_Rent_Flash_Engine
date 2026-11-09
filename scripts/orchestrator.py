@@ -545,7 +545,7 @@ def sync_browser_local_storage():
                     pass
     if not candidates:
         return None
-    candidates.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    candidates.sort(key=lambda x: (x[2].get("lastUpdateClick", ""), x[0], x[1]), reverse=True)
     latest_obj = candidates[0][2]
     st = load_json(BUILDER_STATE_FILE)
     if st.get("githubRepo") and not latest_obj.get("githubRepo"):
@@ -709,7 +709,7 @@ def publish_to_github(repo_url: str, template_id=None):
     print("=" * 72)
 
 
-def serve_builder(port=8765):
+def serve_builder(port=8765, open_browser=True):
     """Run local Studio Builder server so template lock, edits, and 1-click GitHub publish work directly in the browser."""
     import http.server
     import webbrowser
@@ -774,10 +774,11 @@ def serve_builder(port=8765):
     print("  2. Customize your pages")
     print("  3. Click 'Publish to GitHub' in the top bar for 1-click deployment")
     print("=" * 72)
-    try:
-        webbrowser.open(url)
-    except Exception:
-        pass
+    if open_browser:
+        try:
+            webbrowser.open(url)
+        except Exception:
+            pass
     with http.server.ThreadingHTTPServer(("127.0.0.1", port), BuilderHandler) as httpd:
         httpd.serve_forever()
 
@@ -794,6 +795,7 @@ def main():
     parser.add_argument("--save-golden", action="store_true", help="Save stitched page as a golden example")
     parser.add_argument("--compile", action="store_true", help="Compile all page_content_*.md files into Studio Builder")
     parser.add_argument("--serve", action="store_true", help="Launch Studio Builder in browser with live template lock & 1-click GitHub publish")
+    parser.add_argument("--no-open", action="store_true", help="Do not open browser window when starting --serve")
     parser.add_argument("--publish", metavar="REPO_URL", help="Build locked template into dist/ and push static site to GitHub repo URL")
     parser.add_argument("--build-site", action="store_true", help="Generate complete multi-page website using chosen/locked template")
     parser.add_argument("--template", default=None, help="Template ID (if omitted, uses the locked template in builder_state.json)")
@@ -844,7 +846,7 @@ def main():
     elif args.compile:
         run_compile()
     elif args.serve:
-        serve_builder()
+        serve_builder(open_browser=not args.no_open)
     elif args.publish:
         publish_to_github(args.publish, template_id=args.template)
     elif args.build_site:
