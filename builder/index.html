@@ -23,6 +23,7 @@
       <button data-vp="mobile" title="Mobile">Mobile</button>
     </div>
     <button class="btn2" id="themeBtn">Theme</button>
+    <button class="btn2" id="seoBtn" title="Primary keyword + density audit (warn-only)">SEO <span id="seoScore" class="seoScore">-</span></button>
     <div class="menu">
       <button class="btn2 primary" id="exportBtn">Export &#9662;</button>
       <div class="menu-list" id="exportMenu">
@@ -70,6 +71,7 @@
     <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="thFooterLogo"> Logo in footer</label>
     <small id="logoNote" style="color:var(--muted);line-height:1.4"></small>
   </div>
+  <div id="seoPop" class="pop seo-pop" hidden></div>
   <div id="toast"></div>
 </div>
 <script src="js/data.js"></script>
@@ -78,6 +80,7 @@
 <script src="js/templates.js"></script>
 <script src="js/blocks.js"></script>
 <script src="js/site.js"></script>
+<script src="js/seo.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

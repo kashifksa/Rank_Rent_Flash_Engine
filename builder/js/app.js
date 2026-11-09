@@ -9,7 +9,24 @@
   function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200); }
   function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
   function setPath(o, p, v) { const k = p.split('.'); const last = k.pop(); const t = k.reduce((a, x) => a[x], o); t[last] = v; }
-  function save() { clearTimeout(saveT); saveT = setTimeout(() => { B.state.page = pid; try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {} }, 250); }
+  function save() { clearTimeout(saveT); saveT = setTimeout(() => { B.state.page = pid; try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {} seoRefresh(); }, 250); }
+
+  /* ---------- SEO audit (primary keyword + density, warn-only) ---------- */
+  function seoRefresh() {
+    if (!B.seoAudit) return;
+    const r = B.seoAudit(pid), b = $('#seoScore'); if (!b) return;
+    b.textContent = r ? r.score : '-';
+    b.className = 'seoScore' + (r ? (r.score >= 85 ? ' good' : r.score >= 60 ? ' mid' : ' bad') : '');
+    if (!$('#seoPop').hidden) renderSeo(r);
+  }
+  function renderSeo(r) {
+    r = r || B.seoAudit(pid); const box = $('#seoPop'); if (!r) { box.innerHTML = '<h4>SEO</h4><small>No SEO standards loaded.</small>'; return; }
+    const d = r.density, tag = { pass: 'PASS', warn: 'WARN', fail: 'FAIL' };
+    box.innerHTML = '<h4>SEO audit <small>warn-only, updates as you type</small></h4>' +
+      '<div class="kw">Primary keyword: <b>' + esc(r.keyword || '(none)') + '</b>' + (d ? '<br>' + d.total + ' words | exact ' + d.exact + 'x (' + d.exactPct + '%) | variant "' + esc(d.variant) + '" +' + d.variantOnly + 'x | <b>combined ' + d.combinedPct + '%</b> (target ' + d.target[0] + '-' + d.target[1] + '%)' : '') + '</div>' +
+      r.checks.map(c => '<div class="seo-row ' + c.status + '"><div class="st">' + tag[c.status] + '</div><div><b>' + esc(c.label) + '</b><span>' + esc(c.detail) + '</span></div></div>').join('') +
+      (r.sections.length ? '<div class="seo-heat"><b style="font-size:11px">Keyword density by section</b>' + r.sections.map(s => '<div><span>' + esc(s.label) + '</span><i class="' + (s.flag ? 'over' : '') + '" style="width:' + Math.min(100, s.pct * 25) + '%"></i><span>' + s.pct + '%</span></div>').join('') + '</div>' : '');
+  }
   function download(name, text, type) {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([text], { type: type || 'text/html;charset=utf-8' })); a.download = name; a.click();
@@ -47,7 +64,8 @@
       document.querySelectorAll('#vpSeg button').forEach(x => x.classList.toggle('on', x === b));
       $('#frameWrap').style.maxWidth = { desktop: '1440px', tablet: '820px', mobile: '400px' }[vp];
     };
-    $('#themeBtn').onclick = () => { const p = $('#themePop'); p.hidden = !p.hidden; syncTheme(); };
+    $('#themeBtn').onclick = () => { const p = $('#themePop'); p.hidden = !p.hidden; $('#seoPop').hidden = true; syncTheme(); };
+    $('#seoBtn').onclick = () => { const p = $('#seoPop'); p.hidden = !p.hidden; $('#themePop').hidden = true; if (!p.hidden) renderSeo(); };
     const th = (id, key, cast) => { $(id).oninput = e => { B.state.theme = Object.assign({}, B.state.theme, { [key]: cast ? cast(e.target.value) : e.target.value }); reloadSoon(); save(); }; };
     const thd = (id, key) => { $(id).onchange = e => { const th0 = Object.assign({}, B.state.theme); if (e.target.value === '') delete th0[key]; else th0[key] = e.target.value; B.state.theme = th0; reloadSoon(); save(); }; };
     thd('#thAnim', 'anim'); thd('#thFx', 'fx');
@@ -306,7 +324,7 @@
   });
 
   /* ---------- boot ---------- */
-  function renderAll() { syncTheme(); renderLeft(); renderEditor(); loadFrame(); }
+  function renderAll() { syncTheme(); renderLeft(); renderEditor(); loadFrame(); seoRefresh(); }
   function boot() {
     let loaded = false;
     try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) { B.state = Object.assign({ template: 'cornerstone', theme: {}, pages: {} }, s); loaded = true; } } catch (e) {}

@@ -430,6 +430,55 @@ window.BUILDER_DATA = {
    "aliases": {}
   }
  },
+ "seo": {
+  "_comment": "Single source of truth for SEO thresholds. Tune per niche here; seo_audit.py and the builder SEO panel both read this. Violations are WARN-only by default (severity can be raised to 'fail').",
+  "severity": {
+   "default": "warn"
+  },
+  "primary_keyword": {
+   "density_min": 1.0,
+   "density_target_max": 1.5,
+   "density_warn_max": 2.0,
+   "density_fail_max": 2.5,
+   "section_density_max": 3.0,
+   "count_variants": true,
+   "variant_drop_trailing_tokens": [
+    "county"
+   ],
+   "variant_note": "Trailing city/state tokens are taken from each page's own front matter (city, state), so nothing niche-specific is hardcoded.",
+   "first_words_window": 100,
+   "required_in": [
+    "h1",
+    "first_words",
+    "h2_any",
+    "meta_title",
+    "meta_description",
+    "slug",
+    "conclusion"
+   ],
+   "slug_exempt_page_types": [
+    "homepage"
+   ],
+   "meta_title_max_chars": 60,
+   "meta_description_max_chars": 155,
+   "image_alt_min": 1,
+   "image_alt_max": 2
+  },
+  "page_type_overrides": {
+   "blog": {
+    "slug_exempt_page_types": []
+   },
+   "contact": {
+    "required_in": [
+     "h1",
+     "first_words",
+     "meta_title",
+     "meta_description",
+     "slug"
+    ]
+   }
+  }
+ },
  "brand": {
   "logo": "images/homepage/rockford-air-duct-pros-logo.webp",
   "logoLight": "images/homepage/rockford-air-duct-pros-logo-light.webp",
@@ -442,6 +491,8 @@ window.BUILDER_DATA = {
    "nav": "Home",
    "slug": "/",
    "type": "homepage",
+   "keyword": "air duct cleaning rockford",
+   "city": "Rockford",
    "sections": {
     "hero": "# NADCA Certified Air Duct Cleaning in Rockford, IL\n\nProfessional residential and commercial ventilation decontamination removing accumulated dust, allergens, and biological contaminants using high-powered negative air containment.\n\nDirect line: (815) 555-0142\nSchedule Inspection | Explore Core Services",
     "intro": "## Professional Air Duct Cleaning in Rockford\n\nProfessional air duct cleaning in Rockford is a comprehensive mechanical decontamination of supply and return ductwork using commercial negative air pressure vacuum equipment running at five thousand CFM and motorized agitation brushes. This certified source removal process eliminates accumulated drywall dust, pet dander, furnace soot, and biological mold spores without releasing debris back into your indoor living spaces.\n\nEvery residential and commercial heating and cooling system cycles thousands of cubic feet of air through central ductwork every hour. Over years of seasonal temperature swings, moisture condensation, and routine living activities, galvanized sheet metal trunks accumulate heavy dust blankets that standard furnace filters cannot prevent. Our locally based technicians provide certified source removal, upfront written scopes of work, hospital-grade containment protocols, and transparent fiberoptic camera verification for properties throughout Winnebago County.",
@@ -679,6 +730,8 @@ window.BUILDER_DATA = {
    "nav": "About Us",
    "slug": "about",
    "type": "about",
+   "keyword": "rockford air duct cleaning company",
+   "city": "Rockford",
    "sections": {
     "01_identity_hook": "# About Rockford Air Duct Pros - Air Duct Cleaning Experts in Rockford, IL\n\n**Rockford Air Duct Pros has served Winnebago County homeowners** with certified residential and commercial ventilation cleaning since 2014. As an established rockford air duct cleaning company, our work follows one founding principle: deliver verifiable indoor air improvements using documented fiberoptic camera inspections before any work begins and after all debris is removed. We never use high-pressure upselling tactics or whole-house coupon gimmicks.\n\nServing Rockford Since 2014 | Licensed and Insured in Illinois | Call (815) 555-0142",
     "02_origin_story": "## Our Story: How Rockford Air Duct Pros Came to Serve Rockford\n\n**Rockford Air Duct Pros was established in 2014** after founder Marcus Miller spent years inspecting regional heating and cooling installations throughout northern Illinois. Marcus repeatedly encountered frustrated homeowners who paid for discount duct cleanings only to discover blow-and-go operators had merely vacuumed surface registers while leaving main trunk lines packed with dust, drywall grit, and accumulated pet dander. He founded [Rockford Air Duct Pros](/) to provide genuine, NADCA-standard remediation with unedited photo proof.\n\nDuring our first two seasons, our team concentrated on historic neighborhoods along the Rock River, including Churchill Grove and Highland Park. These classic brick bungalows and mid-century ranches feature heavy-gauge galvanized sheet metal ductwork that requires high-velocity negative air extraction rather than weak portable shop vacuums. By solving chronic allergy issues and furnace airflow restrictions in older homes, our local reputation grew steadily through homeowner referrals and community recommendations.\n\n| Operational Milestone | Year Achieved |\n|---|---|\n| **Company founded** in Rockford, IL with dedicated containment van | 2014 |\n| **NADCA ASCS certification** earned by lead inspection specialist | 2015 |\n| **EPA Lead-Safe certification** formalized for pre-1978 housing | 2016 |\n| **Better Business Bureau accreditation** granted with A+ standing | 2017 |\n| **Five hundred local projects** completed across Winnebago County | 2024 |\n\nToday **Rockford Air Duct Pros operates as a dedicated regional specialist**, remaining independently owned and deeply committed to residential air quality throughout northern Illinois.",
@@ -872,6 +925,8 @@ window.BUILDER_DATA = {
    "nav": "Contact Us",
    "slug": "contact",
    "type": "contact",
+   "keyword": "contact air duct cleaning rockford",
+   "city": "Rockford",
    "sections": {
     "01_contact_hero": "# Contact Rockford Air Duct Pros in Rockford, IL\n\nReach out to contact air duct cleaning rockford specialists directly for transparent scheduling and fiberoptic camera inspection consultations across Winnebago County. Speak directly with [Rockford Air Duct Pros](/) technicians to evaluate furnace airflow restrictions, persistent pet allergen buildup, or dryer vent lint hazards in your home.\n\nDirect Office Line: (815) 555-0142 | NADCA Certified | Serving Rockford Since 2014",
     "02_contact_form": "## Request a Consultation and System Inspection\n\nSubmit your service details below to arrange a prompt consultation with our local technicians. Our dispatch team reviews inquiries throughout the business day and provides clear, itemized quotes before any equipment is connected to your ductwork.\n\n- **Full Name:** Enter your first and last name\n- **Phone Number:** Best direct callback number\n- **Service Address:** Street address and neighborhood in the greater Rockford area\n- **Service Category:** Residential Ventilation Cleaning, Commercial HVAC Systems, or Dryer Vent Lint Extraction\n- **Property Details:** Approximate home square footage, furnace location, and specific airflow concerns",
@@ -985,6 +1040,8 @@ window.BUILDER_DATA = {
    "nav": "Loves Park",
    "slug": "air-duct-cleaning-loves-park-il",
    "type": "location",
+   "keyword": "air duct cleaning loves park il",
+   "city": "Loves Park",
    "sections": {
     "01_hero": "# Air Duct Cleaning in Loves Park, IL\n\nWhen searching for professional air duct cleaning loves park il homeowners turn to [Rockford Air Duct Pros](/) for certified ventilation remediation across Winnebago County. [Rockford Air Duct Pros](/) provides complete source removal, negative air vacuum extraction, and fiberoptic camera inspections throughout Loves Park neighborhoods along the Rock River corridor.\n\nLoves Park homeowners receive punctual local dispatch, NADCA-standard cleanliness, and transparent before-and-after photo verification on every residential project.\n\nDirect Dispatch: (815) 555-0142 | Licensed and Insured in Illinois",
     "02_localized_intro": "## Air Duct Cleaning Services for Loves Park Residents\n\n**Loves Park residential neighborhoods** extend along the north bank of the Rock River from the Harlem High School corridor west toward Perryville Road. Most homes throughout these established subdivisions were constructed between 1955 and 1982. This era of construction featured rigid galvanized sheet metal supply trunks and narrow return air cavities that trap settled dust, pet dander, and furnace soot over decades of continuous heating and cooling.\n\nThe localized microclimate of the Rock River valley creates pronounced seasonal humidity swings that promote interior duct condensation and elevated mold risks in finished basement plenums. When homeowners replace older windows with airtight modern glass without rebalancing forced-air registers, moisture-laden air often lingers in ductwork, accelerating allergen accumulation.\n\n[Rockford Air Duct Pros](/) has actively serviced Loves Park residences since 2014. Our technicians understand local home architectural styles and arrive with specialized agitation equipment that reaches every branch duct without causing cosmetic damage to walls or ceilings.",
@@ -1123,6 +1180,8 @@ window.BUILDER_DATA = {
    "nav": "Commercial HVAC Duct Cleaning",
    "slug": "commercial-hvac-duct-cleaning",
    "type": "service",
+   "keyword": "commercial hvac duct cleaning rockford il",
+   "city": "Rockford",
    "sections": {
     "01_hero": "# Commercial HVAC Duct Cleaning in Rockford, IL\n\nProfessional commercial hvac duct cleaning rockford il provides NADCA-certified mechanical remediation for manufacturing plants, corporate offices, healthcare facilities, and retail centers across Winnebago County. [Rockford Air Duct Pros](/) deploys high-volume negative air systems, rotary scrubbing brushes, and borescope cameras to eliminate airborne particulates and restore ventilation efficiency.\n\nProtect facility occupants, satisfy OSHA air quality standards, and lower HVAC energy consumption with scheduled off-hours duct cleaning across northern Illinois.\n\nDirect Commercial Dispatch: (815) 555-0142 | NADCA Certified | Licensed and Insured",
     "03_services_grid": "## Our Rockford Commercial HVAC Duct Cleaning Solutions\n\nWhen contracting for commercial hvac duct cleaning rockford il facility managers rely on our specialized commercial ventilation services to resolve indoor air quality challenges and maintain regulatory compliance.\n\n### Rooftop Air Handler and Plenum Remediation\nWe mechanically scrub and disinfect commercial rooftop units, multi-zone air handlers, and main mixing plenums. Our technicians eliminate heavy particulate accumulation, fungal spores, and oily film from blower wheels and cooling coils, restoring designed cubic-feet-per-minute airflow across large commercial distribution systems without disrupting tenant business operations.\n\n### Spiral and Galvanized Trunk Line Scrubbing\nOur high-velocity rotary whip assemblies and industrial HEPA negative air systems thoroughly scour large-diameter spiral and rectangular ductwork. Certified specialists dislodge compacted manufacturing dust and chemical residues from overhead trunks, pulling all airborne particulates directly into filtered containment units located outside your primary facility workspace today.\n\n### Commercial Kitchen and Exhaust Duct Maintenance\nHigh-capacity commercial exhaust systems require dedicated mechanical scraping and degreasing to prevent dangerous ventilation blockages. We clean non-grease supply and relief ductwork across restaurants, food processing plants, and hospitality venues throughout Winnebago County, ensuring full compliance with municipal fire safety codes and commercial property insurance mandates.\n\n### High-Capacity VAV Box and Diffuser Sanitization\nVariable air volume boxes, reheat coils, and ceiling diffusers collect microscopic office allergens that degrade workplace productivity. Our crews inspect, mechanically clean, and apply botanical antimicrobials across interior dampening components, eliminating localized hot spots, stale odors, and persistent air distribution imbalances throughout multi-tenant Rockford commercial properties.",
@@ -1274,6 +1333,8 @@ window.BUILDER_DATA = {
    "nav": "Dryer Vent Cleaning & Lint Removal",
    "slug": "dryer-vent-cleaning-and-lint-removal",
    "type": "service",
+   "keyword": "dryer vent cleaning rockford il",
+   "city": "Rockford",
    "sections": {
     "01_hero": "# Dryer Vent Cleaning in Rockford, IL\n\nProfessional dryer vent cleaning rockford il protects homes across Winnebago County from dangerous lint fires and appliance overheating. [Rockford Air Duct Pros](/) delivers thorough mechanical brush extraction, airflow velocity testing, and exterior vent cap inspections to restore proper clothes dryer exhaust flow and shorten drying cycles.\n\nReduce laundry drying times, eliminate fire hazards, and lower utility bills with certified dryer vent cleaning throughout northern Illinois.\n\nDirect Service Line: (815) 555-0142 | NADCA Certified | Licensed and Insured",
     "03_services_grid": "## Our Rockford Dryer Vent Cleaning Solutions\n\nHomeowners and property managers across Winnebago County trust our dedicated dryer vent services to prevent residential fires and extend appliance lifespan. When scheduling dryer vent cleaning rockford il residents count on our rotary brush equipment to clear even the longest exhaust runs.\n\n### Residential Dryer Vent Lint Extraction\nWe remove dangerous lint buildup from residential clothes dryer exhaust ducts using rotary brush agitation and high-suction vacuum extraction. Our certified technicians thoroughly clean rigid transitions from the laundry room wall to exterior exhaust hoods, eliminating appliance overheating and restoring efficient drying cycles across Rockford homes.\n\n### Multi-Unit and Apartment Laundry Exhaust Remediation\nMulti-family residential complexes and condominium associations require heavy-duty dryer exhaust maintenance to protect tenants from laundry fire risks. We clean shared vertical booster fan ducts and multi-story horizontal trunk runs across Winnebago County properties today, providing verified documentation for commercial property managers and municipal fire inspectors.\n\n### Exterior Vent Hood and Pest Damper Replacement\nBroken exterior vent flaps and missing damper seals allow cold drafts, insects, and nesting birds into laundry vent lines. We repair and install heavy-duty exterior wall terminations equipped with pest-proof flappers that open freely during active appliance operation and seal tightly when your dryer is idle.\n\n### Dryer Transition Duct and Booster Fan Maintenance\nKinked plastic transition hoses and failing in-line booster fans restrict exhaust airflow and accelerate combustible lint accumulation behind laundry appliances. Our specialists replace substandard foil ducts with fire-rated semi-rigid metal tubing and clean booster fan impellers, maximizing airflow velocity across long residential exhaust runs throughout Rockford.",
@@ -1425,6 +1486,8 @@ window.BUILDER_DATA = {
    "nav": "Negative Air Vacuum Trunk Line Cleaning",
    "slug": "negative-air-vacuum-trunk-line-cleaning",
    "type": "service",
+   "keyword": "negative air vacuum trunk line cleaning rockford",
+   "city": "Rockford",
    "sections": {
     "01_hero": "# Negative Air Vacuum Trunk Line Cleaning in Rockford, IL\n\nNegative air vacuum trunk line cleaning is the gold-standard source removal method for residential and commercial HVAC ductwork across Rockford, Illinois. Our certified technicians connect high-volume 5,000 CFM negative pressure extractors directly to your central supply and return trunks, capturing dislodged debris under sealed HEPA containment without interior blowback.\n\nRestore engineered heating airflow, eliminate decades of compacted dust, and protect indoor air quality across Greater Rockford with verified NADCA source removal.\n\nDirect Dispatch: (815) 555-0142 | Licensed and Insured in Illinois",
     "03_services_grid": "## Our Rockford Negative Air Trunk Line Cleaning Solutions\n\nOur dedicated negative air equipment provides hospital-grade source removal across all primary components of your central heating and cooling ventilation network.\n\n### Main Supply Trunk Negative Air Extraction\nCommercial 5,000 CFM negative pressure is applied directly to central supply trunks, capturing all dislodged dust, pet dander, and renovation grit. Pneumatic forward-sweeping air whips propel heavy debris directly toward sealed HEPA collection chambers without allowing airborne dust to escape into living areas.\n\nSchedule Supply Trunk Cleaning\n\n### Return Air Plenum Decontamination\nReturn air plenums pull unconditioned basement air and settled organic particulates over decades of heating cycles. Our certified technicians seal return grilles, draw high-volume continuous negative vacuum across the plenum, and scrub galvanized surfaces to bare metal using multi-directional nylon brush heads.\n\nSchedule Return Plenum Cleaning\n\n### Branch Run Air Sweeping & Register Blasting\nIndividual branch duct runs feeding bedrooms and family rooms receive targeted high-pressure pneumatic agitation. Specialized forward air nozzles blast interior duct walls at 200 PSI, dislodging compacted allergens and driving them straight down into the under-vacuum main trunk for complete extraction.\n\nSchedule Branch Run Cleaning",
@@ -1580,6 +1643,8 @@ window.BUILDER_DATA = {
    "nav": "Air Duct Sanitization & Antimicrobial Fogging",
    "slug": "sanitization-and-antimicrobial-fogging",
    "type": "service",
+   "keyword": "air duct sanitization and antimicrobial fogging rockford",
+   "city": "Rockford",
    "sections": {
     "01_hero": "# Air Duct Sanitization and Antimicrobial Fogging in Rockford, IL\n\nAir duct sanitization and antimicrobial fogging in Rockford delivers targeted elimination of active mold spores, airborne bacteria, and lingering household odors throughout residential and commercial ventilation networks. Applied through ultra-low volume atomizing misters following mechanical source removal, our hospital-grade botanical treatments neutralize biological contaminants on contact without synthetic fragrances or toxic chemical residues.\n\nSafeguard indoor air quality, eliminate deep-seated microbial growth caused by Northern Illinois summer humidity, and restore hygienic airflow across Greater Rockford.\n\nDirect Dispatch: (815) 555-0142 | EPA-Registered Botanical Standards",
     "03_services_grid": "## Our Rockford Air Duct Sanitization and Antimicrobial Fogging Solutions\n\nOur botanical antimicrobial treatments treat the entire interior surface area of your HVAC network, neutralizing active pathogens and protecting bare metal ductwork from persistent biological colonization.\n\n### Whole-System Botanical Fogging Treatment\nWe disperse an ultra-fine botanical aerosol mist throughout your entire central supply and return duct system. This hospital-grade antimicrobial mist penetrates inaccessible branch corners, coating interior sheet metal and neutralizing active airborne pathogens, volatile organic compounds, and fungal spores without leaving sticky chemical films or emitting hazardous synthetic fumes into your living areas.\n\nSchedule Botanical Fogging Treatment\n\n### Evaporator Coil & Blower Decontamination\nAir conditioner evaporator coils and central blower fans produce heavy condensation that frequently harbors microbial slime and bacterial colonies. Our certified technicians apply specialized antimicrobial foaming disinfectants directly across coil fins, drain pans, and blower wheel assemblies, restoring maximum heat-exchange efficiency while eliminating musty airflow odors at their mechanical point of origin.\n\nSchedule Evaporator Coil Treatment\n\n### Odor Neutralization & Mold Spore Remediation\nPersistent odors caused by dead rodents, past water infiltration, cigar smoke, or pet dander settle deep inside supply trunks. Rather than masking foul scents with artificial perfumes, our botanical antimicrobial fogging breaks down molecular odor compounds and destroys microscopic mold spores, providing complete biological remediation and refreshing interior air quality across your property.\n\nSchedule Odor Remediation Treatment",
@@ -1735,6 +1800,8 @@ window.BUILDER_DATA = {
    "nav": "Video Camera Ductwork Inspection",
    "slug": "video-camera-ductwork-inspection",
    "type": "service",
+   "keyword": "video camera ductwork inspection rockford",
+   "city": "Rockford",
    "sections": {
     "01_hero": "# Video Camera Ductwork Inspection in Rockford, IL\n\nVideo camera ductwork inspection in Rockford delivers real-time high-definition visual diagnostics inside residential and commercial ventilation networks. Utilizing specialized fiber-optic borescopes and motorized crawler cameras, our certified technicians navigate deep into concealed supply and return trunks, providing photographic documentation of particulate accumulation, duct separation, and mold colonization with complete optical clarity.\n\nUncover hidden blockages, verify structural sheet metal integrity, and inspect post-cleaning bare metal results across Greater Rockford with verifiable optical camera proof.\n\nDirect Dispatch: (815) 555-0142 | NADCA ASCS Certified Diagnostics",
     "03_services_grid": "## Our Rockford Video Camera Ductwork Inspection Solutions\n\nOur commercial optical camera systems provide full-spectrum diagnostic imaging across every inch of your concealed heating and cooling ventilation infrastructure.\n\n### Pre-Cleaning Diagnostic Camera Traversals\nOur high-resolution inspection cameras travel through supply and return trunks to identify internal particulate depth, biological colonization, and mechanical obstructions. We project real-time digital video onto portable monitors, allowing property owners to examine actual interior conditions and determine whether comprehensive mechanical source removal or specialized antimicrobial sanitization is genuinely warranted.\n\nSchedule Diagnostic Camera Inspection\n\n### Post-Cleaning Bare-Metal Verification Passes\nFollowing mechanical source removal, our technicians guide panoramic camera heads through every treated main trunk and branch run. This quality verification step provides undeniable optical proof that interior sheet metal surfaces are restored to bare metal standards, ensuring zero residual dust, pet dander, or debris remains inside your ventilation system.\n\nSchedule Bare-Metal Verification Pass\n\n### Structural Duct Integrity & Leak Detection\nConcealed residential duct systems frequently suffer from disconnected joints, unsealed elbows, fallen insulation blankets, and rodent intrusions that waste conditioned airflow. Our flexible fiber-optic cameras locate physical structural defects inside finished walls and ceilings, enabling pinpoint mechanical repairs without requiring invasive demolition of your home drywall or finished hardwood floors.\n\nSchedule Structural Ductwork Inspection",
@@ -1890,6 +1957,8 @@ window.BUILDER_DATA = {
    "nav": "How to Spot Air Duct Cleaning Scams",
    "slug": "how-to-spot-air-duct-cleaning-scams",
    "type": "blog",
+   "keyword": "how to spot fake blow and go coupon scams",
+   "city": "Rockford",
    "sections": {
     "01_header": "# How to Spot Air Duct Cleaning Scams Before They Waste Your Money\n\nThe most reliable way to spot an air duct cleaning scam is to ask for NADCA certification before anyone enters your home. **NADCA-certified technicians** must pass the ASCS examination and use commercial-grade source removal equipment. The low-price coupon operations that dominate Facebook groups have neither. If the company cannot produce a NADCA membership number, treat that as the first red flag.\n\nBy the Rockford Air Duct Pros Team | NADCA ASCS Certified, Serving Rockford, IL Since 2014",
     "02_cause_context": "## What Makes Air Duct Cleaning Scams So Common?\n\nAir duct cleaning scams are common because the service is invisible. Homeowners cannot see inside their duct system, which makes it nearly impossible to verify whether any work was actually performed or performed correctly. Unscrupulous operators exploit this information gap.\n\nThe economics make it attractive for bad actors. A van, a shop vac, and a door-hanger printer are the only startup costs required for a fraudulent operation. **No license, no certification, and no actual equipment** are needed to collect payment from homeowners who do not know what legitimate duct cleaning looks like.\n\nSeveral recurring tactics drive the majority of consumer complaints:\n\n- **The whole-house coupon** - advertised at suspiciously low prices in Facebook groups and on door hangers; the low price is a door-opener, not a real quote\n- **Fake mold discovery** - technician \"finds\" black mold without any laboratory testing and upsells a high-margin treatment\n- **Scope inflation** - arrives to do one area, then claims the entire system needs cleaning and presents a dramatically higher invoice\n- **Unverifiable credentials** - claims NADCA certification or \"EPA certification\" that does not exist under that name\n\n### How the Rockford, IL Market Creates Extra Risk\n\n**Rockford's buy-sell-trade Facebook groups and Nextdoor communities** surface consumer scam complaints about duct cleaning more frequently than most comparable Midwest markets. The city's large inventory of pre-1985 homes creates a ready pool of homeowners anxious about decades of dust in original galvanized ductwork, which is exactly the customer profile these operations target. Out-of-market vans frequently canvass Winnebago County neighborhoods after home improvement trade shows and spring advertising pushes.",

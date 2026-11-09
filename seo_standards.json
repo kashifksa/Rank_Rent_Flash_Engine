@@ -1,0 +1,25 @@
+{
+  "_comment": "Single source of truth for SEO thresholds. Tune per niche here; seo_audit.py and the builder SEO panel both read this. Violations are WARN-only by default (severity can be raised to 'fail').",
+  "severity": { "default": "warn" },
+  "primary_keyword": {
+    "density_min": 1.0,
+    "density_target_max": 1.5,
+    "density_warn_max": 2.0,
+    "density_fail_max": 2.5,
+    "section_density_max": 3.0,
+    "count_variants": true,
+    "variant_drop_trailing_tokens": ["county"],
+    "variant_note": "Trailing city/state tokens are taken from each page's own front matter (city, state), so nothing niche-specific is hardcoded.",
+    "first_words_window": 100,
+    "required_in": ["h1", "first_words", "h2_any", "meta_title", "meta_description", "slug", "conclusion"],
+    "slug_exempt_page_types": ["homepage"],
+    "meta_title_max_chars": 60,
+    "meta_description_max_chars": 155,
+    "image_alt_min": 1,
+    "image_alt_max": 2
+  },
+  "page_type_overrides": {
+    "blog": { "slug_exempt_page_types": [] },
+    "contact": { "required_in": ["h1", "first_words", "meta_title", "meta_description", "slug"] }
+  }
+}

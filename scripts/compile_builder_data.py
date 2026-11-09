@@ -158,14 +158,18 @@ def write_v5_data(compiled):
     """Write builder/js/data.js for the section-registry builder (builder/index.html)."""
     brief = load_json_safe(BASE_DIR / "master_brief.json")
     nap = brief.get("nap", {})
+    topical = load_json_safe(BASE_DIR / "topical_authority.json")
+    tk = {tp.get("page_id"): tp.get("target_keyword", "") for tp in topical.get("pages", [])}
     pages = {}
     for pid, p in compiled.items():
         plan_imgs = [
-            {"slot": i.get("slot", ""), "filename": i.get("filename", ""), "alt_text": i.get("alt_text", "")}
+            {"slot": i.get("slot", ""), "filename": i.get("filename", ""), "alt_text": i.get("alt_text", "") or i.get("alt", "")}
             for i in p.get("images", []) if i.get("filename")
         ]
+        kw = (p.get("meta", {}).get("target_keyword") or tk.get(pid) or "").strip()
         pages[pid] = {
             "id": pid, "title": p["title"], "nav": nav_label(p), "slug": p["slug"], "type": p["type"],
+            "keyword": kw, "city": p.get("city", brief.get("city", "")),
             "sections": p["sections"], "order": list(p["sections"].keys()), "merged": p.get("merged", {}),
             "meta": p.get("meta", {}), "images": plan_imgs, "img_dir": p.get("img_dir", "images/homepage"),
         }
@@ -193,6 +197,7 @@ def write_v5_data(compiled):
             "primary_keyword": brief.get("primary_keyword", ""),
         },
         "schema": SCHEMA,
+        "seo": load_json_safe(BASE_DIR / "seo_standards.json"),
         "brand": brand,
         "pages": pages,
         "defaultState": default_state,
@@ -232,6 +237,8 @@ def compile_all_pages(sync_builder_html=True):
 
         img_dir = f"images/{pid}" if (BASE_DIR / "images" / pid).exists() else "images/homepage"
 
+        fm_city = re.search(r'^city:\s*["\']?(.+?)["\']?\s*$', md_text, re.M)
+        page_city = (fm_city.group(1).strip() if fm_city else "") or p.get("city") or meta_data.get("city") or default_city
         compiled[pid] = {
             "id": pid,
             "title": p["title"],
@@ -239,7 +246,7 @@ def compile_all_pages(sync_builder_html=True):
             "type": p["type"],
             "company_name": company_name,
             "phone": phone,
-            "city": p.get("city", meta_data.get("city", default_city)),
+            "city": page_city,
             "sections": sections_dict,
             "meta": meta_data,
             "images": images_list,

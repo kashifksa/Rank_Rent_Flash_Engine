@@ -79,6 +79,30 @@ def main():
         check("animation attribute exported (Cornerstone = rise)", r["anim"])
         check("hero effect exported (Cornerstone = airflow)", r["fx"])
         check("Case Studies section present on homepage", r["caseStudies"])
+
+        # SEO: JS panel must agree with scripts/seo_audit.py (same thresholds, same math)
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import seo_audit
+        js = pg.evaluate("() => { const o = {}; Builder.pageIds().forEach(id => { const r = Builder.seoAudit(id); o[id] = r && r.density ? [r.density.combinedPct, r.score] : null; }); return o; }")
+        drift, nopy = [], 0
+        for pid_, val in js.items():
+            py = seo_audit.audit_page(pid_)
+            if not py or "density" not in py or not val:
+                nopy += 1
+                continue
+            if abs(py["density"]["combined_pct"] - val[0]) > 0.15:
+                drift.append((pid_, py["density"]["combined_pct"], val[0]))
+        check("SEO panel (JS) density matches seo_audit.py (+-0.15)", not drift, drift)
+        check("SEO audit covers every page with a keyword", len(js) - nopy >= 8, f"{len(js) - nopy}/{len(js)}")
+        before = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
+        pg.evaluate("""() => { const B = Builder, m = B.editModel('homepage', 'intro');
+          m.paras = (m.paras || []).concat(['We provide air duct cleaning in Rockford. '.repeat(30)]); }""")
+        after = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
+        check("SEO density reacts live to text edits", after > before, (before, after))
+        pg.evaluate("() => { Builder.resetSection('homepage', 'intro'); }")
+        pg.click("#seoBtn"); pg.wait_for_timeout(300)
+        check("SEO button opens the audit panel", pg.is_visible("#seoPop") and "Primary keyword" in pg.inner_text("#seoPop"))
+        pg.click("#seoBtn")
         hh = pg.evaluate("Builder.exportPage('homepage')")
         hdr, ftr = hh.split("</header>")[0], hh.split("<footer")[1]
         check("logo auto-detected in header (images/*logo*.webp)", "logo.webp" in hdr)
