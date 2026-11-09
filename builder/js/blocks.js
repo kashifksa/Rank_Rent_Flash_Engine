@@ -48,7 +48,7 @@
   const BLOCKS = {};
 
   BLOCKS.hero = {
-    label: 'Hero', variants: ['full', 'split', 'centered', 'dispatch', 'bento', 'docked'],
+    label: 'Hero', variants: ['full', 'split', 'centered', 'dispatch', 'bento', 'docked', 'magazine'],
     render(m, c) {
       const title = m.h1 || m.h2 || c.page.title;
       const paras = m.paras.filter(p => !/\|/.test(p));
@@ -98,12 +98,23 @@
           '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div></div>' +
           '<div class="hero-dock">' + dock + '</div></div></div>';
       }
+      if (c.variant === 'magazine') {
+        const specs = (chips.length ? chips : ['Certified Field Technicians', 'Same or Next-Day Dispatch', 'Written Scope Before Work', 'Verified Containment']).slice(0, 4).map((x, i) =>
+          '<div class="mag-spec"><span class="mag-idx">[' + String(i + 1).padStart(2, '0') + ']</span><b>' + esc(x) + '</b></div>').join('');
+        return '<div class="hero hero--magazine"' + fx + '><div class="wrap">' +
+          '<div class="mag-meta"><span>01 // FIELD DISPATCH</span><span>' + esc((city ? city + (c.brief.state ? ', ' + c.brief.state : '') : c.nap.company_name).toUpperCase()) + '</span><span>DIRECT LINE: ' + esc(c.phone) + '</span></div>' +
+          '<div class="mag-grid"><div class="mag-copy"><h1>' + inline(title) + '</h1>' +
+          '<div class="mag-lead">' + paras.slice(0, 2).map(p => '<p>' + inline(p) + '</p>').join('') + '</div>' +
+          '<div class="btns">' + callBtn(c) + '<a class="btn btn-ghost" href="' + nextHref + '">' + esc(btn2) + '</a></div></div>' +
+          '<div class="mag-visual">' + (img ? '<div class="mag-frame"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><div class="mag-cap">FIG. 01 &mdash; ' + esc(img.alt || c.page.title) + '</div></div>' : '') +
+          '</div></div><div class="mag-bar">' + specs + '</div></div></div>';
+      }
       return '<div class="hero hero--full"' + fx + ' style="--hero-img:url(\'' + esc(img ? img.src : '') + '\')"><div class="wrap">' + copy + '</div></div>';
     }
   };
 
   BLOCKS.split = {
-    label: 'Text + image', variants: ['image-right', 'image-left', 'text-only'],
+    label: 'Text + image', variants: ['image-right', 'image-left', 'text-only', 'frame'],
     render(m, c) {
       const img = c.img();
       const bullets = m.bullets.length ? m.bullets : (m.items || []).map(i => ({ label: i.title, text: (i.paras || [])[0] || '' }));
@@ -111,6 +122,11 @@
         (b.label ? '<strong>' + inline(b.label) + '</strong> ' : '') + inline(b.text) + '</div></li>').join('') + '</ul>' : '';
       const copy = '<div><h2>' + inline(m.h2 || m.h1 || '') + '</h2>' + m.paras.map(p => '<p>' + inline(p) + '</p>').join('') + list +
         (m.cta ? '<p style="margin-top:18px">' + callBtn(c) + '</p>' : '') + '</div>';
+      if (c.variant === 'frame' && img) {
+        return '<div class="wrap"><div class="split split-frame">' + copy +
+          '<div class="split-media"><div class="arch-frame"><div class="arch-top"><span>FIELD DOCUMENTATION</span><span>' + esc(c.page.city || c.brief.city || '') + '</span></div>' +
+          '<img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"><div class="arch-cap">' + esc(img.alt || m.h2 || '') + '</div></div></div></div></div>';
+      }
       const cls = c.variant === 'text-only' || !img ? 'text-only' : (c.variant === 'image-left' ? 'rev' : '');
       return '<div class="wrap"><div class="split ' + cls + '">' + copy +
         (cls === 'text-only' ? '' : '<div class="split-media"><img src="' + esc(img.src) + '" alt="' + esc(img.alt) + '"></div>') + '</div></div>';
@@ -118,7 +134,7 @@
   };
 
   BLOCKS.cards = {
-    label: 'Cards', variants: ['icons', 'grid', 'list', 'numbered', 'stripe'],
+    label: 'Cards', variants: ['icons', 'grid', 'list', 'numbered', 'stripe', 'ledger'],
     render(m, c) {
       let items = (m.items || []).slice();
       if (!items.length && m.bullets.length) items = m.bullets.map(b => ({ title: b.label || b.text, paras: b.label ? [b.text] : [], facts: [], bullets: [] }));
@@ -134,21 +150,21 @@
         const fx = rest.length ? '<div class="facts">' + rest.map((f, i) => '<div class="fact' + (i === rest.length - 1 && /result/i.test(f.label) ? ' last' : '') + '"><b>' + esc(f.label) + '</b><span>' + inline(f.text) + '</span></div>').join('') + '</div>' : '';
         const showIcon = !rest.length;
         const ic = showIcon ? '<span class="ic">' + icon(pickIcon(it.title)) + '</span>' : '';
-        const numBadge = c.variant === 'numbered' ? '<div class="cnum-top"><span class="cnum">' + String(idx + 1).padStart(2, '0') + '</span>' + ic + '</div>' : '';
+        const numBadge = (c.variant === 'numbered' || c.variant === 'ledger') ? '<div class="cnum-top"><span class="cnum">[' + String(idx + 1).padStart(2, '0') + ']</span>' + ic + '</div>' : '';
         const useBodyWrap = c.variant === 'list' || c.variant === 'stripe';
         const inner = (useBodyWrap ? '<div><h3>' + inline(it.title) + '</h3>' : '<h3>' + inline(it.title) + '</h3>') +
           body.map(p => '<p>' + inline(p) + '</p>').join('') + (bl ? '<ul style="margin:6px 0 0;padding-left:18px;color:var(--muted)">' + bl + '</ul>' : '') + fx +
           (cta ? '<a class="more" href="' + tel(c) + '">' + esc(cta) + ' &rarr;</a>' : '') + (useBodyWrap ? '</div>' : '');
-        const lead = c.variant === 'numbered' ? numBadge : (c.variant === 'grid' ? '' : ic);
+        const lead = (c.variant === 'numbered' || c.variant === 'ledger') ? numBadge : (c.variant === 'grid' ? '' : ic);
         return '<article class="card">' + (loc ? '<span class="loc">' + inline(loc.text) + '</span>' : '') + lead + inner + '</article>';
       }).join('');
-      const wrapCls = c.variant === 'list' ? 'cards-list' : c.variant === 'stripe' ? 'cards-stripe' : ('grid ' + (c.variant === 'icons' ? 'cards-icons' : c.variant === 'numbered' ? 'cards-numbered' : ''));
+      const wrapCls = c.variant === 'list' ? 'cards-list' : c.variant === 'stripe' ? 'cards-stripe' : c.variant === 'ledger' ? 'cards-ledger' : ('grid ' + (c.variant === 'icons' ? 'cards-icons' : c.variant === 'numbered' ? 'cards-numbered' : ''));
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="' + wrapCls + '">' + cards + '</div></div>';
     }
   };
 
   BLOCKS.steps = {
-    label: 'Process steps', variants: ['timeline', 'table', 'rail', 'track'],
+    label: 'Process steps', variants: ['timeline', 'table', 'rail', 'track', 'spec'],
     render(m, c) {
       const intro = m.paras[0];
       let rows = [];
@@ -166,6 +182,11 @@
           rows.map((r, i) => '<div class="rail-item"><div class="n">' + String(i + 1).padStart(2, '0') + '</div><div class="rail-body"><h3>' +
             inline(strip(r.title)) + '</h3><p>' + inline(r.text) + '</p>' + (r.time ? '<span class="time">' + esc(strip(r.time)) + '</span>' : '') + '</div></div>').join('') +
           '</div></div></div>';
+      }
+      if (c.variant === 'spec') {
+        return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="steps-spec">' + rows.map((r, i) =>
+          '<div class="spec-row"><div class="spec-idx">PHASE // ' + String(i + 1).padStart(2, '0') + '</div><div class="spec-title"><h3>' + inline(strip(r.title)) + '</h3>' +
+          (r.time ? '<span class="time">' + esc(strip(r.time)) + '</span>' : '') + '</div><div class="spec-desc"><p>' + inline(r.text) + '</p></div></div>').join('') + '</div></div>';
       }
       const cls = c.variant === 'track' ? 'steps steps-track' : 'steps';
       return '<div class="wrap">' + head(c.eyebrow, m.h2 || m.h1, intro) + '<div class="' + cls + '">' + rows.map((r, i) =>

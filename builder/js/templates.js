@@ -5,7 +5,8 @@
     technical: { h: 'Montserrat', b: 'Inter', label: 'Industrial Tech (Montserrat + Inter)', q: 'family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700' },
     trade: { h: 'Oswald', b: 'Roboto', label: 'Rugged Trade (Oswald + Roboto)', q: 'family=Oswald:wght@500;600;700&family=Roboto:wght@400;500;700' },
     modern: { h: 'Poppins', b: 'Open Sans', label: 'Friendly Modern (Poppins + Open Sans)', q: 'family=Poppins:wght@600;700;800&family=Open+Sans:wght@400;600;700' },
-    editorial: { h: 'Plus Jakarta Sans', b: 'Inter', label: 'Architectural Clean (Plus Jakarta Sans + Inter)', q: 'family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700' }
+    editorial: { h: 'Plus Jakarta Sans', b: 'Inter', label: 'Architectural Clean (Plus Jakarta Sans + Inter)', q: 'family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700' },
+    serif: { h: 'Fraunces', b: 'Plus Jakarta Sans', label: 'Swiss Editorial Serif (Fraunces + Plus Jakarta Sans)', q: 'family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700' }
   };
   B.TEMPLATES = {
     cornerstone: {
@@ -71,6 +72,14 @@
       variants: { hero: 'bento', split: 'image-right', cards: 'icons', steps: 'rail', reviews: 'featured', faq: 'two-col', cta: 'box', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
       motion: { anim: 'rise', fx: 'none' },
       header: 'floating', skin: 'bento'
+    },
+    atelier: {
+      name: 'Swiss Editorial Atelier', badge: 'Architectural magazine grid',
+      desc: '3-zone hairline header, magazine cover hero with spec bar, exposed border-grid service ledger, horizontal phase spec rows, warm paper palette.',
+      theme: { primary: '#141413', accent: '#b83214', font: 'serif', radius: 0, density: 'balanced' },
+      variants: { hero: 'magazine', split: 'frame', cards: 'ledger', steps: 'spec', reviews: 'cards', faq: 'two-col', cta: 'band', gallery: 'cards', badges: 'grid', area: 'map', table: 'cmp' },
+      motion: { anim: 'fade', fx: 'none' },
+      header: 'gridline', skin: 'atelier'
     }
   };
   B.DENSITY = { compact: 52, balanced: 76, spacious: 100 };

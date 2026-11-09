@@ -81,7 +81,7 @@ def main():
           const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); };
           const out = {}; Object.keys(B.TEMPLATES).forEach(k => { B.setTemplate(k); const t = B.TEMPLATES[k], css = (B.SKINS || {})[t.skin] || '', vars = B.cssVars();
             const mv = vars.match(/--btn-fg:(#[0-9a-fA-F]{3,6})/), ms = css.match(/\.btn-primary\{color:(#[0-9a-fA-F]{3,6})/), txt = ms ? ms[1] : (mv ? mv[1] : '#ffffff');
-            out[k] = { skin: t.skin, header: t.header, skinOk: !t.skin || css.length > 50, hdrOk: ['classic','topbar','dark','decker','floating'].indexOf(t.header || 'classic') > -1, ratio: +ratio(t.theme.accent, txt).toFixed(2) }; });
+            out[k] = { skin: t.skin, header: t.header, skinOk: !t.skin || css.length > 50, hdrOk: ['classic','topbar','dark','decker','floating','gridline'].indexOf(t.header || 'classic') > -1, ratio: +ratio(t.theme.accent, txt).toFixed(2) }; });
           B.setTemplate('cornerstone'); return out; }""")
         bad_t = [k for k, v in tc.items() if not v["skinOk"] or not v["hdrOk"]]
         check("every template has a valid skin and header variant", not bad_t, bad_t)

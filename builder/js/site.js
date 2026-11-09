@@ -263,6 +263,13 @@
     const hv = B.tpl().header || 'classic';
     const lg = B.logoUrl(preview, hv === 'dark'), bm = B.brand().mode, mode = bm === 'auto' ? (lg ? 'logo' : 'text') : bm;
     const logoInner = (lg && mode !== 'text' ? '<img src="' + esc(lg) + '" alt="' + esc(nap.company_name) + ' logo">' : '') + ((mode !== 'logo' || !lg) ? '<span>' + esc(nap.company_name) + '</span>' : '');
+    if (hv === 'gridline') {
+      return '<header class="hdr hdr-gridline"><div class="wrap"><a class="logo gl-cell gl-logo" href="index.html">' + logoInner + '</a>' +
+        '<nav class="nav gl-cell gl-nav">' + links.join('') + '</nav>' +
+        '<a class="gl-cta" href="' + tel + '"><small>DIRECT DISPATCH</small><b>' + esc(nap.phone) + ' &rarr;</b></a>' +
+        '<a class="hdr-call" href="' + tel + '">' + B.icon('phone') + ' Call</a>' +
+        '<details class="mnav"><summary>Menu</summary><div>' + links.join('') + '</div></details></div></header>';
+    }
     if (hv === 'decker') {
       const cred = (d.brief.credentials && d.brief.credentials[0]) || 'Licensed & Insured';
       return '<header class="hdr hdr-decker"><div class="deck-top"><div class="wrap"><a class="logo" href="index.html">' + logoInner + '</a>' +
