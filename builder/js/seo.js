@@ -203,6 +203,77 @@
     }
   }
 
+  /* ---- Phase 5: E-E-A-T, real proof, filler, hard rules, image QA, reviews (mirrors eeat_checks in scripts/seo_audit.py) ---- */
+  const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u2705\u2B50\u27A1\u2714\u274C]/gu;   // plain text stars (U+2605) are allowed
+  const QUOTE_RE = /^>\s*["\u201c](.+?)["\u201d]\s*$/gm, ATTR_RE = /^>\s*[-\u2013]\s+(.+?)\s*$/gm;
+  const quoteTexts = md => (String(md).match(QUOTE_RE) || []).map(l => l.replace(/^>\s*["\u201c]|["\u201d]\s*$/g, '').toLowerCase().replace(/\W+/g, ' ').trim());
+  const pageMd = pid => B.sectionList(pid).filter(s => !B.ps(pid).hidden[s]).map(s => B.serializeSection(B.getModel(pid, s))).join('\n\n');
+
+  function eeatChecks(pid, page, secs, body, rep, sev) {
+    const E = (D.seo || {}).eeat; if (!E) return;
+    const type = page.type, add = (id, label, st, detail) => rep.checks.push({ id, label, status: st, detail }), okSt = ok => ok ? 'pass' : sev;
+    const plain = clean(body), rt = raw(plain), n = Math.max(rt.length, 1), low = ' ' + plain.toLowerCase() + ' ';
+
+    if (type !== 'contact') {
+      const fpSet = new Set(E.first_person_words), fp = rt.filter(t => fpSet.has(t)).length;
+      const units = E.specific_units.map(esc).join('|'), nw = E.number_words.join('|');
+      const nums = '(?:\\d[\\d,.]*|' + nw + ')(?:[ -](?:' + nw + '))*';
+      const spec = low.match(new RegExp('\\b' + nums + '[ -]?(?:' + units + ')\\b|\\bsince (?:19|20)\\d\\d\\b|\\b(?:19|20)\\d\\d\\b', 'g')) || [];
+      const fpR = fp / n * 1000, spR = spec.length / n * 1000;
+      add('experience', 'First-hand voice and concrete specifics (numbers, measurements, years)', okSt(fpR >= E.first_person_per_1000_min && spR >= E.specifics_per_1000_min),
+        fpR.toFixed(1) + ' first-person words and ' + spR.toFixed(1) + ' concrete specifics per 1000 words (min ' + E.first_person_per_1000_min + ' and ' + E.specifics_per_1000_min + ').');
+    }
+    if ((E.credential_page_types || []).indexOf(type) > -1) {
+      const found = E.credential_terms.filter(c => new RegExp('\\b' + esc(c) + '\\b').test(low)).sort();
+      add('credentials', 'Credentials or trust proof stated (certified, licensed, insured, BBB...)', okSt(found.length >= 1), 'Found: ' + (found.join(', ') || 'none') + '.');
+    }
+    const filler = E.filler_phrases.filter(p => low.indexOf(p) > -1);
+    add('filler', 'No generic filler phrases', okSt(filler.length <= E.filler_max), filler.length ? 'Found: ' + filler.slice(0, 5).join(', ') : 'None.');
+    const sup = []; E.superlative_patterns.forEach(p => { const m = plain.match(new RegExp(p, 'i')); if (m) sup.push(m[0].trim()); });
+    add('superlatives', 'No unsubstantiated superlatives or guarantees', okSt(!sup.length), sup.length ? 'Found: ' + sup.slice(0, 5).join(', ') + '. Back claims with proof or remove.' : 'None.');
+
+    const sents = plain.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(s => s.split(/\s+/).length >= 6);
+    const norm = sents.map(s => s.toLowerCase().replace(/\W+/g, ' ').trim()), cnt = {}, op = {};
+    norm.forEach(s => { cnt[s] = (cnt[s] || 0) + 1; const o = s.split(/\s+/).slice(0, E.repeat_opening_words).join(' '); op[o] = (op[o] || 0) + 1; });
+    const dup = Object.keys(cnt).filter(s => cnt[s] > 1), repOpen = Object.keys(op).filter(o => op[o] >= E.repeat_opening_max);
+    add('repetition', 'No repeated sentences or templated openings', okSt(!dup.length && !repOpen.length),
+      !dup.length && !repOpen.length ? 'Varied.' : (dup.length ? 'Duplicate sentence(s): ' + dup.length + '. ' : '') + (repOpen.length ? 'Repeated opening: ' + repOpen.slice(0, 3).map(o => "'" + o + "' x" + op[o]).join('; ') : ''));
+
+    const hits = [];
+    Object.keys(E.rule_patterns).forEach(k => { const c = (body.match(new RegExp(E.rule_patterns[k], 'gmi')) || []).length; if (c) hits.push(k + ' x' + c); });
+    const ec = (body.match(EMOJI_RE) || []).length; if (ec) hits.push('emoji x' + ec);
+    add('rules', 'Hard content rules (no em dash, separators, emoji, placeholders, pricing)', hits.length ? 'fail' : 'pass', hits.length ? 'Found: ' + hits.join(', ') : 'Clean.');
+
+    const I = E.images, imgs = B.contentImages(pid);
+    if (imgs.length) {
+      const probs = [], alts = imgs.map(i => (i.alt_text || '').trim()), seen = {};
+      imgs.forEach((i, k) => {
+        const a = alts[k], nm = i.filename || '';
+        if (a.length < I.alt_min_chars || I.generic_alts.indexOf(a.toLowerCase()) > -1) probs.push('weak alt on ' + nm);
+        if (/\d/.test(nm)) probs.push('digits in filename ' + nm);
+        if (i.exists === false) probs.push('file missing: ' + nm);
+        else { if (i.kb && i.kb > I.max_kb) probs.push(nm + ' is ' + i.kb + ' KB (max ' + I.max_kb + ')'); if (i.geotag && !i.gps) probs.push(nm + ' should be geotagged but has no GPS in the file'); }
+        if (a) seen[a] = (seen[a] || 0) + 1;
+      });
+      if (Object.keys(seen).some(a => seen[a] > 1)) probs.push('duplicate alt text');
+      const big = probs.some(p => / KB /.test(p));
+      add('images', 'Image QA: alt text, filenames, size, geotag', !probs.length ? 'pass' : (big ? 'fail' : sev), probs.length ? probs.slice(0, 4).join('; ') + (probs.length > 4 ? ' (+' + (probs.length - 4) + ' more)' : '') : 'All images OK.');
+    }
+
+    const qs = body.match(QUOTE_RE) || [];
+    if (qs.length) {
+      const R = E.reviews, attrs = body.match(ATTR_RE) || [];
+      const good = attrs.filter(a => a.replace(/^>\s*[-\u2013]\s+/, '').split(',').filter(p => p.trim()).length >= 2);
+      const mine = new Set(quoteTexts(body)), shared = new Set();
+      Object.keys(D.pages).forEach(o => { if (o === pid) return; quoteTexts(pageMd(o)).forEach(q => { if (mine.has(q)) shared.add(q); }); });
+      const probs = [];
+      if (qs.length < R.min_per_page_if_present) probs.push('only ' + qs.length + ' review(s)');
+      if (R.attribution_required && good.length < qs.length) probs.push((qs.length - good.length) + ' review(s) missing name + place');
+      if (shared.size) probs.push(shared.size + ' review(s) reused on other pages');
+      add('reviews', 'Reviews are attributed (name + place) and not reused across pages', okSt(!probs.length), qs.length + ' reviews. ' + (!probs.length ? 'OK. Replace sample text with real customer reviews before launch.' : probs.join('; ')));
+    }
+  }
+
   B.seoAudit = function (pid) {
     const std = D.seo || {}, page = B.page(pid); if (!std.primary_keyword || !page) return null;
     const cfg = Object.assign({}, std.primary_keyword, (std.page_type_overrides || {})[page.type] || {});
@@ -273,6 +344,7 @@
 
     structureChecks(pid, page, secs, body, rep, sev);
     linkChecks(pid, page, secs, rep, sev, kw);
+    eeatChecks(pid, page, secs, body, rep, sev);
 
     const sc = { pass: 1, info: 1, warn: 0.5, fail: 0 };
     rep.score = Math.round(rep.checks.reduce((a, c) => a + sc[c.status], 0) / rep.checks.length * 100);

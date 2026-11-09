@@ -280,6 +280,7 @@ def audit_page(pid, std=None):
 
     structure_checks(pid, ptype, body, meta, brief, std, sev, report)
     link_checks(pid, ptype, body, brief, std, sev, report, kw, city, state)
+    eeat_checks(pid, ptype, body, plan, std, sev, report)
 
     scores = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
     report["score"] = round(sum(scores[c["status"]] for c in report["checks"]) / len(report["checks"]) * 100)
@@ -523,6 +524,141 @@ def link_checks(pid, ptype, body, brief, std, sev, report, kw, city, state):
             hub = (brief.get("city") or "").lower()
             add("location_hub", "Location keyword targets the satellite city, not the hub (FIX 32)", "pass" if hub not in tokens(kw) else "fail",
                 "Targets the satellite city." if hub not in tokens(kw) else f"Keyword contains hub city '{hub}'.")
+
+
+EMOJI_RE = re.compile("[\U0001F300-\U0001FAFF\u2705\u2B50\u27A1\u2714\u274C]")  # NOT the plain text star U+2605 (CSS-style text stars are allowed)
+QUOTE_RE = re.compile(r'^>\s*["\u201c](.+?)["\u201d]\s*$', re.M)
+ATTR_RE = re.compile(r"^>\s*[-\u2013]\s+(.+?)\s*$", re.M)
+
+
+def quote_texts(body):
+    return [re.sub(r"\W+", " ", q.lower()).strip() for q in QUOTE_RE.findall(body)]
+
+
+def image_facts(pid, filename):
+    """Real file facts: (exists, size_kb, has_exif_gps). Same lookup rule as compile_builder_data.py (images/<page>/ else images/homepage/)."""
+    d = ROOT / "images" / pid
+    base = d if d.exists() else ROOT / "images" / "homepage"
+    f = base / filename
+    if not f.exists():
+        return False, None, False
+    gps = False
+    try:
+        from PIL import Image
+        ex = Image.open(f).getexif()
+        gps = bool(ex.get_ifd(0x8825))  # GPS IFD
+    except Exception:
+        gps = False
+    return True, round(f.stat().st_size / 1024, 1), gps
+
+
+def eeat_checks(pid, ptype, body, plan, std, sev, report):
+    """Phase 5: first-hand experience, credentials, filler/superlatives, repetition, hard content rules, image QA, review authenticity."""
+    E = std.get("eeat", {})
+    if not E:
+        return
+    add = lambda cid, label, st, detail: report["checks"].append({"id": cid, "status": st, "label": label, "detail": detail})
+    ok_st = lambda ok: "pass" if ok else sev
+    plain = clean_text(body)
+    rt = raw_tokens(plain)
+    n = max(len(rt), 1)
+    low = " " + plain.lower() + " "
+
+    if ptype not in ("contact",):
+        fp = set(E["first_person_words"])
+        fp_n = sum(1 for t in rt if t in fp)
+        units = "|".join(re.escape(u) for u in E["specific_units"])
+        nums = r"(?:\d[\d,.]*|" + "|".join(E["number_words"]) + r")(?:[ -](?:" + "|".join(E["number_words"]) + r"))*"
+        spec = re.findall(r"\b" + nums + r"[ -]?(?:" + units + r")\b|\bsince (?:19|20)\d\d\b|\b(?:19|20)\d\d\b", low)
+        fp_r, sp_r = fp_n / n * 1000, len(spec) / n * 1000
+        add("experience", "First-hand voice and concrete specifics (numbers, measurements, years)",
+            ok_st(fp_r >= E["first_person_per_1000_min"] and sp_r >= E["specifics_per_1000_min"]),
+            f"{fp_r:.1f} first-person words and {sp_r:.1f} concrete specifics per 1000 words (min {E['first_person_per_1000_min']} and {E['specifics_per_1000_min']}).")
+
+    if ptype in E.get("credential_page_types", []):
+        found = sorted({c for c in E["credential_terms"] if re.search(r"\b" + re.escape(c) + r"\b", low)})
+        add("credentials", "Credentials or trust proof stated (certified, licensed, insured, BBB...)", ok_st(len(found) >= 1), f"Found: {', '.join(found) or 'none'}.")
+
+    filler = [p for p in E["filler_phrases"] if p in low]
+    add("filler", "No generic filler phrases", ok_st(len(filler) <= E["filler_max"]), "None." if not filler else "Found: " + ", ".join(filler[:5]))
+    sup = []
+    for pat in E["superlative_patterns"]:
+        m = re.search(pat, plain, re.I)
+        if m:
+            sup.append(m.group(0).strip())
+    add("superlatives", "No unsubstantiated superlatives or guarantees", ok_st(not sup), "None." if not sup else "Found: " + ", ".join(sup[:5]) + ". Back claims with proof or remove.")
+
+    sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", plain) if len(s.split()) >= 6]
+    norm = [re.sub(r"\W+", " ", s.lower()).strip() for s in sents]
+    from collections import Counter
+    dup = [s for s, c in Counter(norm).items() if c > 1]
+    k = E["repeat_opening_words"]
+    openers = Counter(" ".join(s.split()[:k]) for s in norm)
+    rep_open = [o for o, c in openers.items() if c >= E["repeat_opening_max"]]
+    add("repetition", "No repeated sentences or templated openings", ok_st(not dup and not rep_open),
+        "Varied." if not dup and not rep_open else ("Duplicate sentence(s): %d. " % len(dup) if dup else "") + (("Repeated opening: " + "; ".join(f"'{o}' x{openers[o]}" for o in rep_open[:3])) if rep_open else ""))
+
+    hits = {}
+    for label, pat in E["rule_patterns"].items():
+        c = len(re.findall(pat, body_no_front(body), re.M | re.I))
+        if c:
+            hits[label] = c
+    ec = len(EMOJI_RE.findall(body))
+    if ec:
+        hits["emoji"] = ec
+    add("rules", "Hard content rules (no em dash, separators, emoji, placeholders, pricing)", "pass" if not hits else "fail",
+        "Clean." if not hits else "Found: " + ", ".join(f"{k} x{v}" for k, v in hits.items()))
+
+    I = E["images"]
+    imgs = [i for i in (plan.get("images") or plan.get("page_images") or []) if not re.search(r"logo|favicon", i.get("slot", "") + i.get("filename", ""), re.I)]
+    if imgs:
+        probs = []
+        alts = [(i.get("alt_text") or i.get("alt") or "").strip() for i in imgs]
+        for i, a in zip(imgs, alts):
+            nm = i.get("filename", "")
+            exists, kb, gps = image_facts(pid, nm)
+            if len(a) < I["alt_min_chars"] or a.lower() in I["generic_alts"]:
+                probs.append(f"weak alt on {nm}")
+            if re.search(r"\d", nm):
+                probs.append(f"digits in filename {nm}")
+            if not exists:
+                probs.append(f"file missing: {nm}")
+            else:
+                if kb and kb > I["max_kb"]:
+                    probs.append(f"{nm} is {kb} KB (max {I['max_kb']})")
+                if i.get("geotag") and not gps:
+                    probs.append(f"{nm} should be geotagged but has no GPS in the file")
+        dupa = [a for a, c in Counter(alts).items() if a and c > 1]
+        if dupa:
+            probs.append("duplicate alt text")
+        has_big = any(" KB " in p for p in probs)
+        add("images", "Image QA: alt text, filenames, size, geotag", "pass" if not probs else ("fail" if has_big else sev), "All images OK." if not probs else "; ".join(probs[:4]) + (f" (+{len(probs) - 4} more)" if len(probs) > 4 else ""))
+
+    qs = QUOTE_RE.findall(body)
+    if qs:
+        R = E["reviews"]
+        attrs = ATTR_RE.findall(body)
+        good = [a for a in attrs if len([p for p in a.split(",") if p.strip()]) >= 2]
+        mine = set(quote_texts(body))
+        shared = set()
+        for o in all_page_ids():
+            if o == pid:
+                continue
+            ob = split_front_matter((ROOT / f"page_content_{o}.md").read_text(encoding="utf-8", errors="ignore"))[1]
+            shared |= mine & set(quote_texts(ob))
+        probs = []
+        if len(qs) < R["min_per_page_if_present"]:
+            probs.append(f"only {len(qs)} review(s)")
+        if R["attribution_required"] and len(good) < len(qs):
+            probs.append(f"{len(qs) - len(good)} review(s) missing name + place")
+        if shared:
+            probs.append(f"{len(shared)} review(s) reused on other pages")
+        add("reviews", "Reviews are attributed (name + place) and not reused across pages", ok_st(not probs),
+            f"{len(qs)} reviews. " + ("OK. Replace sample text with real customer reviews before launch." if not probs else "; ".join(probs)))
+
+
+def body_no_front(body):
+    return body
 
 
 def all_page_ids():

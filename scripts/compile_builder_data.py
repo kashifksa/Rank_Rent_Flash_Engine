@@ -160,12 +160,17 @@ def write_v5_data(compiled):
     nap = brief.get("nap", {})
     topical = load_json_safe(BASE_DIR / "topical_authority.json")
     tk = {tp.get("page_id"): tp.get("target_keyword", "") for tp in topical.get("pages", [])}
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import seo_audit as _sa  # real file facts (exists, size, EXIF GPS) so the builder panel shows the same truth as the CLI
     pages = {}
     for pid, p in compiled.items():
-        plan_imgs = [
-            {"slot": i.get("slot", ""), "filename": i.get("filename", ""), "alt_text": i.get("alt_text", "") or i.get("alt", "")}
-            for i in p.get("images", []) if i.get("filename")
-        ]
+        plan_imgs = []
+        for i in p.get("images", []):
+            if not i.get("filename"):
+                continue
+            ex, kb, gps = _sa.image_facts(pid, i["filename"])
+            plan_imgs.append({"slot": i.get("slot", ""), "filename": i.get("filename", ""), "alt_text": i.get("alt_text", "") or i.get("alt", ""),
+                              "geotag": bool(i.get("geotag")), "exists": ex, "kb": kb, "gps": gps})
         kw = (p.get("meta", {}).get("target_keyword") or tk.get(pid) or "").strip()
         pages[pid] = {
             "id": pid, "title": p["title"], "nav": nav_label(p), "slug": p["slug"], "type": p["type"],

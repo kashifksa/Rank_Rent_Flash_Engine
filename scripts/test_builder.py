@@ -139,6 +139,24 @@ def main():
           const r = Builder.seoAudit('commercial-hvac-duct-cleaning'); const o = Object.fromEntries(r.checks.map(c => [c.id, c.status]));
           B.resetSection('commercial-hvac-duct-cleaning', '09_faq'); return o; }""")
         check("link to an unbuilt page fails (planned-link rule)", r4.get("links_planned") == "fail", r4)
+        # Phase 5 E-E-A-T / rules / image QA / reviews: same verdicts in the panel and in seo_audit.py
+        P5 = ["experience", "credentials", "filler", "superlatives", "repetition", "rules", "images", "reviews"]
+        diff5 = []
+        for pid_ in js3:
+            py = seo_audit.audit_page(pid_)
+            if not py:
+                continue
+            pys = {c["id"]: c["status"] for c in py["checks"]}
+            js_now = pg.evaluate("(id) => Object.fromEntries(Builder.seoAudit(id).checks.map(c => [c.id, c.status]))", pid_)
+            for k in P5:
+                if k in pys and js_now.get(k) != pys[k]:
+                    diff5.append((pid_, k, pys[k], js_now.get(k)))
+        check("Phase 5 checks (JS) match seo_audit.py on every page", not diff5, diff5[:5])
+        r5 = pg.evaluate("""() => { const B = Builder, m = B.editModel('commercial-hvac-duct-cleaning', '09_faq');
+          m.paras = (m.paras || []).concat(['We are the best \\u2014 only $99 flat-rate, look no further.']);
+          const r = Builder.seoAudit('commercial-hvac-duct-cleaning'); const o = Object.fromEntries(r.checks.map(c => [c.id, c.status]));
+          B.resetSection('commercial-hvac-duct-cleaning', '09_faq'); return o; }""")
+        check("hard-rule violations (em dash, price) FAIL; filler/superlatives WARN", r5.get("rules") == "fail" and r5.get("filler") == "warn" and r5.get("superlatives") == "warn", r5)
         check("non-location pages do not get location checks", "similarity" not in dict(pg.evaluate("() => Builder.seoAudit('commercial-hvac-duct-cleaning').checks.map(c => [c.id, c.status])")))
         before = pg.evaluate("Builder.seoAudit('homepage').density.combinedPct")
         pg.evaluate("""() => { const B = Builder, m = B.editModel('homepage', 'intro');

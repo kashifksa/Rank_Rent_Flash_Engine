@@ -764,6 +764,139 @@ window.BUILDER_DATA = {
     "service"
    ]
   },
+  "eeat": {
+   "_comment": "Phase 5. First-hand experience, real proof, filler/superlative scan, hard content rules (AGENTS.md) and image QA. 'rules' and image-size breaches are FAIL, the rest WARN.",
+   "first_person_per_1000_min": 3,
+   "specifics_per_1000_min": 6,
+   "first_person_words": [
+    "we",
+    "our",
+    "us",
+    "we've",
+    "we're",
+    "my",
+    "i"
+   ],
+   "specific_units": [
+    "cfm",
+    "feet",
+    "foot",
+    "ft",
+    "inch",
+    "inches",
+    "minutes",
+    "hours",
+    "years",
+    "percent",
+    "%",
+    "psi",
+    "degrees",
+    "homes",
+    "pounds",
+    "gallons",
+    "miles",
+    "days",
+    "visits",
+    "projects"
+   ],
+   "number_words": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "twelve",
+    "fifteen",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "hundred",
+    "thousand",
+    "million"
+   ],
+   "credential_terms": [
+    "nadca",
+    "ascs",
+    "epa",
+    "better business bureau",
+    "bbb",
+    "licensed",
+    "insured",
+    "certified",
+    "accredited"
+   ],
+   "credential_page_types": [
+    "homepage",
+    "service",
+    "location",
+    "about",
+    "contact"
+   ],
+   "filler_phrases": [
+    "in today's fast-paced",
+    "look no further",
+    "state-of-the-art",
+    "cutting-edge",
+    "world-class",
+    "second to none",
+    "one-stop shop",
+    "tailored solutions",
+    "tailored to your needs",
+    "seamless",
+    "top-notch",
+    "commitment to excellence",
+    "it's important to note",
+    "when it comes to",
+    "game-changer",
+    "unlock the",
+    "delve",
+    "in conclusion",
+    "elevate your",
+    "peace of mind guaranteed",
+    "premier"
+   ],
+   "filler_max": 0,
+   "superlative_patterns": [
+    "\\bthe best (?!time|way|season|month|option|practice|result)",
+    "#1\\b",
+    "\\bnumber one\\b",
+    "\\baward-winning\\b",
+    "\\btop-rated\\b",
+    "\\bunmatched\\b",
+    "\\bunrivaled\\b",
+    "\\bvoted\\b",
+    "\\bguaranteed results?\\b",
+    "\\b100% (?:satisfaction|guarantee)"
+   ],
+   "repeat_opening_words": 3,
+   "repeat_opening_max": 4,
+   "rule_patterns": {
+    "em dash": "[\\u2014\\u2013]",
+    "separator line": "^\\s*-{3,}\\s*$",
+    "placeholder": "\\b(?:TBD|lorem ipsum|coming in Phase \\d)\\b",
+    "pricing": "\\$\\s?\\d|\\bflat[- ]rate\\b|\\bno hidden fees\\b|\\bsurcharge\\b|\\bstarting (?:at|from) \\$"
+   },
+   "images": {
+    "alt_min_chars": 25,
+    "max_kb": 100,
+    "generic_alts": [
+     "image",
+     "photo",
+     "picture",
+     "img"
+    ]
+   },
+   "reviews": {
+    "min_per_page_if_present": 2,
+    "attribution_required": true
+   }
+  },
   "page_type_overrides": {
    "blog": {
     "slug_exempt_page_types": []
@@ -983,72 +1116,128 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "rockford-air-duct-pros-service-van-hero.webp",
-     "alt_text": "Rockford Air Duct Pros service van parked outside residential home in Rockford, IL"
+     "alt_text": "Rockford Air Duct Pros service van parked outside residential home in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 93.7,
+     "gps": true
     },
     {
      "slot": "primary-service-intro",
      "filename": "residential-duct-cleaning-rockford-illinois.webp",
-     "alt_text": "Air duct technician cleaning supply register in Rolling Green neighborhood, Rockford, IL"
+     "alt_text": "Air duct technician cleaning supply register in Rolling Green neighborhood, Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 85.4,
+     "gps": false
     },
     {
      "slot": "equipment-negative-air",
      "filename": "negative-air-containment-vacuum-rockford-home.webp",
-     "alt_text": "Five thousand CFM negative air containment system connected to duct trunk line in Rockford, IL"
+     "alt_text": "Five thousand CFM negative air containment system connected to duct trunk line in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 92.1,
+     "gps": true
     },
     {
      "slot": "botanical-sanitization",
      "filename": "botanical-antimicrobial-duct-fogging-rockford-residence.webp",
-     "alt_text": "Certified technician applying botanical thyme antimicrobial fogging in Churchill Grove, Rockford, IL"
+     "alt_text": "Certified technician applying botanical thyme antimicrobial fogging in Churchill Grove, Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 64.4,
+     "gps": true
     },
     {
      "slot": "before-inspection",
      "filename": "contaminated-air-duct-interior-rockford-residence.webp",
-     "alt_text": "Borescope inspection camera photo of dust and dander accumulation in Rockford, IL ductwork"
+     "alt_text": "Borescope inspection camera photo of dust and dander accumulation in Rockford, IL ductwork",
+     "geotag": true,
+     "exists": true,
+     "kb": 91.6,
+     "gps": true
     },
     {
      "slot": "after-inspection",
      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
-     "alt_text": "Clean sanitized bare metal air duct interior after mechanical rotary scrubbing in Rockford, IL"
+     "alt_text": "Clean sanitized bare metal air duct interior after mechanical rotary scrubbing in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 98.6,
+     "gps": true
     },
     {
      "slot": "credentials-block",
      "filename": "nadca-bbb-credentials-rockford-duct-company.webp",
-     "alt_text": "NADCA and BBB A Plus accreditation logos displayed for Rockford air duct cleaning company"
+     "alt_text": "NADCA and BBB A Plus accreditation logos displayed for Rockford air duct cleaning company",
+     "geotag": true,
+     "exists": true,
+     "kb": 68.3,
+     "gps": true
     },
     {
      "slot": "blower-wheel-before",
      "filename": "contaminated-furnace-blower-wheel-rockford-residence.webp",
-     "alt_text": "Dirty residential furnace squirrel cage blower wheel caked with dust before cleaning in Rockford, IL"
+     "alt_text": "Dirty residential furnace squirrel cage blower wheel caked with dust before cleaning in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 86.9,
+     "gps": true
     },
     {
      "slot": "blower-wheel-after",
      "filename": "sanitized-furnace-blower-wheel-rockford-residence.webp",
-     "alt_text": "Clean sanitized bare metal furnace squirrel cage blower wheel after precision cleaning in Rockford, IL"
+     "alt_text": "Clean sanitized bare metal furnace squirrel cage blower wheel after precision cleaning in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 79.3,
+     "gps": true
     },
     {
      "slot": "before-after-1",
      "filename": "single-card-air-duct-trunk-rockford-residence.webp",
-     "alt_text": "Churchill Grove residential return air duct decontamination before and after"
+     "alt_text": "Churchill Grove residential return air duct decontamination before and after",
+     "geotag": true,
+     "exists": true,
+     "kb": 92.6,
+     "gps": true
     },
     {
      "slot": "before-after-2",
      "filename": "single-card-dryer-vent-exhaust-rockford-residence.webp",
-     "alt_text": "Rolling Green laundry dryer vent lint hazard cleanout before and after"
+     "alt_text": "Rolling Green laundry dryer vent lint hazard cleanout before and after",
+     "geotag": true,
+     "exists": true,
+     "kb": 72.4,
+     "gps": true
     },
     {
      "slot": "before-after-3",
      "filename": "single-card-blower-wheel-rockford-residence.webp",
-     "alt_text": "Midtown residential furnace blower wheel before and after sanitization"
+     "alt_text": "Midtown residential furnace blower wheel before and after sanitization",
+     "geotag": true,
+     "exists": true,
+     "kb": 94.9,
+     "gps": true
     },
     {
      "slot": "logo",
      "filename": "rockford-air-duct-pros-logo.webp",
-     "alt_text": "Rockford Air Duct Pros logo"
+     "alt_text": "Rockford Air Duct Pros logo",
+     "geotag": false,
+     "exists": true,
+     "kb": 70.6,
+     "gps": false
     },
     {
      "slot": "logo-light",
      "filename": "rockford-air-duct-pros-logo-light.webp",
-     "alt_text": "Rockford Air Duct Pros logo for dark backgrounds"
+     "alt_text": "Rockford Air Duct Pros logo for dark backgrounds",
+     "geotag": false,
+     "exists": true,
+     "kb": 76.1,
+     "gps": false
     }
    ],
    "img_dir": "images/homepage"
@@ -1238,12 +1427,20 @@ window.BUILDER_DATA = {
     {
      "slot": "identity-hook",
      "filename": "rockford-air-duct-pros-owner-team-photo.webp",
-     "alt_text": "Rockford Air Duct Pros owner and technician team standing beside service van in Rockford, IL"
+     "alt_text": "Rockford Air Duct Pros owner and technician team standing beside service van in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 96.6,
+     "gps": true
     },
     {
      "slot": "community-proof",
      "filename": "rockford-air-duct-pros-community-rockford-illinois.webp",
-     "alt_text": "Rockford Air Duct Pros team at Rockford community event in Winnebago County, IL"
+     "alt_text": "Rockford Air Duct Pros team at Rockford community event in Winnebago County, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 94.4,
+     "gps": false
     }
    ],
    "img_dir": "images/about"
@@ -1358,7 +1555,11 @@ window.BUILDER_DATA = {
     {
      "slot": "contact-form-header",
      "filename": "contact-rockford-air-duct-pros-technician.webp",
-     "alt_text": "Rockford Air Duct Pros technician answering customer call to schedule air duct cleaning in Rockford, IL"
+     "alt_text": "Rockford Air Duct Pros technician answering customer call to schedule air duct cleaning in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 70.7,
+     "gps": true
     }
    ],
    "img_dir": "images/contact"
@@ -1493,12 +1694,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "air-duct-cleaning-loves-park-illinois-hero.webp",
-     "alt_text": "Air duct cleaning service truck arriving at a Loves Park, IL residential home near Rock River"
+     "alt_text": "Air duct cleaning service truck arriving at a Loves Park, IL residential home near Rock River",
+     "geotag": true,
+     "exists": true,
+     "kb": 86.2,
+     "gps": true
     },
     {
      "slot": "local-proof",
      "filename": "duct-cleaning-loves-park-colonial-village.webp",
-     "alt_text": "Technician cleaning air duct in Colonial Village neighborhood home, Loves Park, IL"
+     "alt_text": "Technician cleaning air duct in Colonial Village neighborhood home, Loves Park, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 89.1,
+     "gps": false
     }
    ],
    "img_dir": "images/air-duct-cleaning-loves-park-il"
@@ -1646,12 +1855,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "commercial-hvac-duct-cleaning-rockford-rooftop-hero.webp",
-     "alt_text": "Commercial HVAC duct cleaning crew servicing rooftop air handler unit in Rockford, IL"
+     "alt_text": "Commercial HVAC duct cleaning crew servicing rooftop air handler unit in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 92.1,
+     "gps": true
     },
     {
      "slot": "spiral-duct-scrubbing",
      "filename": "industrial-spiral-duct-cleaning-rockford-facility.webp",
-     "alt_text": "Technician using rotary brush to clean industrial spiral ductwork in Rockford, IL facility"
+     "alt_text": "Technician using rotary brush to clean industrial spiral ductwork in Rockford, IL facility",
+     "geotag": true,
+     "exists": true,
+     "kb": 92.2,
+     "gps": true
     }
    ],
    "img_dir": "images/commercial-hvac-duct-cleaning"
@@ -1799,12 +2016,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "dryer-vent-cleaning-rotary-brush-rockford-residence.webp",
-     "alt_text": "Technician using motorized rotary brush to remove lint from laundry dryer vent in Rockford, IL"
+     "alt_text": "Technician using motorized rotary brush to remove lint from laundry dryer vent in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 63.6,
+     "gps": true
     },
     {
      "slot": "lint-hazard",
      "filename": "clogged-dryer-vent-lint-hazard-rockford-home.webp",
-     "alt_text": "Compacted lint accumulation removed from residential clothes dryer exhaust duct in Rockford, IL"
+     "alt_text": "Compacted lint accumulation removed from residential clothes dryer exhaust duct in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 90.1,
+     "gps": false
     }
    ],
    "img_dir": "images/dryer-vent-cleaning-and-lint-removal"
@@ -1972,12 +2197,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "negative-air-containment-vacuum-rockford-home.webp",
-     "alt_text": "Commercial negative air vacuum extractor connected to residential duct trunk in Rockford, IL"
+     "alt_text": "Commercial negative air vacuum extractor connected to residential duct trunk in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 92.1,
+     "gps": true
     },
     {
      "slot": "trunk-extraction",
      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
-     "alt_text": "Sanitized bare metal interior of residential main supply trunk after negative air vacuum extraction"
+     "alt_text": "Sanitized bare metal interior of residential main supply trunk after negative air vacuum extraction",
+     "geotag": true,
+     "exists": true,
+     "kb": 98.6,
+     "gps": true
     }
    ],
    "img_dir": "images/negative-air-vacuum-trunk-line-cleaning"
@@ -2145,12 +2378,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "botanical-antimicrobial-duct-fogging-rockford-residence.webp",
-     "alt_text": "Hospital-grade botanical antimicrobial duct fogging treatment in Rockford, IL"
+     "alt_text": "Hospital-grade botanical antimicrobial duct fogging treatment in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 64.4,
+     "gps": true
     },
     {
      "slot": "results",
      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
-     "alt_text": "Sanitized bare metal interior of residential ductwork following antimicrobial misting in Rockford, IL"
+     "alt_text": "Sanitized bare metal interior of residential ductwork following antimicrobial misting in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 98.6,
+     "gps": true
     }
    ],
    "img_dir": "images/sanitization-and-antimicrobial-fogging"
@@ -2318,12 +2559,20 @@ window.BUILDER_DATA = {
     {
      "slot": "hero",
      "filename": "contaminated-air-duct-interior-rockford-residence.webp",
-     "alt_text": "High-definition borescope camera view inside contaminated residential air duct in Rockford, IL"
+     "alt_text": "High-definition borescope camera view inside contaminated residential air duct in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 91.6,
+     "gps": true
     },
     {
      "slot": "verification",
      "filename": "sanitized-bare-metal-air-duct-rockford-residence.webp",
-     "alt_text": "High-definition camera verification showing clean bare metal ductwork in Rockford, IL"
+     "alt_text": "High-definition camera verification showing clean bare metal ductwork in Rockford, IL",
+     "geotag": true,
+     "exists": true,
+     "kb": 98.6,
+     "gps": true
     }
    ],
    "img_dir": "images/video-camera-ductwork-inspection"

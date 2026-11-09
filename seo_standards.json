@@ -62,6 +62,29 @@
     "blog_informational": ["how to", "how do", "how does", "signs of", "sign", "guide", "what is", "what are", "when to", "why", " vs ", "versus", "spot", "tips", "mistakes", "myths", "checklist"],
     "blog_transactional": ["near me", "company", "companies", "cost", "price", "pricing", "cheap", "hire", "quote", "services", "service"]
   },
+  "eeat": {
+    "_comment": "Phase 5. First-hand experience, real proof, filler/superlative scan, hard content rules (AGENTS.md) and image QA. 'rules' and image-size breaches are FAIL, the rest WARN.",
+    "first_person_per_1000_min": 3,
+    "specifics_per_1000_min": 6,
+    "first_person_words": ["we", "our", "us", "we've", "we're", "my", "i"],
+    "specific_units": ["cfm", "feet", "foot", "ft", "inch", "inches", "minutes", "hours", "years", "percent", "%", "psi", "degrees", "homes", "pounds", "gallons", "miles", "days", "visits", "projects"],
+    "number_words": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "twelve", "fifteen", "twenty", "thirty", "forty", "fifty", "hundred", "thousand", "million"],
+    "credential_terms": ["nadca", "ascs", "epa", "better business bureau", "bbb", "licensed", "insured", "certified", "accredited"],
+    "credential_page_types": ["homepage", "service", "location", "about", "contact"],
+    "filler_phrases": ["in today's fast-paced", "look no further", "state-of-the-art", "cutting-edge", "world-class", "second to none", "one-stop shop", "tailored solutions", "tailored to your needs", "seamless", "top-notch", "commitment to excellence", "it's important to note", "when it comes to", "game-changer", "unlock the", "delve", "in conclusion", "elevate your", "peace of mind guaranteed", "premier"],
+    "filler_max": 0,
+    "superlative_patterns": ["\\bthe best (?!time|way|season|month|option|practice|result)", "#1\\b", "\\bnumber one\\b", "\\baward-winning\\b", "\\btop-rated\\b", "\\bunmatched\\b", "\\bunrivaled\\b", "\\bvoted\\b", "\\bguaranteed results?\\b", "\\b100% (?:satisfaction|guarantee)"],
+    "repeat_opening_words": 3,
+    "repeat_opening_max": 4,
+    "rule_patterns": {
+      "em dash": "[\\u2014\\u2013]",
+      "separator line": "^\\s*-{3,}\\s*$",
+      "placeholder": "\\b(?:TBD|lorem ipsum|coming in Phase \\d)\\b",
+      "pricing": "\\$\\s?\\d|\\bflat[- ]rate\\b|\\bno hidden fees\\b|\\bsurcharge\\b|\\bstarting (?:at|from) \\$"
+    },
+    "images": { "alt_min_chars": 25, "max_kb": 100, "generic_alts": ["image", "photo", "picture", "img"] },
+    "reviews": { "min_per_page_if_present": 2, "attribution_required": true }
+  },
   "page_type_overrides": {
     "blog": { "slug_exempt_page_types": [] },
     "contact": { "required_in": ["h1", "first_words", "meta_title", "meta_description"] },
