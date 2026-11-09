@@ -221,7 +221,7 @@
   }
   function openPubModal() {
     $('#pubTplLabel').textContent = B.tpl().name + ' (' + B.state.template + ')';
-    $('#pubRepoUrl').value = B.state.githubRepo || '';
+    $('#pubRepoUrl').value = B.state.githubRepo || $('#pubRepoUrl').value || '';
     $('#pubLog').hidden = true;
     $('#pubModal').hidden = false;
   }
