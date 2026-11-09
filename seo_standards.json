@@ -69,7 +69,7 @@
     "first_person_words": ["we", "our", "us", "we've", "we're", "my", "i"],
     "specific_units": ["cfm", "feet", "foot", "ft", "inch", "inches", "minutes", "hours", "years", "percent", "%", "psi", "degrees", "homes", "pounds", "gallons", "miles", "days", "visits", "projects"],
     "number_words": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "twelve", "fifteen", "twenty", "thirty", "forty", "fifty", "hundred", "thousand", "million"],
-    "credential_terms": ["nadca", "ascs", "epa", "better business bureau", "bbb", "licensed", "insured", "certified", "accredited"],
+    "credential_terms": ["better business bureau", "bbb", "licensed", "insured", "certified", "accredited", "bonded"],
     "credential_page_types": ["homepage", "service", "location", "about", "contact"],
     "filler_phrases": ["in today's fast-paced", "look no further", "state-of-the-art", "cutting-edge", "world-class", "second to none", "one-stop shop", "tailored solutions", "tailored to your needs", "seamless", "top-notch", "commitment to excellence", "it's important to note", "when it comes to", "game-changer", "unlock the", "delve", "in conclusion", "elevate your", "peace of mind guaranteed", "premier"],
     "filler_max": 0,

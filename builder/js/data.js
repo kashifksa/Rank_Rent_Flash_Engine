@@ -11,7 +11,22 @@ window.BUILDER_DATA = {
   "niche": "Air Duct Cleaning",
   "city": "Rockford",
   "state": "IL",
-  "primary_keyword": "air duct cleaning rockford"
+  "primary_keyword": "air duct cleaning rockford",
+  "credentials": [
+   "NADCA Certified (National Air Duct Cleaners Association)",
+   "ASCS Certified Technicians",
+   "EPA Lead-Safe Certified",
+   "Better Business Bureau Accredited A+",
+   "Fully Licensed and Insured"
+  ],
+  "neighborhoods": [
+   "Churchill's Grove",
+   "Edgewater",
+   "Rolling Green",
+   "Highland Park",
+   "Signal Hill",
+   "Midtown"
+  ]
  },
  "schema": {
   "homepage": {
@@ -821,15 +836,13 @@ window.BUILDER_DATA = {
     "million"
    ],
    "credential_terms": [
-    "nadca",
-    "ascs",
-    "epa",
     "better business bureau",
     "bbb",
     "licensed",
     "insured",
     "certified",
-    "accredited"
+    "accredited",
+    "bonded"
    ],
    "credential_page_types": [
     "homepage",

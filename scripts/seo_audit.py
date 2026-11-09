@@ -72,7 +72,7 @@ FILLER = {"in", "of", "for", "and", "the", "a", "an", "to", "near", "at", "by", 
 
 
 def ft(toks):
-    """Drop filler words so 'Air Duct Cleaning in Rockford' still matches 'air duct cleaning rockford'."""
+    """Drop filler words so 'Plumbing Repair in Springfield' still matches 'plumbing repair springfield'."""
     return [t for t in toks if t not in FILLER]
 
 
@@ -280,7 +280,7 @@ def audit_page(pid, std=None):
 
     structure_checks(pid, ptype, body, meta, brief, std, sev, report)
     link_checks(pid, ptype, body, brief, std, sev, report, kw, city, state)
-    eeat_checks(pid, ptype, body, plan, std, sev, report)
+    eeat_checks(pid, ptype, body, plan, std, sev, report, brief)
 
     scores = {"pass": 1.0, "info": 1.0, "warn": 0.5, "fail": 0.0}
     report["score"] = round(sum(scores[c["status"]] for c in report["checks"]) / len(report["checks"]) * 100)
@@ -552,7 +552,7 @@ def image_facts(pid, filename):
     return True, round(f.stat().st_size / 1024, 1), gps
 
 
-def eeat_checks(pid, ptype, body, plan, std, sev, report):
+def eeat_checks(pid, ptype, body, plan, std, sev, report, brief=None):
     """Phase 5: first-hand experience, credentials, filler/superlatives, repetition, hard content rules, image QA, review authenticity."""
     E = std.get("eeat", {})
     if not E:
@@ -576,7 +576,9 @@ def eeat_checks(pid, ptype, body, plan, std, sev, report):
             f"{fp_r:.1f} first-person words and {sp_r:.1f} concrete specifics per 1000 words (min {E['first_person_per_1000_min']} and {E['specifics_per_1000_min']}).")
 
     if ptype in E.get("credential_page_types", []):
-        found = sorted({c for c in E["credential_terms"] if re.search(r"\b" + re.escape(c) + r"\b", low)})
+        # generic trust terms + acronyms from THIS project's credentials in master_brief.json (nothing niche-specific is hardcoded)
+        terms = set(E["credential_terms"]) | {a.lower() for c in (brief or {}).get("credentials", []) for a in re.findall(r"\b[A-Z]{3,}\b", c)}
+        found = sorted({c for c in terms if re.search(r"\b" + re.escape(c) + r"\b", low)})
         add("credentials", "Credentials or trust proof stated (certified, licensed, insured, BBB...)", ok_st(len(found) >= 1), f"Found: {', '.join(found) or 'none'}.")
 
     filler = [p for p in E["filler_phrases"] if p in low]

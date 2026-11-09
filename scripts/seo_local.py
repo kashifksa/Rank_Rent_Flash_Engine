@@ -105,7 +105,7 @@ def audit_location(pid, texts, hub, state, company):
     scrub = re.sub(re.escape(company), " ", plain, flags=re.I) if company else plain
     roads = sorted({m.group(0).strip() for m in ROAD_RE.finditer(scrub)})
     lms = sorted({m.group(0).strip() for m in LANDMARK_RE.finditer(scrub)} - {city})
-    lms = [x for x in lms if x.lower() not in {"loves park", hub.lower()} and not x.lower().startswith(("our ", "the "))]
+    lms = [x for x in lms if x.lower() not in {city.lower(), hub.lower()} and not x.lower().startswith(("our ", "the "))]
     add("landmarks", f"At least {STD['min_landmarks']} local landmarks (FIX 39)", "pass" if len(lms) >= STD["min_landmarks"] else "warn",
         f"{len(lms)} found: {', '.join(lms[:6]) or 'none'}. (Heuristic: confirm they are real places in {city}.)")
     add("roads", f"At least {STD['min_roads']} numbered highway / thoroughfare (FIX 39)", "pass" if len(roads) >= STD["min_roads"] else "warn",
@@ -132,7 +132,9 @@ def audit_location(pid, texts, hub, state, company):
     city_imgs = [i for i in imgs if city and re.search(re.escape(city), i.get("alt_text", "") or i.get("alt", ""), re.I)]
     add("local_photo", "Real local photo with city in alt text", "pass" if city_imgs else "warn",
         f"{len(city_imgs)} of {len(imgs)} images mention {city}. Use genuine, geotagged job photos, not stock.")
-    nbr = re.findall(r"\b(?:Colonial Village|Meadow|Heights|Estates|Subdivision|neighbou?rhood)\b", plain)
+    brief_hoods = [h for h in sa.load_json(ROOT / "master_brief.json").get("neighborhoods", []) if isinstance(h, str)]
+    hood_re = r"\b(?:" + "|".join([re.escape(h) for h in brief_hoods] + [r"[A-Z][a-z]+(?: [A-Z][a-z]+)? (?:Village|Heights|Estates|Meadows?|Hills|Acres|Terrace|Gardens|Subdivision|Addition)", "neighbou?rhoods?"]) + r")\b"
+    nbr = re.findall(hood_re, plain)
     add("neighborhoods", "Neighbourhood-level detail", "pass" if len(set(nbr)) >= 1 else "warn", f"{len(nbr)} neighbourhood references.")
     add("meta_city", "City in meta title and description",
         "pass" if city and re.search(re.escape(city), meta.get("meta_title", ""), re.I) and re.search(re.escape(city), meta.get("meta_description", ""), re.I) else "warn",

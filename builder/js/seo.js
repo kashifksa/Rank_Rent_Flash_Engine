@@ -61,7 +61,8 @@
     add('local_review', 'City-specific review present', proofSec && cityRe && cityRe.test(clean(proofSec.md)) ? 'pass' : 'warn', proofSec && cityRe && cityRe.test(clean(proofSec.md)) ? 'Found.' : 'No review text in the proof section mentions ' + city + '.');
     const imgs = B.contentImages(pid), ci = imgs.filter(i => cityRe && cityRe.test(i.alt_text || ''));
     add('local_photo', 'Real local photo with city in alt text', ci.length ? 'pass' : 'warn', ci.length + ' of ' + imgs.length + ' images mention ' + city + '. Use genuine, geotagged job photos, not stock.');
-    const nb = plain.match(/\b(?:Colonial Village|Meadow|Heights|Estates|Subdivision|neighbou?rhood)\b/g) || [];
+    const hoods = (D.brief.neighborhoods || []).map(esc).concat(['[A-Z][a-z]+(?: [A-Z][a-z]+)? (?:Village|Heights|Estates|Meadows?|Hills|Acres|Terrace|Gardens|Subdivision|Addition)', 'neighbou?rhoods?']);
+    const nb = plain.match(new RegExp('\\b(?:' + hoods.join('|') + ')\\b', 'g')) || [];
     add('neighborhoods', 'Neighbourhood-level detail', nb.length >= 1 ? 'pass' : 'warn', nb.length + ' neighbourhood references.');
     const meta = page.meta || {};
     add('meta_city', 'City in meta title and description', cityRe && cityRe.test(meta.meta_title || '') && cityRe.test(meta.meta_description || '') ? 'pass' : 'warn', 'title: "' + String(meta.meta_title || '').slice(0, 60) + '"');
@@ -224,7 +225,8 @@
         fpR.toFixed(1) + ' first-person words and ' + spR.toFixed(1) + ' concrete specifics per 1000 words (min ' + E.first_person_per_1000_min + ' and ' + E.specifics_per_1000_min + ').');
     }
     if ((E.credential_page_types || []).indexOf(type) > -1) {
-      const found = E.credential_terms.filter(c => new RegExp('\\b' + esc(c) + '\\b').test(low)).sort();
+      const terms = new Set(E.credential_terms); (D.brief.credentials || []).forEach(c => (c.match(/\b[A-Z]{3,}\b/g) || []).forEach(a => terms.add(a.toLowerCase())));
+      const found = [...terms].filter(c => new RegExp('\\b' + esc(c) + '\\b').test(low)).sort();
       add('credentials', 'Credentials or trust proof stated (certified, licensed, insured, BBB...)', okSt(found.length >= 1), 'Found: ' + (found.join(', ') || 'none') + '.');
     }
     const filler = E.filler_phrases.filter(p => low.indexOf(p) > -1);
