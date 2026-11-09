@@ -165,3 +165,4 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         src = Path(sys.argv[1])
     process_logo(src)
+

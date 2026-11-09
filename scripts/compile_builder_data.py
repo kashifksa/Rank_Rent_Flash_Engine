@@ -223,7 +223,12 @@ def compile_all_pages(sync_builder_html=True):
             print(f"  [SECTIONS] {pid}: {w}")
         meta_data = load_json_safe(meta_path)
         plan_data = load_json_safe(plan_path)
-        images_list = plan_data.get("images", [])
+        images_list = (
+            plan_data.get("images")
+            or plan_data.get("page_images")
+            or plan_data.get("image_plan", {}).get("page_images")
+            or []
+        )
 
         img_dir = f"images/{pid}" if (BASE_DIR / "images" / pid).exists() else "images/homepage"
 
