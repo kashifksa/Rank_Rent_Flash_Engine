@@ -492,14 +492,32 @@ def build_full_website(template_id="stitch_modern_industrial", out_folder=None):
 FORCE_BUILD = False
 
 
-def build_site_v5(template_id="cornerstone", out_folder=None):
+V5_TEMPLATES = ("cornerstone", "keystone", "industrial", "bold", "clean", "authority", "emergency", "bento", "atelier", "blueprint")
+BUILDER_STATE_FILE = ROOT_DIR / "builder_state.json"
+
+
+def get_locked_template(explicit_tpl=None):
+    """Resolve active template: explicit CLI flag > saved builder_state.json > 'blueprint'."""
+    st = load_json(BUILDER_STATE_FILE)
+    if explicit_tpl and explicit_tpl in V5_TEMPLATES:
+        st["template"] = explicit_tpl
+        st["lockedTemplate"] = True
+        BUILDER_STATE_FILE.write_text(json.dumps(st, indent=2, ensure_ascii=False), encoding="utf-8")
+        return explicit_tpl
+    saved = st.get("template")
+    if saved in V5_TEMPLATES:
+        return saved
+    return "cornerstone"
+
+
+def build_site_v5(template_id=None, out_folder=None):
     """
     Whole-site export with the section-registry builder (builder/index.html).
-    Templates: cornerstone, keystone, industrial. Sections come from sections_schema.json.
-    If builder_state.json exists in the project root it is used as the saved project state.
+    Uses locked template in builder_state.json unless explicit template_id is passed.
     """
+    template_id = get_locked_template(template_id)
     print("=" * 72)
-    print(f"  BUILDING FULL WEBSITE (builder v5) - TEMPLATE: {template_id}")
+    print(f"  BUILDING FULL WEBSITE (builder v5) - LOCKED TEMPLATE: {template_id}")
     print("=" * 72)
 
     # 1. sections must match the schema before anything is built
@@ -574,6 +592,119 @@ def build_site_v5(template_id="cornerstone", out_folder=None):
     print("=" * 72)
     print(f"SUCCESS: {len(files)}-page website generated in: {out_dir}")
     print("=" * 72)
+    return out_dir
+
+
+def publish_to_github(repo_url: str, template_id=None):
+    """Build the locked template into dist/ and push only dist/ (HTML + images) to the target GitHub repo."""
+    repo_url = (repo_url or "").strip()
+    if not repo_url:
+        st = load_json(BUILDER_STATE_FILE)
+        repo_url = st.get("githubRepo", "").strip()
+    if not repo_url:
+        print("ERROR: Provide a GitHub repository URL: python scripts/orchestrator.py --publish https://github.com/USER/REPO.git")
+        sys.exit(1)
+
+    st = load_json(BUILDER_STATE_FILE)
+    st["githubRepo"] = repo_url
+    BUILDER_STATE_FILE.write_text(json.dumps(st, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    out_dir = build_site_v5(template_id=template_id, out_folder="dist")
+    if not out_dir or not out_dir.exists():
+        print("ERROR: Build did not complete; aborting GitHub publish.")
+        sys.exit(1)
+
+    tpl_used = get_locked_template(template_id)
+    print(f"\n>>> Pushing exported static website ({out_dir}) [template={tpl_used}] -> {repo_url} ...")
+    cmds = [
+        ["git", "init"],
+        ["git", "branch", "-M", "main"],
+        ["git", "add", "."],
+        ["git", "commit", "-m", f"Deploy static website ({tpl_used} template)"],
+    ]
+    for c in cmds:
+        subprocess.run(c, cwd=str(out_dir), capture_output=True, text=True)
+
+    # Set or update remote origin
+    rem = subprocess.run(["git", "remote"], cwd=str(out_dir), capture_output=True, text=True)
+    if "origin" in (rem.stdout or "").split():
+        subprocess.run(["git", "remote", "set-url", "origin", repo_url], cwd=str(out_dir), check=True)
+    else:
+        subprocess.run(["git", "remote", "add", "origin", repo_url], cwd=str(out_dir), check=True)
+
+    push = subprocess.run(["git", "push", "-u", "origin", "main", "--force"], cwd=str(out_dir), capture_output=True, text=True)
+    if push.returncode != 0:
+        print("Git push output:\n" + (push.stdout or "") + "\n" + (push.stderr or ""))
+        sys.exit(push.returncode)
+    print("=" * 72)
+    print(f"PUBLISHED SUCCESSFULLY TO GITHUB: {repo_url}")
+    print(f"Active Locked Template: {tpl_used}")
+    print("=" * 72)
+
+
+def serve_builder(port=8765):
+    """Run local Studio Builder server so template lock, edits, and 1-click GitHub publish work directly in the browser."""
+    import http.server
+    import webbrowser
+
+    run_compile()
+
+    class BuilderHandler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, directory=str(ROOT_DIR), **kw)
+
+        def log_message(self, fmt, *args):
+            pass
+
+        def do_POST(self):
+            length = int(self.headers.get("Content-Length", "0"))
+            raw = self.rfile.read(length).decode("utf-8", errors="replace") if length else "{}"
+            try:
+                body = json.loads(raw)
+            except Exception:
+                body = {}
+
+            if self.path == "/api/save-state":
+                BUILDER_STATE_FILE.write_text(json.dumps(body, indent=2, ensure_ascii=False), encoding="utf-8")
+                self._json(200, {"ok": True})
+                return
+
+            if self.path == "/api/publish":
+                state = body.get("state") or {}
+                repo = (body.get("repo") or state.get("githubRepo") or "").strip()
+                if state:
+                    BUILDER_STATE_FILE.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+                cmd = [sys.executable, str(SCRIPTS_DIR / "orchestrator.py"), "--publish", repo]
+                if state.get("template"):
+                    cmd += ["--template", state["template"]]
+                r = subprocess.run(cmd, cwd=str(ROOT_DIR), capture_output=True, text=True, encoding="utf-8", errors="replace")
+                out = (r.stdout or "") + ("\n" + r.stderr if r.stderr else "")
+                self._json(200, {"ok": r.returncode == 0, "output": out.strip()})
+                return
+
+            self._json(404, {"ok": False, "error": "Not found"})
+
+        def _json(self, code, obj):
+            data = json.dumps(obj).encode("utf-8")
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+
+    url = f"http://127.0.0.1:{port}/builder/index.html"
+    print("=" * 72)
+    print(f"  STUDIO BUILDER LIVE SERVER: {url}")
+    print("  1. Choose your starting template (auto-locks to builder_state.json)")
+    print("  2. Customize your pages")
+    print("  3. Click 'Publish to GitHub' in the top bar for 1-click deployment")
+    print("=" * 72)
+    try:
+        webbrowser.open(url)
+    except Exception:
+        pass
+    with http.server.ThreadingHTTPServer(("127.0.0.1", port), BuilderHandler) as httpd:
+        httpd.serve_forever()
 
 
 def main():
@@ -587,10 +718,12 @@ def main():
     parser.add_argument("--validate", action="store_true", help="Validate page with pre_publish_filter")
     parser.add_argument("--save-golden", action="store_true", help="Save stitched page as a golden example")
     parser.add_argument("--compile", action="store_true", help="Compile all page_content_*.md files into Studio Builder")
-    parser.add_argument("--build-site", action="store_true", help="Generate complete multi-page website using chosen template")
-    parser.add_argument("--template", default="stitch_modern_industrial", help="Template ID (cornerstone or stitch_modern_industrial)")
-    parser.add_argument("--engine", choices=["legacy", "v5"], default="legacy", help="v5 = new section-registry builder (builder/index.html); templates: cornerstone, keystone, industrial")
-    parser.add_argument("--out", default=None, help="Output directory for --build-site (e.g. dist_stitch)")
+    parser.add_argument("--serve", action="store_true", help="Launch Studio Builder in browser with live template lock & 1-click GitHub publish")
+    parser.add_argument("--publish", metavar="REPO_URL", help="Build locked template into dist/ and push static site to GitHub repo URL")
+    parser.add_argument("--build-site", action="store_true", help="Generate complete multi-page website using chosen/locked template")
+    parser.add_argument("--template", default=None, help="Template ID (if omitted, uses the locked template in builder_state.json)")
+    parser.add_argument("--engine", choices=["legacy", "v5"], default="v5", help="v5 = section-registry builder (builder/index.html)")
+    parser.add_argument("--out", default=None, help="Output directory for --build-site (e.g. dist)")
     parser.add_argument("--force", action="store_true", help="Build even if the pipeline gate has blocking issues (draft builds only)")
     parser.add_argument("--page", help="Page slug (e.g. commercial-hvac-duct-cleaning)")
     parser.add_argument("--type", choices=["service", "location", "blog", "about", "contact"], help="Page type")
@@ -599,10 +732,13 @@ def main():
 
     if args.status or not any([
         args.init_research, args.run_prompts, args.prep_phase1, args.prep, args.stitch, args.validate,
-        args.save_golden, args.compile, args.build_site
+        args.save_golden, args.compile, args.serve, args.publish, args.build_site
     ]):
         get_status()
         return
+
+    global FORCE_BUILD
+    FORCE_BUILD = args.force
 
     if args.init_research:
         run_init_research()
@@ -632,13 +768,15 @@ def main():
         save_as_golden(args.page, args.type)
     elif args.compile:
         run_compile()
+    elif args.serve:
+        serve_builder()
+    elif args.publish:
+        publish_to_github(args.publish, template_id=args.template)
     elif args.build_site:
-        global FORCE_BUILD
-        FORCE_BUILD = args.force
         if args.engine == "v5" or not (ROOT_DIR / "studio_builder.html").exists():
-            build_site_v5(template_id=args.template if args.template in ("cornerstone", "keystone", "industrial", "bold", "clean", "authority", "emergency", "bento", "atelier", "blueprint") else "cornerstone", out_folder=args.out)
+            build_site_v5(template_id=args.template, out_folder=args.out)
         else:
-            build_full_website(template_id=args.template, out_folder=args.out)
+            build_full_website(template_id=args.template or "stitch_modern_industrial", out_folder=args.out)
 
 
 if __name__ == "__main__":

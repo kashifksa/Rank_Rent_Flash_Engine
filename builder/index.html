@@ -10,9 +10,14 @@
 <div id="app">
   <header id="top">
     <div class="brand"><span class="logo">&#9889;</span><b>Site Builder</b><span id="projName"></span></div>
-    <label class="tb">Template
-      <select id="tplSel"></select>
-    </label>
+    <div class="tpl-lock" id="tplLockBox">
+      <span class="tl-lbl">Active Template</span>
+      <div class="tl-row">
+        <b id="tplActiveName">Cornerstone ProFlow</b>
+        <button type="button" class="tl-change" id="openTplModalBtn">Switch Template</button>
+      </div>
+      <select id="tplSel" aria-label="Template" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px"></select>
+    </div>
     <label class="tb">Page
       <select id="pageSel"></select>
     </label>
@@ -24,6 +29,7 @@
     </div>
     <button class="btn2" id="themeBtn">Theme</button>
     <button class="btn2" id="seoBtn" title="Primary keyword + density audit (warn-only)">SEO <span id="seoScore" class="seoScore">-</span></button>
+    <button class="btn2 pub-btn" id="pubBtn">&#9729; Publish to GitHub</button>
     <div class="menu">
       <button class="btn2 primary" id="exportBtn">Export &#9662;</button>
       <div class="menu-list" id="exportMenu">
@@ -72,6 +78,43 @@
     <small id="logoNote" style="color:var(--muted);line-height:1.4"></small>
   </div>
   <div id="seoPop" class="pop seo-pop" hidden></div>
+  <div id="tplModal" class="modal-backdrop" hidden>
+    <div class="modal-card tpl-modal-card">
+      <div class="modal-hdr">
+        <div>
+          <span class="modal-step">STEP 1 &mdash; CHOOSE YOUR STARTING DESIGN</span>
+          <h2>Select a Template for This Website</h2>
+          <p>Pick a template below to lock it as your project's active design. Your content, SEO schema, and images automatically adapt to the chosen template.</p>
+        </div>
+        <button type="button" class="btn2" id="closeTplModalBtn">Keep Current Template &#10005;</button>
+      </div>
+      <div id="tplGrid" class="tpl-grid"></div>
+    </div>
+  </div>
+
+  <div id="pubModal" class="modal-backdrop" hidden>
+    <div class="modal-card pub-modal-card">
+      <div class="modal-hdr">
+        <div>
+          <span class="modal-step">STEP 3 &mdash; DEPLOY STATIC WEBSITE</span>
+          <h2>Publish Chosen Template to GitHub</h2>
+          <p>Exports all pages using your locked template (<b id="pubTplLabel"></b>) + geotagged WebP images into <code>dist/</code> and pushes to your GitHub repository.</p>
+        </div>
+        <button type="button" class="btn2" id="closePubModalBtn">&#10005;</button>
+      </div>
+      <div class="pub-body">
+        <div class="fld">
+          <label>Target GitHub Repository URL (create an empty repo on GitHub first)</label>
+          <input type="text" id="pubRepoUrl" placeholder="https://github.com/YOUR_USERNAME/YOUR_SITE_REPO.git">
+        </div>
+        <div class="pub-actions">
+          <button type="button" class="btn2 pub-btn" id="pubNowBtn">&#9729; Publish Live to GitHub Now</button>
+          <button type="button" class="btn2" id="pubCopyCmdBtn">Copy 1-Command CLI Publish</button>
+        </div>
+        <pre id="pubLog" class="pub-log" hidden></pre>
+      </div>
+    </div>
+  </div>
   <div id="toast"></div>
 </div>
 <script src="js/data.js"></script>

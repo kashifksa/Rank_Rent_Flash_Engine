@@ -9,7 +9,17 @@
   function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200); }
   function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
   function setPath(o, p, v) { const k = p.split('.'); const last = k.pop(); const t = k.reduce((a, x) => a[x], o); t[last] = v; }
-  function save() { clearTimeout(saveT); saveT = setTimeout(() => { B.state.page = pid; try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {} seoRefresh(); }, 250); }
+  function save() {
+    clearTimeout(saveT);
+    saveT = setTimeout(() => {
+      B.state.page = pid;
+      try { localStorage.setItem(KEY, JSON.stringify(B.state)); } catch (e) {}
+      if (location.protocol.startsWith('http')) {
+        fetch('/api/save-state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(B.state) }).catch(() => {});
+      }
+      seoRefresh();
+    }, 250);
+  }
 
   /* ---------- SEO audit (primary keyword + density, warn-only) ---------- */
   function seoRefresh() {
@@ -57,7 +67,13 @@
       const ps = Object.values(D.pages).filter(p => p.type === g[0]);
       return ps.length ? '<optgroup label="' + g[1] + '">' + ps.map(p => '<option value="' + p.id + '">' + esc(p.nav || p.title) + '</option>').join('') + '</optgroup>' : '';
     }).join('');
-    $('#tplSel').onchange = e => { B.setTemplate(e.target.value); toast('Template applied: ' + B.tpl().name + ' (layout choices reset, your text edits kept)'); syncTheme(); renderAll(); save(); };
+    $('#tplSel').onchange = e => { lockTemplate(e.target.value, false); };
+    if ($('#openTplModalBtn')) $('#openTplModalBtn').onclick = () => openTplModal();
+    if ($('#closeTplModalBtn')) $('#closeTplModalBtn').onclick = () => { $('#tplModal').hidden = true; };
+    if ($('#pubBtn')) $('#pubBtn').onclick = () => openPubModal();
+    if ($('#closePubModalBtn')) $('#closePubModalBtn').onclick = () => { $('#pubModal').hidden = true; };
+    if ($('#pubNowBtn')) $('#pubNowBtn').onclick = publishNow;
+    if ($('#pubCopyCmdBtn')) $('#pubCopyCmdBtn').onclick = copyPublishCmd;
     $('#pageSel').onchange = e => go(e.target.value);
     $('#vpSeg').onclick = e => {
       const b = e.target.closest('button'); if (!b) return; vp = b.dataset.vp;
@@ -99,9 +115,84 @@
       }; r.readAsText(f); e.target.value = '';
     };
   }
+  function lockTemplate(k, showToast) {
+    if (!B.TEMPLATES[k]) return;
+    B.setTemplate(k);
+    B.state.lockedTemplate = true;
+    syncTheme();
+    renderAll();
+    save();
+    if ($('#tplModal')) $('#tplModal').hidden = true;
+    if (showToast !== false) toast('Locked template: ' + B.tpl().name);
+  }
+  function openTplModal() {
+    const g = $('#tplGrid'); if (!g) return;
+    g.innerHTML = Object.keys(B.TEMPLATES).map(k => {
+      const t = B.TEMPLATES[k], isCur = k === B.state.template, fn = (B.FONTS[t.theme.font] || {}).label || t.theme.font;
+      const vcount = t.sectionVariants ? Object.keys(t.sectionVariants).length + ' custom section layouts' : ('Header: ' + (t.header || 'classic') + ' | Hero: ' + t.variants.hero + ' | Cards: ' + t.variants.cards);
+      return '<div class="tcard' + (isCur ? ' active' : '') + '">' +
+        '<div class="tcard-top"><div class="tcard-swatches"><span class="tcard-sw" style="background:' + esc(t.theme.primary) + '" title="Primary"></span><span class="tcard-sw" style="background:' + esc(t.theme.accent) + '" title="Accent"></span></div>' +
+        '<span class="tcard-badge">' + esc(t.badge) + '</span></div>' +
+        '<h3>' + esc(t.name) + (isCur ? ' &#10003;' : '') + '</h3>' +
+        '<p>' + esc(t.desc) + '</p>' +
+        '<div class="tcard-meta">' + esc(vcount) + ' &middot; ' + esc(fn.split('(')[0].trim()) + '</div>' +
+        '<div class="tcard-btns">' +
+        '<button type="button" class="btn2" data-preview-tpl="' + esc(k) + '">Preview Behind</button>' +
+        '<button type="button" class="btn2 primary" data-use-tpl="' + esc(k) + '">' + (isCur ? 'Keep This Template' : 'Use This Template') + '</button>' +
+        '</div></div>';
+    }).join('');
+    g.onclick = e => {
+      const pbtn = e.target.closest('button[data-preview-tpl]');
+      if (pbtn) {
+        const k = pbtn.dataset.previewTpl;
+        B.setTemplate(k); syncTheme(); renderAll();
+        openTplModal();
+        toast('Previewing ' + B.tpl().name + ' — click "Use This Template" to lock it in');
+        return;
+      }
+      const ubtn = e.target.closest('button[data-use-tpl]');
+      if (ubtn) lockTemplate(ubtn.dataset.useTpl, true);
+    };
+    $('#tplModal').hidden = false;
+  }
+  function openPubModal() {
+    $('#pubTplLabel').textContent = B.tpl().name + ' (' + B.state.template + ')';
+    $('#pubRepoUrl').value = B.state.githubRepo || '';
+    $('#pubLog').hidden = true;
+    $('#pubModal').hidden = false;
+  }
+  function publishNow() {
+    const repo = ($('#pubRepoUrl').value || '').trim();
+    if (!repo) { toast('Enter your target GitHub repository URL first'); return; }
+    B.state.githubRepo = repo; B.state.lockedTemplate = true; save();
+    const log = $('#pubLog'); log.hidden = false;
+    if (location.protocol.startsWith('http')) {
+      log.textContent = 'Building website with locked template "' + B.state.template + '" and pushing dist/ to GitHub...\n';
+      fetch('/api/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ state: B.state, repo: repo }) })
+        .then(r => r.json())
+        .then(res => { log.textContent = res.output || (res.ok ? 'Published!' : 'Failed'); toast(res.ok ? 'Published to GitHub!' : 'Publish failed — check log'); })
+        .catch(err => { log.textContent = 'Error: ' + err.message; });
+    } else {
+      download('builder_state.json', JSON.stringify(B.state, null, 2), 'application/json');
+      const cmd = 'python scripts/orchestrator.py --publish ' + repo + ' --template ' + B.state.template;
+      try { navigator.clipboard.writeText(cmd); } catch (e) {}
+      log.textContent = '1. Saved builder_state.json (move to project root if needed).\n2. Copied publish command to clipboard! Run in PowerShell:\n\n' + cmd + '\n\n(Tip: Run "python scripts/orchestrator.py --serve" to enable 1-click browser publishing without PowerShell!)';
+      toast('Command copied to clipboard!');
+    }
+  }
+  function copyPublishCmd() {
+    const repo = ($('#pubRepoUrl').value || 'https://github.com/YOUR_USERNAME/YOUR_SITE_REPO.git').trim();
+    B.state.githubRepo = repo; B.state.lockedTemplate = true; save();
+    const cmd = 'python scripts/orchestrator.py --publish ' + repo + ' --template ' + B.state.template;
+    try { navigator.clipboard.writeText(cmd); } catch (e) {}
+    const log = $('#pubLog'); log.hidden = false;
+    log.textContent = 'Run this single command in PowerShell to build & push "' + B.tpl().name + '" to GitHub:\n\n' + cmd;
+    toast('Publish command copied!');
+  }
   function syncTheme() {
     const t = B.theme();
     $('#tplSel').value = B.state.template;
+    if ($('#tplActiveName')) $('#tplActiveName').textContent = B.tpl().name;
     $('#thPrimary').value = t.primary; $('#thAccent').value = t.accent; $('#thFont').value = t.font; $('#thRadius').value = t.radius; $('#thDensity').value = t.density;
     $('#tplNote').textContent = B.tpl().name;
     $('#thAnim').value = t.anim || ''; $('#thFx').value = t.fx || '';
@@ -339,6 +430,9 @@
     $('#pageSel').value = pid;
     renderAll();
     if (dropped) toast(dropped + ' saved edit(s) dropped because the source text changed');
+    if ((!B.state.lockedTemplate && !navigator.webdriver) || location.search.includes('pick=1')) {
+      openTplModal();
+    }
   }
   B.app = { go: go, select: select, get pid() { return pid; }, get sel() { return sel; }, renderAll: renderAll };
   boot();

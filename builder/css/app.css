@@ -61,3 +61,38 @@ select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 .seo-heat{display:grid;gap:3px}.seo-heat div{display:grid;grid-template-columns:130px 1fr 48px;gap:6px;align-items:center;font-size:11px;color:#b4bdd2}
 .seo-heat i{display:block;height:6px;border-radius:3px;background:#3b82f6}.seo-heat i.over{background:#ef4444}
 .seo-row.info .st{background:#1e3a8a;color:#93c5fd}
+
+/* Locked Template Pill + Modals (Step 1 Picker -> Step 2 Locked Editor -> Step 3 GitHub Publish) */
+.tpl-lock{position:relative;display:flex;flex-direction:column;gap:2px;background:#0d1017;border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.tpl-lock .tl-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.tpl-lock .tl-row{display:flex;align-items:center;gap:10px}
+.tpl-lock #tplActiveName{color:#fff;font-size:12.5px}
+.tpl-lock .tl-change{background:rgba(253,118,26,.14);color:var(--accent);border:1px solid rgba(253,118,26,.35);border-radius:5px;padding:2px 8px;font-size:11px;font-weight:700;cursor:pointer}
+.tpl-lock .tl-change:hover{background:var(--accent);color:#fff}
+.pub-btn{background:#16a34a !important;border-color:#16a34a !important;color:#fff !important}
+.pub-btn:hover{background:#15803d !important}
+.modal-backdrop{position:fixed;inset:0;background:rgba(6,9,15,.84);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:28px}
+.modal-backdrop[hidden]{display:none !important}
+.modal-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 28px 80px rgba(0,0,0,.65);max-height:90vh;display:flex;flex-direction:column;overflow:hidden;width:100%}
+.tpl-modal-card{max-width:1180px}
+.pub-modal-card{max-width:640px}
+.modal-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:22px 26px;border-bottom:1px solid var(--line);background:#10141f}
+.modal-step{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.modal-hdr h2{margin:0 0 6px;font-size:20px;color:#fff}
+.modal-hdr p{margin:0;color:var(--muted);font-size:13px;max-width:720px;line-height:1.45}
+.tpl-grid{padding:24px 26px;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.tcard{background:#10141f;border:2px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:border-color .18s,transform .18s}
+.tcard:hover{border-color:#4b5982;transform:translateY(-2px)}
+.tcard.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(253,118,26,.2)}
+.tcard-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tcard-swatches{display:flex;align-items:center;gap:6px}
+.tcard-sw{width:22px;height:22px;border-radius:6px;border:1px solid rgba(255,255,255,.22)}
+.tcard-badge{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--panel2);color:#cbd5e1;padding:4px 9px;border-radius:99px;border:1px solid var(--line)}
+.tcard h3{margin:0;font-size:16px;color:#fff}
+.tcard p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.5;flex:1}
+.tcard-meta{font-size:11px;color:#93c5fd;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);padding:6px 10px;border-radius:6px}
+.tcard-btns{display:flex;gap:8px;margin-top:4px}
+.tcard-btns button{flex:1}
+.pub-body{padding:24px 26px;display:flex;flex-direction:column;gap:16px}
+.pub-actions{display:flex;gap:10px;flex-wrap:wrap}
+.pub-log{background:#080a10;border:1px solid var(--line);border-radius:8px;padding:14px;color:#cbd5e1;font-family:Consolas,monospace;font-size:12px;max-height:240px;overflow-y:auto;white-space:pre-wrap;margin:0}
